@@ -19,8 +19,6 @@ Per eseguire una corretta installazione del software è necessario:
 
 * Scarica e installa "Node.js" da qui: https://nodejs.org/en/download/
 
-* Installare Express-React da terminale posizionandosi nella cartella del progetto utilizzando il seguente comando: npm install express-react-views react react-dom
-
 * Suggeriamo il download dell'IDE 'Visual Studio Code' da qui: https://bit.ly/34MfLQm
 
 
