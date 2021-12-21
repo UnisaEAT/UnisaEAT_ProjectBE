@@ -1,8 +1,7 @@
-var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-const Cliente_Model = db.model_clienti;
+const Admin_Model = db.model_admin;
 
-// Create and Save a new Cliente
+// Create and Save a new Admin
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.nome) {
@@ -10,20 +9,17 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Cliente
-  const cliente = new Cliente_Model ({
+  // Create an Admin
+  const admin = new Admin_Model ({
     nome: req.body.nome,
     cognome: req.body.cognome,
     password: null,
-    citta: req.body.citta,
-    email: req.body.email,
-    indirizzo: req.body.indirizzo,
-    tesserino: null 
+    email: req.body.email
   });
 
-  // Save Cliente in the database
-  cliente
-    .save(cliente)
+  // Save Admin in the database
+  admin
+    .save(admin)
     .then(data => {
       res.send(data);
     })
@@ -35,11 +31,11 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Clienti from the database.
+// Retrieve all Admin from the database.
 exports.findAll = (req, res) => {
   
 
-  Cliente_Model.find({})
+  Admin_Model.find({})
     .then(data => {
       res.send(data);
     })

@@ -1,29 +1,27 @@
-var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-const Cliente_Model = db.model_clienti;
+const Statistiche_Model = db.model_statistiche;
 
-// Create and Save a new Cliente
+// Create and Save a new Statistica
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.nome) {
+  if (/*!req.body.titolo*/false) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
-  // Create a Cliente
-  const cliente = new Cliente_Model ({
-    nome: req.body.nome,
-    cognome: req.body.cognome,
-    password: null,
-    citta: req.body.citta,
-    email: req.body.email,
-    indirizzo: req.body.indirizzo,
-    tesserino: null 
+  // Create a Statistica
+  const statistica = new Statistiche_Model ({
+    titolo: null,
+    descrizione: null,
+    dataInizio: null,
+    dataFine: null,
+    pastiPiuOrdinati: null,
+    pastiMenoOrdinati: null
   });
 
-  // Save Cliente in the database
-  cliente
-    .save(cliente)
+  // Save statistica in the database
+  statistica
+    .save(statistica)
     .then(data => {
       res.send(data);
     })
@@ -35,11 +33,11 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Clienti from the database.
+// Retrieve all Statistiche from the database.
 exports.findAll = (req, res) => {
   
 
-  Cliente_Model.find({})
+  Statistiche_Model.find({})
     .then(data => {
       res.send(data);
     })
