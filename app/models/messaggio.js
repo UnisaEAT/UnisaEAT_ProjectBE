@@ -2,13 +2,10 @@ var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
-      nome: String,
-      cognome: String,
-      password: Object,
-      citta: String,
-      email: String,
-      indirizzo: String,
-      tesserino: ObjectId
+      senderID: ObjectId,
+      receiverID: ObjectId,
+      testo: String,
+      data: Date
     }
   );
 
@@ -18,6 +15,6 @@ module.exports = mongoose => {
     return object;
   });
 
-  const Cliente = mongoose.model("cliente", schema, "cliente");
-  return Cliente;
+  const Messaggio = mongoose.model("messaggio", schema, "messaggio");
+  return Messaggio;
 };

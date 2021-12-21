@@ -1,29 +1,26 @@
 var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-const Cliente_Model = db.model_clienti;
+const Messaggio_Model = db.model_messaggio;
 
-// Create and Save a new Cliente
+// Create and Save a new Messaggio
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.nome) {
+  if (!req.body.testo) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
-  // Create a Cliente
-  const cliente = new Cliente_Model ({
-    nome: req.body.nome,
-    cognome: req.body.cognome,
-    password: null,
-    citta: req.body.citta,
-    email: req.body.email,
-    indirizzo: req.body.indirizzo,
-    tesserino: null 
+  // Create a Messaggio
+  const messaggio = new Messaggio_Model ({
+    senderID: null,
+    receiverID: null,
+    testo: req.body.testo,
+    data: null
   });
 
-  // Save Cliente in the database
-  cliente
-    .save(cliente)
+  // Save Messaggio in the database
+  messaggio
+    .save(messaggio)
     .then(data => {
       res.send(data);
     })
@@ -39,7 +36,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   
 
-  Cliente_Model.find({})
+  Messaggio_Model.find({})
     .then(data => {
       res.send(data);
     })
