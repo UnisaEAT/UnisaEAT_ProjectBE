@@ -1,29 +1,27 @@
 var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-const Cliente_Model = db.model_clienti;
+const Ticket_Model = db.model_ticket;
 
-// Create and Save a new Cliente
+// Create and Save a new Messaggio
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.nome) {
+  if (!req.body.titolo) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
-  // Create a Cliente
-  const cliente = new Cliente_Model ({
-    nome: req.body.nome,
-    cognome: req.body.cognome,
-    password: null,
-    citta: req.body.citta,
-    email: req.body.email,
-    indirizzo: req.body.indirizzo,
-    tesserino: null 
+  // Create a Ticket
+  const ticket = new Ticket_Model ({
+    titolo: req.body.titolo,
+    problema: req.body.problema,
+    soluzione: "",
+    data: new Date(),
+    senderID: new ObjectId()
   });
 
-  // Save Cliente in the database
-  cliente
-    .save(cliente)
+  // Save Ticket in the database
+  ticket
+    .save(ticket)
     .then(data => {
       res.send(data);
     })
@@ -35,11 +33,11 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve all Clienti from the database.
+// Retrieve all Ticket from the database.
 exports.findAll = (req, res) => {
   
 
-  Cliente_Model.find({})
+  Ticket_Model.find({})
     .then(data => {
       res.send(data);
     })

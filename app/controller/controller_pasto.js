@@ -1,8 +1,7 @@
-var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-const Cliente_Model = db.model_clienti;
+const Pasto_Model = db.model_pasto;
 
-// Create and Save a new Cliente
+// Create and Save a new Pasto
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.nome) {
@@ -10,20 +9,20 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Cliente
-  const cliente = new Cliente_Model ({
+  // Create a Pasto
+  const pasto = new Pasto_Model ({
     nome: req.body.nome,
-    cognome: req.body.cognome,
-    password: null,
-    citta: req.body.citta,
-    email: req.body.email,
-    indirizzo: req.body.indirizzo,
-    tesserino: null 
+    descrizione: req.body.descrizione,
+    disponibilita: req.body.disponibilita,
+    immagine: null,
+    categoria: req.body.categoria,
+    ingredienti: req.body.ingredienti,
+    numeroOrdinazioni: 0
   });
 
-  // Save Cliente in the database
-  cliente
-    .save(cliente)
+  // Save Pasto in the database
+  pasto
+    .save(pasto)
     .then(data => {
       res.send(data);
     })
@@ -39,7 +38,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   
 
-  Cliente_Model.find({})
+  Pasto_Model.find({})
     .then(data => {
       res.send(data);
     })

@@ -1,29 +1,29 @@
 var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-const Cliente_Model = db.model_clienti;
+const Ordine_Model = db.model_ordine;
 
-// Create and Save a new Cliente
+// Create and Save a new Ordine
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.nome) {
+  if (false/*!req.body.acquirenteID*/) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
 
-  // Create a Cliente
-  const cliente = new Cliente_Model ({
-    nome: req.body.nome,
-    cognome: req.body.cognome,
-    password: null,
-    citta: req.body.citta,
-    email: req.body.email,
-    indirizzo: req.body.indirizzo,
-    tesserino: null 
+  // Create a Ordine
+  const ordine = new Ordine_Model ({
+    prezzo: 0,
+    dataOrdine: new Date(),
+    boolPranzo: true,
+    stato: "Ordinato",
+    listaPasti: null,
+    qr: null,
+    acquirenteID: new ObjectId()
   });
 
-  // Save Cliente in the database
-  cliente
-    .save(cliente)
+  // Save Ordine in the database
+  ordine
+    .save(ordine)
     .then(data => {
       res.send(data);
     })
@@ -39,7 +39,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   
 
-  Cliente_Model.find({})
+  Ordine_Model.find({})
     .then(data => {
       res.send(data);
     })

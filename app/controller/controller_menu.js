@@ -1,8 +1,7 @@
-var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-const Cliente_Model = db.model_clienti;
+const Menu_Model = db.model_menu;
 
-// Create and Save a new Cliente
+// Create and Save a new Menu
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.nome) {
@@ -10,20 +9,15 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Cliente
-  const cliente = new Cliente_Model ({
+  // Create a Menu
+  const menu = new Menu_Model ({
     nome: req.body.nome,
-    cognome: req.body.cognome,
-    password: null,
-    citta: req.body.citta,
-    email: req.body.email,
-    indirizzo: req.body.indirizzo,
-    tesserino: null 
+    pasti: req.body.pasti
   });
 
-  // Save Cliente in the database
-  cliente
-    .save(cliente)
+  // Save Menu in the database
+  menu
+    .save(menu)
     .then(data => {
       res.send(data);
     })
@@ -39,7 +33,7 @@ exports.create = (req, res) => {
 exports.findAll = (req, res) => {
   
 
-  Cliente_Model.find({})
+  Menu_Model.find({})
     .then(data => {
       res.send(data);
     })
