@@ -1,119 +1,130 @@
 [{
-  "ClienteID": "0512103456",
-  "Nome": "Danny",
-  "Cognome": "De Vito",
-  "Password": "DannyDeVito1",
-  "Citta": "Porto Sant'Elpidio",
-  "Email": "d.devito@studenti.unisa.it",
-  "Indirizzo": "Via delle Vie 121",
-  "Tesserino": null
+        "ClienteID": "0512103456",
+        "Nome": "Danny",
+        "Cognome": "De Vito",
+        "Password": "DannyDeVito1",
+        "Citta": "Porto Sant'Elpidio",
+        "Email": "d.devito@studenti.unisa.it",
+        "Indirizzo": "Via delle Vie 121",
+        "Tesserino": null
 
-},
-  {
+    },
 
-
-    "ClienteID": "0512103457",
-    "Nome": "Carmine",
-    "Cognome": "Citro",
-    "Password": "carminecitro1",
-    "Citta": "Bracigliano",
-    "Email": "c.citro@studenti.unisa.it",
-    "Indirizzo": "Via ministro de falco ",
-    "Tesserino": null
-
-  },
-  {
+    {
+        "ClienteID": "0512103456",
+        "Nome": "Anna Chiara",
+        "Cognome": "Memoli",
+        "Password": "Annachiaramemoli1",
+        "Citta": "Salerno",
+        "Email": "a.annachira@studenti.unisa.it",
+        "Indirizzo": "Via delle Vie 121",
+        "Tesserino": null
+    },
+    {
 
 
-    "ClienteID": "0512103486",
-    "Nome": "Gerardo",
-    "Cognome": "Sessa",
-    "Password": "GerardoSessa1",
-    "Citta": "Fisciano",
-    "Email": "g.sessa@studenti.unisa.it",
-    "Indirizzo": "Nocelleto",
-    "Tesserino": null
+        "ClienteID": "0512103457",
+        "Nome": "Carmine",
+        "Cognome": "Citro",
+        "Password": "carminecitro1",
+        "Citta": "Bracigliano",
+        "Email": "c.citro@studenti.unisa.it",
+        "Indirizzo": "Via ministro de falco ",
+        "Tesserino": null
 
-  },
-
-
-  {
+    },
+    {
 
 
-    "ClienteID": "05121054457",
-    "Nome": "Alessadro",
-    "Cognome": "Cavaliere",
-    "Password": "Alessandro Cavaliere1",
-    "Citta": "Baronissi",
-    "Email": "A.cavaliere@studenti.unisa.it",
-    "Indirizzo": "via cariti",
-    "Tesserino": null
+        "ClienteID": "0512103486",
+        "Nome": "Gerardo",
+        "Cognome": "Sessa",
+        "Password": "GerardoSessa1",
+        "Citta": "Fisciano",
+        "Email": "g.sessa@studenti.unisa.it",
+        "Indirizzo": "Nocelleto",
+        "Tesserino": null
 
-  }, {
-
-
-  "ClienteID": "0512103456",
-  "Nome": "Maria Roasaria",
-  "Cognome": "Giudice",
-  "Password": "MariaROsariaGiudice1",
-  "Citta": "Salerno",
-  "Email": "d.devito@studenti.unisa.it",
-  "Indirizzo": "Via salvatore calenda",
-  "Tesserino": null
-
-},
+    },
 
 
-  {
+    {
 
 
-    "ClienteID": "0512103090",
-    "Nome": "Alessio",
-    "Cognome": "Salzano",
-    "Password": "Alessiosalzano1",
-    "Citta": "albanella",
-    "Email": "a.alessio@studenti.unisa.it",
-    "Indirizzo": " via monteverde",
-    "Tesserino": null
+        "ClienteID": "05121054457",
+        "Nome": "Alessadro",
+        "Cognome": "Cavaliere",
+        "Password": "Alessandro Cavaliere1",
+        "Citta": "Baronissi",
+        "Email": "A.cavaliere@studenti.unisa.it",
+        "Indirizzo": "via cariti",
+        "Tesserino": null
 
-  },
-  {
-
-
-    "ClienteID": "05121436433",
-    "Nome": "Claudio",
-    "Cognome": "Buono",
-    "Password": "ClaudioBuon1",
-    "Citta": "Angri",
-    "Email": "C.buono@studenti.unisa.it",
-    "Indirizzo": "via delle madonne",
-    "Tesserino": null
-
-  },
+    }, {
 
 
-  {
+        "ClienteID": "0512103456",
+        "Nome": "Maria Roasaria",
+        "Cognome": "Giudice",
+        "Password": "MariaROsariaGiudice1",
+        "Citta": "Salerno",
+        "Email": "d.devito@studenti.unisa.it",
+        "Indirizzo": "Via salvatore calenda",
+        "Tesserino": null
+
+    },
 
 
-    "ClienteID": "0512103457",
-    "Nome": "Carmine",
-    "Cognome": "Citro",
-    "Password": "carminecitro1",
-    "Citta": "Bracigliano",
-    "Email": "c.citro@studenti.unisa.it",
-    "Indirizzo": "Via ministro de falco ",
-    "Tesserino": null
-  }, {
+    {
 
 
-  "ClienteID": "0512103456",
-  "Nome": "Danny",
-  "Cognome": "De Vito",
-  "Password": "DannyDeVito1",
-  "Citta": "Porto Sant'Elpidio",
-  "Email": "d.devito@studenti.unisa.it",
-  "Indirizzo": "Via delle Vie 121",
-  "Tesserino": null
+        "ClienteID": "0512103090",
+        "Nome": "Alessio",
+        "Cognome": "Salzano",
+        "Password": "Alessiosalzano1",
+        "Citta": "albanella",
+        "Email": "a.alessio@studenti.unisa.it",
+        "Indirizzo": " via monteverde",
+        "Tesserino": null
 
-}
+    },
+    {
+
+
+        "ClienteID": "05121436433",
+        "Nome": "Claudio",
+        "Cognome": "Buono",
+        "Password": "ClaudioBuon1",
+        "Citta": "Angri",
+        "Email": "C.buono@studenti.unisa.it",
+        "Indirizzo": "via delle madonne",
+        "Tesserino": null
+
+    },
+
+
+    {
+
+
+        "ClienteID": "0512103457",
+        "Nome": "Carmine",
+        "Cognome": "Citro",
+        "Password": "carminecitro1",
+        "Citta": "Bracigliano",
+        "Email": "c.citro@studenti.unisa.it",
+        "Indirizzo": "Via ministro de falco ",
+        "Tesserino": null
+    }, {
+
+
+        "ClienteID": "0512103456",
+        "Nome": "Danny",
+        "Cognome": "De Vito",
+        "Password": "DannyDeVito1",
+        "Citta": "Porto Sant'Elpidio",
+        "Email": "d.devito@studenti.unisa.it",
+        "Indirizzo": "Via delle Vie 121",
+        "Tesserino": null
+
+    }
 ]
