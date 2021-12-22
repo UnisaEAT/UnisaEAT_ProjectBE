@@ -1,5 +1,6 @@
 const db = require("../models");
 const Tesserino_Model = db.model_tesserino;
+const Cliente_Model = db.model_clienti;
 
 // Create and Save a new Tesserino
 /*
@@ -10,14 +11,29 @@ const Tesserino_Model = db.model_tesserino;
 exports.create = (req, res) => {
   // Validate request
 
-  /*
-  if(req.session.utente != "cliente")
+  if(req.session.tipo != "cliente")
   {
     res.status(400).send({ message: "Only customers can access this page!" });
     return;
   }
+
+  /*
+    //prendo dal db i dati del cliente loggato
+    Cliente_Model.find({email:req.session.email}).then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving clienti."
+      });
+    });
+  */
+
   
 
+
+  
   let nome = req.body.nome;
   let cognome = req.body.cognome;
   let email = req.body.email;
@@ -29,6 +45,7 @@ exports.create = (req, res) => {
   let provincia = req.body.provincia;
   let comune = req.body.comune;
   let cap = req.body.cap;
+  let telefono = req.body.telefono;
 
   if (!nome) {
     res.status(400).send({ message: "Nome can not be empty!" });
@@ -84,8 +101,7 @@ exports.create = (req, res) => {
     res.status(400).send({ message: "Cap can not be empty!" });
     return;
   }
-  */
-
+  
 
   //calcolo data di scadenza
   //uguale alla data attuale + 1 anno
