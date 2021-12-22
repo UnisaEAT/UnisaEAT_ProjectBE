@@ -29,6 +29,19 @@ db.mongoose
     console.log("Cannot connect to the database!", err);
     process.exit();
   });
+  
+  //session code
+  const cookieParser = require("cookie-parser");
+  const sessions = require('express-session');
+  app.use(cookieParser());
+  app.use(express.static(__dirname));
+  const oneDay = 1000 * 60 * 60 * 24;
+  app.use(sessions({
+      secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+      saveUninitialized:true,
+      cookie: { maxAge: oneDay },
+      resave: false 
+  }));
 
 // simple route
 app.get("/", (req, res) => {

@@ -1,3 +1,4 @@
+const e = require("express");
 const db = require("../models");
 const Personale_Model = db.model_personale;
 
@@ -105,27 +106,42 @@ exports.create = (req, res) => {
       if (confermapassword != password) {
         res.status(400).send({ message: "Espressione regolare confermapassword non rispettata" });
         return;}
+  /* PRIMA DI INSERIRE EFFETTUO UN CONTROLLO SULL'EMAIL CHE E' UNICA NEL DB, NEL CASO ESISTA RITORNO ERRORE NEL CASO IN CUI NON ESISTE PROSEGUO CON L'INSERIMENTO  */
+  Personale_Model.find({email : email},function (err,docs){
+    if (docs==0){
+      personale
+.save(personale)
+.then(data => {
+  res.send(data);
+})
+.catch(err => {
+  res.status(500).send({
+    message:
+      err.message || "Some error occurred while creating the Tutorial."
+  });
+});
+}
       
+    else{
+      res.status(400).send({ message: "Il personale con quest'email è già stato inserito" }); }
+  
+  if(err){
+    res
+      .status(500)
+      .send({ message: "Error retrieving Tutorial with id=" + email });} })
+  
+// Save Personale in the database
 
-  // Save Personale in the database
-  personale
-    .save(personale)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the Tutorial."
-      });
-    });
+
+
 };
+
 
 // Retrieve all Personale from the database.
 exports.findAll = (req, res) => {
   
 
-  Personale_Model.find({})
+  Personale_Model.find({ruolo : 'personale adisu'})
     .then(data => {
       res.send(data);
     })
