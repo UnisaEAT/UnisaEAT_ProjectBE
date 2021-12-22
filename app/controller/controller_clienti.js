@@ -4,11 +4,13 @@ const Cliente_Model = db.model_clienti;
 
 // Create and Save a new Cliente
 exports.create = (req, res) => {
+
   // Validate request
   if (!req.body.nome) {
     res.status(400).send({ message: "Content can not be empty!" });
     return;
   }
+
 
   // Create a Cliente
   const cliente = new Cliente_Model ({
