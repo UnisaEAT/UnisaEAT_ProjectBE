@@ -9,6 +9,6 @@ module.exports = app => {
     // Retrieve all Tutorials
     router.get("/findAll", personale.findAll);
   
-  
+    
     app.use('/api/personale', router);
   };

@@ -7,5 +7,5 @@ const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
 db.model_clienti = require("./cliente.js")(mongoose);
-
+db.model_personale = require("./personale.js")(mongoose);
 module.exports = db;
