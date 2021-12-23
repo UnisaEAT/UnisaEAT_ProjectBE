@@ -30,6 +30,20 @@ db.mongoose
     process.exit();
   });
 
+//session code
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
+app.use(cookieParser());
+app.use(express.static(__dirname));
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
+
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to UnisaEAT." });
@@ -47,6 +61,7 @@ require("./app/routes/routes_pasto")(app);
 require("./app/routes/routes_faq")(app);
 require("./app/routes/routes_ticket")(app);
 require("./app/routes/routes_statistiche")(app);
+require("./app/routes/routes_profilo")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

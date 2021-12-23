@@ -50,3 +50,43 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+
+//CLIENTE
+
+const session = require('express-session')
+var hash = require('./hash.js')
+
+/**
+ * This method updates the external tutor's informations
+ * @param {Object} req - The HTTP request
+ * @param {Object} res - The HTTP response
+ * @returns {Boolean}  - It returns true if the update was successfull, else false
+ */
+
+ exports.selectCliente = (req, res) => {
+  var id= req.session.utente.id
+    Cliente_Model.findById(id)
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving clienti."
+      });
+    });
+};
+
+ exports.getProfilo = function (req, res) {
+  return new Promise(function (resolve, reject) {
+      //Chiedere questione sessione
+  var tipo= req.session.utente.tipo
+       var result= Cliente_Model.selectCliente()
+get.then(function(result){
+   resolve ({Nome:result.nome, Cognome: result.cognome, 
+    tipo, Indirizzo: result.indirizzo, Email: result.email })
+})
+  });
+};
+//Per modifica profilo dovremmo avere direttamente setPassword - inserire .selectAdmin
