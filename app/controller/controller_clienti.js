@@ -20,7 +20,13 @@ exports.create = (req, res) => {
     citta: req.body.citta,
     email: req.body.email,
     indirizzo: req.body.indirizzo,
-    tesserino: null 
+    tesserino: null,
+    dataDiNascita: null,
+    comuneDiNascita: null,
+    cittadinanza: "italiana",
+    provincia: null,
+    cap: null,
+    telefono: null
   });
 
   // Save Cliente in the database
