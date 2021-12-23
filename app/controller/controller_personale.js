@@ -1,9 +1,10 @@
 const e = require("express");
 const db = require("../models");
 const Personale_Model = db.model_personale;
+var hash = require('./hash.js');
 
 // Create and Save a new Personale
-exports.create = (req, res) => {
+exports.insert = (req, res) => {
   // Validate request
   if (!req.body.nome) {
     res.status(400).send({ message: "Content can not be empty!" });
@@ -106,6 +107,9 @@ exports.create = (req, res) => {
       if (confermapassword != password) {
         res.status(400).send({ message: "Espressione regolare confermapassword non rispettata" });
         return;}
+
+        var passwordHashed = hash.hashPassword(password);
+        personale.password = passwordHashed;
   /* PRIMA DI INSERIRE EFFETTUO UN CONTROLLO SULL'EMAIL CHE E' UNICA NEL DB, NEL CASO ESISTA RITORNO ERRORE NEL CASO IN CUI NON ESISTE PROSEGUO CON L'INSERIMENTO  */
   Personale_Model.find({email : email},function (err,docs){
     if (docs==0){
@@ -130,15 +134,11 @@ exports.create = (req, res) => {
       .status(500)
       .send({ message: "Error retrieving Tutorial with id=" + email });} })
   
-// Save Personale in the database
-
-
-
 };
 
 
 // Retrieve all Personale from the database.
-exports.findAll = (req, res) => {
+exports.findByRuolo = (req, res) => {
   
 
   Personale_Model.find({ruolo : 'personale adisu'})
@@ -148,7 +148,38 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving clienti."
+          err.message || "Some error occurred while retrieving personale adisu."
+      });
+    });
+};
+
+
+//RIMUOVERE UN PERSONALE ADISU DATA UN EMAIL
+exports.findByEmailAndRemove = (req, res) => {
+  var email = req.body.email;
+  Personale_Model.findOneAndDelete({email:email})
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+    res.status(500).send({
+      message:
+      err.message || "Qualche errore durante la rimozione del personale adisu"
+    });
+  });
+};
+
+// Metodo per prendere le info del personale
+exports.findByEmail = (req, res) => {
+var email = req.body.email;
+  Personale_Model.find({email : email})
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving personale adisu."
       });
     });
 };

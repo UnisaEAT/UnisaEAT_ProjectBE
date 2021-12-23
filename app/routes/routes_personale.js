@@ -4,11 +4,16 @@ module.exports = app => {
     var router = require("express").Router();
   
     // Create a new Tutorial
-    router.post("/create", personale.create);
+    router.post("/insert", personale.insert);
   
     // Retrieve all Tutorials
-    router.get("/findAll", personale.findAll);
-  
+    router.get("/viewLista", personale.findByRuolo);
+
+    // Remove a new Personale
+    router.post("/remove",personale.findByEmailAndRemove);
+
+    //Get personale
+    router.get("/getInfo",personale.findByEmail);
     
     app.use('/api/personale', router);
   };
