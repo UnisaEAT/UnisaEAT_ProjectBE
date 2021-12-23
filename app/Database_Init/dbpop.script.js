@@ -2,9 +2,9 @@ var MongoClient = require('mongodb').MongoClient
 var hash = require('../controller/hash')
 
 // Database URL
-const url = 'mongodb://localhost:27017/UnisaEat'
+const url = 'mongodb://localhost:27017/UnisaEAT_db'
     // Database name
-const dbName = 'unisaEat'
+const dbName = 'UnisaEAT_db'
 
 var ins = insert()
 ins.then(function(result) {
@@ -20,9 +20,9 @@ function insert() {
             var dbo = db.db(dbName)
 
             const fs = require('fs')
-            const Clientedata = fs.readFileSync('Database_Init/JSON/Cliente.json')
-            const personaledata = fs.readFileSync('Database_Init/JSON/Personale.json')
-            const admindata = fs.readFileSync('Database_Init/JSON/Admin.json')
+            const Clientedata = fs.readFileSync('./JSON/Cliente.json')
+            const personaledata = fs.readFileSync('./JSON/Personale.json')
+            const admindata = fs.readFileSync('./JSON/Admin.json')
 
             const client = JSON.parse(Clientedata)
             const personale = JSON.parse(personaledata)
@@ -39,16 +39,16 @@ function insert() {
                 admin[k].Password = hash.hashPassword(admin[k].Password)
             }
 
-            dbo.collection('Clienti').insertMany(client, function(err, result) {
+            dbo.collection('cliente').insertMany(client, function(err, result) {
                 if (err) throw err
                 console.log('abbiamo inserito  ' + result.insertedCount + 'clienti')
 
 
-                dbo.collection('Personale').insertMany(personale, function(err, result) {
+                dbo.collection('personale').insertMany(personale, function(err, result) {
                     if (err) throw err
                     console.log('abbiamo inserito  ' + result.insertedCount + 'che rigiuardano il personale')
 
-                    dbo.collection('Admin').insertMany(admin, function(err, result) {
+                    dbo.collection('admin').insertMany(admin, function(err, result) {
                         if (err) throw err
                         console.log('abbiamo inserito  ' + result.insertedCount + 'admin')
 
