@@ -1,0 +1,16 @@
+[ {
+    "nome": "Nicola",
+    "cognome": "Cappello",
+    "password": "bellaPassword",
+    "citta": "Pagani",
+    "email": "n.cappello@studenti.unisa.it",
+    "indirizzo": "via donato ammaturo 12",
+    "tesserino": null,
+    "dataDiNascita": "29/01/2001",
+    "comuneDiNascita": "Nocera Inferiore",
+    "cittadinanza": "italiana",
+    "provincia": "Salerno",
+    "cap": "84016",
+    "telefono": "3899510196"
+  }
+]

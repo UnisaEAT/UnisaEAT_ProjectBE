@@ -1,9 +1,11 @@
 var MongoClient = require('mongodb').MongoClient
-var hash = require('../controller/hash')
+var hash = require('../app/controller/hash')
 // Database URL
-const url = 'mongodb://localhost:27017/UnisaEat'
+const url = 'mongodb://localhost:27017/UnisaEAT_db'
 // Database name
-const dbName = 'unisaEat'
+const dbName = 'UnisaEAT_db'
+
+const path = require('path');
 
 var ins = insert()
 ins.then(function(result) {
@@ -18,8 +20,9 @@ function insert() {
             console.log('connessione al server avvenuta!')
             var dbo = db.db(dbName)
 
+
             const fs = require('fs')
-            const Clientedata = fs.readFileSync('../Database_Init/JSON/Cliente.json')
+            const Clientedata = fs.readFileSync(__dirname+"\\JSON\\Cliente.json")
           //const personaledata = fs.readFileSync('Database_Init/JSON/dbpop_Personale.js')
             //const admindata = fs.readFileSync('Database_Init/JSON/dbpop_Admin.js')
 
@@ -28,7 +31,7 @@ function insert() {
            // const admin = JSON.parse(admindata)
 
             for (var i = 0; client[i] != null; i++) {
-                client[i].Password = hash.hashPassword(client[i].Password)
+                client[i].password = hash.hashPassword(client[i].password)
             }
             /*
             for (var j = 0; personale[j] != null; j++) {
@@ -38,7 +41,7 @@ function insert() {
                 admin[k].Password = hash.hashPassword(admin[k].Password)
             }
         */
-            dbo.collection('Clienti').insertMany(client, function(err, result) {
+            dbo.collection('cliente').insertMany(client, function(err, result) {
                 if (err) throw err
                 console.log('abbiamo inserito  ' + result.insertedCount + 'clienti')
 
