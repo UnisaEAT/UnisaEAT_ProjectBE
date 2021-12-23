@@ -6,7 +6,7 @@
         "Email": "d.devito@studenti.unisa.it",
         "Indirizzo": "Via delle Vie 121",
         "Ruolo": "operatore mensa",
-        "Disponibilità": "4"
+        "Disponibilità": false
     },
 
     {
@@ -17,6 +17,6 @@
         "Email": "c.citro@studenti.unisa.it",
         "Indirizzo": "Via ministro de falco ",
         "Ruolo": "peratore mensa",
-        "Disponibilità": "4"
+        "Disponibilità": false
     }
 ]
