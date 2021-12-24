@@ -8,6 +8,9 @@ module.exports = app => {
   
     // Retrieve all Tesserino
     router.get("/findAll", tesserino.findAll);
+
+    // Retrieve saldo tesserino
+    router.get("/getSaldoTesserino", tesserino.getSaldoTesserino);
   
   
     app.use('/api/tesserino', router);

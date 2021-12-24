@@ -266,3 +266,44 @@ exports.findAll = (req, res) => {
       });
     });
 };
+
+// Get saldo tesserino
+/*
+  se il cliente non è loggato l'operazione viene vietata
+  altrimenti viene controllato se il cliente possiede un tesserino.
+  Se lo possiede viene visualizzato il saldo
+*/
+  exports.getSaldoTesserino = (req, res) => {
+    //variabili di prova da cancellare
+    req.session.tipo = "cliente";
+    req.session.email = "n.cappello@studenti.unisa.it";
+
+    if(req.session.tipo != "cliente")
+    {
+      res.status(400).send({ message: "Only customers can access this page!" });
+      return;
+    }
+  
+    Cliente_Model.find({email:req.session.email}, function (err, docs) {
+      if (err) throw err;
+      let tesserinoID = docs[0].tesserino; //sarà una stringa, non un ObjectID
+      if(tesserinoID==null)
+      {
+        res.status(400).send({ message: "You don't have a Tesserino!" });
+        return;
+      }
+
+      //bisogna passare anche la data di scadenza
+      Tesserino_Model.findById(tesserinoID).then(
+        function (data) {
+          //res.render("C:\\Users\\cappe\\Documents\\GitHub\\UnisaEAT_ProjectBE\\UnisaEAT_ProjectFE\\src\\views\\homepage")
+          res.send((data.saldo).toString());
+          return;
+        },
+        function (err) {
+          res.send(err);
+        }
+      )
+    });
+  };
+  
