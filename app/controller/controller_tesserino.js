@@ -233,7 +233,6 @@ exports.create = (req, res) => {
       dataScadenza: date
     });
 
-    //fare il save con callback
 
     // Save Tesserino in the database
     tesserino
