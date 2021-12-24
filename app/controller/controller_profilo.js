@@ -60,7 +60,6 @@ if (tipo == "Personale"){
 
   const session = require('express-session')
   var hash = require('./hash.js')
-  
   /**
    * This method updates the external tutor's informations
    * @param {Object} req - The HTTP request
@@ -68,45 +67,33 @@ if (tipo == "Personale"){
    * @returns {Boolean}  - It returns true if the update was successfull, else false
    */
   
-  
- 
-  //Inserire IF
-  exports.updatePassword = function (req, res) {
-    return new Promise(function (resolve, reject) {
+   exports.updatePassword = function (req, res) {
         var tipo = "Personale"
         var mail = "giannipepp@gmail.com"
       var oldPassword = req.body.inputOldPassword
       var password = req.body.inputPassword
       var passwordConfirm = req.body.inputConfirmPassword
- 
-      // Form Validation
-      var isRight = true
-  
-      if ((oldPassword == null) || (oldPassword.length <= 7) || (!/^[A-Za-z0-9]+$/.test(oldPassword))) {
-        res.cookie('errOldPassword', '1')
-        isRight = false
+ //->Sostituire is right con classici errori message - definire err.message? se non va solo messaggio
+    if ((oldPassword == null) || (oldPassword.length <= 7) || (!/^[A-Za-z0-9]+$/.test(oldPassword))) {
+       
+          res.status(500).send({
+            message: "Errore Password vecchia."
+        });
       }
   
       if ((password == null) || (password.length <= 7) || (!/^[A-Za-z0-9]+$/.test(password))) {
-        res.cookie('errPassword', '1')
-  
-        isRight = false
+          res.status(500).send({
+            message:"Errore Password."
+        });
       }
   
-      if (passwordConfirm != password) {
-        res.cookie('errPasswordConfirm', '1')
-  
-        isRight = false
-      }
-  
-      if (!isRight) {
-        resolve(false)
-        return
-      }
- //Riga da rivedere
-      if (hash.checkPassword(req.session.utente.utente.Password.hash, req.session.utente.utente.Password.salt, oldPassword)) {
-        var passwordHashed = hash.hashPassword(password) 
-  //Vedere come fare setPassword
+      if (passwordConfirm != password) {   
+          res.status(500).send({
+            message: "Errore Password di conferma."
+        });
+   }
+   var passwordHashed = hash.hashPassword(password) 
+
   if (req.session.tipo == "Personale"){
         var checkS = Personale_Model.findOneAndUpdate ({Email: mail}, {password: passwordHashed});}
         if (req.session.tipo == "Cliente"){
@@ -116,14 +103,15 @@ if (tipo == "Personale"){
 
          checkS.then(function (result) {
            if (result != null) {
-             req.session.utente.utente = result
-             res.cookie('updatePassEff', '1')
-             resolve(true)
-           } else { resolve() }
-         })
-       } else {
-         res.cookie('errPassword', '1')
-         resolve(false)
-       }
-     })
-   }
+
+          res.status(500).send({
+            message:
+           "Tutto ok."
+          });
+           } else { res.status(500).send({
+            message:
+           "Errore alla fine."
+           });
+         }
+   });
+  };
