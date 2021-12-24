@@ -11,7 +11,12 @@ module.exports = app => {
 
     // Retrieve saldo tesserino
     router.get("/getSaldoTesserino", tesserino.getSaldoTesserino);
-  
+
+    // check if the customers has a Tesserino
+    router.get("/hasTesserino", tesserino.hasTesserino);
+
+    // check if the Tesserino is expired
+    router.get("/isExpired", tesserino.isExpired);
   
     app.use('/api/tesserino', router);
   };
