@@ -74,6 +74,7 @@ if (tipo == "Personale"){
       var password = req.body.inputPassword
       var passwordConfirm = req.body.inputConfirmPassword
  //->Sostituire is right con classici errori message - definire err.message? se non va solo messaggio
+ //Aggiungere controllo che la password sia effettivamente quella?
     if ((oldPassword == null) || (oldPassword.length <= 7) || (!/^[A-Za-z0-9]+$/.test(oldPassword))) {
        
           res.status(500).send({
@@ -95,12 +96,27 @@ if (tipo == "Personale"){
    var passwordHashed = hash.hashPassword(password) 
 
   if (req.session.tipo == "Personale"){
-        var checkS = Personale_Model.findOneAndUpdate ({Email: mail}, {password: passwordHashed});}
+        var checkS = Personale_Model.findOneAndUpdate ({Email: mail}, {password: passwordHashed});
+        res.status(500).send({
+          message:
+         "Tutto ok."
+        });
+      }
         if (req.session.tipo == "Cliente"){
-            var checkS = Cliente_Model.findOneAndUpdate ({Email: mail}, {password: passwordHashed});}
+            var checkS = Cliente_Model.findOneAndUpdate ({Email: mail}, {password: passwordHashed});
+            res.status(500).send({
+              message:
+             "Tutto ok."
+            });    
+          }
             if (req.session.tipo == "Admin"){
-                var checkS = Admin_Model.findOneAndUpdate ({Email: mail}, {password: passwordHashed});}
-
+                var checkS = Admin_Model.findOneAndUpdate ({Email: mail}, {password: passwordHashed});
+                res.status(500).send({
+                  message:
+                 "Tutto ok."
+                });
+              }
+/*NEGLI IF CONFERMARE IL RISULTATO
          checkS.then(function (result) {
            if (result != null) {
 
@@ -113,5 +129,5 @@ if (tipo == "Personale"){
            "Errore alla fine."
            });
          }
-   });
+   });*/
   };
