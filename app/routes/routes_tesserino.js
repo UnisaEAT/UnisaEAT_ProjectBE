@@ -6,17 +6,17 @@ module.exports = app => {
     // Create a new Tesserino
     router.post("/create", tesserino.create);
   
-    // Retrieve all Tesserino
-    router.get("/findAll", tesserino.findAll);
-
     // Retrieve saldo tesserino
-    router.get("/getSaldoTesserino", tesserino.getSaldoTesserino);
+    router.get("/getInfoTesserino", tesserino.getInfoTesserino);
 
     // check if the customers has a Tesserino
     router.get("/hasTesserino", tesserino.hasTesserino);
 
     // check if the Tesserino is expired
     router.get("/isExpired", tesserino.isExpired);
+
+    // update saldo del tesserino
+    router.post("/ricaricaTesserino", tesserino.ricaricaTesserino);
   
     app.use('/api/tesserino', router);
   };

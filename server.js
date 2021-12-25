@@ -8,7 +8,7 @@ var corsOptions = {
   origin: "http://localhost:3000"
 };
 
-app.use(cors(corsOptions));
+app.use(cors(/*corsOptions*/));
 
 // parse requests of content-type - application/json
 app.use(express.json());  /* bodyParser.json() is deprecated */
@@ -42,6 +42,7 @@ app.use(sessions({
     cookie: { maxAge: oneDay },
     resave: false 
 }));
+
 
 // simple route
 app.get("/", (req, res) => {
