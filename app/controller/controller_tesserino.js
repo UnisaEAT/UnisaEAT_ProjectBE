@@ -48,7 +48,7 @@ exports.hasTesserino = (req, res) => {
   altrimenti viene restituito true (il tesserino del cliente è scaduto)
 
   Se viene restituito {message : true} allora il tesserino è scaduto
-  Se viene restituito {message : true} allora il tesserino non è scaduto
+  Se viene restituito {message : false} allora il tesserino non è scaduto
 */
 exports.isExpired = (req, res) => {
   //variabili di prova da cancellare
@@ -128,6 +128,7 @@ exports.create = (req, res) => {
     let email = req.body.email;
     let confermaEmail = req.body.confermaEmail;
     let dataDiNascita = req.body.dataDiNascita;
+    let provinciaDiNascita = req.body.provinciaDiNascita;
     let comuneDiNascita = req.body.comuneDiNascita;
     let cittadinanza = req.body.cittadinanza;
     let indirizzo = req.body.indirizzo;
@@ -207,6 +208,21 @@ exports.create = (req, res) => {
     else {
       if(docs[0].dataDiNascita != dataDiNascita) {
         res.json({ message: "Data di nascita not found!" });
+        return;
+      }
+    }
+
+    if (!provinciaDiNascita) {
+      res.json({ message: "Provincia di nascita can not be empty!" });
+      return;
+    }
+    else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provinciaDiNascita)) || provinciaDiNascita.length <= 1) {
+      res.json({ message: "Provincia di nascita has invalid sintax!" });
+      return;
+    }
+    else {
+      if(docs[0].provinciaDiNascita != provinciaDiNascita) {
+        res.json({ message: "Provincia di nascita not found!" });
         return;
       }
     }
@@ -381,6 +397,7 @@ exports.create = (req, res) => {
       let email = req.body.email;
       let confermaEmail = req.body.confermaEmail;
       let dataDiNascita = req.body.dataDiNascita;
+      let provinciaDiNascita = req.body.provinciaDiNascita;
       let comuneDiNascita = req.body.comuneDiNascita;
       let cittadinanza = req.body.cittadinanza;
       let indirizzo = req.body.indirizzo;
@@ -463,7 +480,22 @@ exports.create = (req, res) => {
           return;
         }
       }
-  
+      
+      if (!provinciaDiNascita) {
+        res.json({ message: "Provincia di nascita can not be empty!" });
+        return;
+      }
+      else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provinciaDiNascita)) || provinciaDiNascita.length <= 1) {
+        res.json({ message: "Provincia di nascita has invalid sintax!" });
+        return;
+      }
+      else {
+        if(docs[0].provinciaDiNascita != provinciaDiNascita) {
+          res.json({ message: "Provincia di nascita not found!" });
+          return;
+        }
+      }
+
       if (!comuneDiNascita) {
         res.json({ message: "Comune di nascita can not be empty!" });
         return;

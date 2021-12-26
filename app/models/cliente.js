@@ -10,6 +10,7 @@ module.exports = mongoose => {
       indirizzo: String,
       tesserino: ObjectId,
       dataDiNascita: String,
+      provinciaDiNascita: String,
       comuneDiNascita: String,
       cittadinanza: String,
       provincia: String,
