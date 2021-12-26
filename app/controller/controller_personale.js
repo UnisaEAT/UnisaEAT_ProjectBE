@@ -28,7 +28,7 @@ exports.insert = (req, res) => {
     email: req.body.email,
     numeroTelefono: req.body.numeroTelefono,
     dataDiNascita: req.body.dataDiNascita,
-    ruolo: null,
+    ruolo: null, //AGGIUNGERE LA SESSIONE PER IL RUOLO
     disponibilita: false,
     indirizzo: req.body.indirizzo
   });
@@ -36,78 +36,78 @@ exports.insert = (req, res) => {
    
   //validazione del nome
   if (!nome) {
-  res.status(400).send({ message: "Nome can not be empty!" });
+  res.json({ message: "Nome non può essere vuoto" });
   return;}
    if (nome.length != 0) {
     if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
-      res.status(400).send({ message: "Espressione regolare nome non rispettata" });
+      res.json({ message: "Espressione regolare nome non rispettata" });
       return;}
     }
 
    //validazione del cognome
    if (!cognome) {
-    res.status(400).send({ message: "Cognome can not be empty!" });
+    res.json({ message: "Cognome non può essere vuoto" });
     return;}
     if (cognome.length != 0) {
       if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
-        res.status(400).send({ message: "Espressione regolare cognome non rispettata" });
+        res.json({ message: "Espressione regolare cognome non rispettata" });
         return;}
       }
 
    //validazione della data di nascita
    if (!dataDiNascita) {
-    res.status(400).send({ message: "dataDiNascita can not be empty!" });
+    res.json({ message: "Data di nascita non può essere vuoto" });
     return;}
     if (dataDiNascita.length == 10) {
       if (!(/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[-\/.](19|20)\d\d/.test(dataDiNascita))) {
-        res.status(400).send({ message: "Espressione regolare datadinascita non rispettata" });
+        res.json({ message: "Espressione regolare datadinascita non rispettata" });
         return;}
       }
 
    //validazione del numero di telefono
    if (!numeroTelefono) {
-    res.status(400).send({ message: "NumeroTelefono can not be empty!" });
+    res.json({ message: "NumeroTelefono non può essere vuoto" });
     return;}
      if (numeroTelefono.length != 0) {
         if (!(/^[0-9\-\+]{9,15}$/.test(numeroTelefono)) || numeroTelefono.length <10 || numeroTelefono.length >15) {
-        res.status(400).send({ message: "Espressione regolare numero non rispettata" });
+        res.json({ message: "Espressione regolare numero non rispettata" });
         return;}}
 
     //validazione dell'email    
     if (!email) {
-    res.status(400).send({ message: "Email can not be empty!" });
+    res.json({ message: "Email non può essere vuoto" });
     return;}
     if (email.length != 0) {
       if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length <8 ) {
-        res.status(400).send({ message: "Espressione regolare email non rispettata" });
+        res.json({ message: "Espressione regolare email non rispettata" });
         return;}}
     
     //validazione dell'indirizzo
     if (!indirizzo) {
-      res.status(400).send({ message: "Indirizzo can not be empty!" });
+      res.json({ message: "Indirizzo non può essere vuoto" });
       return;}
       if (indirizzo.length != 0) {
         if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
-          res.status(400).send({ message: "Espressione regolare indirizzo non rispettata" });
+          res.json({ message: "Espressione regolare indirizzo non rispettata" });
           return;}}
       
     //validazione della password
     if (!password) {
-      res.status(400).send({ message: "Passowrd can not be empty!" });
+      res.json({ message: "Passowrd non può essere vuoto" });
       return;}
       if(password.length != 0){
         if ((password.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
-          res.status(400).send({ message: "Espressione regolare passowrd non rispettata" });
+          res.json({ message: "Espressione regolare passowrd non rispettata" });
           return;}
         }
     //validazione della conferma della password
     if (!confermapassword) {
-      res.status(400).send({ message: "ConfermaPassword can not be empty!" });
+      res.json({ message: "ConfermaPassword non può essere vuoto" });
       return;} 
       if (confermapassword != password) {
-        res.status(400).send({ message: "Espressione regolare confermapassword non rispettata" });
+        res.json({ message: "Espressione regolare confermapassword non rispettata" });
         return;}
-
+ 
         var passwordHashed = hash.hashPassword(password);
         personale.password = passwordHashed;
   /* PRIMA DI INSERIRE EFFETTUO UN CONTROLLO SULL'EMAIL CHE E' UNICA NEL DB, NEL CASO ESISTA RITORNO ERRORE NEL CASO IN CUI NON ESISTE PROSEGUO CON L'INSERIMENTO  */
@@ -116,23 +116,19 @@ exports.insert = (req, res) => {
       personale
 .save(personale)
 .then(data => {
-  res.send(data);
+  res.json({message: true});
 })
 .catch(err => {
-  res.status(500).send({
-    message:
-      err.message || "Some error occurred while creating the Tutorial."
+  res.json({message: err.message || "Some error occurred while retriving personale."
   });
 });
 }
       
     else{
-      res.status(400).send({ message: "Il personale con quest'email è già stato inserito" }); }
+      res.json({ message: false }); }
   
   if(err){
-    res
-      .status(500)
-      .send({ message: "Error retrieving Tutorial with id=" + email });} })
+    res.json({ message: "Error retrieving personale with email=" + email });} })
   
 };
 
@@ -141,15 +137,16 @@ exports.insert = (req, res) => {
 exports.findByRuolo = (req, res) => {
   
 
-  Personale_Model.find({ruolo : 'personale adisu'})
+  Personale_Model.find({ruolo : 'personale adisu'/*qua aggiungere il campo per la sessione ruolo */})
     .then(data => {
-      res.send(data);
+      if(data==null){
+        res.json({message:false})
+      }
+      else{
+      res.json(data);}
     })
     .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving personale adisu."
-      });
+      res.json({message: err.message || "Some error occurred while retrieving personale adisu."});
     });
 };
 
@@ -157,14 +154,14 @@ exports.findByRuolo = (req, res) => {
 //RIMUOVERE UN PERSONALE ADISU DATA UN EMAIL
 exports.findByEmailAndRemove = (req, res) => {
   var email = req.body.email;
-  Personale_Model.findOneAndDelete({email:email})
+  Personale_Model.findOneAndDelete({email:email}) //vedere con alex come passare l'email in questo campo
   .then(data => {
-    res.send(data);
+    if(data==null){
+    res.json({message: false})}
+    else res.json({message: true})
   })
   .catch(err => {
-    res.status(500).send({
-      message:
-      err.message || "Qualche errore durante la rimozione del personale adisu"
+    res.json({ message: err.message || "Qualche errore durante la rimozione del personale adisu"
     });
   });
 };
@@ -172,12 +169,14 @@ exports.findByEmailAndRemove = (req, res) => {
 // Metodo per prendere le info del personale
 exports.findByEmail = (req, res) => {
 var email = req.body.email;
-  Personale_Model.find({email : email})
+  Personale_Model.find({email : email}) //vedere con alex come passare l'email in questo campo 
     .then(data => {
-      res.send(data);
+      if(data==null){
+      res.json({message:false})}
+      else res.json(data);
     })
     .catch(err => {
-      res.status(500).send({
+      res.json({
         message:
           err.message || "Some error occurred while retrieving personale adisu."
       });
