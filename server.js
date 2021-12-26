@@ -8,7 +8,8 @@ var corsOptions = {
   origin: "http://localhost:8080"
 };
 
-app.use(cors(corsOptions));
+app.use(cors(/*corsOptions*/)); 
+//per comunicare con frontend 
 
 // parse requests of content-type - application/json
 app.use(express.json());  /* bodyParser.json() is deprecated */
