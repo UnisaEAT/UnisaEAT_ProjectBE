@@ -23,7 +23,7 @@ if (tipo == "Personale"){
 //Email andrà modificato una volta implementata la sessione nei Login
       Personale_Model.findOne({email:mail}) //ID
       .then(data => {
-        res.send(data);
+        res.json(data);
       })
       .catch(err => {
         res.status(500).send({
@@ -35,7 +35,7 @@ if (tipo == "Personale"){
     if (tipo == "Cliente"){
         Cliente_Model.find({email:mail}) //ID
         .then(data => {
-          res.send(data);
+          res.json(data);
         })
         .catch(err => {
           res.status(500).send({
@@ -47,7 +47,7 @@ if (tipo == "Personale"){
       if (tipo == "Admin"){
         Admin_Model.find({email:mail}) //ID
         .then(data => {
-          res.send(data);
+          res.json(data);
         })
         .catch(err => {
           res.status(500).send({
