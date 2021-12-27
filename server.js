@@ -44,12 +44,6 @@ app.use(sessions({
     resave: false 
 }));
 
-
-// simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to UnisaEAT." });
-});
-
 require("./app/routes/routes_cliente")(app);
 require("./app/routes/routes_admin")(app);
 require("./app/routes/routes_personale")(app);
