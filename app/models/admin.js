@@ -1,10 +1,10 @@
 module.exports = mongoose => {
     var schema = mongoose.Schema({
-        _nome: String,
+        nome: String,
 
-        _cognome: String,
+        cognome: String,
 
-        _password: Object,
+        password: Object,
 
 
         email: String,

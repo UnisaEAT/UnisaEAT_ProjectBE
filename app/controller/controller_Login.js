@@ -44,44 +44,38 @@ exports.login = (req, res) => {
     }
 
 
-    Personale_Model.find({
-        email: email
-    }, function(err, docs) {
+    Personale_Model.find({email: email}, function(err, docs) {
         if (err) throw err;
         let check = docs[0];
         console.log(docs[0]);
 
         if ((check != null) && (docs[0].ruolo == "operatore mensa") && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
             res.json(check)
-                // crezione sessione
+            // crezione sessione operatore mensa
             req.session.email = docs[0].email
             req.session.ruolo = "operatore mensa"
             return;
-
-
-        } else if ((check != null) && (docs[0].ruolo == "personale adisu") && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
+        } 
+        else if ((check != null) && (docs[0].ruolo == "personale adisu") && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
 
             // creazione sessione personale adisu
             req.session.email = docs[0].email
             req.session.ruolo = "personale adisu"
             res.json(check)
 
-        } else if (check == null) {
-            Cliente_Model.find({
-                email: email
-            }, function(err, docs) {
+        } 
+        else if (check == null) {
+            Cliente_Model.find({email: email}, function(err, docs) {
                 if (err) throw err;
                 let check = docs[0];
                 console.log(docs[0]);
                 if ((check != null) && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
-                    //creazione sessio admin
+                    //creazione sessions cliente
                     req.session.email = docs[0].email
                     req.session.ruolo = "cliente"
                     res.json(check)
                 } else if (check == null) {
-                    Admin_Model.find({
-                        email: email
-                    }, function(err, docs) {
+                    Admin_Model.find({email: email}, function(err, docs) {
                         if (err) throw err;
                         let check = docs[0];
                         console.log(docs[0]);
@@ -92,10 +86,12 @@ exports.login = (req, res) => {
                             req.session.ruolo = "admin"
                             res.json(check)
                         }
+                        else {
+                            res.json({message: "Campi del login errati"})
+                        }
+
                     })
-                } else res.json({
-                    message: "Campi del login errati"
-                });
+                } 
                 return;
 
             })
