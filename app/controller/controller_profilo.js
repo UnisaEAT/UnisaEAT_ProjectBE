@@ -6,7 +6,7 @@ var Personale_Model = db.model_personale;
 var Cliente_Model=db.model_clienti;
 //Admin
 var Admin_Model=db.model_admin;
-
+//Verificare sessione
 
 
 exports.findByEmail = (req, res) => {
@@ -17,7 +17,6 @@ exports.findByEmail = (req, res) => {
     EX - getPROFILO
     Vedere se bisogna consegnare con Propt e non più send
     */
-//TIPO - Nota: req.session.tipo=personale andrà modificato una volta implementata la sessione nei Login
   
 //if Personale, Cliente, Admin
 if (tipo == "Personale"){
