@@ -1,111 +1,99 @@
-var hash = require('./hash.js')
-var clientmodel = require('../models/cliente.js')
-var personalemodel = require('../models/personale.js')
-var adminmodel = require('../models/admin.js')
-    /**
-     * This method authenticates the user to the system
-     * @param {Object} req - The HTTP request
-     * @param {Object} res - The HTTP response
-     * @returns {Boolean}  - It returns true if login was successfull, else false
-     */
-exports.login = function(req, res) {
-    return new Promise(function(resolve, reject) {
-            // take form parameters
-            var email = req.body.email
-            var password = req.body.password
+const e = require("express");
+const db = require("../models");
+const Personale_Model = db.model_personale;
+const Cliente_Model = db.model_cliente;
+const Admin_Model = db.model_admin
 
-            // form validation
-            var isRight = true
-            if ((email == null) || (email.length <= 1) || (!/^[a-z].[a-z]+[1-9]/.test(email))) {
-                if (!/^[a-z].[a-z]+[1-9]/.test(email)) {
-                    if (!/[a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9]){1,}?/.test(email)) {
-                        res.cookie('errUsername', '1')
-                        isRight = false
-                    }
-                }
+var hash = require('./hash.js');
+
+exports.login = (req, res) => {
+        //prendiamo l'email e la password dal body
+        var email = req.body.email
+        var password = req.body.password
+
+        //validazione dell'email
+        if (!email) {
+            res.json({
+                message: "Email non può essere vuoto"
+            });
+            return;
+        }
+        if (email.length != 0) {
+            if (!(/^[a-zA-Z0-9.%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/.test(email)) || (email.length < 8)) {
+                res.json({ message: "Espressione regolare email non rispettata" });
+                return;
             }
-
-            if ((password == null) || (password.length <= 7) || (!new RegExp('^[A-Za-z0-9\s]+$').test(password))) {
-                res.cookie('errPassword', '1')
-                isRight = false
-            }
-
-            if (!isRight) {
-                resolve(false)
-                return
-            }
-
-            var checkclient = clientmodel.findByEmail(email)
-
-            checkclient.then(function(resultc) {
-                if (resultc == null) {
-                    var checkpersonale = personalemodel.findByEmail(email)
-                    checkpersonale.then(function(resultp) {
-                        if (resultp == null) {
-                            var checkadmin = adminmodel.findByEmail(email)
-                            checkadmin.then(function(resultAd) {
-                                if (resultAd == null) {
-                                    res.cookie('errore login', '1')
-                                    resolve(false)
-                                } else {
-                                    if (hash.checkPassword(resultAd.Password().hash, resultAd.Password().salt, password)) {
-                                        var adminSession = {
-                                            utente: resultAd,
-                                            type: 'admin',
-                                            ruolo: 'personale adisu'
-
-                                        }
-                                        res.cookie('loginEffettuato', '1')
-                                        resolve(adminSession)
-                                    } else {
-                                        res.cookie('errore Login', '1')
-                                        resolve(false)
-                                    }
-                                }
-                            })
-                        } else {
-                            if (hash.checkPassword(resultp.Password().hash, resultp.Password().salt, password) && (result.ruolo = 'Personale ADISU')) {
-                                var PersonaleadisuSession = {
-                                    utente: resultp,
-                                    type: 'Personale ADISU',
-                                    ruolo: 'operatore mensa',
-                                    email: resultp.email,
-
-                                }
-                                res.cookie('login effetuato', '1')
-                                resolve(PersonaleadisuSession)
-                            } else {
-                                res.cookie('errore login', '1')
-                                resolve(false)
-                            }
-                        }
-                    })
-                } else {
-                    if (hash.checkPassword(resultp.Password().hash, resultp.Password().salt, password) && (result.ruolo = 'Operatore mensa')) {
-                        var OperatoreMenseSession = {
-                            utente: resultA,
-                            email: resultp.email,
-                            type: 'operatore mensa'
-                        }
-                        res.cookie('login effetuato', '1')
-                        resolve(OperatoreMenseSession)
-                    } else {
-                        res.cookie('errore login', '1')
-                        resolve(false)
-
-                    }
-                }
-            })
-            if (hash.checkPassword(resultc.Password().hash, resultc.Password().salt, password))
-                var ClienteSession = {
-                    email: resultc.email,
-                    utente: resultc,
-                    type: 'Cliente'
-                }
-            res.cookie('login effetuato', '1')
-            resolve(ClienteSession)
-
         }
 
-    )
-}
+        //validazione della password
+        if (!password) {
+            res.json({
+                message: "Passowrd non può essere vuoto"
+            });
+            return;
+        }
+        if (password.length != 0) {
+            if ((password.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
+                res.json({ message: "Espressione regolare passowrd non rispettata" });
+                return;
+            }
+        }
+
+
+        Personale_Model.find({
+                    email: email
+                }, function(err, docs) {
+                    if (err) throw err;
+                    let check = docs[0];
+                    console.log(docs[0]);
+
+                    if ((check != null) && (docs[0].ruolo == "operatore mensa") && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
+                        res.json(check)
+                            // crezione sessione
+                        req.session.email = docs[0].email
+                        req.session.ruolo = "operatore mensa"
+                        return;
+
+
+                    } else if ((check != null) && (docs[0].ruolo == "personale adisu") && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
+
+                        // creazione sessione personale adisu
+                        req.session.email = docs[0].email
+                        req.session.ruolo = "personale adisu"
+                        res.json(check)
+
+                    } else if (check == null) {
+                        Cliente_Model.find({
+                                email: email
+                            }, function(err, docs) {
+                                if (err) throw err;
+                                let check = docs[0];
+                                console.log(docs[0]);
+                                if ((check != null) && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
+                                    //creazione sessio admin
+                                    req.session.email = docs[0].email
+                                    req.session.ruolo = "cliente"
+                                    res.json(check)
+                                } else if (check == null) {
+                                    Admin_Model.find({
+                                        email: email
+                                    }, function(err, docs) {
+                                        if (err) throw err;
+                                        let check = docs[0];
+                                        console.log(docs[0]);
+                                        if ((check != null) && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
+                                            // creazione sessione admin
+
+                                            req.session.email = docs[0].email
+                                            req.session.ruolo = "admin"
+                                            res.json(check)
+                                        }
+                                    })
+                                }
+
+
+                            }
+                            // else res.json({ message: "Admin errato" });
+                            // return;
+                        )
+                    })

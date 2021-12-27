@@ -8,7 +8,7 @@ var corsOptions = {
     origin: "http://localhost:8080"
 };
 
-app.use(cors(corsOptions));
+app.use(cors( /*corsOptions*/ ));
 
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
@@ -29,7 +29,19 @@ db.mongoose
         console.log("Cannot connect to the database!", err);
         process.exit();
     });
-
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
+app.use(cookieParser());
+app.use(express.static(__dirname));
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized: true,
+    cookie: {
+        maxAge: oneDay
+    },
+    resave: false
+}));
 // simple route
 app.get("/", (req, res) => {
     res.json({ message: "Welcome to UnisaEAT." });

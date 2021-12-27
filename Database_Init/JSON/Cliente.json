@@ -1,0 +1,94 @@
+[{
+        "clienteID": "0512103456",
+        "nome": "Danny",
+        "cognome": "Devoto",
+        "password": "DannyDeVito1!",
+        "citta": "Porto Sant'Elpidio",
+        "email": "d.devoto@studenti.unisa.it",
+        "indirizzo": "Via delle Vie 121",
+        "tesserino": null
+
+    },
+
+    {
+        "clienteID": "0512103456",
+        "nome": "Anna Chiara",
+        "cognome": "Memoli",
+        "password": "Annachiaramemoli1!",
+        "citta": "Salerno",
+        "email": "a.annachira@studenti.unisa.it",
+        "indirizzo": "Via delle Vie 121",
+        "tesserino": null
+    },
+    {
+
+
+        "clienteID": "0512103486",
+        "nome": "Gerardo",
+        "cognome": "Sessa",
+        "password": "GerardoSessa1!",
+        "citta": "Fisciano",
+        "email": "g.sessa@studenti.unisa.it",
+        "indirizzo": "Nocelleto",
+        "tesserino": null
+
+    },
+
+
+    {
+
+
+        "clienteID": "05121054457",
+        "nome": "Alessadro",
+        "cognome": "Cavaliere",
+        "password": "Alessandro Cavaliere1!",
+        "citta": "Baronissi",
+        "email": "A.cavaliere@studenti.unisa.it",
+        "indirizzo": "via cariti",
+        "tesserino": null
+
+    }, {
+
+
+        "clienteID": "0512103456",
+        "nome": "Maria Roasaria",
+        "cognome": "Giudice",
+        "password": "MariaROsariaGiudice1!",
+        "citta": "Salerno",
+        "email": "m.mariarosaria@studenti.unisa.it",
+        "indirizzo": "Via salvatore calenda",
+        "tesserino": null
+
+    },
+
+
+    {
+
+
+        "clienteID": "0512103090",
+        "nome": "Alessio",
+        "cognome": "Salzano",
+        "password": "Alessiosalzano1!",
+        "citta": "albanella",
+        "email": "a.alessio@studenti.unisa.it",
+        "indirizzo": " via monteverde",
+        "tesserino": null
+
+    },
+    {
+
+
+        "clienteID": "05121436433",
+        "nome": "Claudio",
+        "cognome": "Buono",
+        "password": "ClaudioBuon1!",
+        "citta": "Angri",
+        "email": "C.buono@studenti.unisa.it",
+        "indirizzo": "via delle madonne",
+        "tesserino": null
+
+    }
+
+
+
+]

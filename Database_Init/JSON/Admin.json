@@ -1,0 +1,15 @@
+[{
+        "adminID": "0512103456",
+        "nome": "alfredo",
+        "cognome": "citro",
+        "password": "Alfredocitro1!",
+        "email": "a.citro@studenti.unisa.it"
+    },
+    {
+        "adminID": "0512103457",
+        "nome": "gerardo",
+        "cognome": "citro",
+        "password": "Gerardocitro1!",
+        "email": "g.citro@studenti.unisa.it"
+    }
+]

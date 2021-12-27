@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient
-var hash = require('../controller/hash')
+var hash = require('../app/controller/hash')
 
 // Database URL
 const url = 'mongodb://localhost:27017/UnisaEAT_db'
@@ -11,7 +11,7 @@ ins.then(function(result) {
     process.exit()
 })
 
-
+//database stesso livello di documentation, stesso livello di app copia nella nostra cartella
 function insert() {
     return new Promise(function(resolve, reject) {
         MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
@@ -20,23 +20,23 @@ function insert() {
             var dbo = db.db(dbName)
 
             const fs = require('fs')
-            const Clientedata = fs.readFileSync('./JSON/Cliente.json')
-            const personaledata = fs.readFileSync('./JSON/Personale.json')
-            const admindata = fs.readFileSync('./JSON/Admin.json')
+            const Clientedata = fs.readFileSync(__dirname + '\\JSON\\Cliente.json')
+            const personaledata = fs.readFileSync(__dirname + '\\JSON\\Personale.json')
+            const admindata = fs.readFileSync(__dirname + '\\JSON\\Admin.json')
 
             const client = JSON.parse(Clientedata)
             const personale = JSON.parse(personaledata)
             const admin = JSON.parse(admindata)
 
             for (var i = 0; client[i] != null; i++) {
-                client[i].Password = hash.hashPassword(client[i].Password)
+                client[i].password = hash.hashPassword(client[i].password)
             }
 
             for (var j = 0; personale[j] != null; j++) {
-                personale[j].Password = hash.hashPassword(personale[j].Password)
+                personale[j].password = hash.hashPassword(personale[j].password)
             }
             for (var k = 0; admin[k] != null; k++) {
-                admin[k].Password = hash.hashPassword(admin[k].Password)
+                admin[k].password = hash.hashPassword(admin[k].password)
             }
 
             dbo.collection('cliente').insertMany(client, function(err, result) {

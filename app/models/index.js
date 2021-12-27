@@ -6,7 +6,7 @@ mongoose.Promise = global.Promise;
 const db = {};
 db.mongoose = mongoose;
 db.url = dbConfig.url;
-db.model_clienti = require("./cliente.js")(mongoose);
+db.model_cliente = require("./cliente.js")(mongoose);
 db.model_admin = require("./admin.js")(mongoose);
 db.model_personale = require("./personale.js")(mongoose);
 db.model_messaggio = require("./messaggio.js")(mongoose);
@@ -18,6 +18,7 @@ db.model_pasto = require("./pasto.js")(mongoose);
 db.model_faq = require("./faq.js")(mongoose);
 db.model_ticket = require("./ticket.js")(mongoose);
 db.model_statistiche = require("./statistiche.js")(mongoose);
+
 
 
 module.exports = db;
