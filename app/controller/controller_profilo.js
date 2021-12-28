@@ -10,8 +10,8 @@ var Admin_Model=db.model_admin;
 
 
 exports.findByEmail = (req, res) => {
-    var tipo = "Personale"
-    var mail = "giannipepp@gmail.com"
+    var tipo = res.body.tipo;
+    var mail = res.body.email;
     /*req.session.utente.id = new ObjectId("61c4518cee6b7b3e89608755")
     var id= req.session.utente.id ORA SI E' DECISO PER EMAIL
     EX - getPROFILO
