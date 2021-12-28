@@ -20,49 +20,21 @@ function insert() {
             console.log('connessione al server avvenuta!')
             var dbo = db.db(dbName)
 
-
             const fs = require('fs')
             const Clientedata = fs.readFileSync(__dirname+"\\JSON\\Cliente.json")
-          //const personaledata = fs.readFileSync('Database_Init/JSON/dbpop_Personale.js')
-            //const admindata = fs.readFileSync('Database_Init/JSON/dbpop_Admin.js')
 
             const client = JSON.parse(Clientedata)
-            //const personale = JSON.parse(personaledata)
-           // const admin = JSON.parse(admindata)
 
             for (var i = 0; client[i] != null; i++) {
                 client[i].password = hash.hashPassword(client[i].password)
             }
-            /*
-            for (var j = 0; personale[j] != null; j++) {
-                personale[j].Password = hash.hashPassword(personale[j].Password)
-            }
-            for (var k = 0; admin[k] != null; k++) {
-                admin[k].Password = hash.hashPassword(admin[k].Password)
-            }
-        */
+            
             dbo.collection('cliente').insertMany(client, function(err, result) {
                 if (err) throw err
                 console.log('abbiamo inserito  ' + result.insertedCount + 'clienti')
-
-                /*
-                dbo.collection('Personale').insertMany(personale, function(err, result) {
-                    if (err) throw err
-                    console.log('abbiamo inserito  ' + result.insertedCount + 'che rigiuardano il personale')
-
-                    dbo.collection('Admin').insertMany(admin, function(err, result) {
-                        if (err) throw err
-                        console.log('abbiamo inserito  ' + result.insertedCount + 'admin')
-*/
-                        if (err) throw err
-                        console.log('Succesfully created the collection UnisaEAT_db.')
-                        resolve()
-                    })
-                })
+                console.log('Succesfully created the collection UnisaEAT_db.')
+                resolve()
             })
-    /*
         })
     })
-    */
-
 }
