@@ -9,7 +9,7 @@ module.exports = mongoose => {
 
         email: String,
     });
-
+    node
 
     schema.method("toJSON", function() {
         const { __v, _id, ...object } = this.toObject();
