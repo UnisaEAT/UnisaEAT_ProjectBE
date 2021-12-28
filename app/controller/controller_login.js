@@ -99,6 +99,7 @@ exports.login = (req, res) => {
         }
     })
 };
+
 exports.authChecker = (req, res) => {
     const sessUser = req.session.email;
     if (sessUser) {
