@@ -1,5 +1,5 @@
 [{
-        "personaleID": "0512103456",
+
         "nome": "Danny",
         "cognome": "De Vito",
         "password": "aas!1Asdsa",
@@ -10,7 +10,6 @@
     },
 
     {
-        "clienteID": "0512103457",
         "nome": "Carmine",
         "cognome": "Citro",
         "password": "carminecitro1!",

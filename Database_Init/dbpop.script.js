@@ -41,7 +41,7 @@ function insert() {
 
             dbo.collection('cliente').insertMany(client, function(err, result) {
                 if (err) throw err
-                console.log('abbiamo inserito  ' + result.insertedCount + 'clienti')
+                console.log('abbiamo inserito  ' + result.insertedCount + ' clienti')
 
 
                 dbo.collection('personale').insertMany(personale, function(err, result) {
