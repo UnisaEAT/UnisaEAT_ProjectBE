@@ -99,7 +99,6 @@ exports.login = (req, res) => {
         }
     })
 };
-<<<<<<< HEAD:app/controller/controller_Login.js
 exports.authChecker = (req, res) => {
     const sessUser = req.session.email;
     if (sessUser) {
@@ -108,5 +107,3 @@ exports.authChecker = (req, res) => {
         return res.json({ message: "Unauthorized" });
     }
 };
-=======
->>>>>>> f14808811ba29957fe10098098e84daf16e7bdc0:app/controller/controller_login.js
