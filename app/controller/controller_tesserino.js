@@ -603,31 +603,13 @@ exports.create = (req, res) => {
       //uguale alla data attuale + 1 anno
       let date = new Date();
       date.setDate(date.getDate() + 365); 
-  
-      // Create a Tesserino
-      const tesserino = new Tesserino_Model ({
-        saldo: 0,
-        dataScadenza: date
-      });
-  
-  
-      // Save Tesserino in the database
-      tesserino
-        .save(tesserino)
-        .then(data => {
-          Cliente_Model.findOneAndUpdate({email:req.session.email}, {tesserino:new ObjectId(data._id)}).then(
-            function(value) {
-              res.json({message : true});
-              return;
-            }
-          )
-        })
-        .catch(err => {
-          res.json({
-            message:
-              err.message || "Some error occurred while updating the Tesserino."
-          });
-        });
+      let tesserinoID = docs[0].tesserino;
+
+      Tesserino_Model.findByIdAndUpdate(tesserinoID, {dataScadenza:date}, function (err, docs){
+        if (err) throw err;
+        res.json(true);
+        return;
+      })
   
     });
   };
