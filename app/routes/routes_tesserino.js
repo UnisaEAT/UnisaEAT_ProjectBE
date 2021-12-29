@@ -17,6 +17,9 @@ module.exports = app => {
 
     // update saldo del tesserino
     router.post("/ricaricaTesserino", tesserino.ricaricaTesserino);
+
+    // update data del tesserino
+    router.post("/rinnovoTesserino", tesserino.updateDataScadenza);
   
     app.use('/api/tesserino', router);
   };
