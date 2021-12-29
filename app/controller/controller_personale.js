@@ -6,10 +6,6 @@ var hash = require('./hash.js');
 // Create and Save a new Personale
 exports.insert = (req, res) => {
   // Validate request
-  if (!req.body.nome) {
-    res.status(400).send({ message: "Content can not be empty!" });
-    return;
-  }
   let nome = req.body.nome;
   let cognome = req.body.cognome;
   let password = req.body.password;

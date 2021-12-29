@@ -13,7 +13,7 @@ module.exports = app => {
     router.post("/remove",personale.findByEmailAndRemove);
 
     //Get personale
-    router.get("/getInfo",personale.findByEmail);
+    router.post("/getInfo",personale.findByEmail);
     
     app.use('/api/personale', router);
   };
