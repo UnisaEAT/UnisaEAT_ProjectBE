@@ -32,76 +32,76 @@ exports.insert = (req, res) => {
    
   //validazione del nome
   if (!nome) {
-  res.json({ message: "Nome non può essere vuoto" });
+  res.json({name:"nome", message: "Nome non può essere vuoto" });
   return;}
    if (nome.length != 0) {
     if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
-      res.json({ message: "Espressione regolare nome non rispettata" });
+      res.json({name:"nome", message: "Espressione regolare nome non rispettata" });
       return;}
     }
 
    //validazione del cognome
    if (!cognome) {
-    res.json({ message: "Cognome non può essere vuoto" });
+    res.json({ name:"cognome", message: "Cognome non può essere vuoto" });
     return;}
     if (cognome.length != 0) {
       if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
-        res.json({ message: "Espressione regolare cognome non rispettata" });
+        res.json({name:"cognome", message: "Espressione regolare cognome non rispettata" });
         return;}
       }
 
    //validazione della data di nascita
    if (!dataDiNascita) {
-    res.json({ message: "Data di nascita non può essere vuoto" });
+    res.json({ name:"datadinascita",message: "Data di nascita non può essere vuoto" });
     return;}
     if (dataDiNascita.length == 10) {
       if (!(/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[-\/.](19|20)\d\d/.test(dataDiNascita))) {
-        res.json({ message: "Espressione regolare datadinascita non rispettata" });
+        res.json({name:"dataDiNascita", message: "Espressione regolare datadinascita non rispettata" });
         return;}
       }
 
    //validazione del numero di telefono
    if (!numeroTelefono) {
-    res.json({ message: "NumeroTelefono non può essere vuoto" });
+    res.json({ name:"numeroTelefono",message: "NumeroTelefono non può essere vuoto" });
     return;}
      if (numeroTelefono.length != 0) {
         if (!(/^[0-9\-\+]{9,15}$/.test(numeroTelefono)) || numeroTelefono.length <10 || numeroTelefono.length >15) {
-        res.json({ message: "Espressione regolare numero non rispettata" });
+        res.json({name:"numeroTelefono", message: "Espressione regolare numero non rispettata" });
         return;}}
 
     //validazione dell'email    
     if (!email) {
-    res.json({ message: "Email non può essere vuoto" });
+    res.json({ name:"email",message: "Email non può essere vuoto" });
     return;}
     if (email.length != 0) {
       if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length <8 ) {
-        res.json({ message: "Espressione regolare email non rispettata" });
+        res.json({name:"email", message: "Espressione regolare email non rispettata" });
         return;}}
     
     //validazione dell'indirizzo
     if (!indirizzo) {
-      res.json({ message: "Indirizzo non può essere vuoto" });
+      res.json({name:"indirizzo", message: "Indirizzo non può essere vuoto" });
       return;}
       if (indirizzo.length != 0) {
         if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
-          res.json({ message: "Espressione regolare indirizzo non rispettata" });
+          res.json({ name:"indirizzo",message: "Espressione regolare indirizzo non rispettata" });
           return;}}
       
     //validazione della password
     if (!password) {
-      res.json({ message: "Passowrd non può essere vuoto" });
+      res.json({ name:"password",message: "Passowrd non può essere vuoto" });
       return;}
       if(password.length != 0){
         if ((password.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
-          res.json({ message: "Espressione regolare passowrd non rispettata" });
+          res.json({ name:"password",message: "Espressione regolare passowrd non rispettata" });
           return;}
         }
     //validazione della conferma della password
     if (!confermapassword) {
-      res.json({ message: "ConfermaPassword non può essere vuoto" });
+      res.json({name:"confermapassword", message: "ConfermaPassword non può essere vuoto" });
       return;} 
       if (confermapassword != password) {
-        res.json({ message: "Espressione regolare confermapassword non rispettata" });
+        res.json({ name:"confermapassword",message: "ConfermaPassword è diverso dal campo password" });
         return;}
  
         var passwordHashed = hash.hashPassword(password);
@@ -162,7 +162,7 @@ exports.findByEmailAndRemove = (req, res) => {
   });
 };
 
-// Metodo per prendere le info del personale
+/*Metodo per prendere le info del personale (NON VIENE USATO)
 exports.findByEmail = (req, res) => {
 var email = req.body.email;
   Personale_Model.find({email : email}) //vedere con alex come passare l'email in questo campo 
@@ -176,5 +176,4 @@ var email = req.body.email;
         message:
           err.message || "Some error occurred while retrieving personale adisu."
       });
-    });
-};
+    }); */
