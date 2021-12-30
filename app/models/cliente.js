@@ -1,14 +1,21 @@
+var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
   var schema = mongoose.Schema(
     {
-      clienteID: String,
       nome: String,
       cognome: String,
       password: Object,
       citta: String,
       email: String,
       indirizzo: String,
-      tesserino: Object
+      tesserino: ObjectId,
+      dataDiNascita: String,
+      provinciaDiNascita: String,
+      comuneDiNascita: String,
+      cittadinanza: String,
+      provincia: String,
+      cap: String,
+      telefono: String
     }
   );
 
@@ -18,6 +25,6 @@ module.exports = mongoose => {
     return object;
   });
 
-  const Cliente = mongoose.model("cliente", schema);
+  const Cliente = mongoose.model("cliente", schema, "cliente");
   return Cliente;
 };

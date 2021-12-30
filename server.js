@@ -5,7 +5,7 @@ const cors = require("cors");
 const app = express();
 
 var corsOptions = {
-  origin: "http://localhost:8080"
+  origin: "http://localhost:3000"
 };
 
 app.use(cors(/*corsOptions*/));
@@ -43,16 +43,41 @@ db.mongoose
       resave: false 
   }));
 
+//session code
+const cookieParser = require("cookie-parser");
+const sessions = require('express-session');
+app.use(cookieParser());
+app.use(express.static(__dirname));
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    cookie: { maxAge: oneDay },
+    resave: false 
+}));
+
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to UnisaEAT." });
 });
 
 require("./app/routes/routes_cliente")(app);
+
+require("./app/routes/routes_admin")(app);
 require("./app/routes/routes_personale")(app);
+require("./app/routes/routes_messaggio")(app);
+require("./app/routes/routes_notifica")(app);
+require("./app/routes/routes_tesserino")(app);
+require("./app/routes/routes_ordine")(app);
+require("./app/routes/routes_menu")(app);
+require("./app/routes/routes_pasto")(app);
+require("./app/routes/routes_faq")(app);
+require("./app/routes/routes_ticket")(app);
+require("./app/routes/routes_statistiche")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
