@@ -16,4 +16,4 @@ module.exports = app => {
     router.post("/getInfo",personale.findByEmail);
     
     app.use('/api/personale', router);
-  };
+  }; 
