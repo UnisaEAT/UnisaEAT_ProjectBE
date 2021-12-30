@@ -12,8 +12,6 @@ exports.insert = (req, res) => {
   let email = req.body.email;
   let numeroTelefono = req.body.numeroTelefono;
   let dataDiNascita = req.body.dataDiNascita;
-  let ruolo = null;
-  let disponibilita = false;
   let indirizzo = req.body.indirizzo;
   let confermapassword = req.body.confermapassword;
   // Create a Personale
@@ -24,8 +22,8 @@ exports.insert = (req, res) => {
     email: req.body.email,
     numeroTelefono: req.body.numeroTelefono,
     dataDiNascita: req.body.dataDiNascita,
-    ruolo: null, //AGGIUNGERE LA SESSIONE PER IL RUOLO
-    disponibilita: false,
+    ruolo: req.session.tipo, 
+    disponibilita: true,
     indirizzo: req.body.indirizzo
   });
   
@@ -132,8 +130,12 @@ exports.insert = (req, res) => {
 // Retrieve all Personale from the database.
 exports.findByRuolo = (req, res) => {
   
-
-  Personale_Model.find({ruolo : 'personale adisu'/*qua aggiungere il campo per la sessione ruolo */})
+  var tipo=null;
+  if(req.session.tipo=="admin"){
+    tipo="personale adisu"
+  }
+  else {tipo="operatore mensa"}
+  Personale_Model.find({ruolo : tipo})
     .then(data => {
       if(data==null){
         res.json({message:false})
@@ -150,7 +152,7 @@ exports.findByRuolo = (req, res) => {
 //RIMUOVERE UN PERSONALE ADISU DATA UN EMAIL
 exports.findByEmailAndRemove = (req, res) => {
   var email = req.body.email;
-  Personale_Model.findOneAndDelete({email:email}) //vedere con alex come passare l'email in questo campo
+  Personale_Model.findOneAndDelete({email:email})
   .then(data => {
     if(data==null){
     res.json({message: false})}

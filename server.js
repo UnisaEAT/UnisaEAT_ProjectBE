@@ -48,7 +48,6 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to UnisaEAT." });
 });
 
-require("./app/routes/routes_cliente")(app);
 require("./app/routes/routes_personale")(app);
 
 // set port, listen for requests
