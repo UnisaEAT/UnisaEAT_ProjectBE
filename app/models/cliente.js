@@ -8,7 +8,14 @@ module.exports = mongoose => {
       citta: String,
       email: String,
       indirizzo: String,
-      tesserino: ObjectId
+      tesserino: ObjectId,
+      dataDiNascita: String,
+      provinciaDiNascita: String,
+      comuneDiNascita: String,
+      cittadinanza: String,
+      provincia: String,
+      cap: String,
+      telefono: String
     }
   );
 
