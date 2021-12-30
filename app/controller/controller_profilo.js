@@ -10,8 +10,8 @@ var Admin_Model=db.model_admin;
 
 
 exports.findByEmail = (req, res) => {
-    var tipo = res.body.tipo;
-    var mail = res.body.email;
+    var tipo = req.session.tipo;
+    var mail = req.session.email;
     /*req.session.utente.id = new ObjectId("61c4518cee6b7b3e89608755")
     var id= req.session.utente.id ORA SI E' DECISO PER EMAIL
     EX - getPROFILO
@@ -68,8 +68,8 @@ if (tipo == "Personale"){
    */
   
    exports.updatePassword = function (req, res) {
-         req.session.tipo = "Personale"
-        var mail = "giannipepp@gmail.com"
+        
+        var mail = req.session.mail
       var oldPassword = req.body.inputOldPassword
       var password = req.body.inputPassword
       var passwordConfirm = req.body.inputConfirmPassword
