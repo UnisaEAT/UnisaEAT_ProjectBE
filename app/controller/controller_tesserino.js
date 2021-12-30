@@ -15,8 +15,9 @@ const Cliente_Model = db.model_clienti;
 */
 exports.hasTesserino = (req, res) => {
   //variabili di prova da cancellare
-  req.session.tipo = "cliente";
+  /*req.session.tipo = "cliente";
   req.session.email = "n.cappello@studenti.unisa.it";
+  */
 
   if(req.session.tipo != "cliente")
   {
@@ -52,8 +53,9 @@ exports.hasTesserino = (req, res) => {
 */
 exports.isExpired = (req, res) => {
   //variabili di prova da cancellare
-  req.session.tipo = "cliente";
+  /*req.session.tipo = "cliente";
   req.session.email = "n.cappello@studenti.unisa.it";
+  */
 
   if(req.session.tipo != "cliente")
   {
@@ -107,8 +109,9 @@ exports.create = (req, res) => {
   // Validate request
 
   //variabili di prova da cancellare
-  req.session.tipo = "cliente";
+  /*req.session.tipo = "cliente";
   req.session.email = "n.cappello@studenti.unisa.it";
+  */
 
   if(req.session.tipo != "cliente")
   {
@@ -375,9 +378,10 @@ exports.create = (req, res) => {
     // Validate request
   
     //variabili di prova da cancellare
-    req.session.tipo = "cliente";
+    /*req.session.tipo = "cliente";
     req.session.email = "n.cappello@studenti.unisa.it";
-  
+    */
+
     if(req.session.tipo != "cliente")
     {
       res.json({ message: "Only customers can access this page!" });
@@ -625,8 +629,9 @@ exports.create = (req, res) => {
 */
   exports.getInfoTesserino = (req, res) => {
     //variabili di prova da cancellare
-    req.session.tipo = "cliente";
+    /*req.session.tipo = "cliente";
     req.session.email = "n.cappello@studenti.unisa.it";
+    */
 
     if(req.session.tipo != "cliente")
     {
@@ -672,8 +677,9 @@ exports.create = (req, res) => {
 */
 exports.ricaricaTesserino = (req, res) => {
   //variabili di prova da cancellare
-  req.session.tipo = "cliente";
+  /*req.session.tipo = "cliente";
   req.session.email = "n.cappello@studenti.unisa.it";
+  */
 
   if(req.session.tipo != "cliente")
   {
