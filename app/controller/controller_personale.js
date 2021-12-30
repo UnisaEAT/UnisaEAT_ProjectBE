@@ -162,7 +162,7 @@ exports.findByEmailAndRemove = (req, res) => {
     res.json({ message: err.message || "Qualche errore durante la rimozione del personale adisu"
     });
   });
-};
+}; 
 
 /*Metodo per prendere le info del personale (NON VIENE USATO)
 exports.findByEmail = (req, res) => {
