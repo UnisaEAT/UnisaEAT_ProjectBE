@@ -1,9 +1,9 @@
 var MongoClient = require('mongodb').MongoClient
 var hash = require('../controller/hash')
 // Database URL
-const url = 'mongodb://localhost:27017/UnisaEat'
+const url = 'mongodb://localhost:27017/UnisaEAT_db'
 // Database name
-const dbName = 'unisaEat'
+const dbName = 'UnisaEAT_db'
 
 var ins = insert()
 ins.then(function(result) {
@@ -28,26 +28,26 @@ function insert() {
            // const admin = JSON.parse(admindata)
 
             for (var i = 0; client[i] != null; i++) {
-                client[i].Password = hash.hashPassword(client[i].Password)
+                client[i].password = hash.hashPassword(client[i].password)
             }
             /*
             for (var j = 0; personale[j] != null; j++) {
-                personale[j].Password = hash.hashPassword(personale[j].Password)
+                personale[j].password = hash.hashPassword(personale[j].password)
             }
             for (var k = 0; admin[k] != null; k++) {
-                admin[k].Password = hash.hashPassword(admin[k].Password)
+                admin[k].password = hash.hashPassword(admin[k].password)
             }
         */
-            dbo.collection('Clienti').insertMany(client, function(err, result) {
+            dbo.collection('clienti').insertMany(client, function(err, result) {
                 if (err) throw err
                 console.log('abbiamo inserito  ' + result.insertedCount + 'clienti')
 
                 /*
-                dbo.collection('Personale').insertMany(personale, function(err, result) {
+                dbo.collection('personale').insertMany(personale, function(err, result) {
                     if (err) throw err
                     console.log('abbiamo inserito  ' + result.insertedCount + 'che rigiuardano il personale')
 
-                    dbo.collection('Admin').insertMany(admin, function(err, result) {
+                    dbo.collection('admin').insertMany(admin, function(err, result) {
                         if (err) throw err
                         console.log('abbiamo inserito  ' + result.insertedCount + 'admin')
 */
