@@ -1,7 +1,8 @@
 module.exports = app => {
-    const Logout = require("../controller/controller_logout");
+    const logout = require("../controller/controller_logout");
 
     var router = require("express").Router()
-    router.get("/logout", Logout.logout);
+    router.get("/logout", logout.logout);
 
+    app.use('/api/logout', router);
 }

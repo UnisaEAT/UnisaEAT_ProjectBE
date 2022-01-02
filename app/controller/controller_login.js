@@ -102,7 +102,7 @@ exports.login = (req, res) => {
 exports.authChecker = (req, res) => {
     const sessUser = req.session.email;
     if (sessUser) {
-        return res.json({ email: req.session.email, tipo: req.session.tipo });
+        return res.json({ email: req.session.email, ruolo: req.session.ruolo });
     } else {
         return res.json({ message: "Unauthorized" });
     }
