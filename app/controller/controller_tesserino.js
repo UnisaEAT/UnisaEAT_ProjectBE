@@ -110,9 +110,9 @@ exports.create = (req, res) => {
   // Validate request
 
   //variabili di prova da cancellare
-  /*req.session.tipo = "cliente";
-  req.session.email = "n.cappello@studenti.unisa.it";
-  */
+  req.session.tipo = "cliente";
+  req.session.email = "c.buono@studenti.unisa.it";
+  
 
   if(req.session.tipo != "cliente")
   {

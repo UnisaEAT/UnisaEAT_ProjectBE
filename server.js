@@ -49,18 +49,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to UnisaEAT." });
 });
 
-require("./app/routes/routes_cliente")(app);
-require("./app/routes/routes_admin")(app);
-require("./app/routes/routes_personale")(app);
-require("./app/routes/routes_messaggio")(app);
-require("./app/routes/routes_notifica")(app);
 require("./app/routes/routes_tesserino")(app);
-require("./app/routes/routes_ordine")(app);
-require("./app/routes/routes_menu")(app);
-require("./app/routes/routes_pasto")(app);
-require("./app/routes/routes_faq")(app);
-require("./app/routes/routes_ticket")(app);
-require("./app/routes/routes_statistiche")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
