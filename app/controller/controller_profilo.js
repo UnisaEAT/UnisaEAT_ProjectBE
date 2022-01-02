@@ -69,12 +69,12 @@ if (tipo == "Personale"){
  
    exports.updatePassword = function (req, res) {
  
-      var mail = "m.judo@studenti.unisa.it"
+      var mail = "g.citro@studenti.unisa.it"
       req.session.tipo="Admin"
       var oldPassword = req.body.inputOldPassword
       var password = req.body.inputPassword
       var passwordConfirm = req.body.inputConfirmPassword
-      if ((oldPassword == null) || (oldPassword.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(oldPassword)))
+      if ( (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(oldPassword)) || (oldPassword.length <= 8) || (oldPassword==null))
       ) {
  
         res.json({
