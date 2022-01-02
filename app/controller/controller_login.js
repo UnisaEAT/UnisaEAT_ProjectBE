@@ -14,14 +14,16 @@ exports.login = (req, res) => {
     //validazione dell'email
     if (!email) {
         res.json({
-            message: "Email non può essere vuoto"
+            name: "email",
+            error: "Email non può essere vuoto"
         });
         return;
     }
     if (email.length != 0) {
         if (!(/^[a-zA-Z0-9.%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/.test(email)) || (email.length < 8)) {
             res.json({
-                message: "Espressione regolare email non rispettata"
+                name: "email",
+                message: "Espressione regolare email non rispettata",
             });
             return;
         }
@@ -30,14 +32,16 @@ exports.login = (req, res) => {
     //validazione della password
     if (!password) {
         res.json({
-            message: "Passowrd non può essere vuoto"
+            name: "password",
+            message: "Passowrd non può essere vuoto",
         });
         return;
     }
     if (password.length != 0) {
         if ((password.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
             res.json({
-                message: "Espressione regolare passowrd non rispettata"
+                name: "password",
+                message: "Espressione regolare passowrd non rispettata",
             });
             return;
         }
@@ -86,7 +90,9 @@ exports.login = (req, res) => {
                             req.session.ruolo = "admin"
                             res.json(check)
                         } else {
-                            res.json({ message: "Campi del login errati" })
+                            res.json({ 
+                                message: "Campi del login errati", 
+                            })
                         }
 
                     })
