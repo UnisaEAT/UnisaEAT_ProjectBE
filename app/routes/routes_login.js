@@ -1,7 +1,9 @@
 module.exports = app => {
-    const Login = require("../controller/controller_login");
+    const login = require("../controller/controller_login");
 
     var router = require("express").Router()
-    router.post("/login", Login.login);
+    router.post("/login", login.login);
+    router.get("/authChecker", login.authChecker);
+
     app.use('/api/login', router);
 }
