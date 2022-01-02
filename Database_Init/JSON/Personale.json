@@ -1,0 +1,24 @@
+[{
+    "nome": "Danny",
+    "cognome": "De Vito",
+    "password": "aas!1Asdsa",
+    "email": "d.devito@studenti.unisa.it",
+    "numeroTelefono": "3425645222",
+    "dataDiNascita": "23/02/2000",
+    "indirizzo": "Via delle Vie 121",
+    "ruolo": "operatore mensa",
+    "disponibilità": false
+},
+
+{
+    "nome": "Carmine",
+    "cognome": "Citro",
+    "password": "carminecitro1!",
+    "email": "c.citro@studenti.unisa.it",
+    "numeroTelefono": "3425643422",
+    "dataDiNascita": "20/10/2001",
+    "indirizzo": "Via ministro de falco ",
+    "ruolo": "operatore mensa",
+    "disponibilità": false
+}
+]

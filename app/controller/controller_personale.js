@@ -22,11 +22,17 @@ exports.insert = (req, res) => {
     email: req.body.email,
     numeroTelefono: req.body.numeroTelefono,
     dataDiNascita: req.body.dataDiNascita,
-    ruolo: req.session.tipo, 
+    ruolo: null, 
     disponibilita: true,
     indirizzo: req.body.indirizzo
   });
   
+  if(req.session.tipo=="admin"){
+    personale.ruolo="personale adisu"
+  }
+  else if(req.session.tipo=="personale adisu"){
+    personale.ruolo="operatore mensa"
+  }
    
   //validazione del nome
   if (!nome) {
@@ -104,6 +110,9 @@ exports.insert = (req, res) => {
  
         var passwordHashed = hash.hashPassword(password);
         personale.password = passwordHashed;
+
+        
+        
   /* PRIMA DI INSERIRE EFFETTUO UN CONTROLLO SULL'EMAIL CHE E' UNICA NEL DB, NEL CASO ESISTA RITORNO ERRORE NEL CASO IN CUI NON ESISTE PROSEGUO CON L'INSERIMENTO  */
   Personale_Model.find({email : email},function (err,docs){
     if (docs==0){
@@ -130,8 +139,11 @@ exports.insert = (req, res) => {
 // Retrieve all Personale from the database.
 exports.findByRuolo = (req, res) => {
   
+  //variabile di prova da cancellare
+  req.session.ruolo = "personale adisu"
+
   var tipo=null;
-  if(req.session.tipo=="admin"){
+  if(req.session.ruolo=="admin"){
     tipo="personale adisu"
   }
   else {tipo="operatore mensa"}
