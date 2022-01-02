@@ -16,11 +16,11 @@ const Cliente_Model = db.model_clienti;
 */
 exports.hasTesserino = (req, res) => {
   //variabili di prova da cancellare
-  /*req.session.tipo = "cliente";
+  /*req.session.ruolo = "cliente";
   req.session.email = "n.cappello@studenti.unisa.it";
   */
 
-  if(req.session.tipo != "cliente")
+  if(req.session.ruolo != "cliente")
   {
     res.json({message : "Only customers can access this page!"});
     return;
@@ -54,11 +54,11 @@ exports.hasTesserino = (req, res) => {
 */
 exports.isExpired = (req, res) => {
   //variabili di prova da cancellare
-  /*req.session.tipo = "cliente";
+  /*req.session.ruolo = "cliente";
   req.session.email = "n.cappello@studenti.unisa.it";
   */
 
-  if(req.session.tipo != "cliente")
+  if(req.session.ruolo != "cliente")
   {
     res.json({message : "Only customers can access this page!"});
     return;
@@ -110,11 +110,11 @@ exports.create = (req, res) => {
   // Validate request
 
   //variabili di prova da cancellare
-  req.session.tipo = "cliente";
+  req.session.ruolo = "cliente";
   req.session.email = "c.buono@studenti.unisa.it";
   
 
-  if(req.session.tipo != "cliente")
+  if(req.session.ruolo != "cliente")
   {
     res.json({ message: "Only customers can access this page!" });
     return;
@@ -379,11 +379,11 @@ exports.create = (req, res) => {
     // Validate request
   
     //variabili di prova da cancellare
-    /*req.session.tipo = "cliente";
+    /*req.session.ruolo = "cliente";
     req.session.email = "n.cappello@studenti.unisa.it";
     */
 
-    if(req.session.tipo != "cliente")
+    if(req.session.ruolo != "cliente")
     {
       res.json({ message: "Only customers can access this page!" });
       return;
@@ -630,11 +630,11 @@ exports.create = (req, res) => {
 */
   exports.getInfoTesserino = (req, res) => {
     //variabili di prova da cancellare
-    /*req.session.tipo = "cliente";
+    /*req.session.ruolo = "cliente";
     req.session.email = "n.cappello@studenti.unisa.it";
     */
 
-    if(req.session.tipo != "cliente")
+    if(req.session.ruolo != "cliente")
     {
       res.json({ message: "Only customers can access this page!" });
       return;
@@ -678,11 +678,11 @@ exports.create = (req, res) => {
 */
 exports.ricaricaTesserino = (req, res) => {
   //variabili di prova da cancellare
-  /*req.session.tipo = "cliente";
+  /*req.session.ruolo = "cliente";
   req.session.email = "n.cappello@studenti.unisa.it";
   */
 
-  if(req.session.tipo != "cliente")
+  if(req.session.ruolo != "cliente")
   {
     res.json({ message: "Only customers can access this page!" });
     return;
