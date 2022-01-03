@@ -1,5 +1,4 @@
 [{
-        "personaleID": "0512103456",
         "nome": "Danny",
         "cognome": "De Vito",
         "password": "aas!1Asdsa",
@@ -10,10 +9,9 @@
     },
 
     {
-        "clienteID": "0512103457",
         "nome": "Carmine",
         "cognome": "Citro",
-        "password": "carminecitro1!",
+        "password": "Carminecitro1!",
         "email": "c.citro@studenti.unisa.it",
         "indirizzo": "Via ministro de falco ",
         "ruolo": "operatore mensa",
