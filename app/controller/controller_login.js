@@ -7,6 +7,7 @@ const Admin_Model = db.model_admin
 var hash = require('./hash.js');
 
 exports.login = (req, res) => {
+    
     //prendiamo l'email e la password dal body
     var email = req.body.email
     var password = req.body.password
@@ -15,7 +16,7 @@ exports.login = (req, res) => {
     if (!email) {
         res.json({
             name: "email",
-            error: "Email non può essere vuoto"
+            message: "Email non può essere vuoto"
         });
         return;
     }
@@ -33,7 +34,7 @@ exports.login = (req, res) => {
     if (!password) {
         res.json({
             name: "password",
-            message: "Passowrd non può essere vuoto",
+            message: "Passoword non può essere vuoto",
         });
         return;
     }
@@ -41,7 +42,7 @@ exports.login = (req, res) => {
         if ((password.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
             res.json({
                 name: "password",
-                message: "Espressione regolare passowrd non rispettata",
+                message: "Espressione regolare passoword non rispettata",
             });
             return;
         }
@@ -105,8 +106,10 @@ exports.login = (req, res) => {
         }
     })
 };
+
 exports.authChecker = (req, res) => {
     const sessUser = req.session.email;
+    console.log(sessUser)
     if (sessUser) {
         return res.json({ email: req.session.email, ruolo: req.session.ruolo });
     } else {
