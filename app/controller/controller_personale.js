@@ -22,11 +22,17 @@ exports.insert = (req, res) => {
     email: req.body.email,
     numeroTelefono: req.body.numeroTelefono,
     dataDiNascita: req.body.dataDiNascita,
-    ruolo: null, //AGGIUNGERE LA SESSIONE PER IL RUOLO
+    ruolo: null, 
     disponibilita: true,
     indirizzo: req.body.indirizzo
   });
   
+  if(req.session.ruolo=="admin"){
+    personale.ruolo="personale adisu"
+  }
+  else if(req.session.ruolo=="personale adisu"){
+    personale.ruolo="operatore mensa"
+  }
    
   //validazione del nome
   if (!nome) {
@@ -105,12 +111,7 @@ exports.insert = (req, res) => {
         var passwordHashed = hash.hashPassword(password);
         personale.password = passwordHashed;
 
-        if(req.session.tipo=="admin"){
-          personale.ruolo="personale adisu"
-        }
-        if(req.session.tipo=="personale adisu"){
-          personale.ruolo="operatore mensa"
-        }
+        
         
   /* PRIMA DI INSERIRE EFFETTUO UN CONTROLLO SULL'EMAIL CHE E' UNICA NEL DB, NEL CASO ESISTA RITORNO ERRORE NEL CASO IN CUI NON ESISTE PROSEGUO CON L'INSERIMENTO  */
   Personale_Model.find({email : email},function (err,docs){
@@ -138,11 +139,14 @@ exports.insert = (req, res) => {
 // Retrieve all Personale from the database.
 exports.findByRuolo = (req, res) => {
   
-var tipo=null;
-if(req.session.tipo=="admin"){
-  tipo="personale adisu"
-}
-else {tipo="operatore mensa"}
+  //variabile di prova da cancellare
+  req.session.ruolo = "personale adisu"
+
+  var tipo=null;
+  if(req.session.ruolo=="admin"){
+    tipo="personale adisu"
+  }
+  else {tipo="operatore mensa"}
   Personale_Model.find({ruolo : tipo})
     .then(data => {
       if(data==null){
@@ -159,8 +163,7 @@ else {tipo="operatore mensa"}
 
 //RIMUOVERE UN PERSONALE ADISU DATA UN EMAIL
 exports.findByEmailAndRemove = (req, res) => {
-  var email = req.body.email;
-  Personale_Model.findOneAndDelete({email:email}) //vedere con alex come passare l'email in questo campo
+  Personale_Model.findOneAndDelete({email:req.body.emailTest})
   .then(data => {
     if(data==null){
     res.json({message: false})}
@@ -170,7 +173,7 @@ exports.findByEmailAndRemove = (req, res) => {
     res.json({ message: err.message || "Qualche errore durante la rimozione del personale adisu"
     });
   });
-};
+}; 
 
 /*Metodo per prendere le info del personale (NON VIENE USATO)
 exports.findByEmail = (req, res) => {
