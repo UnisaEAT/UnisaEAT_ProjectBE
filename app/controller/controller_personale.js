@@ -27,10 +27,10 @@ exports.insert = (req, res) => {
     indirizzo: req.body.indirizzo
   });
   
-  if(req.session.tipo=="admin"){
+  if(req.session.ruolo=="admin"){
     personale.ruolo="personale adisu"
   }
-  else if(req.session.tipo=="personale adisu"){
+  else if(req.session.ruolo=="personale adisu"){
     personale.ruolo="operatore mensa"
   }
    
@@ -163,8 +163,7 @@ exports.findByRuolo = (req, res) => {
 
 //RIMUOVERE UN PERSONALE ADISU DATA UN EMAIL
 exports.findByEmailAndRemove = (req, res) => {
-  var email = req.body.email;
-  Personale_Model.findOneAndDelete({email:email})
+  Personale_Model.findOneAndDelete({email:req.body.emailTest})
   .then(data => {
     if(data==null){
     res.json({message: false})}
