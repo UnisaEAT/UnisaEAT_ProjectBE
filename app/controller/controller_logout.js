@@ -1,4 +1,4 @@
-/*exports.logout = (req, res) => {
+exports.logout = (req, res) => {
 
     req.session.destroy((err) => {
         //delete session data from store, using sessionID in cookie
@@ -7,4 +7,4 @@
         return;
       });
 
-}*/
+}
