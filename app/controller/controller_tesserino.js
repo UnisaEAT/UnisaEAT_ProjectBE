@@ -1,7 +1,7 @@
 var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
 const Tesserino_Model = db.model_tesserino;
-const Cliente_Model = db.model_clienti;
+const Cliente_Model = db.model_cliente;
 
 
 /*
