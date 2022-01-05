@@ -1,0 +1,21 @@
+[{
+        "nome": "alfredo",
+        "cognome": "citro",
+        "password": "Alfredocitro1!",
+        "email": "a.citro@studenti.unisa.it"
+    },
+    {
+        "nome": "gerardo",
+        "cognome": "citro",
+        "password": "Gerardocitro1!",
+        "email": "g.citro@studenti.unisa.it"
+    },
+    {
+        "nome": "mario",
+        "cognome": "luigi",
+        "password": "marioEluigi1!",
+        "email": "m.luigi12@studenti.unisa.it"
+    }
+
+
+]
