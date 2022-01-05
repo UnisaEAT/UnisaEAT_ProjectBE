@@ -1,0 +1,20 @@
+[{
+        "nome": "Danny",
+        "cognome": "De Vito",
+        "password": "aas!1Asdsa",
+        "email": "d.devito@studenti.unisa.it",
+        "indirizzo": "Via delle Vie 121",
+        "ruolo": "operatore mensa",
+        "disponibilità": false
+    },
+
+    {
+        "nome": "Carmine",
+        "cognome": "Citro",
+        "password": "Carminecitro1!",
+        "email": "c.citro@studenti.unisa.it",
+        "indirizzo": "Via ministro de falco ",
+        "ruolo": "operatore mensa",
+        "disponibilità": false
+    }
+]

@@ -1,14 +1,16 @@
+//Route routes_faq.js
 module.exports = app => {
     const faq = require("../controller/controller_faq");
   
     var router = require("express").Router();
   
-    // Create a new Tutorial
-    router.post("/create", faq.create);
+   
   
-    // Retrieve all Tutorials
-    router.get("/findAll", faq.findAll);
-  
+router.post("/insertFAQ", faq.insertFAQ);
+router.post("/deleteFAQ", faq.deleteFAQ);
+router.post("/selectFAQ", faq.selectFAQ);
+router.post("/updateFAQ", faq.updateFAQ);
+
   
     app.use('/api/faq', router);
   };

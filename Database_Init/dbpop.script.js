@@ -5,10 +5,9 @@ const url = 'mongodb://localhost:27017/UnisaEAT_db'
 // Database name
 const dbName = 'UnisaEAT_db'
 
-const path = require('path');
-
 var ins = insert()
 ins.then(function(result) {
+
     process.exit()
 })
 
@@ -21,20 +20,34 @@ function insert() {
             var dbo = db.db(dbName)
 
             const fs = require('fs')
-            const Clientedata = fs.readFileSync(__dirname+"\\JSON\\Cliente.json")
+           // const clienteData = fs.readFileSync('../Database_Init/JSON/Cliente.json')
+           // const personaleData = fs.readFileSync('../Database_Init/JSON/Personale.json')
+           // const adminData = fs.readFileSync('../Database_Init/JSON/Admin.json')
+           const faqdata = fs.readFileSync(__dirname + '\\JSON\\faq.json')
 
-            const client = JSON.parse(Clientedata)
+            //const client = JSON.parse(clienteData)
+            //const personale = JSON.parse(personaleData)
+            //const admin = JSON.parse(adminData)
+            const faq = JSON.parse(faqdata)
 
-            for (var i = 0; client[i] != null; i++) {
-                client[i].password = hash.hashPassword(client[i].password)
-            }
-            
-            dbo.collection('cliente').insertMany(client, function(err, result) {
+         /*   dbo.collection('cliente').insertMany(client, function(err, result) {
                 if (err) throw err
-                console.log('abbiamo inserito  ' + result.insertedCount + 'clienti')
-                console.log('Succesfully created the collection UnisaEAT_db.')
-                resolve()
+                console.log('abbiamo inserito  ' + result.insertedCount + 'cliente')
+                dbo.collection('personale').insertMany(personale, function(err, result) {
+                    if (err) throw err
+                    console.log('abbiamo inserito  ' + result.insertedCount + 'che rigiuardano il personale')*/
+                    dbo.collection('faq').insertMany(faq, function(err, result) {
+                        if (err) throw err
+                        console.log('abbiamo inserito  ' + result.insertedCount + 'faq')
+                        if (err) throw err
+                        console.log('Succesfully created the collection UnisaEAT_db.')
+                        resolve()
+                    })
+                })
             })
-        })
-    })
+    
+  
+  
+    
+
 }
