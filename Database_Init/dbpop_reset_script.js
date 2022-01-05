@@ -21,15 +21,11 @@ function dropDb() {
             console.log('Connected successfully to server!')
             var dbo = db.db(dbName)
 
-            dbo.collection('cliente').deleteMany({}, function(err, result) {
-                if (err) throw err
-                console.log('cancellazione di  ' + result.deletedCount + 'clienti')
-                dbo.collection('tesserino').deleteMany({}, function (err, result){
-                    if (err) throw err
-                    console.log('cancellazione di  ' + result.deletedCount + 'tesserini')
-                    resolve();
-                })
-                
+            dbo.dropDatabase(function (err, result){
+                if(err) throw err;
+                console.log("Risultato = "+result);
+                db.close();
+                resolve();
             })
         })
     })

@@ -16,17 +16,23 @@ const Cliente_Model = db.model_clienti;
 */
 exports.hasTesserino = (req, res) => {
   //variabili di prova da cancellare
-  /*req.session.ruolo = "cliente";
-  req.session.email = "n.cappello@studenti.unisa.it";
+  const ruolo = "cliente";
+  const email = "n.cappello@studenti.unisa.it";
+  
+
+  // il fe mi passa le variabili di sessione
+  /*
+  const ruolo = req.body.ruolo;
+  const email = req.body.email;
   */
 
-  if(req.session.ruolo != "cliente")
+  if(ruolo != "cliente")
   {
     res.json({message : "Only customers can access this page!"});
     return;
   }
 
-  Cliente_Model.find({email:req.session.email}, function (err, docs) {
+  Cliente_Model.find({email:email}, function (err, docs) {
     if (err) throw err;
     if(docs[0].tesserino!=null)
     {
@@ -53,18 +59,25 @@ exports.hasTesserino = (req, res) => {
   Se viene restituito {message : false} allora il tesserino non è scaduto
 */
 exports.isExpired = (req, res) => {
+  
   //variabili di prova da cancellare
-  /*req.session.ruolo = "cliente";
-  req.session.email = "n.cappello@studenti.unisa.it";
+  const ruolo = "cliente";
+  const email = "n.cappello@studenti.unisa.it";
+  
+
+  // il fe mi passa le variabili di sessione
+  /*
+  const ruolo = req.body.ruolo;
+  const email = req.body.email;
   */
 
-  if(req.session.ruolo != "cliente")
+  if(ruolo != "cliente")
   {
     res.json({message : "Only customers can access this page!"});
     return;
   }
 
-  Cliente_Model.find({email:req.session.email}, function (err, docs) {
+  Cliente_Model.find({email:email}, function (err, docs) {
     if (err) throw err;
     let tesserinoID = docs[0].tesserino; 
     if(tesserinoID == null)
@@ -107,20 +120,26 @@ exports.isExpired = (req, res) => {
   Viene restituito {message:true} se il create è andato a buon fine
  */ 
 exports.create = (req, res) => {
-  // Validate request
-
+  
+  
   //variabili di prova da cancellare
-  req.session.ruolo = "cliente";
-  req.session.email = "c.buono@studenti.unisa.it";
+  const ruolo = "cliente";
+  const email = "n.cappello@studenti.unisa.it";
   
 
-  if(req.session.ruolo != "cliente")
+  // il fe mi passa le variabili di sessione
+  /*
+  const ruolo = req.body.ruolo;
+  const email = req.body.email;
+  */
+
+  if(ruolo != "cliente")
   {
     res.json({ message: "Only customers can access this page!" });
     return;
   }
 
-  Cliente_Model.find({email:req.session.email}, function (err, docs) {
+  Cliente_Model.find({email:email}, function (err, docs) {
     if (err) throw err;
     if(docs[0].tesserino!=null)
     {
@@ -350,7 +369,7 @@ exports.create = (req, res) => {
     tesserino
       .save(tesserino)
       .then(data => {
-        Cliente_Model.findOneAndUpdate({email:req.session.email}, {tesserino:new ObjectId(data._id)}).then(
+        Cliente_Model.findOneAndUpdate({email:email}, {tesserino:new ObjectId(data._id)}).then(
           function(value) {
             res.json({message : true});
             return;
@@ -376,20 +395,25 @@ exports.create = (req, res) => {
   Se il tesserino del cliente loggato è scaduto viene aggiornata la data di scadenza nel db 
  */
   exports.updateDataScadenza = (req, res) => {
-    // Validate request
-  
+    
     //variabili di prova da cancellare
-    /*req.session.ruolo = "cliente";
-    req.session.email = "n.cappello@studenti.unisa.it";
+    const ruolo = "cliente";
+    const email = "n.cappello@studenti.unisa.it";
+    
+
+    // il fe mi passa le variabili di sessione
+    /*
+    const ruolo = req.body.ruolo;
+    const email = req.body.email;
     */
 
-    if(req.session.ruolo != "cliente")
+    if(ruolo != "cliente")
     {
       res.json({ message: "Only customers can access this page!" });
       return;
     }
   
-    Cliente_Model.find({email:req.session.email}, function (err, docs) {
+    Cliente_Model.find({email:email}, function (err, docs) {
       if (err) throw err; 
       if(docs[0].tesserino==null)
       {
@@ -629,18 +653,25 @@ exports.create = (req, res) => {
   Quindi se response.hasOwnProperty("message") is true allora non è l'oggetto tesserino
 */
   exports.getInfoTesserino = (req, res) => {
+    
     //variabili di prova da cancellare
-    /*req.session.ruolo = "cliente";
-    req.session.email = "n.cappello@studenti.unisa.it";
+    const ruolo = "cliente";
+    const email = "n.cappello@studenti.unisa.it";
+    
+
+    // il fe mi passa le variabili di sessione
+    /*
+    const ruolo = req.body.ruolo;
+    const email = req.body.email;
     */
 
-    if(req.session.ruolo != "cliente")
+    if(ruolo != "cliente")
     {
       res.json({ message: "Only customers can access this page!" });
       return;
     }
   
-    Cliente_Model.find({email:req.session.email}, function (err, docs) {
+    Cliente_Model.find({email:email}, function (err, docs) {
       if (err) throw err;
       let tesserinoID = docs[0].tesserino; //sarà una stringa, non un ObjectID
       if(tesserinoID==null)
@@ -677,18 +708,25 @@ exports.create = (req, res) => {
   altrimenti {message:"Stringa di errore"}
 */
 exports.ricaricaTesserino = (req, res) => {
+  
   //variabili di prova da cancellare
-  /*req.session.ruolo = "cliente";
-  req.session.email = "n.cappello@studenti.unisa.it";
+  const ruolo = "cliente";
+  const email = "n.cappello@studenti.unisa.it";
+  
+
+  // il fe mi passa le variabili di sessione
+  /*
+  const ruolo = req.body.ruolo;
+  const email = req.body.email;
   */
 
-  if(req.session.ruolo != "cliente")
+  if(ruolo != "cliente")
   {
     res.json({ message: "Only customers can access this page!" });
     return;
   }
 
-  Cliente_Model.find({email:req.session.email}, function (err, docs) {
+  Cliente_Model.find({email:email}, function (err, docs) {
     if (err) throw err;
     let tesserinoID = docs[0].tesserino; //sarà una stringa, non un ObjectID
     if(tesserinoID==null)
