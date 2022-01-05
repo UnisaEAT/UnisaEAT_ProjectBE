@@ -4,17 +4,14 @@ const cors = require("cors");
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:3000"
-};
-
 app.use(cors(/*corsOptions*/));
 
+
 // parse requests of content-type - application/json
-app.use(express.json());  /* bodyParser.json() is deprecated */
+app.use(express.json()); /* bodyParser.json() is deprecated */
 
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));   /* bodyParser.urlencoded() is deprecated */
+app.use(express.urlencoded({ extended: true })); /* bodyParser.urlencoded() is deprecated */
 
 const db = require("./app/models");
 db.mongoose
@@ -31,8 +28,6 @@ db.mongoose
   });
   
 
-
-//session code
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
 app.use(cookieParser());
@@ -40,15 +35,16 @@ app.use(express.static(__dirname));
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(sessions({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    saveUninitialized:true,
-    cookie: { maxAge: oneDay },
-    resave: false 
+    saveUninitialized: true,
+    cookie: {
+        maxAge: oneDay
+    },
+    resave: false
 }));
-
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to UnisaEAT." });
+    res.json({ message: "Welcome to UnisaEAT." });
 });
 
 require("./app/routes/routes_cliente")(app);
@@ -64,9 +60,10 @@ require("./app/routes/routes_pasto")(app);
 require("./app/routes/routes_faq")(app);
 require("./app/routes/routes_ticket")(app);
 require("./app/routes/routes_statistiche")(app);
-
+require("./app/routes/routes_login")(app);
+require("./app/routes/routes_logout")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+    console.log(`Server is running on port ${PORT}.`);
 });

@@ -30,6 +30,17 @@ function dropDb() {
                     resolve();
                 })
                 
+                console.log('cancelazione di  ' + result.deletedCount + 'clienti')
+                dbo.collection('personale').deleteMany({}, function(err, result) {
+                    if (err) throw err
+                    console.log('cancellazione di ' + result.deletedCount + ' addetti al personale')
+                    dbo.collection('admin').deleteMany({}, function(err, result) {
+                        if (err) throw err
+                        console.log('cancellazione di  ' + result.deletedCount + 'admin')
+                        resolve()
+                    })
+                })
+
             })
         })
     })

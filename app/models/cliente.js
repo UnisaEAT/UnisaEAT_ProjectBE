@@ -19,12 +19,16 @@ module.exports = mongoose => {
     }
   );
 
-  schema.method("toJSON", function() {
-    const { __v, _id, ...object } = this.toObject();
-    object.id = _id;
-    return object;
-  });
+    schema.method("toJSON", function() {
+        const {
+            __v,
+            _id,
+            ...object
+        } = this.toObject();
+        object.id = _id;
+        return object;
+    });
 
-  const Cliente = mongoose.model("cliente", schema, "cliente");
-  return Cliente;
+    const Cliente = mongoose.model("cliente", schema, "cliente");
+    return Cliente;
 };
