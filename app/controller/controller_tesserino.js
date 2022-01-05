@@ -15,16 +15,10 @@ const Cliente_Model = db.model_clienti;
   Se viene restituito {message:false} il cliente non ha un tesserino
 */
 exports.hasTesserino = (req, res) => {
-  //variabili di prova da cancellare
-  const ruolo = "cliente";
-  const email = "n.cappello@studenti.unisa.it";
   
-
-  // il fe mi passa le variabili di sessione
-  /*
   const ruolo = req.body.ruolo;
   const email = req.body.email;
-  */
+  
 
   if(ruolo != "cliente")
   {
@@ -60,16 +54,10 @@ exports.hasTesserino = (req, res) => {
 */
 exports.isExpired = (req, res) => {
   
-  //variabili di prova da cancellare
-  const ruolo = "cliente";
-  const email = "n.cappello@studenti.unisa.it";
   
-
-  // il fe mi passa le variabili di sessione
-  /*
   const ruolo = req.body.ruolo;
   const email = req.body.email;
-  */
+  
 
   if(ruolo != "cliente")
   {
@@ -121,17 +109,9 @@ exports.isExpired = (req, res) => {
  */ 
 exports.create = (req, res) => {
   
-  
-  //variabili di prova da cancellare
-  const ruolo = "cliente";
-  const email = "n.cappello@studenti.unisa.it";
-  
-
-  // il fe mi passa le variabili di sessione
-  /*
   const ruolo = req.body.ruolo;
   const email = req.body.email;
-  */
+  
 
   if(ruolo != "cliente")
   {
@@ -395,17 +375,10 @@ exports.create = (req, res) => {
   Se il tesserino del cliente loggato è scaduto viene aggiornata la data di scadenza nel db 
  */
   exports.updateDataScadenza = (req, res) => {
-    
-    //variabili di prova da cancellare
-    const ruolo = "cliente";
-    const email = "n.cappello@studenti.unisa.it";
-    
-
-    // il fe mi passa le variabili di sessione
-    /*
+        
     const ruolo = req.body.ruolo;
     const email = req.body.email;
-    */
+    
 
     if(ruolo != "cliente")
     {
@@ -654,16 +627,9 @@ exports.create = (req, res) => {
 */
   exports.getInfoTesserino = (req, res) => {
     
-    //variabili di prova da cancellare
-    const ruolo = "cliente";
-    const email = "n.cappello@studenti.unisa.it";
-    
-
-    // il fe mi passa le variabili di sessione
-    /*
     const ruolo = req.body.ruolo;
     const email = req.body.email;
-    */
+    
 
     if(ruolo != "cliente")
     {
@@ -709,16 +675,9 @@ exports.create = (req, res) => {
 */
 exports.ricaricaTesserino = (req, res) => {
   
-  //variabili di prova da cancellare
-  const ruolo = "cliente";
-  const email = "n.cappello@studenti.unisa.it";
-  
-
-  // il fe mi passa le variabili di sessione
-  /*
   const ruolo = req.body.ruolo;
   const email = req.body.email;
-  */
+  
 
   if(ruolo != "cliente")
   {
