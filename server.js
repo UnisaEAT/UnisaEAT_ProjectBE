@@ -7,6 +7,7 @@ const app = express();
 app.use(cors(/*corsOptions*/));
 
 
+
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
 
@@ -42,7 +43,11 @@ app.use(sessions({
     resave: false
 }));
 
+
 require("./app/routes/routes_cliente")(app);
+require("./app/routes/routes_admin")(app);
+require("./app/routes/routes_personale")(app);
+require("./app/routes/routes_profilo")(app);
 
 require("./app/routes/routes_admin")(app);
 require("./app/routes/routes_personale")(app);

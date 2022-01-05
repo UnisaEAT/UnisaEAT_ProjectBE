@@ -4,6 +4,7 @@ var hash = require('../app/controller/hash')
 // Database URL
 const url = 'mongodb://localhost:27017/UnisaEAT_db'
     // Database name
+
 const dbName = 'UnisaEAT_db'
 
 var ins = insert()
@@ -28,6 +29,7 @@ function insert() {
             const personale = JSON.parse(personaledata)
             const admin = JSON.parse(admindata)
 
+
             for (var i = 0; client[i] != null; i++) {
                 client[i].password = hash.hashPassword(client[i].password)
             }
@@ -38,6 +40,7 @@ function insert() {
             for (var k = 0; admin[k] != null; k++) {
                 admin[k].password = hash.hashPassword(admin[k].password)
             }
+
 
             dbo.collection('cliente').insertMany(client, function(err, result) {
                 if (err) throw err
