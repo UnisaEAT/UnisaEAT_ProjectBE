@@ -377,7 +377,7 @@ exports.create = (req, res) => {
   exports.updateDataScadenza = (req, res) => {
         
     const ruolo = req.body.ruolo;
-    const email = req.body.email;
+    const email = req.body.emailSession;
     
 
     if(ruolo != "cliente")

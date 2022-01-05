@@ -7,13 +7,13 @@ module.exports = app => {
     router.post("/create", tesserino.create);
   
     // Retrieve saldo tesserino
-    router.get("/getInfoTesserino", tesserino.getInfoTesserino);
+    router.post("/getInfoTesserino", tesserino.getInfoTesserino);
 
     // check if the customers has a Tesserino
-    router.get("/hasTesserino", tesserino.hasTesserino);
+    router.post("/hasTesserino", tesserino.hasTesserino);
 
     // check if the Tesserino is expired
-    router.get("/isExpired", tesserino.isExpired);
+    router.post("/isExpired", tesserino.isExpired);
 
     // update saldo del tesserino
     router.post("/ricaricaTesserino", tesserino.ricaricaTesserino);
