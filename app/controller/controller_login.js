@@ -55,17 +55,20 @@ exports.login = (req, res) => {
         console.log(docs[0]);
 
         if ((check != null) && (docs[0].ruolo == "operatore mensa") && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
-            res.json(check)
-                // crezione sessione operatore mensa
-            req.session.email = docs[0].email
-            req.session.ruolo = "operatore mensa"
+            
+            // crezione sessione operatore mensa
+            /*req.session.email = docs[0].email
+            req.session.ruolo = "operatore mensa"*/
+            res.json({"email":docs[0].email, "ruolo":"operatore mensa"})
             return;
+
         } else if ((check != null) && (docs[0].ruolo == "personale adisu") && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
 
             // creazione sessione personale adisu
             req.session.email = docs[0].email
             req.session.ruolo = "personale adisu"
-            res.json(check)
+            res.json({"email":docs[0].email, "ruolo":"personale adisu"})
+            return;
 
         } else if (check == null) {
             Cliente_Model.find({ email: email }, function(err, docs) {
@@ -76,9 +79,11 @@ exports.login = (req, res) => {
 
 
                     //creazione sessions cliente
-                    req.session.email = docs[0].email
-                    req.session.ruolo = "cliente"
-                    res.json(check)
+                    /*req.session.email = docs[0].email
+                    req.session.ruolo = "cliente"*/
+
+                    res.json({"email":docs[0].email, "ruolo":"cliente"})
+                    return;
                 } else if (check == null) {
                     Admin_Model.find({ email: email }, function(err, docs) {
                         if (err) throw err;
@@ -89,11 +94,13 @@ exports.login = (req, res) => {
                             // creazione sessione admin
                             req.session.email = docs[0].email
                             req.session.ruolo = "admin"
-                            res.json(check)
+                            res.json({"email":docs[0].email, "ruolo":"admin"})
+                            return;
                         } else {
                             res.json({ 
                                 message: "Campi del login errati", 
                             })
+                            return;
                         }
 
                     })
