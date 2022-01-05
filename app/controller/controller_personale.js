@@ -27,10 +27,10 @@ exports.insert = (req, res) => {
     indirizzo: req.body.indirizzo
   });
   
-  if(req.session.ruolo=="admin"){
+  if(req.body.ruolo=="admin"){
     personale.ruolo="personale adisu"
   }
-  else if(req.session.ruolo=="personale adisu"){
+  else if(req.body.ruolo=="personale adisu"){
     personale.ruolo="operatore mensa"
   }
    
@@ -138,12 +138,9 @@ exports.insert = (req, res) => {
 
 // Retrieve all Personale from the database.
 exports.findByRuolo = (req, res) => {
-  
-  //variabile di prova da cancellare
-  req.session.ruolo = "personale adisu"
 
   var tipo=null;
-  if(req.session.ruolo=="admin"){
+  if(req.body.ruolo=="admin"){
     tipo="personale adisu"
   }
   else {tipo="operatore mensa"}
