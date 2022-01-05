@@ -109,8 +109,8 @@ exports.isExpired = (req, res) => {
  */ 
 exports.create = (req, res) => {
   
-  const ruolo = req.body.ruolo;
-  const email = req.body.email;
+  const ruolo = req.body.ruoloSessione;
+  const email = req.body.emailSessione;
   
 
   if(ruolo != "cliente")
@@ -376,8 +376,8 @@ exports.create = (req, res) => {
  */
   exports.updateDataScadenza = (req, res) => {
         
-    const ruolo = req.body.ruolo;
-    const email = req.body.emailSession;
+    const ruolo = req.body.ruoloSessione;
+    const email = req.body.emailSessione;
     
 
     if(ruolo != "cliente")
