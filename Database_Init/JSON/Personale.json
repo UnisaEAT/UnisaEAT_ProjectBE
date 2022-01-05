@@ -1,0 +1,40 @@
+[
+  {
+    "nome": "Alessio",
+    "cognome": "Salzano",
+    "password": "Alessio00!",
+    "email": "alessiosal@gmail.com",
+    "numeroTelefono": "3201231231",
+    "dataDiNascita": "20/07/2000",
+    "ruolo": "operatore mensa",
+    "disponibilita": true,
+    "indirizzo": "Via delle vie"
+  },
+
+  {
+    "nome": "Alex",
+    "cognome": "Cavaliere",
+    "password": "Alexcav00!",
+    "email": "alex@gmail.com",
+    "numeroTelefono": "3201231231",
+    "dataDiNascita": "20/07/2000",
+    "ruolo": "operatore mensa",
+    "disponibilita": true,
+    "indirizzo": "Via delle vie"
+  },
+
+  {
+    "nome": "Maria",
+    "cognome": "Rosaria",
+    "password": "MariaRosaria00!",
+    "email": "mary@gmail.com",
+    "numeroTelefono": "3201231231",
+    "dataDiNascita": "20/07/2000",
+    "ruolo": "operatore mensa",
+    "disponibilita": true,
+    "indirizzo": "Via delle vie"
+  }
+
+
+
+]
