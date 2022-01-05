@@ -60,7 +60,7 @@ require("./app/routes/routes_faq")(app);
 require("./app/routes/routes_ticket")(app);
 require("./app/routes/routes_statistiche")(app);
 require("./app/routes/routes_login")(app);
-require("./app/routes/routes_logout")(app);
+//require("./app/routes/routes_logout")(app);
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

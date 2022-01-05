@@ -48,8 +48,77 @@ exports.login = (req, res) => {
         }
     }
 
+    //codice nuovo
+    Personale_Model.find({email:email}, function(err, docs) {
+        if (err) throw err;
+        if(docs.length!=0) {
+            //la mail corrisponde ad un personale, si fa il check della password
+            if((hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
+                //la password corrisponde, restituisco l'utente loggato
+                res.json({email:docs[0].email, ruolo:docs[0].ruolo})
+                return;
+            }
+            else {
+                //la password non corrisponde
+                res.json({message:"Campi del login errati"})
+                return;
 
-    Personale_Model.find({ email: email }, function(err, docs) {
+            }
+        }
+        else {
+            //la mail non corrisponde ad un personale. Si controllano le altre collection
+            //Controllo cliente
+            Cliente_Model.find({email:email}, function (err, docs) {
+                if (err) throw err;
+                if(docs.length!=0){
+                    //la mail corrisponde ad un cliente, si fa il check della password
+                    if((hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
+                        //la password corrisponde, restituisco l'utente loggato
+                        res.json({email:docs[0].email, ruolo:"cliente"})
+                        return;
+                    }
+                    else {
+                        //la password non corrisponde
+                        res.json({message:"Campi del login errati"})
+                        return;
+        
+                    }
+                }
+                else
+                {
+                    //la mail non corrisponde ad un cliente.
+                    //Controllo admin
+                    Admin_Model.find({email:email}, function (err, docs) {
+                        if (err) throw err;
+                        if(docs.length!=0) {
+                            //la mail corrisponde ad un admin, si fa il check della password
+                            if((hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
+                                //la password corrisponde, restituisco l'utente loggato
+                                res.json({email:docs[0].email, ruolo:"admin"})
+                                return;
+                            }
+                            else {
+                                //la password non corrisponde
+                                res.json({message:"Campi del login errati"})
+                                return;
+                
+                            }
+                        }
+                        else {
+                            //la mail non esiste in nessun collection
+                            res.json({message:"Campi del login errati"})
+                            return;
+                        }
+                    })
+                }
+
+            })
+        }
+
+    })
+    
+    //codice vecchio 
+    /*Personale_Model.find({ email: email }, function(err, docs) {
         if (err) throw err;
         let check = docs[0];
         console.log(docs[0]);
@@ -57,8 +126,8 @@ exports.login = (req, res) => {
         if ((check != null) && (docs[0].ruolo == "operatore mensa") && (hash.checkPassword(docs[0].password.hash, docs[0].password.salt, password))) {
             
             // crezione sessione operatore mensa
-            /*req.session.email = docs[0].email
-            req.session.ruolo = "operatore mensa"*/
+            req.session.email = docs[0].email
+            req.session.ruolo = "operatore mensa"
             res.json({"email":docs[0].email, "ruolo":"operatore mensa"})
             return;
 
@@ -79,8 +148,8 @@ exports.login = (req, res) => {
 
 
                     //creazione sessions cliente
-                    /*req.session.email = docs[0].email
-                    req.session.ruolo = "cliente"*/
+                    req.session.email = docs[0].email
+                    req.session.ruolo = "cliente"
 
                     res.json({"email":docs[0].email, "ruolo":"cliente"})
                     return;
@@ -111,10 +180,10 @@ exports.login = (req, res) => {
 
 
         }
-    })
+    })*/
 };
 
-exports.authChecker = (req, res) => {
+/*exports.authChecker = (req, res) => {
     const sessUser = req.session.email;
     console.log(sessUser)
     if (sessUser) {
@@ -122,4 +191,4 @@ exports.authChecker = (req, res) => {
     } else {
         return res.json({ message: "Unauthorized" });
     }
-};
+};*/
