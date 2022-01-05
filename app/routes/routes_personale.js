@@ -16,13 +16,12 @@ module.exports = app => {
   //Get personale
   // router.post("/getInfo",personale.findByEmail);
   
-  app.use('/api/personale', router);
 
-    // Create a new Tutorial
+    /* Create a new Tutorial
     router.post("/create", personale.create);
 
     // Retrieve all Tutorials
-    router.get("/findAll", personale.findAll);
+    router.get("/findAll", personale.findAll);*/
 
 
     app.use('/api/personale', router);
