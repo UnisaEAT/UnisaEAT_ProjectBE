@@ -1,4 +1,5 @@
 module.exports = mongoose => {
+    //Schema FAQ
     var schema = mongoose.Schema(
         {
             domanda: String,

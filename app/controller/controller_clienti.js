@@ -1,16 +1,16 @@
 var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-const Cliente_Model = db.model_clienti;
+const Cliente_Model = db.model_cliente;
 
-// Create and Save a new Cliente
+// Crea e salva un nuovo Cliente
 exports.create = (req, res) => {
-    // Validate request
+    // Validazione request
     if (!req.body.nome) {
         res.status(400).send({message: "Content can not be empty!"});
         return;
     }
 
-    // Create a Cliente
+    // Crea un nuovo Cliente
     const cliente = new Cliente_Model({
         nome: req.body.nome,
         cognome: req.body.cognome,
@@ -21,7 +21,7 @@ exports.create = (req, res) => {
         tesserino: null
     });
 
-    // Save Cliente in the database
+    // Salva un Cliente nel database
     cliente
         .save(cliente)
         .then(data => {
@@ -35,7 +35,7 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all Clienti from the database.
+// Prendi tutti i Clienti dal database.
 exports.findAll = (req, res) => {
 
 
@@ -53,7 +53,6 @@ exports.findAll = (req, res) => {
 
 
 //CLIENTE
-
 const session = require('express-session')
 var hash = require('./hash.js')
 
@@ -64,6 +63,8 @@ var hash = require('./hash.js')
  * @returns {Boolean}  - It returns true if the update was successfull, else false
  */
 
+
+//Selezione di un Cliente
 exports.selectCliente = (req, res) => {
     var id = req.session.utente.id
     Cliente_Model.findById(id)
@@ -78,6 +79,7 @@ exports.selectCliente = (req, res) => {
         });
 };
 
+//Get del profilo
 exports.getProfilo = function (req, res) {
     return new Promise(function (resolve, reject) {
         //Chiedere questione sessione

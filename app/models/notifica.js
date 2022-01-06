@@ -1,5 +1,6 @@
 var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
+    //Schema Notifica
     var schema = mongoose.Schema(
         {
             receiverID: ObjectId,

@@ -1,4 +1,5 @@
 module.exports = mongoose => {
+    //Schema Pasto
     var schema = mongoose.Schema(
         {
             nome: String,

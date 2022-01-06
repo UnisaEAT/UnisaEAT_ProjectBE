@@ -1,7 +1,7 @@
 const db = require("../models");
 const Admin_Model = db.model_admin;
 
-// Create and Save a new Admin
+// Crea e salva un nuovo Admin
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.nome) {
@@ -9,7 +9,7 @@ exports.create = (req, res) => {
         return;
     }
 
-    // Create an Admin
+    // Crea un admin
     const admin = new Admin_Model({
         nome: req.body.nome,
         cognome: req.body.cognome,
@@ -17,7 +17,7 @@ exports.create = (req, res) => {
         email: req.body.email
     });
 
-    // Save Admin in the database
+    // Salva un Admin sul database
     admin
         .save(admin)
         .then(data => {
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
         });
 };
 
-// Retrieve all Admin from the database.
+// Prendi tutti gli Admin dal database.
 exports.findAll = (req, res) => {
 
 

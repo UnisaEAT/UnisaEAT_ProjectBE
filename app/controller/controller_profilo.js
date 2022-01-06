@@ -1,16 +1,12 @@
 var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-//Personale
-var Personale_Model = db.model_personale;
-//Cliente
-var Cliente_Model = db.model_clienti;
-//Admin
-var Admin_Model = db.model_admin;
-//Verificare sessione
-const session = require('express-session')
+var Personale_Model = db.model_personale;  //Personale
+var Cliente_Model = db.model_clienti;  //Cliente
+var Admin_Model = db.model_admin;  //Admin
+const session = require('express-session')  //Verificare sessione
 var hash = require('./hash.js')
 
-
+//findByEmail dell'utente
 exports.findByEmail = (req, res) => {
 
     //mettere i ruoli in minuscolo (admin, personale adisu, operatore mensa)

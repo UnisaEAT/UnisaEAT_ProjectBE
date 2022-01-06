@@ -1,4 +1,5 @@
 module.exports = mongoose => {
+    //Schema Statistiche
     var schema = mongoose.Schema(
         {
             titolo: String,

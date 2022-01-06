@@ -12,12 +12,14 @@ ins.then(function (result) {
     process.exit()
 })
 
-//database stesso livello di documentation, stesso livello di app copia nella nostra cartella
+//Funzione che permette di inserire script JSON di attori specifici all'interno del database via riga di comando
+//Passo 1-->Spostarsi sulla cartella Database_Init presente all'interno della cartella UnisaEAT_ProjectBE
+//Passo 2-->Lanciare il comando "node .\dbpop.script.js" che eseguira il codice scelto.
 function insert() {
     return new Promise(function (resolve, reject) {
         MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function (err, db) {
             if (err) reject(err)
-            console.log('connessione al server avvenuta!')
+            console.log('Connessione al server avvenuta!')
             var dbo = db.db(dbName)
 
             const fs = require('fs')

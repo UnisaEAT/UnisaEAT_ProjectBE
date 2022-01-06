@@ -1,5 +1,6 @@
 var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
+    //Schema Ordine
     var schema = mongoose.Schema(
         {
             prezzo: Number,

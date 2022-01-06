@@ -8,11 +8,11 @@ var hash = require('./hash.js');
 
 exports.login = (req, res) => {
 
-    //prendiamo l'email e la password dal body
+    //Prendiamo l'email e la password dal body
     var email = req.body.email
     var password = req.body.password
 
-    //validazione dell'email
+    //Validazione dell'email
     if (!email) {
         res.json({
             name: "email",
@@ -30,7 +30,7 @@ exports.login = (req, res) => {
         }
     }
 
-    //validazione della password
+    //Validazione della password
     if (!password) {
         res.json({
             name: "password",
@@ -48,7 +48,7 @@ exports.login = (req, res) => {
         }
     }
 
-    //codice nuovo
+    //Si controlla se l'email corrisponde a quella di un Personale(operatore mensa o personale ADISU)
     Personale_Model.find({email: email}, function (err, docs) {
         if (err) throw err;
         if (docs.length != 0) {
@@ -64,8 +64,8 @@ exports.login = (req, res) => {
 
             }
         } else {
-            //la mail non corrisponde ad un personale. Si controllano le altre collection
-            //Controllo cliente
+            //la mail non corrisponde ad un Personale. Si controllano le altre collection
+            //Si controlla se l'email corrisponde a quella di un Cliente
             Cliente_Model.find({email: email}, function (err, docs) {
                 if (err) throw err;
                 if (docs.length != 0) {
@@ -81,8 +81,8 @@ exports.login = (req, res) => {
 
                     }
                 } else {
-                    //la mail non corrisponde ad un cliente.
-                    //Controllo admin
+                    //la mail non corrisponde ad un Cliente. Si controllano le altre collection
+                    //Si controlla se l'email corrisponde a quella di un Admin
                     Admin_Model.find({email: email}, function (err, docs) {
                         if (err) throw err;
                         if (docs.length != 0) {
@@ -98,7 +98,7 @@ exports.login = (req, res) => {
 
                             }
                         } else {
-                            //la mail non esiste in nessun collection
+                            //la mail non esiste in nessuna collection
                             res.json({message: "Campi del login errati"})
                             return;
                         }

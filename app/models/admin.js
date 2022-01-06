@@ -1,12 +1,9 @@
 module.exports = mongoose => {
+    //Schema Admin
     var schema = mongoose.Schema({
         nome: String,
-
         cognome: String,
-
         password: Object,
-
-
         email: String,
     });
 

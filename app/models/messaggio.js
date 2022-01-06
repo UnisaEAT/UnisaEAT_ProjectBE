@@ -1,5 +1,6 @@
 var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
+    //Schema Messaggio
     var schema = mongoose.Schema(
         {
             senderID: ObjectId,

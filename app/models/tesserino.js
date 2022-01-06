@@ -1,4 +1,5 @@
 module.exports = mongoose => {
+    //Schema Tesserino
     var schema = mongoose.Schema(
         {
             saldo: Number,

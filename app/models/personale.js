@@ -1,4 +1,5 @@
 module.exports = mongoose => {
+    //Schema Personale
     var schema = mongoose.Schema({
         nome: String,
         cognome: String,

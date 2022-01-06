@@ -1,5 +1,6 @@
 var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
+    //Schema Ticket
     var schema = mongoose.Schema(
         {
             titolo: String,

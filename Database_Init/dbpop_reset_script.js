@@ -1,9 +1,9 @@
 var MongoClient = require('mongodb').MongoClient
 
-// Database URL
+// URL del Database
 const url = 'mongodb://localhost:27017/UnisaEAT_db'
 
-// Database name
+// Nome del Database utilizzato su MongoDB
 const dbName = 'UnisaEAT_db'
 
 var del = dropDb()

@@ -3,9 +3,9 @@ const db = require("../models");
 const Personale_Model = db.model_personale;
 var hash = require('./hash.js');
 
-// Create and Save a new Personale
+// Crea e salva un nuovo Personale(operatore mensa o personale ADISU)
 exports.insert = (req, res) => {
-    // Validate request
+    // Validazione della request
     let nome = req.body.nome;
     let cognome = req.body.cognome;
     let password = req.body.password;
@@ -131,7 +131,10 @@ exports.insert = (req, res) => {
 
     var passwordHashed = hash.hashPassword(password);
     personale.password = passwordHashed;
-    /* PRIMA DI INSERIRE EFFETTUO UN CONTROLLO SULL'EMAIL CHE E' UNICA NEL DB, NEL CASO ESISTA RITORNO ERRORE NEL CASO IN CUI NON ESISTE PROSEGUO CON L'INSERIMENTO  */
+
+    //Prima di inserire si effettua un controllo sull'email (che è unica nel DB)
+    //Nel caso non esiste tale email si ritorna un errore
+    //Nel caso in cui ,invece, tale email esiste, si prosegue con l'inserimento
     Personale_Model.find({email: email}, function (err, docs) {
         if (docs == 0) {
             personale
@@ -156,7 +159,7 @@ exports.insert = (req, res) => {
 };
 
 
-// Retrieve all Personale from the database.
+// Prendi tutti i Personali dal Database dato un ruolo
 exports.findByRuolo = (req, res) => {
 
     //variabile di prova da cancellare
@@ -167,6 +170,7 @@ exports.findByRuolo = (req, res) => {
     } else {
         tipo = "operatore mensa"
     }
+    //Trova un personale tramite il ruolo(operatore mensa o personale ADISU)
     Personale_Model.find({ruolo: tipo})
         .then(data => {
             if (data == null) {
@@ -181,7 +185,7 @@ exports.findByRuolo = (req, res) => {
 };
 
 
-//RIMUOVERE UN PERSONALE ADISU DATA UN EMAIL
+//Rimozione di un Personale data un email ricevuta dal lato Front-End
 exports.findByEmailAndRemove = (req, res) => {
     Personale_Model.findOneAndDelete({email: req.body.email})
         .then(data => {

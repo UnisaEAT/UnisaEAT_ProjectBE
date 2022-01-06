@@ -1,4 +1,5 @@
 module.exports = mongoose => {
+    //Schema Menu
     var schema = mongoose.Schema(
         {
             nome: String,

@@ -310,7 +310,7 @@ exports.create = (req, res) => {
         });
 
 
-        // Save Tesserino in the database
+        // Salva un tesserino nel database
         tesserino
             .save(tesserino)
             .then(data => {
@@ -331,7 +331,7 @@ exports.create = (req, res) => {
     });
 };
 
-// Update dataScadenza tesserino
+// Aggiorna dataScadenza tesserino
 /*
   In seguito al rinnovo del tesserino si aggiorna la data di scadenza, che sarà la data attuale + 1 anno
 
@@ -619,7 +619,7 @@ exports.ricaricaTesserino = (req, res) => {
         res.json({message: "Only customers can access this page!"});
         return;
     }
-
+    //Trova un Cliente tramite l'email
     Cliente_Model.find({email: email}, function (err, docs) {
         if (err) throw err;
         let tesserinoID = docs[0].tesserino; //sarà una stringa, non un ObjectID
@@ -628,6 +628,7 @@ exports.ricaricaTesserino = (req, res) => {
             return;
         }
 
+        //Trova un tesserino tramite il suo ID
         Tesserino_Model.findById(tesserinoID).then(
             function (data) {
                 let dataScadenza = data.dataScadenza;
@@ -639,7 +640,7 @@ exports.ricaricaTesserino = (req, res) => {
                     return;
                 }
 
-                //validate request if tesserino is not expired
+                //valida la request se il tesserino non è scaduto
                 let intestatario = req.body.intestatario;
                 let tipoCarta = req.body.tipoCarta;
                 let numeroCarta = req.body.numeroCarta;
