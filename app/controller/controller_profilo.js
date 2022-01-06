@@ -9,18 +9,13 @@ var hash = require('./hash.js')
 //findByEmail dell'utente
 exports.findByEmail = (req, res) => {
 
-    //mettere i ruoli in minuscolo (admin, personale adisu, operatore mensa)
-    var tipo = req.session.ruolo;
-    var mail = req.session.email;
+    var tipo = req.body.ruolo
+    console.log("Tipo"+tipo)
+    var mail = req.body.email
 
-    /*req.session.utente.id = new ObjectId("61c4518cee6b7b3e89608755")
-    var id= req.session.utente.id ORA SI E' DECISO PER EMAIL
-    EX - getPROFILO
-    Vedere se bisogna consegnare con Propt e non più send
-    */
 
 //if Personale, Cliente, Admin
-    if (tipo == "Personale") {
+    if (tipo == "personale") {
 //Email andrà modificato una volta implementata la sessione nei Login
         Personale_Model.findOne({email: mail}) //ID
             .then(data => {
@@ -28,30 +23,34 @@ exports.findByEmail = (req, res) => {
             })
             .catch(err => {
                 res.json({
+                    name: "ruolo",
                     message:
+                    
                         err.message || "Some error occurred while retrieving profile."
                 });
             });
     }
-    if (tipo == "Cliente") {
+    if (tipo == "cliente") {
         Cliente_Model.find({email: mail}) //ID
             .then(data => {
                 res.json(data);
             })
             .catch(err => {
                 res.json({
+                    name: "ruolo",
                     message:
                         err.message || "Some error occurred while retrieving profile."
                 });
             });
     }
-    if (tipo == "Admin") {
+    if (tipo == "admin") {
         Admin_Model.find({email: mail}) //ID
             .then(data => {
                 res.json(data);
             })
             .catch(err => {
                 res.json({
+                    name: "ruolo",
                     message:
                         err.message || "Some error occurred while retrieving profile."
                 });
@@ -61,26 +60,24 @@ exports.findByEmail = (req, res) => {
 
 exports.updatePassword = function (req, res) {
 
-    //var mail = "g.citro@studenti.unisa.it"
-    var mail = req.session.email
-    //mettere ruolo invece di tipo
-    //password corretta: Gerardocitro1!
+   
+    var mail = req.body.email
     var oldPassword = req.body.inputOldPassword
     var password = req.body.inputPassword
     var passwordConfirm = req.body.inputConfirmPassword
 
     if ((!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(oldPassword)) || (oldPassword.length <= 8) || (oldPassword == null))) {
-        res.json({message: "Errore Password vecchia."});
+        res.json({name: "password", message: "Errore Password vecchia."});
         return;
     }
 
     if ((password == null) || (password.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
-        res.json({message: "Errore Password."});
+        res.json({name: "password", message: "Errore Password."});
         return;
     }
 
     if (passwordConfirm != password) {
-        res.json({message: "Errore Password di conferma."});
+        res.json({name: "password", message: "Errore Password di conferma."});
         return;
     }
 
@@ -126,54 +123,54 @@ exports.updatePassword = function (req, res) {
 
     var passwordHashed = hash.hashPassword(password)
 
-    console.log(req.session.ruolo)
-    if (req.session.ruolo == "personale adisu" || req.session.ruolo == "operatore mensa") {
+    console.log(req.body.ruolo)
+    if (req.body.ruolo == "personale adisu" || req.body.ruolo == "operatore mensa") {
 
         Personale_Model.find({email: mail}, function (err, docs) {
             if (err) throw err;
             let hashato = docs[0].password;
 
             if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({message: "Password non corrisponde nel DB."});
+                res.json({name: "password", message: "Password non corrisponde nel DB."});
                 return;
             } else {
                 Personale_Model.findOneAndUpdate({email: mail}, {password: passwordHashed}).then(
                     function (val) {
-                        res.json({message: "Modifica password avvenuta con successo."});
+                        res.json({name: "password", message: "Modifica password avvenuta con successo."});
                         return;
                     }
                 );
             }
         })
-    } else if (req.session.ruolo == "cliente") {
+    } else if (req.body.ruolo == "cliente") {
         Cliente_Model.find({email: mail}, function (err, docs) {
             if (err) throw err;
             let hashato = docs[0].password;
 
             if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({message: "Password non corrisponde nel DB."});
+                res.json({name: "password", message: "Password non corrisponde nel DB."});
                 return;
             } else {
                 Cliente_Model.findOneAndUpdate({email: mail}, {password: passwordHashed}).then(
                     function (val) {
-                        res.json({message: "Modifica password avvenuta con successo."});
+                        res.json({name: "password", message: "Modifica password avvenuta con successo."});
                         return;
                     }
                 );
             }
         })
-    } else if (req.session.ruolo == "admin") {
+    } else if (req.body.ruolo == "admin") {
         Admin_Model.find({email: mail}, function (err, docs) {
             if (err) throw err;
             let hashato = docs[0].password;
 
             if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({message: "Password non corrisponde nel DB."});
+                res.json({name: "password", message: "Password non corrisponde nel DB."});
                 return;
             } else {
                 Admin_Model.findOneAndUpdate({email: mail}, {password: passwordHashed}).then(
                     function (val) {
-                        res.json({message: "Modifica password avvenuta con successo."});
+                        res.json({name: "password", message: "Modifica password avvenuta con successo."});
                         return;
                     }
                 );

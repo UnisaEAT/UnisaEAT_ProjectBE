@@ -4,7 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     //Trova tramite l'email il profilo
-    router.get("/findByEmail", profilo.findByEmail);
+    router.post("/findByEmail", profilo.findByEmail);
 
     //Aggiorna la password del Cliente
     router.post("/updatePassword", profilo.updatePassword);
