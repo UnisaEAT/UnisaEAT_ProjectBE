@@ -10,8 +10,8 @@ var hash = require('./hash.js')
 exports.findByEmail = (req, res) => {
 
     //mettere i ruoli in minuscolo (admin, personale adisu, operatore mensa)
-    var tipo = "Admin";
-    var mail = "m.judo@studenti.unisa.it";
+    var tipo = req.session.ruolo;
+    var mail = req.session.email;
 
     /*req.session.utente.id = new ObjectId("61c4518cee6b7b3e89608755")
     var id= req.session.utente.id ORA SI E' DECISO PER EMAIL
@@ -62,11 +62,9 @@ exports.findByEmail = (req, res) => {
 exports.updatePassword = function (req, res) {
 
     //var mail = "g.citro@studenti.unisa.it"
-    var mail = "c.citro@studenti.unisa.it"
+    var mail = req.session.email
     //mettere ruolo invece di tipo
     //password corretta: Gerardocitro1!
-
-    req.session.ruolo = "operatore mensa"
     var oldPassword = req.body.inputOldPassword
     var password = req.body.inputPassword
     var passwordConfirm = req.body.inputConfirmPassword
