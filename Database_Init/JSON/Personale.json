@@ -31,5 +31,14 @@
     "ruolo": "operatore mensa",
     "disponibilita": true,
     "indirizzo": "Via delle vie"
+  },
+  {
+    "nome": "Danny",
+    "cognome": "De Vito",
+    "password": "aas!1Asdsa",
+    "email": "d.devito@studenti.unisa.it",
+    "indirizzo": "Via delle Vie 121",
+    "ruolo": "operatore mensa",
+    "disponibilità": false
   }
 ]

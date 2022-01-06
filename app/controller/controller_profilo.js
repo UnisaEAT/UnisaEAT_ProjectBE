@@ -1,7 +1,7 @@
 var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
 var Personale_Model = db.model_personale;  //Personale
-var Cliente_Model = db.model_clienti;  //Cliente
+var Cliente_Model = db.model_cliente;  //Cliente
 var Admin_Model = db.model_admin;  //Admin
 const session = require('express-session')  //Verificare sessione
 var hash = require('./hash.js')
@@ -30,7 +30,7 @@ exports.findByEmail = (req, res) => {
                 });
             });
     }
-    if (tipo == "cliente") {
+    else if (tipo == "cliente") {
         Cliente_Model.find({email: mail}) //ID
             .then(data => {
                 res.json(data);
@@ -43,7 +43,7 @@ exports.findByEmail = (req, res) => {
                 });
             });
     }
-    if (tipo == "admin") {
+    else if (tipo == "admin") {
         Admin_Model.find({email: mail}) //ID
             .then(data => {
                 res.json(data);
