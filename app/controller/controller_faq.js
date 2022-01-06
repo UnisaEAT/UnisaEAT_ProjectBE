@@ -6,11 +6,11 @@ const Faq_Model = db.model_faq; //FARE IL MODEL DI FAQ
 exports.insertFAQ = (req, res) => {
   // Validate request
   if (!req.body.domanda) {
-    res.json({ message: "Content can not be empty!" });
+    res.json({ name:"domanda", message: "Content can not be empty!" });
     return;
   }
   if (!req.body.risposta) {
-    res.json({ message: "Content can not be empty!" });
+    res.json({ name:"risposta", message: "Content can not be empty!" });
     return;
   }
 	let domanda= req.body.domanda
@@ -26,21 +26,21 @@ risposta: req.body.risposta
 
  //validazione domanda
   if (!domanda) {
-  res.json({ message: "Domanda non può essere vuoto" });
+  res.json({ name:"domanda", message: "Domanda non può essere vuoto" });
   return;}
    if (domanda.length != 0) {
     if (!(/^[A-Z0-9][\w\W]{15,198}\?$/.test(domanda)) || domanda.length <= 17 || domanda.length > 200) {
-      res.json({ message: "Espressione regolare non rispettata - domanda" });
+      res.json({ name:"domanda", message: "Espressione regolare non rispettata - domanda" });
       return;}
     }
 
   //validazione risposta
    if (!risposta) {
-    res.json({ message: "Risposta non può essere vuoto" });
+    res.json({ name:"risposta", message: "Risposta non può essere vuoto" });
     return;}
     if (risposta.length != 0) {
       if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(risposta)) || risposta.length <= 17 || risposta.length > 200) {
-        res.json({ message: "Espressione regolare non rispettata - risposta" });
+        res.json({name:"risposta", message: "Espressione regolare non rispettata - risposta" });
         return;}
       }
 
