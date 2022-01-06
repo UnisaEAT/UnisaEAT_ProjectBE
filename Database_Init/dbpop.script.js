@@ -3,19 +3,19 @@ var hash = require('../app/controller/hash')
 
 // Database URL
 const url = 'mongodb://localhost:27017/UnisaEAT_db'
-    // Database name
+// Database name
 
 const dbName = 'UnisaEAT_db'
 
 var ins = insert()
-ins.then(function(result) {
+ins.then(function (result) {
     process.exit()
 })
 
 //database stesso livello di documentation, stesso livello di app copia nella nostra cartella
 function insert() {
-    return new Promise(function(resolve, reject) {
-        MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true }, function(err, db) {
+    return new Promise(function (resolve, reject) {
+        MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function (err, db) {
             if (err) reject(err)
             console.log('connessione al server avvenuta!')
             var dbo = db.db(dbName)
@@ -42,16 +42,16 @@ function insert() {
             }
 
 
-            dbo.collection('cliente').insertMany(client, function(err, result) {
+            dbo.collection('cliente').insertMany(client, function (err, result) {
                 if (err) throw err
                 console.log('abbiamo inserito  ' + result.insertedCount + ' clienti')
 
 
-                dbo.collection('personale').insertMany(personale, function(err, result) {
+                dbo.collection('personale').insertMany(personale, function (err, result) {
                     if (err) throw err
                     console.log('abbiamo inserito  ' + result.insertedCount + 'che rigiuardano il personale')
 
-                    dbo.collection('admin').insertMany(admin, function(err, result) {
+                    dbo.collection('admin').insertMany(admin, function (err, result) {
                         if (err) throw err
                         console.log('abbiamo inserito  ' + result.insertedCount + 'admin')
 

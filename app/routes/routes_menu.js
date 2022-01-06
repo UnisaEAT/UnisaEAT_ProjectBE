@@ -4,11 +4,10 @@ module.exports = app => {
     var router = require("express").Router();
 
 
-
-    // Retrieve all pasto for choose the menu
+    // Prendi tutti i pasti per fare in modo che l'operatore mensa scelga il menu
     router.get("/sceltaMenu", menu.sceltaMenu);
 
-
+    //Riceve la tipologia di menu da visualizzare
     router.post("/visualizzaMenu", menu.visualizzamenu);
 
 

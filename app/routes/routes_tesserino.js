@@ -1,25 +1,25 @@
 module.exports = app => {
     const tesserino = require("../controller/controller_tesserino");
-  
+
     var router = require("express").Router();
-  
-    // Create a new Tesserino
+
+    // Create un nuovo tesserino
     router.post("/create", tesserino.create);
-  
-    // Retrieve saldo tesserino
+
+    // Ricava il saldo del tesserino
     router.post("/getInfoTesserino", tesserino.getInfoTesserino);
 
-    // check if the customers has a Tesserino
+    // Controlla se l'utente possiede già un tesserino
     router.post("/hasTesserino", tesserino.hasTesserino);
 
-    // check if the Tesserino is expired
+    // Controlla se il tesserino è scaduto
     router.post("/isExpired", tesserino.isExpired);
 
-    // update saldo del tesserino
+    // Ricarica il Tesserino aggiornando il saldo
     router.post("/ricaricaTesserino", tesserino.ricaricaTesserino);
 
-    // update data del tesserino
+    // Rinnova un tesserino ,se scaduto
     router.post("/rinnovoTesserino", tesserino.updateDataScadenza);
-  
+
     app.use('/api/tesserino', router);
-  };
+};

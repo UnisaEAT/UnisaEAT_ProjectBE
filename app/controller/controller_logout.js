@@ -5,6 +5,6 @@ exports.logout = (req, res) => {
         if (err) throw err;
         res.json(true);
         return;
-      });
+    });
 
 }

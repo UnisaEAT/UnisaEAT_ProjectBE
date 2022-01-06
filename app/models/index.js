@@ -16,6 +16,4 @@ db.model_notifica = require("./notifica.js")(mongoose);
 db.model_tesserino = require("./tesserino.js")(mongoose);
 
 
-
-
 module.exports = db;

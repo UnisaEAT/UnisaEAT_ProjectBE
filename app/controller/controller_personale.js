@@ -15,7 +15,7 @@ exports.insert = (req, res) => {
     let indirizzo = req.body.indirizzo;
     let confermapassword = req.body.confermapassword;
     // Create a Personale
-    const personale = new Personale_Model ({
+    const personale = new Personale_Model({
         nome: req.body.nome,
         cognome: req.body.cognome,
         password: req.body.password,
@@ -27,111 +27,131 @@ exports.insert = (req, res) => {
         indirizzo: req.body.indirizzo
     });
 
-    var tipo ="admin"
+    var tipo = "admin"
 
 
-    if(tipo=="admin"){
-        personale.ruolo="personale adisu"
-    }
-    else if(tipo=="personale adisu"){
-        personale.ruolo="operatore mensa"
+    if (tipo == "admin") {
+        personale.ruolo = "personale adisu"
+    } else if (tipo == "personale adisu") {
+        personale.ruolo = "operatore mensa"
     }
 
     //validazione del nome
     if (!nome) {
-        res.json({name:"nome", message: "Nome non può essere vuoto" });
-        return;}
+        res.json({name: "nome", message: "Nome non può essere vuoto"});
+        return;
+    }
     if (nome.length != 0) {
         if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
-            res.json({name:"nome", message: "Espressione regolare nome non rispettata" });
-            return;}
+            res.json({name: "nome", message: "Espressione regolare nome non rispettata"});
+            return;
+        }
     }
 
     //validazione del cognome
     if (!cognome) {
-        res.json({ name:"cognome", message: "Cognome non può essere vuoto" });
-        return;}
+        res.json({name: "cognome", message: "Cognome non può essere vuoto"});
+        return;
+    }
     if (cognome.length != 0) {
         if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
-            res.json({name:"cognome", message: "Espressione regolare cognome non rispettata" });
-            return;}
+            res.json({name: "cognome", message: "Espressione regolare cognome non rispettata"});
+            return;
+        }
     }
 
     //validazione della data di nascita
     if (!dataDiNascita) {
-        res.json({ name:"datadinascita",message: "Data di nascita non può essere vuoto" });
-        return;}
+        res.json({name: "datadinascita", message: "Data di nascita non può essere vuoto"});
+        return;
+    }
     if (dataDiNascita.length == 10) {
         if (!(/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[-\/.](19|20)\d\d/.test(dataDiNascita))) {
-            res.json({name:"dataDiNascita", message: "Espressione regolare datadinascita non rispettata" });
-            return;}
+            res.json({name: "dataDiNascita", message: "Espressione regolare datadinascita non rispettata"});
+            return;
+        }
     }
 
     //validazione del numero di telefono
     if (!numeroTelefono) {
-        res.json({ name:"numeroTelefono",message: "NumeroTelefono non può essere vuoto" });
-        return;}
+        res.json({name: "numeroTelefono", message: "NumeroTelefono non può essere vuoto"});
+        return;
+    }
     if (numeroTelefono.length != 0) {
-        if (!(/^[0-9\-\+]{9,15}$/.test(numeroTelefono)) || numeroTelefono.length <10 || numeroTelefono.length >15) {
-            res.json({name:"numeroTelefono", message: "Espressione regolare numero non rispettata" });
-            return;}}
+        if (!(/^[0-9\-\+]{9,15}$/.test(numeroTelefono)) || numeroTelefono.length < 10 || numeroTelefono.length > 15) {
+            res.json({name: "numeroTelefono", message: "Espressione regolare numero non rispettata"});
+            return;
+        }
+    }
 
     //validazione dell'email
     if (!email) {
-        res.json({ name:"email",message: "Email non può essere vuoto" });
-        return;}
+        res.json({name: "email", message: "Email non può essere vuoto"});
+        return;
+    }
     if (email.length != 0) {
-        if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length <8 ) {
-            res.json({name:"email", message: "Espressione regolare email non rispettata" });
-            return;}}
+        if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length < 8) {
+            res.json({name: "email", message: "Espressione regolare email non rispettata"});
+            return;
+        }
+    }
 
     //validazione dell'indirizzo
     if (!indirizzo) {
-        res.json({name:"indirizzo", message: "Indirizzo non può essere vuoto" });
-        return;}
+        res.json({name: "indirizzo", message: "Indirizzo non può essere vuoto"});
+        return;
+    }
     if (indirizzo.length != 0) {
         if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
-            res.json({ name:"indirizzo",message: "Espressione regolare indirizzo non rispettata" });
-            return;}}
+            res.json({name: "indirizzo", message: "Espressione regolare indirizzo non rispettata"});
+            return;
+        }
+    }
 
     //validazione della password
     if (!password) {
-        res.json({ name:"password",message: "Passowrd non può essere vuoto" });
-        return;}
-    if(password.length != 0){
+        res.json({name: "password", message: "Passowrd non può essere vuoto"});
+        return;
+    }
+    if (password.length != 0) {
         if ((password.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
-            res.json({ name:"password",message: "Espressione regolare passowrd non rispettata" });
-            return;}
+            res.json({name: "password", message: "Espressione regolare passowrd non rispettata"});
+            return;
+        }
     }
     //validazione della conferma della password
     if (!confermapassword) {
-        res.json({name:"confermapassword", message: "ConfermaPassword non può essere vuoto" });
-        return;}
+        res.json({name: "confermapassword", message: "ConfermaPassword non può essere vuoto"});
+        return;
+    }
     if (confermapassword != password) {
-        res.json({ name:"confermapassword",message: "ConfermaPassword è diverso dal campo password" });
-        return;}
+        res.json({name: "confermapassword", message: "ConfermaPassword è diverso dal campo password"});
+        return;
+    }
 
     var passwordHashed = hash.hashPassword(password);
     personale.password = passwordHashed;
     /* PRIMA DI INSERIRE EFFETTUO UN CONTROLLO SULL'EMAIL CHE E' UNICA NEL DB, NEL CASO ESISTA RITORNO ERRORE NEL CASO IN CUI NON ESISTE PROSEGUO CON L'INSERIMENTO  */
-    Personale_Model.find({email : email},function (err,docs){
-        if (docs==0){
+    Personale_Model.find({email: email}, function (err, docs) {
+        if (docs == 0) {
             personale
                 .save(personale)
                 .then(data => {
                     res.json({message: true});
                 })
                 .catch(err => {
-                    res.json({message: err.message || "Some error occurred while retriving personale."
+                    res.json({
+                        message: err.message || "Some error occurred while retriving personale."
                     });
                 });
+        } else {
+            res.json({message: false});
         }
 
-        else{
-            res.json({ message: false }); }
-
-        if(err){
-            res.json({ message: "Error retrieving personale with email=" + email });} })
+        if (err) {
+            res.json({message: "Error retrieving personale with email=" + email});
+        }
+    })
 
 };
 
@@ -142,17 +162,18 @@ exports.findByRuolo = (req, res) => {
     //variabile di prova da cancellare
     var tipo = "personale adisu"
 
-    if(tipo=="admin"){
-        tipo="personale adisu"
+    if (tipo == "admin") {
+        tipo = "personale adisu"
+    } else {
+        tipo = "operatore mensa"
     }
-    else {tipo="operatore mensa"}
-    Personale_Model.find({ruolo : tipo})
+    Personale_Model.find({ruolo: tipo})
         .then(data => {
-            if(data==null){
-                res.json({message:false})
+            if (data == null) {
+                res.json({message: false})
+            } else {
+                res.json(data);
             }
-            else{
-                res.json(data);}
         })
         .catch(err => {
             res.json({message: err.message || "Some error occurred while retrieving personale adisu."});
@@ -162,14 +183,15 @@ exports.findByRuolo = (req, res) => {
 
 //RIMUOVERE UN PERSONALE ADISU DATA UN EMAIL
 exports.findByEmailAndRemove = (req, res) => {
-    Personale_Model.findOneAndDelete({email:req.body.emailTest})
+    Personale_Model.findOneAndDelete({email: req.body.email})
         .then(data => {
-            if(data==null){
-                res.json({message: false})}
-            else res.json({message: true})
+            if (data == null) {
+                res.json({message: false})
+            } else res.json({message: true})
         })
         .catch(err => {
-            res.json({ message: err.message || "Qualche errore durante la rimozione del personale adisu"
+            res.json({
+                message: err.message || "Qualche errore durante la rimozione del personale adisu"
             });
         });
 };

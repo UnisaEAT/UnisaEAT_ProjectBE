@@ -3,10 +3,10 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Create a new Tutorial
+    // Create a new admin
     router.post("/create", admin.create);
 
-    // Retrieve all Tutorials
+    // Retrieve all admin
     router.get("/findAll", admin.findAll);
 
 

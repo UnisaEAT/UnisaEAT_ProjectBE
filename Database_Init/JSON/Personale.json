@@ -10,7 +10,6 @@
     "disponibilita": true,
     "indirizzo": "Via delle vie"
   },
-
   {
     "nome": "Alex",
     "cognome": "Cavaliere",
@@ -22,7 +21,6 @@
     "disponibilita": true,
     "indirizzo": "Via delle vie"
   },
-
   {
     "nome": "Maria",
     "cognome": "Rosaria",
@@ -34,7 +32,4 @@
     "disponibilita": true,
     "indirizzo": "Via delle vie"
   }
-
-
-
 ]

@@ -15,31 +15,27 @@ const Cliente_Model = db.model_cliente;
   Se viene restituito {message:false} il cliente non ha un tesserino
 */
 exports.hasTesserino = (req, res) => {
-  
-  const ruolo = req.body.ruolo;
-  const email = req.body.email;
-  
 
-  if(ruolo != "cliente")
-  {
-    res.json({message : "Only customers can access this page!"});
-    return;
-  }
+    const ruolo = req.body.ruolo;
+    const email = req.body.email;
 
-  Cliente_Model.find({email:email}, function (err, docs) {
-    if (err) throw err;
-    if(docs[0].tesserino!=null)
-    {
-      res.json({message : true});
-      return;
+
+    if (ruolo != "cliente") {
+        res.json({message: "Only customers can access this page!"});
+        return;
     }
-    else
-    {
-      res.json({message : false});
-      return;
-    }
-  });
-}; 
+
+    Cliente_Model.find({email: email}, function (err, docs) {
+        if (err) throw err;
+        if (docs[0].tesserino != null) {
+            res.json({message: true});
+            return;
+        } else {
+            res.json({message: false});
+            return;
+        }
+    });
+};
 
 /*
   Viene eseguita quando l'utente vuole accedere alla pagina di rinnovo del tesserino
@@ -53,49 +49,45 @@ exports.hasTesserino = (req, res) => {
   Se viene restituito {message : false} allora il tesserino non è scaduto
 */
 exports.isExpired = (req, res) => {
-  
-  
-  const ruolo = req.body.ruolo;
-  const email = req.body.email;
-  
 
-  if(ruolo != "cliente")
-  {
-    res.json({message : "Only customers can access this page!"});
-    return;
-  }
 
-  Cliente_Model.find({email:email}, function (err, docs) {
-    if (err) throw err;
-    let tesserinoID = docs[0].tesserino; 
-    if(tesserinoID == null)
-    {
-      res.json({message : "You don't have a Tesserino!"});
-      return;
+    const ruolo = req.body.ruolo;
+    const email = req.body.email;
+
+
+    if (ruolo != "cliente") {
+        res.json({message: "Only customers can access this page!"});
+        return;
     }
-    else
-    {
-      Tesserino_Model.findById(tesserinoID).then(
-        function (data) {
 
-          let dataScadenza = data.dataScadenza;
-          let dataAttuale = new Date();
-
-          if(dataAttuale<dataScadenza) {
-            res.json({ message: false});
+    Cliente_Model.find({email: email}, function (err, docs) {
+        if (err) throw err;
+        let tesserinoID = docs[0].tesserino;
+        if (tesserinoID == null) {
+            res.json({message: "You don't have a Tesserino!"});
             return;
-          }
-          res.json({message : true});
-          return;
+        } else {
+            Tesserino_Model.findById(tesserinoID).then(
+                function (data) {
 
-        },
-        function (err) {
-          res.json({messagge : "Error: " + err});
+                    let dataScadenza = data.dataScadenza;
+                    let dataAttuale = new Date();
+
+                    if (dataAttuale < dataScadenza) {
+                        res.json({message: false});
+                        return;
+                    }
+                    res.json({message: true});
+                    return;
+
+                },
+                function (err) {
+                    res.json({messagge: "Error: " + err});
+                }
+            )
         }
-      )
-    }
-  });
-}; 
+    });
+};
 
 // Create and Save a new Tesserino
 /*
@@ -106,264 +98,237 @@ exports.isExpired = (req, res) => {
   Se il form è corretto inserisco il tesserino nel db e aggiorno il campo tesserino del cliente loggato
 
   Viene restituito {message:true} se il create è andato a buon fine
- */ 
+ */
 exports.create = (req, res) => {
-  
-  const ruolo = req.body.ruoloSessione;
-  const email = req.body.emailSessione;
-  
 
-  if(ruolo != "cliente")
-  {
-    res.json({ message: "Only customers can access this page!" });
-    return;
-  }
+    const ruolo = req.body.ruoloSessione;
+    const email = req.body.emailSessione;
 
-  Cliente_Model.find({email:email}, function (err, docs) {
-    if (err) throw err;
-    if(docs[0].tesserino!=null)
-    {
-      res.json({ message: "You already have a Tesserino!" });
-      return;
-    }
-    let nome = req.body.nome;
-    let cognome = req.body.cognome;
-    let email = req.body.email;
-    let confermaEmail = req.body.confermaEmail;
-    let dataDiNascita = req.body.dataDiNascita;
-    let provinciaDiNascita = req.body.provinciaDiNascita;
-    let comuneDiNascita = req.body.comuneDiNascita;
-    let cittadinanza = req.body.cittadinanza;
-    let indirizzo = req.body.indirizzo;
-    let provincia = req.body.provincia;
-    let comune = req.body.comune; //campo città nel db
-    let cap = req.body.cap;
-    let telefono = req.body.telefono;
 
-    if (!nome) {
-      res.json({ name:"nome", message: "Nome can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
-      res.json({ name:"nome", message: "Nome has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].nome != nome) {
-        res.json({ name:"nome", message: "Nome not found!" });
+    if (ruolo != "cliente") {
+        res.json({message: "Only customers can access this page!"});
         return;
-      }
     }
 
-    if (!cognome) {
-      res.json({ name:"cognome", message: "Cognome can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
-      res.json({ name:"cognome", message: "Cognome has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].cognome != cognome) {
-        res.json({ name:"cognome", message: "Cognome not found!" });
-        return;
-      }
-    }
-
-    if (!email) {
-      res.json({ name:"email", message: "Email can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length <8 ) {
-      res.json({ name:"email", message: "Email has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].email != email) {
-        res.json({ name:"email", message: "Email not found!" });
-        return;
-      }
-    }
-
-    if (!confermaEmail) {
-      res.json({ name:"confermaEmail", message: "Conferma Email can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(confermaEmail)) || confermaEmail.length <8 ) {
-      res.json({ name:"confermaEmail", message: "Conferma Email has invalid sintax!" });
-      return;
-    }
-    else {
-      if(confermaEmail != email) {
-        res.json({ name:"confermaEmail", message: "Email and Conferma Email not equals!" });
-        return;
-      }
-    }
-
-    if (!dataDiNascita) {
-      res.json({ name:"dataDiNascita", message: "Data di nascita can not be empty!" });
-      return;
-    }
-    else if (!(/^(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/](19|20)\d\d/.test(dataDiNascita))) {
-      res.json({ name:"dataDiNascita", message: "Data di nascita has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].dataDiNascita != dataDiNascita) {
-        res.json({ name:"dataDiNascita", message: "Data di nascita not found!" });
-        return;
-      }
-    }
-
-    if (!provinciaDiNascita) {
-      res.json({ name:"provinciaDiNascita", message: "Provincia di nascita can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provinciaDiNascita)) || provinciaDiNascita.length <= 1) {
-      res.json({ name:"provinciaDiNascita", message: "Provincia di nascita has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].provinciaDiNascita != provinciaDiNascita) {
-        res.json({ name:"provinciaDiNascita", message: "Provincia di nascita not found!" });
-        return;
-      }
-    }
-
-    if (!comuneDiNascita) {
-      res.json({ name:"comuneDiNascita", message: "Comune di nascita can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comuneDiNascita)) || comuneDiNascita.length <= 1) {
-      res.json({ name:"comuneDiNascita", message: "Comune di nascita has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].comuneDiNascita != comuneDiNascita) {
-        res.json({ name:"comuneDiNascita", message: "Comune di nascita not found!" });
-        return;
-      }
-    }
-
-    if (!cittadinanza) {
-      res.json({ name:"cittadinanza", message: "Cittadinanza can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cittadinanza)) || cittadinanza.length <= 1) {
-      res.json({ name:"cittadinanza", message: "Cittadinanza has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].cittadinanza != cittadinanza) {
-        res.json({ name:"cittadinanza", message: "Cittadinanza not found!" });
-        return;
-      }
-    }
-
-    if (!indirizzo) {
-      res.json({ name:"indirizzo", message: "Indirizzo can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
-      res.json({ name:"indirizzo", message: "Indirizzo has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].indirizzo != indirizzo) {
-        res.json({ name:"indirizzo", message: "Indirizzo not found!" });
-        return;
-      }
-    }
-
-    if (!provincia) {
-      res.json({ name:"provincia", message: "Provincia can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provincia)) || provincia.length <= 1) {
-      res.json({ name:"provincia", message: "Provincia has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].provincia != provincia) {
-        res.json({ name:"provincia", message: "Provincia not found!" });
-        return;
-      }
-    }
-
-    if (!comune) {
-      res.json({ name:"comune", message: "Comune can not be empty!" });
-      return;
-    }
-    else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comune)) || comune.length <= 1) {
-      res.json({ name:"comune", message: "Comune has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].citta != comune) {
-        res.json({ name:"comune", message: "Comune not found!" });
-        return;
-      }
-    }
-
-    if (!cap) {
-      res.json({ name:"cap", message: "Cap can not be empty!" });
-      return;
-    }
-    else if (!(/^\d{5}$/.test(cap))) {
-      res.json({ name:"cap", message: "Cap has invalid sintax!" });
-      return;
-    }
-    else {
-      if(docs[0].cap != cap) {
-        res.json({ name:"cap", message: "Cap not found!" });
-        return;
-      }
-    }
-
-    if (telefono.length != 0) {
-      if (!(/^[0-9\-\+]{9,15}$/.test(telefono)) || telefono.length <10 || telefono.length >15) {
-        res.json({ name:"telefono", message: "Telefono has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].telefono != telefono) {
-          res.json({ name:"telefono", message: "Telefono not found!" });
-          return;
-        }
-      }  
-    }
-
-    //calcolo data di scadenza
-    //uguale alla data attuale + 1 anno
-    let date = new Date();
-    date.setDate(date.getDate() + 365); 
-
-    // Create a Tesserino
-    const tesserino = new Tesserino_Model ({
-      saldo: 0,
-      dataScadenza: date
-    });
-
-
-    // Save Tesserino in the database
-    tesserino
-      .save(tesserino)
-      .then(data => {
-        Cliente_Model.findOneAndUpdate({email:email}, {tesserino:new ObjectId(data._id)}).then(
-          function(value) {
-            res.json({message : true});
+    Cliente_Model.find({email: email}, function (err, docs) {
+        if (err) throw err;
+        if (docs[0].tesserino != null) {
+            res.json({message: "You already have a Tesserino!"});
             return;
-          }
-        )
-      })
-      .catch(err => {
-        res.json({
-          message:
-            err.message || "Some error occurred while creating the Tesserino."
-        });
-      });
+        }
+        let nome = req.body.nome;
+        let cognome = req.body.cognome;
+        let email = req.body.email;
+        let confermaEmail = req.body.confermaEmail;
+        let dataDiNascita = req.body.dataDiNascita;
+        let provinciaDiNascita = req.body.provinciaDiNascita;
+        let comuneDiNascita = req.body.comuneDiNascita;
+        let cittadinanza = req.body.cittadinanza;
+        let indirizzo = req.body.indirizzo;
+        let provincia = req.body.provincia;
+        let comune = req.body.comune; //campo città nel db
+        let cap = req.body.cap;
+        let telefono = req.body.telefono;
 
-  });
+        if (!nome) {
+            res.json({name: "nome", message: "Nome can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
+            res.json({name: "nome", message: "Nome has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].nome != nome) {
+                res.json({name: "nome", message: "Nome not found!"});
+                return;
+            }
+        }
+
+        if (!cognome) {
+            res.json({name: "cognome", message: "Cognome can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
+            res.json({name: "cognome", message: "Cognome has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].cognome != cognome) {
+                res.json({name: "cognome", message: "Cognome not found!"});
+                return;
+            }
+        }
+
+        if (!email) {
+            res.json({name: "email", message: "Email can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length < 8) {
+            res.json({name: "email", message: "Email has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].email != email) {
+                res.json({name: "email", message: "Email not found!"});
+                return;
+            }
+        }
+
+        if (!confermaEmail) {
+            res.json({name: "confermaEmail", message: "Conferma Email can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(confermaEmail)) || confermaEmail.length < 8) {
+            res.json({name: "confermaEmail", message: "Conferma Email has invalid sintax!"});
+            return;
+        } else {
+            if (confermaEmail != email) {
+                res.json({name: "confermaEmail", message: "Email and Conferma Email not equals!"});
+                return;
+            }
+        }
+
+        if (!dataDiNascita) {
+            res.json({name: "dataDiNascita", message: "Data di nascita can not be empty!"});
+            return;
+        } else if (!(/^(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/](19|20)\d\d/.test(dataDiNascita))) {
+            res.json({name: "dataDiNascita", message: "Data di nascita has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].dataDiNascita != dataDiNascita) {
+                res.json({name: "dataDiNascita", message: "Data di nascita not found!"});
+                return;
+            }
+        }
+
+        if (!provinciaDiNascita) {
+            res.json({name: "provinciaDiNascita", message: "Provincia di nascita can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provinciaDiNascita)) || provinciaDiNascita.length <= 1) {
+            res.json({name: "provinciaDiNascita", message: "Provincia di nascita has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].provinciaDiNascita != provinciaDiNascita) {
+                res.json({name: "provinciaDiNascita", message: "Provincia di nascita not found!"});
+                return;
+            }
+        }
+
+        if (!comuneDiNascita) {
+            res.json({name: "comuneDiNascita", message: "Comune di nascita can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comuneDiNascita)) || comuneDiNascita.length <= 1) {
+            res.json({name: "comuneDiNascita", message: "Comune di nascita has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].comuneDiNascita != comuneDiNascita) {
+                res.json({name: "comuneDiNascita", message: "Comune di nascita not found!"});
+                return;
+            }
+        }
+
+        if (!cittadinanza) {
+            res.json({name: "cittadinanza", message: "Cittadinanza can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cittadinanza)) || cittadinanza.length <= 1) {
+            res.json({name: "cittadinanza", message: "Cittadinanza has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].cittadinanza != cittadinanza) {
+                res.json({name: "cittadinanza", message: "Cittadinanza not found!"});
+                return;
+            }
+        }
+
+        if (!indirizzo) {
+            res.json({name: "indirizzo", message: "Indirizzo can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
+            res.json({name: "indirizzo", message: "Indirizzo has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].indirizzo != indirizzo) {
+                res.json({name: "indirizzo", message: "Indirizzo not found!"});
+                return;
+            }
+        }
+
+        if (!provincia) {
+            res.json({name: "provincia", message: "Provincia can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provincia)) || provincia.length <= 1) {
+            res.json({name: "provincia", message: "Provincia has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].provincia != provincia) {
+                res.json({name: "provincia", message: "Provincia not found!"});
+                return;
+            }
+        }
+
+        if (!comune) {
+            res.json({name: "comune", message: "Comune can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comune)) || comune.length <= 1) {
+            res.json({name: "comune", message: "Comune has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].citta != comune) {
+                res.json({name: "comune", message: "Comune not found!"});
+                return;
+            }
+        }
+
+        if (!cap) {
+            res.json({name: "cap", message: "Cap can not be empty!"});
+            return;
+        } else if (!(/^\d{5}$/.test(cap))) {
+            res.json({name: "cap", message: "Cap has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].cap != cap) {
+                res.json({name: "cap", message: "Cap not found!"});
+                return;
+            }
+        }
+
+        if (telefono.length != 0) {
+            if (!(/^[0-9\-\+]{9,15}$/.test(telefono)) || telefono.length < 10 || telefono.length > 15) {
+                res.json({name: "telefono", message: "Telefono has invalid sintax!"});
+                return;
+            } else {
+                if (docs[0].telefono != telefono) {
+                    res.json({name: "telefono", message: "Telefono not found!"});
+                    return;
+                }
+            }
+        }
+
+        //calcolo data di scadenza
+        //uguale alla data attuale + 1 anno
+        let date = new Date();
+        date.setDate(date.getDate() + 365);
+
+        // Create a Tesserino
+        const tesserino = new Tesserino_Model({
+            saldo: 0,
+            dataScadenza: date
+        });
+
+
+        // Save Tesserino in the database
+        tesserino
+            .save(tesserino)
+            .then(data => {
+                Cliente_Model.findOneAndUpdate({email: email}, {tesserino: new ObjectId(data._id)}).then(
+                    function (value) {
+                        res.json({message: true});
+                        return;
+                    }
+                )
+            })
+            .catch(err => {
+                res.json({
+                    message:
+                        err.message || "Some error occurred while creating the Tesserino."
+                });
+            });
+
+    });
 };
 
 // Update dataScadenza tesserino
@@ -374,247 +339,220 @@ exports.create = (req, res) => {
   Se il tesserino del cliente loggato non è scaduto (la data di scadenza è minore della data attuale) l'operazione non viene effettuata
   Se il tesserino del cliente loggato è scaduto viene aggiornata la data di scadenza nel db 
  */
-  exports.updateDataScadenza = (req, res) => {
-        
+exports.updateDataScadenza = (req, res) => {
+
     const ruolo = req.body.ruoloSessione;
     const email = req.body.emailSessione;
-    
 
-    if(ruolo != "cliente")
-    {
-      res.json({ message: "Only customers can access this page!" });
-      return;
+
+    if (ruolo != "cliente") {
+        res.json({message: "Only customers can access this page!"});
+        return;
     }
-  
-    Cliente_Model.find({email:email}, function (err, docs) {
-      if (err) throw err; 
-      if(docs[0].tesserino==null)
-      {
-        res.json({ message: "You don't have a Tesserino!" });
-        return;
-      }
 
-      let nome = req.body.nome;
-      let cognome = req.body.cognome;
-      let email = req.body.email;
-      let confermaEmail = req.body.confermaEmail;
-      let dataDiNascita = req.body.dataDiNascita;
-      let provinciaDiNascita = req.body.provinciaDiNascita;
-      let comuneDiNascita = req.body.comuneDiNascita;
-      let cittadinanza = req.body.cittadinanza;
-      let indirizzo = req.body.indirizzo;
-      let provincia = req.body.provincia;
-      let comune = req.body.comune; //campo città nel db
-      let cap = req.body.cap;
-      let telefono = req.body.telefono;
-  
-      if (!nome) {
-        res.json({ name:"nome", message: "Nome can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
-        res.json({ name:"nome", message: "Nome has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].nome != nome) {
-          res.json({ name:"nome", message: "Nome not found!" });
-          return;
-        }
-      }
-  
-      if (!cognome) {
-        res.json({ name:"cognome", message: "Cognome can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
-        res.json({ name:"cognome", message: "Cognome has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].cognome != cognome) {
-          res.json({ name:"cognome", message: "Cognome not found!" });
-          return;
-        }
-      }
-  
-      if (!email) {
-        res.json({ name:"email", message: "Email can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length <8 ) {
-        res.json({ name:"email", message: "Email has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].email != email) {
-          res.json({ name:"email", message: "Email not found!" });
-          return;
-        }
-      }
-  
-      if (!confermaEmail) {
-        res.json({ name:"confermaEmail", message: "Conferma Email can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(confermaEmail)) || confermaEmail.length <8 ) {
-        res.json({ name:"confermaEmail", message: "Conferma Email has invalid sintax!" });
-        return;
-      }
-      else {
-        if(confermaEmail != email) {
-          res.json({ name:"confermaEmail", message: "Email and Conferma Email not equals!" });
-          return;
-        }
-      }
-  
-      if (!dataDiNascita) {
-        res.json({ name:"dataDiNascita", message: "Data di nascita can not be empty!" });
-        return;
-      }
-      else if (!(/^(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/](19|20)\d\d/.test(dataDiNascita))) {
-        res.json({ name:"dataDiNascita", message: "Data di nascita has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].dataDiNascita != dataDiNascita) {
-          res.json({ name:"dataDiNascita", message: "Data di nascita not found!" });
-          return;
-        }
-      }
-      
-      if (!provinciaDiNascita) {
-        res.json({ name:"provinciaDiNascita", message: "Provincia di nascita can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provinciaDiNascita)) || provinciaDiNascita.length <= 1) {
-        res.json({ name:"provinciaDiNascita", message: "Provincia di nascita has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].provinciaDiNascita != provinciaDiNascita) {
-          res.json({ name:"provinciaDiNascita", message: "Provincia di nascita not found!" });
-          return;
-        }
-      }
-
-      if (!comuneDiNascita) {
-        res.json({ name:"comuneDiNascita", message: "Comune di nascita can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comuneDiNascita)) || comuneDiNascita.length <= 1) {
-        res.json({ name:"comuneDiNascita", message: "Comune di nascita has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].comuneDiNascita != comuneDiNascita) {
-          res.json({ name:"comuneDiNascita", message: "Comune di nascita not found!" });
-          return;
-        }
-      }
-  
-      if (!cittadinanza) {
-        res.json({ name:"cittadinanza", message: "Cittadinanza can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cittadinanza)) || cittadinanza.length <= 1) {
-        res.json({ name:"cittadinanza", message: "Cittadinanza has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].cittadinanza != cittadinanza) {
-          res.json({ name:"cittadinanza", message: "Cittadinanza not found!" });
-          return;
-        }
-      }
-  
-      if (!indirizzo) {
-        res.json({ name:"indirizzo", message: "Indirizzo can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
-        res.json({ name:"indirizzo", message: "Indirizzo has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].indirizzo != indirizzo) {
-          res.json({ name:"indirizzo", message: "Indirizzo not found!" });
-          return;
-        }
-      }
-  
-      if (!provincia) {
-        res.json({ name:"provincia", message: "Provincia can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provincia)) || provincia.length <= 1) {
-        res.json({ name:"provincia", message: "Provincia has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].provincia != provincia) {
-          res.json({ name:"provincia", message: "Provincia not found!" });
-          return;
-        }
-      }
-  
-      if (!comune) {
-        res.json({ name:"comune", message: "Comune can not be empty!" });
-        return;
-      }
-      else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comune)) || comune.length <= 1) {
-        res.json({ name:"comune", message: "Comune has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].citta != comune) {
-          res.json({ name:"comune", message: "Comune not found!" });
-          return;
-        }
-      }
-  
-      if (!cap) {
-        res.json({ name:"cap", message: "Cap can not be empty!" });
-        return;
-      }
-      else if (!(/^\d{5}$/.test(cap))) {
-        res.json({ name:"cap", message: "Cap has invalid sintax!" });
-        return;
-      }
-      else {
-        if(docs[0].cap != cap) {
-          res.json({ name:"cap", message: "Cap not found!" });
-          return;
-        }
-      }
-  
-      if (telefono.length != 0) {
-        if (!(/^[0-9\-\+]{9,15}$/.test(telefono)) || telefono.length <10 || telefono.length >15) {
-          res.json({ name:"telefono", message: "Telefono has invalid sintax!" });
-          return;
-        }
-        else {
-          if(docs[0].telefono != telefono) {
-            res.json({ name:"telefono", message: "Telefono not found!" });
-            return;
-          }
-        }  
-      }
-  
-       //calcolo data di scadenza
-      //uguale alla data attuale + 1 anno
-      let date = new Date();
-      date.setDate(date.getDate() + 365); 
-      let tesserinoID = docs[0].tesserino;
-
-      Tesserino_Model.findByIdAndUpdate(tesserinoID, {dataScadenza:date}, function (err, docs){
+    Cliente_Model.find({email: email}, function (err, docs) {
         if (err) throw err;
-        res.json(true);
-        return;
-      })
-  
+        if (docs[0].tesserino == null) {
+            res.json({message: "You don't have a Tesserino!"});
+            return;
+        }
+
+        let nome = req.body.nome;
+        let cognome = req.body.cognome;
+        let email = req.body.email;
+        let confermaEmail = req.body.confermaEmail;
+        let dataDiNascita = req.body.dataDiNascita;
+        let provinciaDiNascita = req.body.provinciaDiNascita;
+        let comuneDiNascita = req.body.comuneDiNascita;
+        let cittadinanza = req.body.cittadinanza;
+        let indirizzo = req.body.indirizzo;
+        let provincia = req.body.provincia;
+        let comune = req.body.comune; //campo città nel db
+        let cap = req.body.cap;
+        let telefono = req.body.telefono;
+
+        if (!nome) {
+            res.json({name: "nome", message: "Nome can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
+            res.json({name: "nome", message: "Nome has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].nome != nome) {
+                res.json({name: "nome", message: "Nome not found!"});
+                return;
+            }
+        }
+
+        if (!cognome) {
+            res.json({name: "cognome", message: "Cognome can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
+            res.json({name: "cognome", message: "Cognome has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].cognome != cognome) {
+                res.json({name: "cognome", message: "Cognome not found!"});
+                return;
+            }
+        }
+
+        if (!email) {
+            res.json({name: "email", message: "Email can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length < 8) {
+            res.json({name: "email", message: "Email has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].email != email) {
+                res.json({name: "email", message: "Email not found!"});
+                return;
+            }
+        }
+
+        if (!confermaEmail) {
+            res.json({name: "confermaEmail", message: "Conferma Email can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(confermaEmail)) || confermaEmail.length < 8) {
+            res.json({name: "confermaEmail", message: "Conferma Email has invalid sintax!"});
+            return;
+        } else {
+            if (confermaEmail != email) {
+                res.json({name: "confermaEmail", message: "Email and Conferma Email not equals!"});
+                return;
+            }
+        }
+
+        if (!dataDiNascita) {
+            res.json({name: "dataDiNascita", message: "Data di nascita can not be empty!"});
+            return;
+        } else if (!(/^(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/](19|20)\d\d/.test(dataDiNascita))) {
+            res.json({name: "dataDiNascita", message: "Data di nascita has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].dataDiNascita != dataDiNascita) {
+                res.json({name: "dataDiNascita", message: "Data di nascita not found!"});
+                return;
+            }
+        }
+
+        if (!provinciaDiNascita) {
+            res.json({name: "provinciaDiNascita", message: "Provincia di nascita can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provinciaDiNascita)) || provinciaDiNascita.length <= 1) {
+            res.json({name: "provinciaDiNascita", message: "Provincia di nascita has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].provinciaDiNascita != provinciaDiNascita) {
+                res.json({name: "provinciaDiNascita", message: "Provincia di nascita not found!"});
+                return;
+            }
+        }
+
+        if (!comuneDiNascita) {
+            res.json({name: "comuneDiNascita", message: "Comune di nascita can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comuneDiNascita)) || comuneDiNascita.length <= 1) {
+            res.json({name: "comuneDiNascita", message: "Comune di nascita has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].comuneDiNascita != comuneDiNascita) {
+                res.json({name: "comuneDiNascita", message: "Comune di nascita not found!"});
+                return;
+            }
+        }
+
+        if (!cittadinanza) {
+            res.json({name: "cittadinanza", message: "Cittadinanza can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cittadinanza)) || cittadinanza.length <= 1) {
+            res.json({name: "cittadinanza", message: "Cittadinanza has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].cittadinanza != cittadinanza) {
+                res.json({name: "cittadinanza", message: "Cittadinanza not found!"});
+                return;
+            }
+        }
+
+        if (!indirizzo) {
+            res.json({name: "indirizzo", message: "Indirizzo can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
+            res.json({name: "indirizzo", message: "Indirizzo has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].indirizzo != indirizzo) {
+                res.json({name: "indirizzo", message: "Indirizzo not found!"});
+                return;
+            }
+        }
+
+        if (!provincia) {
+            res.json({name: "provincia", message: "Provincia can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provincia)) || provincia.length <= 1) {
+            res.json({name: "provincia", message: "Provincia has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].provincia != provincia) {
+                res.json({name: "provincia", message: "Provincia not found!"});
+                return;
+            }
+        }
+
+        if (!comune) {
+            res.json({name: "comune", message: "Comune can not be empty!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comune)) || comune.length <= 1) {
+            res.json({name: "comune", message: "Comune has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].citta != comune) {
+                res.json({name: "comune", message: "Comune not found!"});
+                return;
+            }
+        }
+
+        if (!cap) {
+            res.json({name: "cap", message: "Cap can not be empty!"});
+            return;
+        } else if (!(/^\d{5}$/.test(cap))) {
+            res.json({name: "cap", message: "Cap has invalid sintax!"});
+            return;
+        } else {
+            if (docs[0].cap != cap) {
+                res.json({name: "cap", message: "Cap not found!"});
+                return;
+            }
+        }
+
+        if (telefono.length != 0) {
+            if (!(/^[0-9\-\+]{9,15}$/.test(telefono)) || telefono.length < 10 || telefono.length > 15) {
+                res.json({name: "telefono", message: "Telefono has invalid sintax!"});
+                return;
+            } else {
+                if (docs[0].telefono != telefono) {
+                    res.json({name: "telefono", message: "Telefono not found!"});
+                    return;
+                }
+            }
+        }
+
+        //calcolo data di scadenza
+        //uguale alla data attuale + 1 anno
+        let date = new Date();
+        date.setDate(date.getDate() + 365);
+        let tesserinoID = docs[0].tesserino;
+
+        Tesserino_Model.findByIdAndUpdate(tesserinoID, {dataScadenza: date}, function (err, docs) {
+            if (err) throw err;
+            res.json(true);
+            return;
+        })
+
     });
-  };
+};
 
 // Get info tesserino
 /*
@@ -625,43 +563,41 @@ exports.create = (req, res) => {
   Nel caso di messaggi di errore, l'oggetto inviato sarà {message:"messaggio"}
   Quindi se response.hasOwnProperty("message") is true allora non è l'oggetto tesserino
 */
-  exports.getInfoTesserino = (req, res) => {
-    
+exports.getInfoTesserino = (req, res) => {
+
     const ruolo = req.body.ruolo;
     const email = req.body.email;
-    
 
-    if(ruolo != "cliente")
-    {
-      res.json({ message: "Only customers can access this page!" });
-      return;
-    }
-  
-    Cliente_Model.find({email:email}, function (err, docs) {
-      if (err) throw err;
-      let tesserinoID = docs[0].tesserino; //sarà una stringa, non un ObjectID
-      if(tesserinoID==null)
-      {
-        res.json({ message: "You don't have a Tesserino!" });
+
+    if (ruolo != "cliente") {
+        res.json({message: "Only customers can access this page!"});
         return;
-      }
+    }
 
-      Tesserino_Model.findById(tesserinoID).then(
-        function (data) {
-          let foundTesserino = {
-            ...data._doc
-          }
-          foundTesserino.dataScadenza = data.dataScadenza.toISOString().substring(0, 10)
-          res.json(foundTesserino);
-          return;
-        },
-        function (err) {
-          res.json(err);
+    Cliente_Model.find({email: email}, function (err, docs) {
+        if (err) throw err;
+        let tesserinoID = docs[0].tesserino; //sarà una stringa, non un ObjectID
+        if (tesserinoID == null) {
+            res.json({message: "You don't have a Tesserino!"});
+            return;
         }
-      )
+
+        Tesserino_Model.findById(tesserinoID).then(
+            function (data) {
+                let foundTesserino = {
+                    ...data._doc
+                }
+                foundTesserino.dataScadenza = data.dataScadenza.toISOString().substring(0, 10)
+                res.json(foundTesserino);
+                return;
+            },
+            function (err) {
+                res.json(err);
+            }
+        )
     });
-  };
-  
+};
+
 // Ricarica tesserino
 /*
   se il cliente non è loggato l'operazione viene vietata
@@ -674,144 +610,140 @@ exports.create = (req, res) => {
   altrimenti {message:"Stringa di errore"}
 */
 exports.ricaricaTesserino = (req, res) => {
-  
-  const ruolo = req.body.ruolo;
-  const email = req.body.email;
-  
 
-  if(ruolo != "cliente")
-  {
-    res.json({ message: "Only customers can access this page!" });
-    return;
-  }
+    const ruolo = req.body.ruolo;
+    const email = req.body.email;
 
-  Cliente_Model.find({email:email}, function (err, docs) {
-    if (err) throw err;
-    let tesserinoID = docs[0].tesserino; //sarà una stringa, non un ObjectID
-    if(tesserinoID==null)
-    {
-      res.json({ message: "You don't have a Tesserino!" });
-      return;
+
+    if (ruolo != "cliente") {
+        res.json({message: "Only customers can access this page!"});
+        return;
     }
 
-    Tesserino_Model.findById(tesserinoID).then(
-      function (data) {
-        let dataScadenza = data.dataScadenza;
-        let dataAttuale = new Date();
-        let saldo = parseFloat(data.saldo);
-
-        if(dataAttuale>dataScadenza) {
-          res.json({ message: "Your tesserino is expired!"});
-          return;
-        }
-
-        //validate request if tesserino is not expired
-        let intestatario = req.body.intestatario;
-        let tipoCarta = req.body.tipoCarta;
-        let numeroCarta = req.body.numeroCarta;
-        let dataScadenzaCarta = req.body.dataScadenzaCarta;
-        let cvv = req.body.cvv;
-        let importo = req.body.importo;
-
-        if(!intestatario) {
-          res.json({ name:"intestatario", message : "Intestatario can not be empty"});
-          return;
-        }
-
-        if(!tipoCarta) {
-          res.json({name:"tipoCarta", message : "Tipo carta can not be empty"});
-          return;
-        }
-
-        if(!numeroCarta) {
-          res.json({ name:"numeroCarta", message : "Numero carta can not be empty"});
-          return;
-        }
-
-        if(!dataScadenzaCarta) {
-          res.json({name:"dataScadenzaCarta", message : "Data scadenza carta can not be empty"});
-          return;
-        }
-
-        if(!cvv) {
-          res.json({name:"cvv", message : "Cvv can not be empty"});
-          return;
-        }
-
-        if(!importo) {
-          res.json({name:"importo", message : "Importo can not be empty"});
-          return;
-        }
-
-        if (intestatario.length != 0) {
-          if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(intestatario)) || intestatario.length <= 1) {
-            res.json({name:"intestatario", message: "Intestatario has invalid syntax!"});
+    Cliente_Model.find({email: email}, function (err, docs) {
+        if (err) throw err;
+        let tesserinoID = docs[0].tesserino; //sarà una stringa, non un ObjectID
+        if (tesserinoID == null) {
+            res.json({message: "You don't have a Tesserino!"});
             return;
-          }
         }
-        
-        if(tipoCarta == "Mastercard") {
-          if (numeroCarta.length != 0) {
-            if (!(/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)[0-9]{0,}$/.test(numeroCarta)) || numeroCarta.length <= 12 || numeroCarta.length > 16) {
-              res.json({name:"numeroCarta", message: "Numero carta has invalid syntax!"});
-              return;
+
+        Tesserino_Model.findById(tesserinoID).then(
+            function (data) {
+                let dataScadenza = data.dataScadenza;
+                let dataAttuale = new Date();
+                let saldo = parseFloat(data.saldo);
+
+                if (dataAttuale > dataScadenza) {
+                    res.json({message: "Your tesserino is expired!"});
+                    return;
+                }
+
+                //validate request if tesserino is not expired
+                let intestatario = req.body.intestatario;
+                let tipoCarta = req.body.tipoCarta;
+                let numeroCarta = req.body.numeroCarta;
+                let dataScadenzaCarta = req.body.dataScadenzaCarta;
+                let cvv = req.body.cvv;
+                let importo = req.body.importo;
+
+                if (!intestatario) {
+                    res.json({name: "intestatario", message: "Intestatario can not be empty"});
+                    return;
+                }
+
+                if (!tipoCarta) {
+                    res.json({name: "tipoCarta", message: "Tipo carta can not be empty"});
+                    return;
+                }
+
+                if (!numeroCarta) {
+                    res.json({name: "numeroCarta", message: "Numero carta can not be empty"});
+                    return;
+                }
+
+                if (!dataScadenzaCarta) {
+                    res.json({name: "dataScadenzaCarta", message: "Data scadenza carta can not be empty"});
+                    return;
+                }
+
+                if (!cvv) {
+                    res.json({name: "cvv", message: "Cvv can not be empty"});
+                    return;
+                }
+
+                if (!importo) {
+                    res.json({name: "importo", message: "Importo can not be empty"});
+                    return;
+                }
+
+                if (intestatario.length != 0) {
+                    if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(intestatario)) || intestatario.length <= 1) {
+                        res.json({name: "intestatario", message: "Intestatario has invalid syntax!"});
+                        return;
+                    }
+                }
+
+                if (tipoCarta == "Mastercard") {
+                    if (numeroCarta.length != 0) {
+                        if (!(/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)[0-9]{0,}$/.test(numeroCarta)) || numeroCarta.length <= 12 || numeroCarta.length > 16) {
+                            res.json({name: "numeroCarta", message: "Numero carta has invalid syntax!"});
+                            return;
+                        }
+                    }
+                } else if (tipoCarta == "Visa") {
+                    if (numeroCarta.length != 0) {
+                        if (!(/^4[0-9]{6,}$/.test(numeroCarta)) || numeroCarta.length <= 12 || numeroCarta.length > 16) {
+                            res.json({name: "numeroCarta", message: "Numero carta has invalid syntax!"});
+                            return;
+                        }
+                    }
+                } else {
+                    //è AmericanExpress
+                    if (numeroCarta.length != 0) {
+                        if (!(/^3[47][0-9]{5,}$/.test(numeroCarta)) || numeroCarta.length <= 12 || numeroCarta.length > 16) {
+                            res.json({name: "numeroCarta", message: "Numero carta has invalid syntax!"});
+                            return;
+                        }
+                    }
+                }
+
+                if (dataScadenzaCarta.length != 0) {
+                    if (!(/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/.test(dataScadenzaCarta)) || (dataScadenzaCarta.length != 5 && dataScadenzaCarta.length != 7)) {
+                        res.json({name: "dataScadenzaCarta", message: "Data scadenza carta has invalid syntax!"});
+                        return;
+                        //mm/gg sintassi
+                    }
+                }
+
+                if (cvv.length != 0) {
+                    if (!(/^[0-9]{3,4}$/.test(cvv)) || (cvv.length != 3 && cvv.length != 4)) {
+                        res.json({name: "cvv", message: "Cvv has invalid syntax!"});
+                        return;
+                    }
+                }
+
+                if (importo.length != 0) {
+                    if (!(/(^\d{1,3})(\,\d{1,2})?$/.test(importo)) || importo.length > 6) {
+                        res.json({name: "importo", message: "Importo has invalid syntax!"});
+                        return;
+                    }
+                }
+
+                //aggiorno saldo
+                importo = parseFloat(importo);
+                Tesserino_Model.findByIdAndUpdate(tesserinoID, {saldo: saldo + importo}, function (err, docs) {
+                    if (err) throw err;
+                    res.json({message: true});
+                    return;
+
+                });
+
+            },
+            function (err) {
+                res.json(err);
             }
-          }
-        }
-        else if(tipoCarta == "Visa") {
-          if (numeroCarta.length != 0) {
-            if (!(/^4[0-9]{6,}$/.test(numeroCarta)) || numeroCarta.length <= 12 || numeroCarta.length > 16) {
-              res.json({name:"numeroCarta", message: "Numero carta has invalid syntax!"});
-              return;
-            }
-          }
-        }
-        else {
-          //è AmericanExpress
-          if (numeroCarta.length != 0) {
-            if (!(/^3[47][0-9]{5,}$/.test(numeroCarta)) || numeroCarta.length <= 12 || numeroCarta.length > 16) {
-              res.json({name:"numeroCarta", message: "Numero carta has invalid syntax!"});
-              return;
-            }
-          }
-        }
-    
-        if (dataScadenzaCarta.length != 0) {
-          if (!(/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/.test(dataScadenzaCarta)) || (dataScadenzaCarta.length != 5 && dataScadenzaCarta.length != 7) ) {
-            res.json({ name:"dataScadenzaCarta", message: "Data scadenza carta has invalid syntax!"});
-            return;
-            //mm/gg sintassi
-          }
-        }
-        
-        if (cvv.length != 0) {
-          if (!(/^[0-9]{3,4}$/.test(cvv)) || (cvv.length != 3 && cvv.length != 4) ) {
-            res.json({name:"cvv", message: "Cvv has invalid syntax!"});
-            return;
-          }
-        }
-    
-        if (importo.length != 0) {
-          if (!(/(^\d{1,3})(\,\d{1,2})?$/.test(importo)) || importo.length > 6) {
-            res.json({ name:"importo", message: "Importo has invalid syntax!"});
-            return;
-          }
-        }
-
-        //aggiorno saldo
-        importo = parseFloat(importo);
-        Tesserino_Model.findByIdAndUpdate(tesserinoID, { saldo: saldo+importo }, function (err, docs) {
-          if (err) throw err;
-          res.json({ message: true});
-          return;
-          
-        });
-        
-      },
-      function (err) {
-        res.json(err);
-      }
-    )
-  });
+        )
+    });
 
 };

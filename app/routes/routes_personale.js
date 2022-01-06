@@ -3,14 +3,14 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Create a new Tutorial
+    // Aggiungi un nuovo personale(operatore mensa o personale ADISU)
     router.post("/insert", personale.insert);
 
-    // Retrieve all Tutorials
+    // Prendi tutta la lista di Personali(operatori mensa o personali ADISU)
     router.get("/viewLista", personale.findByRuolo);
 
-    // Remove a new Personale
-    router.post("/remove",personale.findByEmailAndRemove);
+    // Rimuovi un Personale(operatore mensa o personale ADISU)
+    router.post("/remove", personale.findByEmailAndRemove);
 
     //Get personale
     //router.post("/getInfo",personale.findByEmail);

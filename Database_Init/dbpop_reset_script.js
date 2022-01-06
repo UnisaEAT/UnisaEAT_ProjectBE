@@ -7,23 +7,23 @@ const url = 'mongodb://localhost:27017/UnisaEAT_db'
 const dbName = 'UnisaEAT_db'
 
 var del = dropDb()
-del.then(function(result) {
+del.then(function (result) {
     process.exit()
 })
 
 function dropDb() {
-    return new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
         MongoClient.connect(url, {
             useNewUrlParser: true,
             useUnifiedTopology: true
-        }, function(err, db) {
+        }, function (err, db) {
             if (err) reject(err)
             console.log('Connected successfully to server!')
             var dbo = db.db(dbName)
 
-            dbo.dropDatabase(function (err, result){
-                if(err) throw err;
-                console.log("Risultato = "+result);
+            dbo.dropDatabase(function (err, result) {
+                if (err) throw err;
+                console.log("Risultato = " + result);
                 db.close();
                 resolve();
             })

@@ -5,7 +5,7 @@ const Admin_Model = db.model_admin;
 exports.create = (req, res) => {
     // Validate request
     if (!req.body.nome) {
-        res.status(400).send({ message: "Content can not be empty!" });
+        res.status(400).send({message: "Content can not be empty!"});
         return;
     }
 
