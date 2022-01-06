@@ -27,7 +27,7 @@ exports.insert = (req, res) => {
         indirizzo: req.body.indirizzo
     });
 
-    var tipo = "admin"
+    var tipo = req.body.ruolo
 
 
     if (tipo == "admin") {
@@ -163,7 +163,7 @@ exports.insert = (req, res) => {
 exports.findByRuolo = (req, res) => {
 
     //variabile di prova da cancellare
-    var tipo = "personale adisu"
+    var tipo = req.body.ruolo;
 
     if (tipo == "admin") {
         tipo = "personale adisu"

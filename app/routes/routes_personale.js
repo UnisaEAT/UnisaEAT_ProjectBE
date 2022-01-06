@@ -7,7 +7,7 @@ module.exports = app => {
     router.post("/insert", personale.insert);
 
     // Prendi tutta la lista di Personali(operatori mensa o personali ADISU)
-    router.get("/viewLista", personale.findByRuolo);
+    router.post("/viewLista", personale.findByRuolo);
 
     // Rimuovi un Personale(operatore mensa o personale ADISU)
     router.post("/remove", personale.findByEmailAndRemove);
