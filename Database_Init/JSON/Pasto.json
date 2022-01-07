@@ -1,0 +1,91 @@
+[{
+  "_id": {
+    "$oid": "61cdca255b90e73e88bf13e3"
+  },
+  "nome": "Pasta al pomodoro",
+  "descrizione": "Un primo piatto della cucina italiana, formato da pasta condita con salsa di pomodoro e foglie di basilico.",
+  "categoria": "primo",
+  "ingredienti": "pasta, olio extravergine d'oliva, basilico, pomodori pelati, aglio, sale fino.",
+  "numeroOrdinazioni": 0
+},{
+  "_id": {
+    "$oid": "61cdca255b90e73e88bf13e4"
+  },
+  "nome": "Spaghetti alla carbonara",
+  "descrizione": "La pasta alla carbonara è un piatto caratteristico del Lazio, e più in particolare di Roma, preparato con ingredienti popolari e dal gusto intenso.",
+  "categoria": "primo",
+  "ingredienti": "spaghetti, tuori di uova, pepe nero, guanciale, pecorino romano",
+  "numeroOrdinazioni": 0
+},{
+  "_id": {
+    "$oid": "61cdca255b90e73e88bf13e5"
+  },
+  "nome": "Petto di pollo in padella",
+  "descrizione": "Il petto di pollo è uno dei tagli di carne più amati soprattutto grazie alla sua versatilità.",
+  "categoria": "secondo",
+  "ingredienti": "pollo, olio extravergine d'oliva, sale",
+  "numeroOrdinazioni": 0
+},{
+  "_id": {
+    "$oid": "61cdca255b90e73e88bf13e6"
+  },
+  "nome": "Petto di tacchino in padella",
+  "descrizione": "Petto di tacchino in padella, un secondo piatto facilissimo e veloce da preparare",
+  "categoria": "secondo",
+  "ingredienti": "tacchino, olio extravergine d'oliva, sale",
+  "numeroOrdinazioni": 0
+},{
+  "_id": {
+    "$oid": "61cdca255b90e73e88bf13e7"
+  },
+  "nome": "Puré di patate",
+  "descrizione": "Il puré di patate è un cibo cotto cremoso, preparato con patate, latte e burro.",
+  "categoria": "contorno",
+  "ingredienti": "patate, latte, burro, parmigiano reggiano DOP, sale, noce moscata",
+  "numeroOrdinazioni": 0
+},{
+  "_id": {
+    "$oid": "61cdca255b90e73e88bf13e8"
+  },
+  "nome": "Sformato di verdure",
+  "descrizione": "Lo sformato di verdure è un piatto semplice e sfizioso da preparare, con tante verdure e formaggio che si trasformano in un piatto golosissimo!",
+  "categoria": "contorno",
+  "ingredienti": "melanzane, zucchine, peperoni, parmigiano reggiano DOP, sale, olio extravergine d'oliva, pepe",
+  "numeroOrdinazioni": 0
+},{
+  "_id": {
+    "$oid": "61cdca255b90e73e88bf13e9"
+  },
+  "nome": "Torta alla frutta",
+  "descrizione": "Una gustosa torta alla frutta!",
+  "categoria": "extra",
+  "ingredienti": "pasta sfoglia, zucchero, ricotta, uova, panna montata, frutti di bosco",
+  "numeroOrdinazioni": 0
+},{
+  "_id": {
+    "$oid": "61cdca255b90e73e88bf13ea"
+  },
+  "nome": "Ciambelle fritte",
+  "descrizione": "Ciambelle fritte con lo zucchero morbidissime, un dolce lievitato di una bontà unica.",
+  "categoria": "extra",
+  "ingredienti": "farina, latte, burro, uova, zucchero",
+  "numeroOrdinazioni": 0
+},{
+  "_id": {
+    "$oid": "61d4163d21841bf44b0f4296"
+  },
+  "nome": "Banana",
+  "descrizione": "Bacche della pianta del banano.",
+  "categoria": "frutta",
+  "ingredienti": "",
+  "numeroOrdinazioni": 0
+},{
+  "_id": {
+    "$oid": "61d4177121841bf44b0f4297"
+  },
+  "nome": "Pera",
+  "descrizione": "Ricca di zuccheri semplici, specialmente fruttosio.",
+  "categoria": "frutta",
+  "ingredienti": "",
+  "numeroOrdinazioni": 0
+}]

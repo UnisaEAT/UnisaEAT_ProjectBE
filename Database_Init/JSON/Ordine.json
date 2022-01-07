@@ -1,0 +1,56 @@
+[{
+    "_id": {
+      "$oid": "61d6fbf22152a0d7aa376c1d"
+    },
+    "prezzo": 3,
+    "dataOrdine": {
+      "$date": "2022-01-07T00:00:00Z"
+    },
+    "boolPranzo": true,
+    "acquirente": {
+      "$oid": "61d430b10e0e48ca8230212e"
+    },
+    "listaPasti": [
+      {
+        "$oid": "61cdca255b90e73e88bf13e3"
+      },
+      {
+        "$oid": "61cdca255b90e73e88bf13e5"
+      },
+      {
+        "$oid": "61cdca255b90e73e88bf13e7"
+      },
+      {
+        "$oid": "61d4163d21841bf44b0f4296"
+      }
+    ]
+  },{
+    "_id": {
+      "$oid": "61d6fe712152a0d7aa376c23"
+    },
+    "prezzo": 4,
+    "dataOrdine": {
+      "$date": "2022-01-07T00:00:00Z"
+    },
+    "boolPranzo": false,
+    "acquirente": {
+      "$oid": "61d430b10e0e48ca8230212e"
+    },
+    "listaPasti": [
+      {
+        "$oid": "61cdca255b90e73e88bf13e4"
+      },
+      {
+        "$oid": "61cdca255b90e73e88bf13e6"
+      },
+      {
+        "$oid": "61cdca255b90e73e88bf13e8"
+      },
+      {
+        "$oid": "61d4177121841bf44b0f4297"
+      },
+      {
+        "$oid": "61cdca255b90e73e88bf13ea"
+      }
+    ]
+  }]
