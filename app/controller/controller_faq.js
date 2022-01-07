@@ -6,11 +6,11 @@ const Faq_Model = db.model_faq; //FARE IL MODEL DI FAQ
 exports.insertFAQ = (req, res) => {
   // Validate request
   if (!req.body.domanda) {
-    res.json({ name:"domanda", message: "Content can not be empty!" });
+    res.json({ name:"domanda", message: "La domanda non può essere vuota!" });
     return;
   }
   if (!req.body.risposta) {
-    res.json({ name:"risposta", message: "Content can not be empty!" });
+    res.json({ name:"risposta", message: "La risposta non può essere vuota!" });
     return;
   }
 	let domanda= req.body.domanda
@@ -18,8 +18,8 @@ exports.insertFAQ = (req, res) => {
 
 // Create Faq
   const faq= new Faq_Model({
-domanda: req.body.domanda,
-risposta: req.body.risposta
+    domanda: req.body.domanda,
+    risposta: req.body.risposta
   });
   
  //^[A-Z0-9][\w\W]{18,198}\.$ VEDERE STELLINE    Lunghezza < 20 || Lunghezza >200  [errore] (Secondo me non è giusto e basta 0)
@@ -30,7 +30,7 @@ risposta: req.body.risposta
   return;}
    if (domanda.length != 0) {
     if (!(/^[A-Z0-9][\w\W]{15,198}\?$/.test(domanda)) || domanda.length <= 17 || domanda.length > 200) {
-      res.json({ name:"domanda", message: "Espressione regolare non rispettata - domanda" });
+      res.json({ name:"domanda", message: "Espressione regolare non rispettata" });
       return;}
     }
 
@@ -40,7 +40,7 @@ risposta: req.body.risposta
     return;}
     if (risposta.length != 0) {
       if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(risposta)) || risposta.length <= 17 || risposta.length > 200) {
-        res.json({name:"risposta", message: "Espressione regolare non rispettata - risposta" });
+        res.json({name:"risposta", message: "Espressione regolare non rispettata" });
         return;}
       }
 
@@ -50,13 +50,13 @@ risposta: req.body.risposta
   Faq_Model.find({domanda : domanda},function (err,docs){
     if (docs==0){
       faq.save(faq)
-.then(data => {
-  res.json({message: true});
-})
-.catch(err => {
-  res.json({message: err.message || "Some error occurred while retriving faq."
-  });
-});
+    .then(data => {
+      res.json({message: true});
+    })
+    .catch(err => {
+      res.json({message: err.message || "Some error occurred while retriving faq."
+      });
+    });
 }
       
     else{
@@ -73,7 +73,7 @@ risposta: req.body.risposta
 //RIMUOVERE DATA UN EMAIL - utilizziamo la domanda(?)
 exports.deleteFAQ = (req, res) => {
   var domanda = req.body.domanda;
-  Faq_Model.findOneAndDelete({domanda:domanda}) //vedere con alex come passare l'email in questo campo
+  Faq_Model.findOneAndDelete({domanda:domanda}) 
   .then(data => {
     if(data==null){
     res.json({message: false})}
@@ -89,7 +89,7 @@ exports.deleteFAQ = (req, res) => {
 // Metodo per prendere le info - Visualizzazione?
 exports.selectFAQ = (req, res) => {
 var domanda = req.body.domanda;
-  Faq_Model.find({domanda : domanda}) //vedere con alex come passare l'email in questo campo 
+  Faq_Model.find({domanda : domanda}) 
     .then(data => {
       if(data==null){
       res.json({message:false})}
