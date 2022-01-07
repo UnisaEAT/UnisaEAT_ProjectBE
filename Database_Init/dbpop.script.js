@@ -1,5 +1,6 @@
 var MongoClient = require('mongodb').MongoClient
 var hash = require('../app/controller/hash')
+var ObjectId = require('mongodb').ObjectID;
 
 // Database URL
 const url = 'mongodb://localhost:27017/UnisaEAT_db'
@@ -25,41 +26,67 @@ function insert() {
             const fs = require('fs')
             const clienteData = fs.readFileSync(__dirname + '\\JSON\\Cliente.json')
             const personaledata = fs.readFileSync(__dirname + '\\JSON\\Personale.json')
-            const admindata = fs.readFileSync(__dirname + '\\JSON\\Admin.json')
+            const adminData = fs.readFileSync(__dirname + '\\JSON\\Admin.json')
+            const menuData = fs.readFileSync(__dirname + '\\JSON\\Menu.json')
 
             const client = JSON.parse(clienteData)
             const personale = JSON.parse(personaledata)
-            const admin = JSON.parse(admindata)
+            const admin = JSON.parse(adminData)
+            const menu = JSON.parse(menuData)
 
+           
 
             for (var i = 0; client[i] != null; i++) {
+
+                if(client[i].hasOwnProperty("_id")){
+                    client[i]._id = new ObjectId(client[i]._id.$oid)
+                }
+
+                if(client[i].tesserino!=null){
+                    client[i].tesserino = new ObjectId(client[i].tesserino.$oid)
+                }
+
                 client[i].password = hash.hashPassword(client[i].password)
             }
 
             for (var j = 0; personale[j] != null; j++) {
                 personale[j].password = hash.hashPassword(personale[j].password)
             }
+
             for (var k = 0; admin[k] != null; k++) {
                 admin[k].password = hash.hashPassword(admin[k].password)
             }
 
+            for(var i = 0; menu[i] != null; i++) {
+                menu[i]._id = new ObjectId(menu[i]._id.$oid)
+                menu[i].data = new Date(menu[i].data.$date)
+                //modificare id pasti
+            }
+
+            
+
+            
 
             dbo.collection('cliente').insertMany(client, function (err, result) {
                 if (err) throw err
-                console.log('abbiamo inserito  ' + result.insertedCount + ' clienti')
+                console.log('abbiamo inserito ' + result.insertedCount + ' clienti')
 
 
                 dbo.collection('personale').insertMany(personale, function (err, result) {
                     if (err) throw err
-                    console.log('abbiamo inserito  ' + result.insertedCount + 'che rigiuardano il personale')
+                    console.log('abbiamo inserito ' + result.insertedCount + ' membri del personale')
 
                     dbo.collection('admin').insertMany(admin, function (err, result) {
                         if (err) throw err
-                        console.log('abbiamo inserito  ' + result.insertedCount + 'admin')
+                        console.log('abbiamo inserito ' + result.insertedCount + ' admin')
 
-                        if (err) throw err
-                        console.log('Succesfully created the collection UnisaEAT_db.')
-                        resolve()
+                        dbo.collection('menu').insertMany(menu, function (err, result) {
+                            if (err) throw err
+                            console.log('abbiamo inserito ' + result.insertedCount + ' menu')
+                            console.log('Succesfully created the collection UnisaEAT_db.')
+                            resolve()
+                        })
+                        
                     })
                 })
             })
