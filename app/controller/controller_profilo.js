@@ -60,8 +60,8 @@ exports.findByEmail = (req, res) => {
 
 exports.updatePassword = function (req, res) {
 
-    var tipo= req.body.ruolo
     var mail = req.body.email
+    console.log("EMAIL "+mail)
     var oldPassword = req.body.inputOldPassword
     var password = req.body.inputPassword
     var passwordConfirm = req.body.inputConfirmPassword
