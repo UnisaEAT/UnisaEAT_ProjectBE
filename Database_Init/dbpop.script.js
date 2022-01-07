@@ -23,11 +23,11 @@ function insert() {
             var dbo = db.db(dbName)
 
             const fs = require('fs')
-            const Clientedata = fs.readFileSync(__dirname + '\\JSON\\Cliente.json')
+            const clienteData = fs.readFileSync(__dirname + '\\JSON\\Cliente.json')
             const personaledata = fs.readFileSync(__dirname + '\\JSON\\Personale.json')
             const admindata = fs.readFileSync(__dirname + '\\JSON\\Admin.json')
 
-            const client = JSON.parse(Clientedata)
+            const client = JSON.parse(clienteData)
             const personale = JSON.parse(personaledata)
             const admin = JSON.parse(admindata)
 
