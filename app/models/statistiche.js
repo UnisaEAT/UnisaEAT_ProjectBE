@@ -2,12 +2,9 @@ module.exports = mongoose => {
     //Schema Statistiche
     var schema = mongoose.Schema(
         {
-            titolo: String,
-            descrizione: String,
             dataInizio: Date,
             dataFine: Date,
-            pastiPiuOrdinati: Array,
-            pastiMenoOrdinati: Array
+            pastiEOrdinazioni: Array,
         }
     );
 

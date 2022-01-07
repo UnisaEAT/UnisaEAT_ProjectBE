@@ -4,6 +4,10 @@ const cors = require("cors");
 
 const app = express();
 
+/*var corsOptions = {
+    origin: "http://localhost:3000"
+};*/
+
 app.use(cors(/*corsOptions*/));
 
 
@@ -55,11 +59,27 @@ require("./app/routes/routes_tesserino")(app);
 //require("./app/routes/routes_pasto")(app);
 //require("./app/routes/routes_faq")(app);
 //require("./app/routes/routes_ticket")(app);
-//require("./app/routes/routes_statistiche")(app);
+require("./app/routes/routes_statistiche")(app);
 require("./app/routes/routes_login")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
+    /*
+    //CODICE PROVA CALCOLO STATISTICHE, NON CANCELLARE
+    const statistiche = require("./app/controller/controller_statistiche")
+    statistiche.calcoloStatistiche().then(
+        function (value) {
+        console.log(value)
+        }
+    )
+    */
+   
+    /*
+    CODICE FUNZIONAMENTO REALE, NON CANCELLARE
+    const statistiche = require("./app/controller/controller_statistiche")
+    //calcolo delle statistiche ogni settimana (1000 millisecondi sono 1 secondo; 604800 secondi sono una settimana)
+    setInterval(statistiche.calcoloStatistiche, 1000 * 604800) 
+    */
 });

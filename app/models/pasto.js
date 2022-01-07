@@ -4,8 +4,6 @@ module.exports = mongoose => {
         {
             nome: String,
             descrizione: String,
-            disponibilita: Number,
-            immagine: Object,
             categoria: String,
             ingredienti: String,
             numeroOrdinazioni: Number
