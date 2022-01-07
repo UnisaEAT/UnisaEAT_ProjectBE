@@ -88,8 +88,8 @@ exports.deleteFAQ = (req, res) => {
 
 // Metodo per prendere le info - Visualizzazione?
 exports.selectFAQ = (req, res) => {
-var domanda = req.body.domanda;
-  Faq_Model.find({domanda : domanda}) 
+
+  Faq_Model.find({}) 
     .then(data => {
       if(data==null){
       res.json({message:false})}
