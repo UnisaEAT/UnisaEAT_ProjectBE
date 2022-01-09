@@ -110,6 +110,26 @@ exports.updateFAQ = (req, res) => {
 var domanda = req.body.domanda;
 var newdomanda= req.body.newdomanda;
 var newrisposta=req.body.newrisposta;
+
+//validazione domanda
+if (!newdomanda) {
+  res.json({ name:"domanda", message: "Domanda non può essere vuoto" });
+  return;}
+   if (newdomanda.length != 0) {
+    if (!(/^[A-Z0-9][\w\W]{15,198}\?$/.test(newdomanda)) || newdomanda.length <= 17 || newdomanda.length > 200) {
+      res.json({ name:"domanda", message: "Espressione regolare non rispettata" });
+      return;}
+    }
+
+  //validazione risposta
+   if (!newrisposta) {
+    res.json({ name:"risposta", message: "Risposta non può essere vuoto" });
+    return;}
+    if (newrisposta.length != 0) {
+      if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(newrisposta)) || newrisposta.length <= 17 || newrisposta.length > 200) {
+        res.json({name:"risposta", message: "Espressione regolare non rispettata" });
+        return;}
+      }
 //Cerco domanda e cambio risposta, cerco risposta e cambio domanda?
   Faq_Model.findOneAndUpdate({domanda : domanda}, {domanda: newdomanda, risposta: newrisposta}) //vedere con alex come passare l'email in questo campo 
     .then(
