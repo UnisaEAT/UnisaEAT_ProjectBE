@@ -198,7 +198,11 @@ exports.getOrdiniByCliente = (req, res) => {
         if (err) throw err;
 
         //sostituisco gli id dei pasti con gli oggetti pasti veri e propri
-        cloneDocs.forEach(element => {
+        cloneDocs.forEach((element, index, array) => {
+          let date = new Date(array[index].dataOrdine);
+          let dataToString = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
+          array[index].dataOrdine = dataToString
+          
           element.listaPasti.forEach((el, index, arr) => {
           let result = docs.find(function (pasto) {return pasto._id == el})
           arr[index] = JSON.parse(JSON.stringify(result))
