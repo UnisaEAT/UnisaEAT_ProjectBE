@@ -13,8 +13,21 @@ exports.create = (req, res) => {
 
     if (sender && receiver) {
         
+        const conversazione = new Conversazione_Model({
+            membri: [sender, receiver]
+        })
+
+        conversazione.save(conversazione).then(data => {
+            res.json(true);
+        })
+        .catch(err => {
+            res.json({error:"Some error occurred while retriving personale."});
+        });
+
         // trovo l'id delle mail di sender e receiver
-        if(sender.ruolo == "cliente"){
+        //IN QUESTO CODICE VIENE SALVATO L'ID DEGLI UTENTI DELLA CONVERSAZIONE
+        //poiché in sessione lato fe viene salvata la mail, per semplicità è meglio conservare le mail
+        /*if(sender.ruolo == "cliente"){
             Cliente_Model.find({email:sender.email}, function(err, docs) {
                 if (err) throw err;
                 let senderObj = {id: docs[0]._id, ruolo:"cliente"};
@@ -61,9 +74,27 @@ exports.create = (req, res) => {
                 })
 
             })
-        }
+        }*/
+
     }
     else {
         return res.json({error:"Sender o Receiver vuoti"})
     }
 }
+
+//restituisce tutte le conversazioni di un utente
+//l'fe passa la chat 
+exports.getConversazioni = (req, res) => {
+
+    const user = req.body.user;
+
+    if(!user) {
+        return res.json({"error":"Nessun utente loggato"});
+    }
+
+    Conversazione_Model.find({'membri': {$in:[user]}}, function (err, docs) {
+        if (err) throw err;
+        res.json(docs);
+    })
+}
+
