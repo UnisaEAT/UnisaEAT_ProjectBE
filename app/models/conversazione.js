@@ -1,12 +1,10 @@
 var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
-    //Schema Messaggio
+    //Schema Conversazione
+    //membri sarà un Array di due oggetti: uno cliente e l'altro personale (id e ruolo)
     var schema = mongoose.Schema(
         {
-            conversazioneId: ObjectId,
-            senderId: ObjectId,
-            testo: String,
-            dataInvio: Date
+            membri: Array
         }
     );
 
@@ -16,6 +14,6 @@ module.exports = mongoose => {
         return object;
     });
 
-    const Messaggio = mongoose.model("messaggio", schema, "messaggio");
-    return Messaggio;
+    const Conversazione = mongoose.model("conversazione", schema, "conversazione");
+    return Conversazione;
 };
