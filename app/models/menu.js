@@ -2,8 +2,9 @@ module.exports = mongoose => {
     //Schema Menu
     var schema = mongoose.Schema(
         {
-            nome: String,
-            pasti: Array
+            pasti: Array,
+            tipo: String,
+            data: Date
         }
     );
 

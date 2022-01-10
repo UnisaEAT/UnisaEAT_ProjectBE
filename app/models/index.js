@@ -16,6 +16,7 @@ db.model_notifica = require("./notifica.js")(mongoose);
 db.model_tesserino = require("./tesserino.js")(mongoose);
 db.model_statistiche = require("./statistiche.js")(mongoose);
 db.model_pasto = require("./pasto.js")(mongoose);
-
+db.model_ordine = require("./ordine.js")(mongoose);
+db.model_menu = require("./menu.js")(mongoose);
 
 module.exports = db;

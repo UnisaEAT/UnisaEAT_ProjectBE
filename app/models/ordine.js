@@ -6,10 +6,8 @@ module.exports = mongoose => {
             prezzo: Number,
             dataOrdine: Date,
             boolPranzo: Boolean,
-            stato: String,
             listaPasti: Array,
-            qr: Object,
-            acquirenteID: ObjectId
+            acquirente: ObjectId
         }
     );
 
