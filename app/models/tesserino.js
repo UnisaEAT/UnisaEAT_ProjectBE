@@ -1,10 +1,9 @@
 module.exports = mongoose => {
-    //Schema Menu
+    //Schema Tesserino
     var schema = mongoose.Schema(
         {
-            pasti: Array,
-            tipo: String,
-            data: Date
+            saldo: Number,
+            dataScadenza: Date
         }
     );
 
@@ -14,6 +13,6 @@ module.exports = mongoose => {
         return object;
     });
 
-    const Menu = mongoose.model("menu", schema, "menu");
-    return Menu;
+    const Tesserino = mongoose.model("tesserino", schema, "tesserino");
+    return Tesserino;
 };

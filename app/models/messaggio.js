@@ -1,9 +1,11 @@
+var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
-    //Schema Menu
+    //Schema Messaggio
     var schema = mongoose.Schema(
         {
-            pasti: Array,
-            tipo: String,
+            senderID: ObjectId,
+            receiverID: ObjectId,
+            testo: String,
             data: Date
         }
     );
@@ -14,6 +16,6 @@ module.exports = mongoose => {
         return object;
     });
 
-    const Menu = mongoose.model("menu", schema, "menu");
-    return Menu;
+    const Messaggio = mongoose.model("messaggio", schema, "messaggio");
+    return Messaggio;
 };

@@ -1,10 +1,9 @@
 module.exports = mongoose => {
-    //Schema Menu
+    //Schema FAQ
     var schema = mongoose.Schema(
         {
-            pasti: Array,
-            tipo: String,
-            data: Date
+            domanda: String,
+            risposta: String
         }
     );
 
@@ -14,6 +13,6 @@ module.exports = mongoose => {
         return object;
     });
 
-    const Menu = mongoose.model("menu", schema, "menu");
-    return Menu;
+    const Faq = mongoose.model("faq", schema, "faq");
+    return Faq;
 };
