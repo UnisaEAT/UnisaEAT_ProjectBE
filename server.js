@@ -55,7 +55,7 @@ require("./app/routes/routes_personale")(app);
 //require("./app/routes/routes_notifica")(app);
 require("./app/routes/routes_tesserino")(app);
 require("./app/routes/routes_ordine")(app);
-//srequire("./app/routes/routes_menu")(app);
+require("./app/routes/routes_menu")(app);
 //require("./app/routes/routes_pasto")(app);
 //require("./app/routes/routes_faq")(app);
 //require("./app/routes/routes_ticket")(app);
