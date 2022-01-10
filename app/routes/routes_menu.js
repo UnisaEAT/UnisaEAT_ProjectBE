@@ -13,3 +13,4 @@ module.exports = app => {
 
     app.use('/api/menu', router);
 };
+
