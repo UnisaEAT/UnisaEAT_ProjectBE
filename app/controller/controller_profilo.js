@@ -15,9 +15,9 @@ exports.findByEmail = (req, res) => {
 
 
 //if Personale, Cliente, Admin
-    if (tipo == "personale") {
+    if ((tipo == "personale adisu")||(tipo=="operatore mensa")) {
 //Email andrà modificato una volta implementata la sessione nei Login
-        Personale_Model.findOne({email: mail}) //ID
+        Personale_Model.find({email: mail}) //ID
             .then(data => {
                 res.json(data);
             })
@@ -30,7 +30,7 @@ exports.findByEmail = (req, res) => {
                 });
             });
     }
-    else if (tipo == "cliente") {
+   if (tipo == "cliente") {
         Cliente_Model.find({email: mail}) //ID
             .then(data => {
                 res.json(data);
@@ -43,7 +43,7 @@ exports.findByEmail = (req, res) => {
                 });
             });
     }
-    else if (tipo == "admin") {
+    if (tipo == "admin") {
         Admin_Model.find({email: mail}) //ID
             .then(data => {
                 res.json(data);
