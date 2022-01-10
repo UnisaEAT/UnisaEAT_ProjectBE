@@ -83,7 +83,7 @@ exports.create = (req, res) => {
 }
 
 //restituisce tutte le conversazioni di un utente
-//l'fe passa la chat 
+//l'fe passa l'utente {email, ruolo} di cui vuole ottenere tutte le conversazioni
 exports.getConversazioni = (req, res) => {
 
     const user = req.body.user;
@@ -98,3 +98,18 @@ exports.getConversazioni = (req, res) => {
     })
 }
 
+// restituisce una conversazione tra due utenti
+// l'fe passa gli utenti {email, ruolo} di cui vuole ottenere la conversazione
+exports.getConversazione = (req, res) => {
+    const user1 = req.body.user1;
+    const user2 = req.body.user2;
+
+    if(!user1 && !user2) {
+        return res.json({"error":"Specificare gli utenti di cui si vuole ottenere la conversazione"});
+    }
+
+    Conversazione_Model.find({'membri': {$all :[user1, user2]}}, function (err, docs) {
+        if(err) throw err;
+        res.json(docs);
+    })
+}
