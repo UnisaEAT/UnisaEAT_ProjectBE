@@ -1,7 +1,7 @@
 var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
     //Schema Conversazione
-    //membri sarà un Array di due oggetti: uno cliente e l'altro personale (id e ruolo)
+    //membri sarà un Array di due oggetti: uno cliente e l'altro personale (email e ruolo)
     var schema = mongoose.Schema(
         {
             membri: Array

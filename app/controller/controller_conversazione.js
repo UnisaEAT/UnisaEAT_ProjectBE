@@ -1,8 +1,5 @@
-var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
 const Conversazione_Model = db.model_conversazione;
-const Cliente_Model = db.model_cliente;
-const Personale_Model = db.model_personale;
 
 // crea una nuova conversazione
 // devono essere passati dal fe la mail ed il ruolo di sender e receiver
@@ -18,10 +15,10 @@ exports.create = (req, res) => {
         })
 
         conversazione.save(conversazione).then(data => {
-            res.json(true);
+            return res.json(true);
         })
         .catch(err => {
-            res.json({error:"Some error occurred while retriving personale."});
+            return res.json({error:"Some error occurred while creating conversazione."});
         });
 
         // trovo l'id delle mail di sender e receiver
