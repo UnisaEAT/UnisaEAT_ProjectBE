@@ -12,3 +12,4 @@ module.exports = app => {
     router.post("/ModificaMenu", menu.modificamenu);
     app.use('/api/menu', router);
   };
+  

@@ -21,3 +21,4 @@ module.exports = mongoose => {
     const Pasto = mongoose.model("pasto", schema, "pasto");
     return Pasto;
 };
+
