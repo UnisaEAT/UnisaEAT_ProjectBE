@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "nodejs",
@@ -22,16 +22,8 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "express": "^4.17.2",
-    "express-react-views": "^0.11.0",
     "express-session": "^1.17.2",
-    "fs": "^0.0.1-security",
     "mongoose": "^5.8.10",
-    "node-mocks-http": "^1.11.0",
-    "path": "^0.12.7",
     "react-router-dom": "^5.2.0"
-  },
-  "devDependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^9.1.3"
   }
 }

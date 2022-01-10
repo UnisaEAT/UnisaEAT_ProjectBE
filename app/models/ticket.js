@@ -1,17 +1,17 @@
-var ObjectId = require('mongodb').ObjectID;
+//Model faq.js
 module.exports = mongoose => {
     var schema = mongoose.Schema(
       {
+        
         titolo: String,
         problema: String,
         soluzione: String,
-        data: Date,
-        senderID: ObjectId
+        date: String
       }
     );
   
     schema.method("toJSON", function() {
-      const { __v, _id, ...object } = this.toObject();
+      const {_id, ...object } = this.toObject();
       object.id = _id;
       return object;
     });
@@ -19,4 +19,3 @@ module.exports = mongoose => {
     const Ticket = mongoose.model("ticket", schema, "ticket");
     return Ticket;
   };
-  
