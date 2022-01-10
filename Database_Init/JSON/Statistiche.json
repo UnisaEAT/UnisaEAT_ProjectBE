@@ -1,0 +1,220 @@
+[{
+  "_id": {
+    "$oid": "61cdca34fe014b378096e123"
+  },
+  "pastiEOrdinazioni": [
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e9"
+      },
+      "ordinazioni": 87
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13ea"
+      },
+      "ordinazioni": 74
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e4"
+      },
+      "ordinazioni": 65
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e3"
+      },
+      "ordinazioni": 57
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e7"
+      },
+      "ordinazioni": 54
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e8"
+      },
+      "ordinazioni": 48
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e5"
+      },
+      "ordinazioni": 44
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e6"
+      },
+      "ordinazioni": 33
+    },
+    {
+      "id": {
+        "$oid": "61d4163d21841bf44b0f4296"
+      },
+      "ordinazioni": 58
+    },
+    {
+      "id": {
+        "$oid": "61d4177121841bf44b0f4297"
+      },
+      "ordinazioni": 77
+    }
+  ],
+  "dataInizio": {
+    "$date": "2021-12-24T15:03:16.498Z"
+  },
+  "dataFine": {
+    "$date": "2021-12-30T15:03:16.583Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61cdcab851795a742a08b6bd"
+  },
+  "pastiEOrdinazioni": [
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e9"
+      },
+      "ordinazioni": 77
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13ea"
+      },
+      "ordinazioni": 64
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e4"
+      },
+      "ordinazioni": 45
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e3"
+      },
+      "ordinazioni": 47
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e7"
+      },
+      "ordinazioni": 24
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e8"
+      },
+      "ordinazioni": 48
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e5"
+      },
+      "ordinazioni": 44
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e6"
+      },
+      "ordinazioni": 45
+    },
+    {
+      "id": {
+        "$oid": "61d4163d21841bf44b0f4296"
+      },
+      "ordinazioni": 40
+    },
+    {
+      "id": {
+        "$oid": "61d4177121841bf44b0f4297"
+      },
+      "ordinazioni": 38
+    }
+  ],
+  "dataInizio": {
+    "$date": "2021-12-17T15:03:16.498Z"
+  },
+  "dataFine": {
+    "$date": "2021-12-23T15:03:16.583Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61cdcaee51795a742a08b6be"
+  },
+  "pastiEOrdinazioni": [
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e9"
+      },
+      "ordinazioni": 87
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13ea"
+      },
+      "ordinazioni": 55
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e4"
+      },
+      "ordinazioni": 93
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e3"
+      },
+      "ordinazioni": 57
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e7"
+      },
+      "ordinazioni": 21
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e8"
+      },
+      "ordinazioni": 48
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e5"
+      },
+      "ordinazioni": 44
+    },
+    {
+      "id": {
+        "$oid": "61cdca255b90e73e88bf13e6"
+      },
+      "ordinazioni": 33
+    },
+    {
+      "id": {
+        "$oid": "61d4163d21841bf44b0f4296"
+      },
+      "ordinazioni": 40
+    },
+    {
+      "id": {
+        "$oid": "61d4177121841bf44b0f4297"
+      },
+      "ordinazioni": 56
+    }
+  ],
+  "dataInizio": {
+    "$date": "2021-12-10T15:03:16.498Z"
+  },
+  "dataFine": {
+    "$date": "2021-12-16T15:03:16.583Z"
+  },
+  "__v": 0
+}]
