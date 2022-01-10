@@ -1,18 +1,18 @@
 module.exports = mongoose => {
-    //Schema Menu
     var schema = mongoose.Schema(
-        {
-            nome: String,
-            pasti: Array
-        }
+      {
+          pasti: Array,
+          tipo: String,
+          data: Date
+      }
     );
-
-    schema.method("toJSON", function () {
-        const {__v, _id, ...object} = this.toObject();
-        object.id = _id;
-        return object;
+  
+    schema.method("toJSON", function() {
+      const { __v, _id, ...object } = this.toObject();
+      object.id = _id;
+      return object;
     });
-
+  
     const Menu = mongoose.model("menu", schema, "menu");
     return Menu;
-};
+  };

@@ -1,15 +1,14 @@
 module.exports = app => {
     const menu = require("../controller/controller_menu");
-
+  
     var router = require("express").Router();
-
-
-    // Prendi tutti i pasti per fare in modo che l'operatore mensa scelga il menu
-    router.get("/sceltaMenu", menu.sceltaMenu);
-
-    //Riceve la tipologia di menu da visualizzare
-    router.post("/visualizzaMenu", menu.visualizzamenu);
-
-
+  
+  
+  
+    // Retrieve all pasto for choose the menu
+    router.get("/SceltaMenu", menu.scelatamenu);
+    router.post("/VisualizzaMenu", menu.visualizzamenu);
+    router.post("/InserisciMenu", menu.inseriscimenu);
+    router.post("/ModificaMenu", menu.modificamenu);
     app.use('/api/menu', router);
-};
+  };
