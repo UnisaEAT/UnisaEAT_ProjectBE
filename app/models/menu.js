@@ -16,3 +16,4 @@ module.exports = mongoose => {
     const Menu = mongoose.model("menu", schema, "menu");
     return Menu;
   };
+  
