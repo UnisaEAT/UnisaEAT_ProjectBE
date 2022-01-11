@@ -18,5 +18,6 @@ db.model_statistiche = require("./statistiche.js")(mongoose);
 db.model_pasto = require("./pasto.js")(mongoose);
 db.model_ordine = require("./ordine.js")(mongoose);
 db.model_menu = require("./menu.js")(mongoose);
+db.model_faq = require("./faq.js")(mongoose);
 
 module.exports = db;

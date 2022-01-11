@@ -1,0 +1,15 @@
+[   {
+        "domanda": "Con chi posso comunicare dalla chat?",
+        "risposta": "Il cliente potrà comunicare con il Personale Adisu."
+    },
+
+    {    
+        "domanda": "A che università fa riferimento il servizio UnisaEAT?",
+        "risposta": "L'università degli studi di salerno, come suggerisce il nome."
+    },
+    {       
+        "domanda": "Come posso ritirare un ordine in mensa?",
+        "risposta": "Dopo aver effettuato l'ordine viene rilasciato un ticket da mostrare direttamente in mensa."
+    }
+
+]

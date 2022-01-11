@@ -10,6 +10,7 @@ const dbName = 'UnisaEAT_db'
 
 var ins = insert()
 ins.then(function (result) {
+
     process.exit()
 })
 
@@ -32,7 +33,7 @@ function insert() {
             const ordineData = fs.readFileSync(__dirname + '\\JSON\\Ordine.json')
             const statisticheData = fs.readFileSync(__dirname+"\\JSON\\Statistiche.json")
             const tesserinoData = fs.readFileSync(__dirname + '\\JSON\\Tesserino.json')
-
+			const faqdata = fs.readFileSync(__dirname + '\\JSON\\faq.json')
             const client = JSON.parse(clienteData)
             const personale = JSON.parse(personaledata)
             const admin = JSON.parse(admindata)
@@ -41,7 +42,8 @@ function insert() {
             const menu = JSON.parse(menuData)
             const ordine = JSON.parse(ordineData);
             const tesserino = JSON.parse(tesserinoData);
-
+			const faq = JSON.parse(faqdata)
+			
             for (var i = 0; client[i] != null; i++) {
 
                 if(client[i].hasOwnProperty("_id")){
@@ -128,7 +130,11 @@ function insert() {
                                     dbo.collection('ordine').insertMany(ordine, function(err, result) {
                                         if (err) throw err;
                                         console.log('abbiamo inserito ' + result.insertedCount + ' ordini')
-
+									
+									 dbo.collection('faq').insertMany(faq, function(err, result) {
+										if (err) throw err
+										console.log('abbiamo inserito  ' + result.insertedCount + 'faq')
+										
                                         dbo.collection('tesserino').insertMany(tesserino, function (err, result) {
                                             if (err) throw err;
                                             console.log('abbiamo inserito ' + result.insertedCount + ' tesserini')
@@ -143,6 +149,6 @@ function insert() {
                     })
                 })
             })
-        })
-    })
+    
+
 }
