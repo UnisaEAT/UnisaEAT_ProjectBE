@@ -141,7 +141,7 @@ function insert() {
 
                                             console.log('Succesfully created the collection UnisaEAT_db.')
                                             resolve()
-                                        })
+                                               })
                                     })
                                 })        
                             })
@@ -150,5 +150,8 @@ function insert() {
                 })
             })
     
-
+        })
+    })
+})
 }
+    
