@@ -16,14 +16,15 @@ exports.insert = (req, res) => {
   }
 	let titolo= req.body.titolo
 	let problema= req.body.problema
-  let date= req.body.date
+  let dat= new Date()
+  dat.setUTCHours(0,0,0,0)
 
 // Create 
   const ticket= new Ticket_Model({
     titolo: req.body.titolo,
     problema: req.body.problema,
     soluzione: null,
-    date: req.body.date
+    date: dat
   });
   
 
