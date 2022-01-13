@@ -23,12 +23,12 @@ function insert() {
            // const clienteData = fs.readFileSync('../Database_Init/JSON/Cliente.json')
            // const personaleData = fs.readFileSync('../Database_Init/JSON/Personale.json')
            // const adminData = fs.readFileSync('../Database_Init/JSON/Admin.json')
-           const faqdata = fs.readFileSync(__dirname + '\\JSON\\faq.json')
+           const ticketdata = fs.readFileSync(__dirname + '\\JSON\\ticket.json')
 
             //const client = JSON.parse(clienteData)
             //const personale = JSON.parse(personaleData)
             //const admin = JSON.parse(adminData)
-            const faq = JSON.parse(faqdata)
+            const ticket = JSON.parse(ticketdata)
 
          /*   dbo.collection('cliente').insertMany(client, function(err, result) {
                 if (err) throw err
