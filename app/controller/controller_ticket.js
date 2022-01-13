@@ -18,13 +18,15 @@ exports.insert = (req, res) => {
 	let problema= req.body.problema
   let dat= new Date()
   dat.setUTCHours(0,0,0,0)
+  let mail= req.body.email
 
 // Create 
   const ticket= new Ticket_Model({
     titolo: req.body.titolo,
     problema: req.body.problema,
     soluzione: null,
-    date: dat
+    date: dat,
+    email:mail
   });
   
 
@@ -71,10 +73,10 @@ exports.insert = (req, res) => {
 //Questo era INSERIMENTO
 
 
-// Metodo per prendere le info - Visualizzazione?
+// Metodo per prendere le info - Visualizzazione? -- Controllo per Email
 exports.select = (req, res) => {
 
-  Ticket_Model.find({}) 
+Ticket_Model.find({email:mail})
     .then(data => {
       if(data==null){
       res.json({message:false})}
@@ -83,10 +85,11 @@ exports.select = (req, res) => {
     .catch(err => {
       res.json({
         message:
-          err.message || "Some error occurred while retrieving ticket."
+          err.message || "Some error occurred while retrieving ticket by email."
       });
-    });
-};
+    });}
+;
+
 
 
 

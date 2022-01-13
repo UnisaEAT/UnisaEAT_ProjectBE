@@ -6,6 +6,7 @@ module.exports = mongoose => {
         titolo: String,
         problema: String,
         soluzione: String,
+        email:String,
         date: Date
       }
     );
