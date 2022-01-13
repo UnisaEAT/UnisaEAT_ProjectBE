@@ -76,7 +76,7 @@ exports.insert = (req, res) => {
 // Metodo per prendere le info - Visualizzazione? -- Controllo per Email
 exports.select = (req, res) => {
 
-Ticket_Model.find({email:mail})
+Ticket_Model.find({})
     .then(data => {
       if(data==null){
       res.json({message:false})}
