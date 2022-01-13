@@ -83,7 +83,7 @@ exports.inseriscimenu = async (req,res) => {
   });
 };
 
-exports.modificamenu = async (req,res) => {
+exports.modificamenu =  (req,res) => {
   var tipoMenu=req.body.tipo;
   var dataOdierna=new Date();
   var listaPasti=req.body.pasti;
