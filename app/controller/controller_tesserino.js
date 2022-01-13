@@ -130,11 +130,24 @@ exports.create = (req, res) => {
         let cap = req.body.cap;
         let telefono = req.body.telefono;
 
+        if (!cognome) {
+            res.json({name: "cognome", message: "Questo campo è obbligatorio!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
+            res.json({name: "cognome", message: "Formato cognome non corretto!"});
+            return;
+        } else {
+            if (docs[0].cognome != cognome) {
+                res.json({name: "cognome", message: "Cognome not found!"});
+                return;
+            }
+        }
+
         if (!nome) {
-            res.json({name: "nome", message: "Nome can not be empty!"});
+            res.json({name: "nome", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
-            res.json({name: "nome", message: "Nome has invalid sintax!"});
+            res.json({name: "nome", message: "Formato nome non corretto!"});
             return;
         } else {
             if (docs[0].nome != nome) {
@@ -143,15 +156,41 @@ exports.create = (req, res) => {
             }
         }
 
-        if (!cognome) {
-            res.json({name: "cognome", message: "Cognome can not be empty!"});
+        if (!dataDiNascita) {
+            res.json({name: "dataDiNascita", message: "Questo campo è obbligatorio!"});
             return;
-        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
-            res.json({name: "cognome", message: "Cognome has invalid sintax!"});
+        } else if (!(/^(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/](19|20)\d\d/.test(dataDiNascita))) {
+            res.json({name: "dataDiNascita", message: "Formato data non corretto!"});
             return;
         } else {
-            if (docs[0].cognome != cognome) {
-                res.json({name: "cognome", message: "Cognome not found!"});
+            if (docs[0].dataDiNascita != dataDiNascita) {
+                res.json({name: "dataDiNascita", message: "Data di nascita not found!"});
+                return;
+            }
+        }
+
+        if (!provinciaDiNascita) {
+            res.json({name: "provinciaDiNascita", message: "Questo campo è obbligatorio!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provinciaDiNascita)) || provinciaDiNascita.length <= 1) {
+            res.json({name: "provinciaDiNascita", message: "Formato provincia di nascita non corretto!"});
+            return;
+        } else {
+            if (docs[0].provinciaDiNascita != provinciaDiNascita) {
+                res.json({name: "provinciaDiNascita", message: "Provincia di nascita not found!"});
+                return;
+            }
+        }
+
+        if (!comuneDiNascita) {
+            res.json({name: "comuneDiNascita", message: "Questo campo è obbligatorio!"});
+            return;
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comuneDiNascita)) || comuneDiNascita.length <= 1) {
+            res.json({name: "comuneDiNascita", message: "Formato comune di nascita non corretto!"});
+            return;
+        } else {
+            if (docs[0].comuneDiNascita != comuneDiNascita) {
+                res.json({name: "comuneDiNascita", message: "Comune di nascita not found!"});
                 return;
             }
         }
@@ -178,45 +217,6 @@ exports.create = (req, res) => {
         } else {
             if (confermaEmail != email) {
                 res.json({name: "confermaEmail", message: "Email and Conferma Email not equals!"});
-                return;
-            }
-        }
-
-        if (!dataDiNascita) {
-            res.json({name: "dataDiNascita", message: "Data di nascita can not be empty!"});
-            return;
-        } else if (!(/^(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/](19|20)\d\d/.test(dataDiNascita))) {
-            res.json({name: "dataDiNascita", message: "Data di nascita has invalid sintax!"});
-            return;
-        } else {
-            if (docs[0].dataDiNascita != dataDiNascita) {
-                res.json({name: "dataDiNascita", message: "Data di nascita not found!"});
-                return;
-            }
-        }
-
-        if (!provinciaDiNascita) {
-            res.json({name: "provinciaDiNascita", message: "Provincia di nascita can not be empty!"});
-            return;
-        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provinciaDiNascita)) || provinciaDiNascita.length <= 1) {
-            res.json({name: "provinciaDiNascita", message: "Provincia di nascita has invalid sintax!"});
-            return;
-        } else {
-            if (docs[0].provinciaDiNascita != provinciaDiNascita) {
-                res.json({name: "provinciaDiNascita", message: "Provincia di nascita not found!"});
-                return;
-            }
-        }
-
-        if (!comuneDiNascita) {
-            res.json({name: "comuneDiNascita", message: "Comune di nascita can not be empty!"});
-            return;
-        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comuneDiNascita)) || comuneDiNascita.length <= 1) {
-            res.json({name: "comuneDiNascita", message: "Comune di nascita has invalid sintax!"});
-            return;
-        } else {
-            if (docs[0].comuneDiNascita != comuneDiNascita) {
-                res.json({name: "comuneDiNascita", message: "Comune di nascita not found!"});
                 return;
             }
         }
