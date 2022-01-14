@@ -342,6 +342,8 @@ exports.create = (req, res) => {
   Se il cliente loggato non ha un tesserino l'operazione non viene effettuata
   Se il tesserino del cliente loggato non è scaduto (la data di scadenza è minore della data attuale) l'operazione non viene effettuata
   Se il tesserino del cliente loggato è scaduto viene aggiornata la data di scadenza nel db 
+
+  Restituisce false se il tesserino non è scaduto, true se è stato rinnovato
  */
 exports.updateDataScadenza = (req, res) => {
 
@@ -375,24 +377,11 @@ exports.updateDataScadenza = (req, res) => {
         let cap = req.body.cap;
         let telefono = req.body.telefono;
 
-        if (!nome) {
-            res.json({name: "nome", message: "Nome can not be empty!"});
-            return;
-        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
-            res.json({name: "nome", message: "Nome has invalid sintax!"});
-            return;
-        } else {
-            if (docs[0].nome != nome) {
-                res.json({name: "nome", message: "Nome not found!"});
-                return;
-            }
-        }
-
         if (!cognome) {
-            res.json({name: "cognome", message: "Cognome can not be empty!"});
+            res.json({name: "cognome", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cognome)) || cognome.length <= 1) {
-            res.json({name: "cognome", message: "Cognome has invalid sintax!"});
+            res.json({name: "cognome", message: "Formato cognome non corretto!"});
             return;
         } else {
             if (docs[0].cognome != cognome) {
@@ -401,37 +390,24 @@ exports.updateDataScadenza = (req, res) => {
             }
         }
 
-        if (!email) {
-            res.json({name: "email", message: "Email can not be empty!"});
+        if (!nome) {
+            res.json({name: "nome", message: "Questo campo è obbligatorio!"});
             return;
-        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length < 8) {
-            res.json({name: "email", message: "Email has invalid sintax!"});
-            return;
-        } else {
-            if (docs[0].email != email) {
-                res.json({name: "email", message: "Email not found!"});
-                return;
-            }
-        }
-
-        if (!confermaEmail) {
-            res.json({name: "confermaEmail", message: "Conferma Email can not be empty!"});
-            return;
-        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(confermaEmail)) || confermaEmail.length < 8) {
-            res.json({name: "confermaEmail", message: "Conferma Email has invalid sintax!"});
+        } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(nome)) || nome.length <= 1) {
+            res.json({name: "nome", message: "Formato nome non corretto!"});
             return;
         } else {
-            if (confermaEmail != email) {
-                res.json({name: "confermaEmail", message: "Email and Conferma Email not equals!"});
+            if (docs[0].nome != nome) {
+                res.json({name: "nome", message: "Nome not found!"});
                 return;
             }
         }
 
         if (!dataDiNascita) {
-            res.json({name: "dataDiNascita", message: "Data di nascita can not be empty!"});
+            res.json({name: "dataDiNascita", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^(0[1-9]|[12][0-9]|3[01])[\/](0[1-9]|1[012])[\/](19|20)\d\d/.test(dataDiNascita))) {
-            res.json({name: "dataDiNascita", message: "Data di nascita has invalid sintax!"});
+            res.json({name: "dataDiNascita", message: "Formato data non corretto!"});
             return;
         } else {
             if (docs[0].dataDiNascita != dataDiNascita) {
@@ -441,10 +417,10 @@ exports.updateDataScadenza = (req, res) => {
         }
 
         if (!provinciaDiNascita) {
-            res.json({name: "provinciaDiNascita", message: "Provincia di nascita can not be empty!"});
+            res.json({name: "provinciaDiNascita", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provinciaDiNascita)) || provinciaDiNascita.length <= 1) {
-            res.json({name: "provinciaDiNascita", message: "Provincia di nascita has invalid sintax!"});
+            res.json({name: "provinciaDiNascita", message: "Formato provincia di nascita non corretto!"});
             return;
         } else {
             if (docs[0].provinciaDiNascita != provinciaDiNascita) {
@@ -454,10 +430,10 @@ exports.updateDataScadenza = (req, res) => {
         }
 
         if (!comuneDiNascita) {
-            res.json({name: "comuneDiNascita", message: "Comune di nascita can not be empty!"});
+            res.json({name: "comuneDiNascita", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comuneDiNascita)) || comuneDiNascita.length <= 1) {
-            res.json({name: "comuneDiNascita", message: "Comune di nascita has invalid sintax!"});
+            res.json({name: "comuneDiNascita", message: "Formato comune di nascita non corretto!"});
             return;
         } else {
             if (docs[0].comuneDiNascita != comuneDiNascita) {
@@ -467,10 +443,10 @@ exports.updateDataScadenza = (req, res) => {
         }
 
         if (!cittadinanza) {
-            res.json({name: "cittadinanza", message: "Cittadinanza can not be empty!"});
+            res.json({name: "cittadinanza", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cittadinanza)) || cittadinanza.length <= 1) {
-            res.json({name: "cittadinanza", message: "Cittadinanza has invalid sintax!"});
+            res.json({name: "cittadinanza", message: "Formato cittadinanza non corretto!"});
             return;
         } else {
             if (docs[0].cittadinanza != cittadinanza) {
@@ -480,10 +456,10 @@ exports.updateDataScadenza = (req, res) => {
         }
 
         if (!indirizzo) {
-            res.json({name: "indirizzo", message: "Indirizzo can not be empty!"});
+            res.json({name: "indirizzo", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
-            res.json({name: "indirizzo", message: "Indirizzo has invalid sintax!"});
+            res.json({name: "indirizzo", message: "Formato indirizzo non corretto!"});
             return;
         } else {
             if (docs[0].indirizzo != indirizzo) {
@@ -493,10 +469,10 @@ exports.updateDataScadenza = (req, res) => {
         }
 
         if (!provincia) {
-            res.json({name: "provincia", message: "Provincia can not be empty!"});
+            res.json({name: "provincia", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provincia)) || provincia.length <= 1) {
-            res.json({name: "provincia", message: "Provincia has invalid sintax!"});
+            res.json({name: "provincia", message: "Formato provincia non corretto!"});
             return;
         } else {
             if (docs[0].provincia != provincia) {
@@ -506,10 +482,10 @@ exports.updateDataScadenza = (req, res) => {
         }
 
         if (!comune) {
-            res.json({name: "comune", message: "Comune can not be empty!"});
+            res.json({name: "comune", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comune)) || comune.length <= 1) {
-            res.json({name: "comune", message: "Comune has invalid sintax!"});
+            res.json({name: "comune", message: "Formato comune non corretto!"});
             return;
         } else {
             if (docs[0].citta != comune) {
@@ -519,10 +495,10 @@ exports.updateDataScadenza = (req, res) => {
         }
 
         if (!cap) {
-            res.json({name: "cap", message: "Cap can not be empty!"});
+            res.json({name: "cap", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^\d{5}$/.test(cap))) {
-            res.json({name: "cap", message: "Cap has invalid sintax!"});
+            res.json({name: "cap", message: "Formato cap non corretto!"});
             return;
         } else {
             if (docs[0].cap != cap) {
@@ -530,31 +506,81 @@ exports.updateDataScadenza = (req, res) => {
                 return;
             }
         }
-
+        
         if (telefono.length != 0) {
-            if (!(/^[0-9\-\+]{9,15}$/.test(telefono)) || telefono.length < 10 || telefono.length > 15) {
-                res.json({name: "telefono", message: "Telefono has invalid sintax!"});
+            if (telefono.length < 10 || telefono.length > 15) {
+                res.json({name: "telefono", message: "Lunghezza numero di cellulare non corretta!"});
                 return;
+            }
+            else if (!(/^[0-9\-\+]{9,15}$/.test(telefono))){
+                res.json({name: "telefono", message: "Formato cellulare non corretto!"});
+                return;
+            }
             } else {
                 if (docs[0].telefono != telefono) {
                     res.json({name: "telefono", message: "Telefono not found!"});
                     return;
                 }
             }
+
+        if (!email) {
+            res.json({name: "email", message: "Questo campo è obbligatorio!"});
+            return;
+        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length < 8) {
+            res.json({name: "email", message: "Formato email non corretto!"});
+            return;
+        } else {
+            if (docs[0].email != email) {
+                res.json({name: "email", message: "Email not found!"});
+                return;
+            }
         }
 
-        //calcolo data di scadenza
-        //uguale alla data attuale + 1 anno
-        let date = new Date();
-        date.setDate(date.getDate() + 365);
+        if (!confermaEmail) {
+            res.json({name: "confermaEmail", message: "Questo campo è obbligatorio!"});
+            return;
+        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(confermaEmail)) || confermaEmail.length < 8) {
+            res.json({name: "confermaEmail", message: "Formato conferma email non corretto!"});
+            return;
+        } else {
+            if (confermaEmail != email) {
+                res.json({name: "confermaEmail", message: "Conferma email non corrisponde all’email inserita!"});
+                return;
+            }
+        }
+
+        
         let tesserinoID = docs[0].tesserino;
 
-        Tesserino_Model.findByIdAndUpdate(tesserinoID, {dataScadenza: date}, function (err, docs) {
-            if (err) throw err;
-            res.json(true);
-            return;
-        })
+        Tesserino_Model.findById(tesserinoID).then(
+            function (data) {
 
+                let dataScadenza = data.dataScadenza;
+                let dataAttuale = new Date();
+
+                if (dataAttuale < dataScadenza) {
+                    // non è scaduto e non deve essere rinnovato
+                    res.json(false)
+                }
+                else {
+                    //è scaduto e va rinnovato
+                    //calcolo data di scadenza
+                    //uguale alla data attuale + 1 anno
+                    let date = new Date();
+                    date.setDate(date.getDate() + 365);
+
+                    Tesserino_Model.findByIdAndUpdate(tesserinoID, {dataScadenza: date}, function (err, docs) {
+                        if (err) throw err;
+                        res.json(true);
+                        return;
+                    })
+
+                }
+            },
+            function (err) {
+                res.json({messagge: "Error: " + err});
+            }
+        )
     });
 };
 

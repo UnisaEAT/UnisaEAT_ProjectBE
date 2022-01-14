@@ -1,22 +1,17 @@
 var chai = require('chai')
 var expect = chai.expect
 var chaiHttp = require('chai-http');
-//var mockHttp = require('node-mocks-http') da eliminare
 chai.use(chaiHttp);
 
-var tesserinoControl = require('../app/controller/controller_tesserino')
+const host = "localhost:8080/api/tesserino"
+const path = "/rinnovoTesserino";
+const emailSessione = "marcorossi@gmail.com"
+const ruoloSessione = "cliente"
 
-var host = "localhost:8080/api/tesserino"
-
-//let server = require('../server'); da eliminare
-describe('Field test for create tesserino', function () {
+describe('Field test for rinnovo tesserino', function () {
   
-    let emailSessione = "francrossi@gmail.com"
-    let ruoloSessione = "cliente"
+  it('TC_TDM_2.1', function (done) {
 
-  it('Test method create - TC_TDM_1.1', function (done) {
-
-    let path = "/create";
 
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
@@ -35,9 +30,8 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.2', function (done) {
+  it('TC_TDM_2.2', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
@@ -56,9 +50,8 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.3', function (done) {
+  it('TC_TDM_2.3', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
@@ -77,13 +70,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.4', function (done) {
+  it('TC_TDM_2.4', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco123",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco12#3",
         dataDiNascita: "", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -98,13 +90,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.5', function (done) {
+  it('TC_TDM_2.5', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -119,13 +110,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.6', function (done) {
+  it('TC_TDM_2.6', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "111/40/2000", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -140,13 +130,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.7', function (done) {
+  it('TC_TDM_2.7', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -161,13 +150,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.8', function (done) {
+  it('TC_TDM_2.8', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salern0241", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -182,13 +170,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.9', function (done) {
+  it('TC_TDM_2.9', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -203,13 +190,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.10', function (done) {
+  it('TC_TDM_2.10', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angr0234", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -224,13 +210,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.11', function (done) {
+  it('TC_TDM_2.11', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -245,13 +230,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.12', function (done) {
+  it('TC_TDM_2.12', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italian!!32", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -266,13 +250,12 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.13', function (done) {
+  it('TC_TDM_2.13', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -287,15 +270,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.14', function (done) {
+  it('TC_TDM_2.14', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi!!+12", provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi!! .12", provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -308,15 +290,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.15', function (done) {
+  it('TC_TDM_2.15', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -329,15 +310,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.16', function (done) {
+  it('TC_TDM_2.16', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salern12!?", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salern12!?", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -350,15 +330,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.17', function (done) {
+  it('TC_TDM_2.17', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -371,15 +350,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.18', function (done) {
+  it('TC_TDM_2.18', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fiscian31\!", cap: "", telefono: "", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fiscian31\!", cap: "", telefono: "", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -392,15 +370,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.19', function (done) {
+  it('TC_TDM_2.19', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "", telefono: "", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "", telefono: "", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -413,15 +390,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.20', function (done) {
+  it('TC_TDM_2.20', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "212", telefono: "", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "212", telefono: "", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -434,15 +410,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.21', function (done) {
+  it('TC_TDM_2.21', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+39347321", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+39347321", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -455,15 +430,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.22', function (done) {
+  it('TC_TDM_2.22', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+39347321ab32", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+39347321ab32", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -476,15 +450,14 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.23', function (done) {
+  it('TC_TDM_2.23', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234566", email: "", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567", email: "", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -497,16 +470,15 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.24', function (done) {
+  it('TC_TDM_2.24', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234566",
-        email: "franc@.com", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
+        email: "marc@.com", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -519,16 +491,15 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.25', function (done) {
+  it('TC_TDM_2.25', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234566",
-        email: "francrossi@gmail.com", confermaEmail:""
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
+        email: "marcorossi@gmail.com", confermaEmail:""
 
     })
     .end(function(error, response, body) {
@@ -541,16 +512,15 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.26', function (done) {
+  it('TC_TDM_2.26', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234566",
-        email: "francrossi@gmail.com", confermaEmail:"franc@.swq1"
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
+        email: "marcorossi@gmail.com", confermaEmail:"marc@.swq1"
 
     })
     .end(function(error, response, body) {
@@ -563,16 +533,15 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.27', function (done) {
+  it('TC_TDM_2.27', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234566",
-        email: "francrossi@gmail.com", confermaEmail:"francescorossi@hotmail.it"
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
+        email: "marcorossi@gmail.com", confermaEmail:"marcorossi@hotmail.it"
 
     })
     .end(function(error, response, body) {
@@ -585,28 +554,25 @@ describe('Field test for create tesserino', function () {
     });
   })
 
-  it('Test method create - TC_TDM_1.28', function (done) {
+  it('TC_TDM_2.28', function (done) {
 
-    let path = "/create";
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Francesco",
+        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
-        indirizzo: "Via Enaudi F/4", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234566",
-        email: "francrossi@gmail.com", confermaEmail:"francrossi@gmail.com"
+        indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
+        email: "marcorossi@gmail.com", confermaEmail:"marcorossi@gmail.com"
 
     })
     .end(function(error, response, body) {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: true})
+            expect(response.body).to.deep.equal(true)
             done();
         }
     });
   })
 
 })
-//           "Questo campo è obbligatorio!"
-//           "Formato data non corretto!"
