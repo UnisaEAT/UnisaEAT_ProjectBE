@@ -17,7 +17,6 @@ exports.insert = (req, res) => {
 	let titolo= req.body.titolo
 	let problema= req.body.problema
   let dat= new Date()
-  dat.setUTCHours(0,0,0,0)
   let mail= req.body.email
 
 // Create 
