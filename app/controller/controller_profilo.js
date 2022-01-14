@@ -67,17 +67,17 @@ exports.updatePassword = function (req, res) {
     var passwordConfirm = req.body.inputConfirmPassword
 
     if ((!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(oldPassword)) || (oldPassword.length <= 8) || (oldPassword == null))) {
-        res.json({name: "password", message: "Errore Password vecchia."});
+        res.json({name: "inputOldPassword", message: "Errore Password vecchia."});
         return;
     }
 
     if ((password == null) || (password.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
-        res.json({name: "password", message: "Errore Password."});
+        res.json({name: "inputPassword", message: "Errore Password."});
         return;
     }
 
     if (passwordConfirm != password) {
-        res.json({name: "password", message: "Errore Password di conferma."});
+        res.json({name: "inputConfirmPassword", message: "Errore Password di conferma."});
         return;
     }
 
@@ -131,7 +131,7 @@ exports.updatePassword = function (req, res) {
             let hashato = docs[0].password;
 
             if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({name: "password", message: "Password non corrisponde nel DB."});
+                res.json({name: "inputOldPassword", message: "Password non corrisponde nel DB."});
                 return;
             } else {
                 Personale_Model.findOneAndUpdate({email: mail}, {password: passwordHashed}).then(
@@ -148,7 +148,7 @@ exports.updatePassword = function (req, res) {
             let hashato = docs[0].password;
 
             if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({name: "password", message: "Password non corrisponde nel DB."});
+                res.json({name: "inputOldPassword", message: "Password non corrisponde nel DB."});
                 return;
             } else {
                 Cliente_Model.findOneAndUpdate({email: mail}, {password: passwordHashed}).then(
@@ -165,7 +165,7 @@ exports.updatePassword = function (req, res) {
             let hashato = docs[0].password;
 
             if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({name: "password", message: "Password non corrisponde nel DB."});
+                res.json({name: "inputOldPassword", message: "Password non corrisponde nel DB."});
                 return;
             } else {
                 Admin_Model.findOneAndUpdate({email: mail}, {password: passwordHashed}).then(
