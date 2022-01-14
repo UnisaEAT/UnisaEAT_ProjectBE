@@ -17,6 +17,9 @@ ins.then(function (result) {
 //Funzione che permette di inserire script JSON di attori specifici all'interno del database via riga di comando
 //Passo 1-->Spostarsi sulla cartella Database_Init presente all'interno della cartella UnisaEAT_ProjectBE
 //Passo 2-->Lanciare il comando "node .\dbpop.script.js" che eseguira il codice scelto.
+
+
+
 function insert() {
     return new Promise(function (resolve, reject) {
         MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true}, function (err, db) {
@@ -34,6 +37,7 @@ function insert() {
             const statisticheData = fs.readFileSync(__dirname+"\\JSON\\Statistiche.json")
             const tesserinoData = fs.readFileSync(__dirname + '\\JSON\\Tesserino.json')
 			const faqdata = fs.readFileSync(__dirname + '\\JSON\\faq.json')
+			const ticketData = fs.readFileSync(__dirname + '\\JSON\\ticket.json')
             const client = JSON.parse(clienteData)
             const personale = JSON.parse(personaledata)
             const admin = JSON.parse(admindata)
@@ -43,6 +47,7 @@ function insert() {
             const ordine = JSON.parse(ordineData);
             const tesserino = JSON.parse(tesserinoData);
 			const faq = JSON.parse(faqdata)
+			const ticket = JSON.parse(ticketData)
 			
             for (var i = 0; client[i] != null; i++) {
 
@@ -138,20 +143,24 @@ function insert() {
                                         dbo.collection('tesserino').insertMany(tesserino, function (err, result) {
                                             if (err) throw err;
                                             console.log('abbiamo inserito ' + result.insertedCount + ' tesserini')
-
+										 dbo.collection('ticket').insertMany(ticket, function(err, result) {
+											if (err) throw err
+											console.log('abbiamo inserito  ' + result.insertedCount + 'ticket')
+											if(err)throw err
                                             console.log('Succesfully created the collection UnisaEAT_db.')
                                             resolve()
                                                })
-                                    })
-                                })        
-                            })
-                        })
-                    })
-                })
-            })
-    
-        })
-    })
+										})
+									})        
+								})
+							})
+						})
+					})
+				})
+			})
+		})
+	})
 })
+         
 }
     

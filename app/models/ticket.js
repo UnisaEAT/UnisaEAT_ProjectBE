@@ -1,23 +1,25 @@
-var ObjectId = require('mongodb').ObjectID;
+//Model Ticket.js
 module.exports = mongoose => {
     //Schema Ticket
     var schema = mongoose.Schema(
-        {
-            titolo: String,
-            problema: String,
-            soluzione: String,
-            data: Date,
-            senderID: ObjectId
-        }
+      {
+        
+        titolo: String,
+        problema: String,
+        soluzione: String,
+        email:String,
+        date: Date
+      }
     );
-
-    schema.method("toJSON", function () {
-        const {__v, _id, ...object} = this.toObject();
-        object.id = _id;
-        return object;
+  
+    schema.method("toJSON", function() {
+      const {_id, ...object } = this.toObject();
+      object.id = _id;
+      return object;
     });
 
     const Ticket = mongoose.model("ticket", schema, "ticket");
     return Ticket;
+
 };
   

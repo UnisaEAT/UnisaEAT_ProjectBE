@@ -4,12 +4,12 @@ const cors = require("cors");
 
 const app = express();
 
-/*var corsOptions = {
-    origin: "http://localhost:3000"
-};*/
+var corsOptions = {
+    origin: "http://localhost:8080"
+};
 
-app.use(cors(/*corsOptions*/));
 
+app.use(cors( /*corsOptions*/ ));
 
 // parse requests of content-type - application/json
 app.use(express.json()); /* bodyParser.json() is deprecated */
@@ -30,7 +30,6 @@ db.mongoose
         console.log("Cannot connect to the database!", err);
         process.exit();
     });
-
 
 const cookieParser = require("cookie-parser");
 const sessions = require('express-session');
@@ -58,9 +57,10 @@ require("./app/routes/routes_ordine")(app);
 require("./app/routes/routes_menu")(app);
 //require("./app/routes/routes_pasto")(app);
 require("./app/routes/routes_faq")(app);
-//require("./app/routes/routes_ticket")(app);
+require("./app/routes/routes_ticket")(app);
 require("./app/routes/routes_statistiche")(app);
 require("./app/routes/routes_login")(app);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
