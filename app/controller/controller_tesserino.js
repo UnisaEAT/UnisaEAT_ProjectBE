@@ -195,37 +195,11 @@ exports.create = (req, res) => {
             }
         }
 
-        if (!email) {
-            res.json({name: "email", message: "Email can not be empty!"});
-            return;
-        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length < 8) {
-            res.json({name: "email", message: "Email has invalid sintax!"});
-            return;
-        } else {
-            if (docs[0].email != email) {
-                res.json({name: "email", message: "Email not found!"});
-                return;
-            }
-        }
-
-        if (!confermaEmail) {
-            res.json({name: "confermaEmail", message: "Conferma Email can not be empty!"});
-            return;
-        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(confermaEmail)) || confermaEmail.length < 8) {
-            res.json({name: "confermaEmail", message: "Conferma Email has invalid sintax!"});
-            return;
-        } else {
-            if (confermaEmail != email) {
-                res.json({name: "confermaEmail", message: "Email and Conferma Email not equals!"});
-                return;
-            }
-        }
-
         if (!cittadinanza) {
-            res.json({name: "cittadinanza", message: "Cittadinanza can not be empty!"});
+            res.json({name: "cittadinanza", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(cittadinanza)) || cittadinanza.length <= 1) {
-            res.json({name: "cittadinanza", message: "Cittadinanza has invalid sintax!"});
+            res.json({name: "cittadinanza", message: "Formato cittadinanza non corretto!"});
             return;
         } else {
             if (docs[0].cittadinanza != cittadinanza) {
@@ -235,10 +209,10 @@ exports.create = (req, res) => {
         }
 
         if (!indirizzo) {
-            res.json({name: "indirizzo", message: "Indirizzo can not be empty!"});
+            res.json({name: "indirizzo", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
-            res.json({name: "indirizzo", message: "Indirizzo has invalid sintax!"});
+            res.json({name: "indirizzo", message: "Formato indirizzo non corretto!"});
             return;
         } else {
             if (docs[0].indirizzo != indirizzo) {
@@ -248,10 +222,10 @@ exports.create = (req, res) => {
         }
 
         if (!provincia) {
-            res.json({name: "provincia", message: "Provincia can not be empty!"});
+            res.json({name: "provincia", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(provincia)) || provincia.length <= 1) {
-            res.json({name: "provincia", message: "Provincia has invalid sintax!"});
+            res.json({name: "provincia", message: "Formato provincia non corretto!"});
             return;
         } else {
             if (docs[0].provincia != provincia) {
@@ -261,10 +235,10 @@ exports.create = (req, res) => {
         }
 
         if (!comune) {
-            res.json({name: "comune", message: "Comune can not be empty!"});
+            res.json({name: "comune", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(comune)) || comune.length <= 1) {
-            res.json({name: "comune", message: "Comune has invalid sintax!"});
+            res.json({name: "comune", message: "Formato comune non corretto!"});
             return;
         } else {
             if (docs[0].citta != comune) {
@@ -274,10 +248,10 @@ exports.create = (req, res) => {
         }
 
         if (!cap) {
-            res.json({name: "cap", message: "Cap can not be empty!"});
+            res.json({name: "cap", message: "Questo campo è obbligatorio!"});
             return;
         } else if (!(/^\d{5}$/.test(cap))) {
-            res.json({name: "cap", message: "Cap has invalid sintax!"});
+            res.json({name: "cap", message: "Formato cap non corretto!"});
             return;
         } else {
             if (docs[0].cap != cap) {
@@ -285,16 +259,46 @@ exports.create = (req, res) => {
                 return;
             }
         }
-
+        
         if (telefono.length != 0) {
-            if (!(/^[0-9\-\+]{9,15}$/.test(telefono)) || telefono.length < 10 || telefono.length > 15) {
-                res.json({name: "telefono", message: "Telefono has invalid sintax!"});
+            if (telefono.length < 10 || telefono.length > 15) {
+                res.json({name: "telefono", message: "Lunghezza numero di cellulare non corretta!"});
                 return;
+            }
+            else if (!(/^[0-9\-\+]{9,15}$/.test(telefono))){
+                res.json({name: "telefono", message: "Formato cellulare non corretto!"});
+                return;
+            }
             } else {
                 if (docs[0].telefono != telefono) {
                     res.json({name: "telefono", message: "Telefono not found!"});
                     return;
                 }
+            }
+
+        if (!email) {
+            res.json({name: "email", message: "Questo campo è obbligatorio!"});
+            return;
+        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(email)) || email.length < 8) {
+            res.json({name: "email", message: "Formato email non corretto!"});
+            return;
+        } else {
+            if (docs[0].email != email) {
+                res.json({name: "email", message: "Email not found!"});
+                return;
+            }
+        }
+
+        if (!confermaEmail) {
+            res.json({name: "confermaEmail", message: "Questo campo è obbligatorio!"});
+            return;
+        } else if (!(/^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(confermaEmail)) || confermaEmail.length < 8) {
+            res.json({name: "confermaEmail", message: "Formato conferma email non corretto!"});
+            return;
+        } else {
+            if (confermaEmail != email) {
+                res.json({name: "confermaEmail", message: "Conferma email non corrisponde all’email inserita!"});
+                return;
             }
         }
 
