@@ -12,6 +12,10 @@ exports.create = (req, res) => {
         return res.json({"error":"Nessun messaggio inviato"})
     }
 
+    if(message.testo.length == 0 || message.testo.length > 1000){
+        return res.json({"error":true, message: "Lunghezza del messaggio non corretta!"})
+    } 
+
     const messaggio = new Messaggio_Model({
         conversazioneId : message.conversazioneId,
         sender: message.sender,
@@ -39,6 +43,10 @@ exports.deleteMessaggio = (req, res) => {
 exports.modifyMessaggio = (req, res) => {
     const idMessaggio = req.body.idMessaggio;
     const nuovoTesto = req.body.nuovoTesto;
+
+    if(message.nuovoTesto.length == 0 || message.nuovoTesto.length > 1000){
+        return res.json({"error":true, message: "Lunghezza del messaggio non corretta!"})
+    } 
 
     Messaggio_Model.findByIdAndUpdate({_id:idMessaggio}, {testo:nuovoTesto}, function(err, docs) {
         if (err) throw err;
