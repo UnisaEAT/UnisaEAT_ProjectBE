@@ -1,13 +1,12 @@
 var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
-    //Schema Notifica
+    //Schema Messaggio
     var schema = mongoose.Schema(
         {
+            senderID: ObjectId,
             receiverID: ObjectId,
             testo: String,
-            tipo: String,
-            titolo: String,
-            visualizzazione: Boolean
+            data: Date
         }
     );
 
@@ -17,6 +16,6 @@ module.exports = mongoose => {
         return object;
     });
 
-    const Notifica = mongoose.model("notifica", schema, "notifica");
-    return Notifica;
+    const Messaggio = mongoose.model("messaggio", schema, "messaggio");
+    return Messaggio;
 };
