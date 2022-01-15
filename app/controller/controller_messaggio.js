@@ -44,7 +44,7 @@ exports.modifyMessaggio = (req, res) => {
     const idMessaggio = req.body.idMessaggio;
     const nuovoTesto = req.body.nuovoTesto;
 
-    if(message.nuovoTesto.length == 0 || message.nuovoTesto.length > 1000){
+    if(nuovoTesto.length == 0 || nuovoTesto.length > 1000){
         return res.json({"error":true, message: "Lunghezza del messaggio non corretta!"})
     } 
 
