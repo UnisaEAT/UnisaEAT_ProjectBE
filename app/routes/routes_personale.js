@@ -7,7 +7,7 @@ module.exports = app => {
     router.post("/insert", personale.insert);
   
     // Retrieve all Tutorials
-    router.get("/viewLista", personale.findByRuolo);
+    router.post("/viewLista", personale.findByRuolo);
 
     // Remove a new Personale
     router.post("/remove",personale.findByEmailAndRemove);
