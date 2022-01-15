@@ -94,6 +94,7 @@ Ticket_Model.find({})
 
 //Prova modifica
 exports.update = (req, res) => {
+  let mail=req.body.mail
   var titolo = req.body.titolo
   var soluzione= req.body.soluzione
   if (!soluzione) {
@@ -108,7 +109,21 @@ exports.update = (req, res) => {
  Ticket_Model.findOneAndUpdate({titolo : titolo}, {soluzione: soluzione})
     .then(
 	function (value){
-	res.json({message:true})
+	  var notifica=new Notifica_Model({
+      titolo:"Il tuo ticket è stato risolto!",
+      testo:"Il ticket inviato da "+ mail+" è stato risolto!",
+      reciverEmail:mail,
+      tipo:"Notifica Ticket",
+      visualizzazione:true
+  })
+  notifica
+  .save(notifica)
+  .then(data=>{
+      res.json({message:true})
+  })
+  .catch(err=>{
+      res.json({message:"Some error occurred while retrieving notifica"})
+  })
 }
 )	
     .catch(err => {
@@ -117,20 +132,6 @@ exports.update = (req, res) => {
           err.message || "Some error occurred while retrieving ticket."
       });
     });
-    var notifica=new Notifica_Model({
-      titolo:"Il tuo ticket è stato risolto!",
-      testo:"Il ticket inviato da "+ email+" è stato risolto!",
-      reciverEmail:mail,
-      tipo:"Notifica Tesserino",
-      visualizzazione:true
-  })
-  notifica
-  .save(notifica)
-  .then(data=>{
-      res.json({name:"notifica", message:"Notifica salvata"})
-  })
-  .catch(err=>{
-      res.json({name:"notifica", message:"Some error while saving noficia"})
-  })
+  
 
 };
