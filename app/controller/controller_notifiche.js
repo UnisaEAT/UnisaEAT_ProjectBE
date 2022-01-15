@@ -29,15 +29,3 @@ exports.rimuoviNotifica =(req,res) =>{
         return;
     })
 };
-
-exports.salvaNotifica=(req,res) =>{
-   var not=new Notifiche_Model({
-       titolo:"",//il titolo che inserirò nelle opportune classi
-       testo:"",//testo opportuno
-       reciverEmail:"",//email di chi riceverà la notifica
-       tipo:"",//tipo?
-       visualizzazione:""//capire a che serve 
-   });
-
-   not.save(not).then(data=>{res.json("op riuscita")})
-}
