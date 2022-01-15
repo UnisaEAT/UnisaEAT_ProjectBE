@@ -679,8 +679,15 @@ exports.ricaricaTesserino = (req, res) => {
                 let importo = req.body.importo;
 
                 if (!intestatario) {
-                    res.json({name: "intestatario", message: "Intestatario can not be empty"});
+                    res.json({name: "intestatario", message: "Questo campo è obbligatorio!"});
                     return;
+                }
+
+                if (intestatario.length != 0) {
+                    if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(intestatario)) || intestatario.length <= 1) {
+                        res.json({name: "intestatario", message: "Formato Intestatario non corretto!"});
+                        return;
+                    }
                 }
 
                 if (!tipoCarta) {
@@ -693,58 +700,53 @@ exports.ricaricaTesserino = (req, res) => {
                     return;
                 }
 
-                if (!dataScadenzaCarta) {
-                    res.json({name: "dataScadenzaCarta", message: "Data scadenza carta can not be empty"});
-                    return;
-                }
-
-                if (!cvv) {
-                    res.json({name: "cvv", message: "Cvv can not be empty"});
-                    return;
-                }
-
-                if (!importo) {
-                    res.json({name: "importo", message: "Importo can not be empty"});
-                    return;
-                }
-
-                if (intestatario.length != 0) {
-                    if (!(/^[a-zA-Z][^\n0-9<>!?[\]{}|\\\/^~%#:;,$%?\0-\cZ]+$/.test(intestatario)) || intestatario.length <= 1) {
-                        res.json({name: "intestatario", message: "Intestatario has invalid syntax!"});
+                if (numeroCarta.length != 0) {
+                    if (numeroCarta.length <= 12 || numeroCarta.length > 16) {
+                        res.json({name: "numeroCarta", message: "Numero della carta di credito errato!"});
                         return;
                     }
                 }
 
                 if (tipoCarta == "Mastercard") {
                     if (numeroCarta.length != 0) {
-                        if (!(/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)[0-9]{0,}$/.test(numeroCarta)) || numeroCarta.length <= 12 || numeroCarta.length > 16) {
-                            res.json({name: "numeroCarta", message: "Numero carta has invalid syntax!"});
+                        if (!(/^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)[0-9]{0,}$/.test(numeroCarta))) {
+                            res.json({name: "numeroCarta", message: "Formato numero carta errato!"});
                             return;
                         }
                     }
                 } else if (tipoCarta == "Visa") {
                     if (numeroCarta.length != 0) {
-                        if (!(/^4[0-9]{6,}$/.test(numeroCarta)) || numeroCarta.length <= 12 || numeroCarta.length > 16) {
-                            res.json({name: "numeroCarta", message: "Numero carta has invalid syntax!"});
+                        if (!(/^4[0-9]{6,}$/.test(numeroCarta))) {
+                            res.json({name: "numeroCarta", message: "Formato numero carta errato!"});
                             return;
                         }
                     }
                 } else {
                     //è AmericanExpress
                     if (numeroCarta.length != 0) {
-                        if (!(/^3[47][0-9]{5,}$/.test(numeroCarta)) || numeroCarta.length <= 12 || numeroCarta.length > 16) {
-                            res.json({name: "numeroCarta", message: "Numero carta has invalid syntax!"});
+                        if (!(/^3[47][0-9]{5,}$/.test(numeroCarta))) {
+                            res.json({name: "numeroCarta", message: "Formato numero carta errato!"});
                             return;
                         }
                     }
                 }
 
+                if (!dataScadenzaCarta) {
+                    res.json({name: "dataScadenzaCarta", message: "Questo campo è obbligatorio!"});
+                    return;
+                }
+
                 if (dataScadenzaCarta.length != 0) {
                     if (!(/^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/.test(dataScadenzaCarta)) || (dataScadenzaCarta.length != 5 && dataScadenzaCarta.length != 7)) {
-                        res.json({name: "dataScadenzaCarta", message: "Data scadenza carta has invalid syntax!"});
+                        res.json({name: "dataScadenzaCarta", message: "Formato data scadenza errato!"});
                         return;
                         //mm/gg sintassi
                     }
+                }
+
+                if (!cvv) {
+                    res.json({name: "cvv", message: "Questo campo è obbligatorio!"});
+                    return;
                 }
 
                 if (cvv.length != 0) {
@@ -754,6 +756,11 @@ exports.ricaricaTesserino = (req, res) => {
                     }
                 }
 
+                if (!importo) {
+                    res.json({name: "importo", message: "Importo can not be empty"});
+                    return;
+                }
+    
                 if (importo.length != 0) {
                     if (!(/(^\d{1,3})(\,\d{1,2})?$/.test(importo)) || importo.length > 6) {
                         res.json({name: "importo", message: "Importo has invalid syntax!"});
