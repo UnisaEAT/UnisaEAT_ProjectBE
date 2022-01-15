@@ -3,7 +3,7 @@ module.exports = mongoose => {
     //Schema Notifica
     var schema = mongoose.Schema(
         {
-            receiverID: ObjectId,
+            receiverEmail: String,
             testo: String,
             tipo: String,
             titolo: String,

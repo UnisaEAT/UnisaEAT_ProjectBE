@@ -1,7 +1,7 @@
 const e = require("express");
 const db = require("../models");
 const Ticket_Model = db.model_ticket; //FARE IL MODEL 
-
+const Notifica_Model=db.model_notifica;
 // Create and Save a new
 
 exports.insert = (req, res) => {
@@ -117,6 +117,20 @@ exports.update = (req, res) => {
           err.message || "Some error occurred while retrieving ticket."
       });
     });
-
+    var notifica=new Notifica_Model({
+      titolo:"Il tuo ticket è stato risolto!",
+      testo:"Il ticket inviato da "+ email+" è stato risolto!",
+      reciverEmail:mail,
+      tipo:"Notifica Tesserino",
+      visualizzazione:true
+  })
+  notifica
+  .save(notifica)
+  .then(data=>{
+      res.json({name:"notifica", message:"Notifica salvata"})
+  })
+  .catch(err=>{
+      res.json({name:"notifica", message:"Some error while saving noficia"})
+  })
 
 };

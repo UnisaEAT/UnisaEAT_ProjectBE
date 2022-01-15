@@ -2,7 +2,7 @@ var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
 const Tesserino_Model = db.model_tesserino;
 const Cliente_Model = db.model_cliente;
-
+const Notifica_Model= db.model_notifica;
 
 /*
   Viene eseguita quando l'utente vuole accedere alla pagina di richiesta del tesserino
@@ -327,6 +327,23 @@ exports.create = (req, res) => {
                         err.message || "Some error occurred while creating the Tesserino."
                 });
             });
+            var notifica=new Notifica_Model({
+                titolo:"Richiesta tesserino avvenuta!",
+                testo:"La richiesta del tesserino da parte di "+email+" è avvenuta con successo!",
+                reciverEmail:email,
+                tipo:"Notifica Tesserino",
+                visualizzazione:true
+            })
+            //salva la notifica nel database
+            notifica
+            .save(notifica)
+            .then(data=>{
+                res.json({name:"notifica", message:"Notifica salvata"})
+            })
+            .catch(err=>{
+                res.json({name:"notifica", message:"Some error while saving noficia"})
+            })
+
 
     });
 };
@@ -550,6 +567,24 @@ exports.updateDataScadenza = (req, res) => {
             res.json(true);
             return;
         })
+        //creo la notifica
+        var notifica=new Notifica_Model({
+            titolo:"Rinnovo tesserino avvenuto!",
+            testo:"La richiesta del rinnovo del tesserino da parte di "+email+" è avvenuta con successo!",
+            reciverEmail:email,
+            tipo:"Notifica Tesserino",
+            visualizzazione:true
+        })
+
+        //salvo la notifica
+        notifica
+        .save(notifica)
+        .then(data=>{
+            res.json({name:"notifica", message:"Notifica salvata"})
+        })
+        .catch(err=>{
+            res.json({name:"notifica", message:"Some error while saving noficia"})
+        })
 
     });
 };
@@ -744,7 +779,24 @@ exports.ricaricaTesserino = (req, res) => {
             function (err) {
                 res.json(err);
             }
+            
         )
+        var notifica=new Notifica_Model({
+            titolo:"Ricarica tesserino avvenuta!",
+            testo:"La ricarica del tesserino da parte di "+email+" è avvenuta con successo!",
+            reciverEmail:email,
+            tipo:"Notifica Tesserino",
+            visualizzazione:true
+        })
+        notifica
+        .save(notifica)
+        .then(data=>{
+            res.json({name:"notifica", message:"Notifica salvata"})
+        })
+        .catch(err=>{
+            res.json({name:"notifica", message:"Some error while saving noficia"})
+        })
+
     });
 
 };
