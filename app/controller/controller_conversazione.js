@@ -15,7 +15,7 @@ exports.create = (req, res) => {
         })
 
         conversazione.save(conversazione).then(data => {
-            return res.json(true);
+            return res.json(data);
         })
         .catch(err => {
             return res.json({error:"Some error occurred while creating conversazione."});
