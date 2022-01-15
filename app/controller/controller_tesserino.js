@@ -751,7 +751,7 @@ exports.ricaricaTesserino = (req, res) => {
 
                 if (cvv.length != 0) {
                     if (!(/^[0-9]{3,4}$/.test(cvv)) || (cvv.length != 3 && cvv.length != 4)) {
-                        res.json({name: "cvv", message: "Cvv has invalid syntax!"});
+                        res.json({name: "cvv", message: "Formato CVV errato!"});
                         return;
                     }
                 }

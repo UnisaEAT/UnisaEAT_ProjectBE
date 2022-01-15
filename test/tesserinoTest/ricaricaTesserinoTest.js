@@ -135,13 +135,13 @@ describe('Field test for ricarica tesserino', function () {
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
-        tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"", importo:""
+        tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"43212", importo:""
     })
     .end(function(error, response, body) {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({name: "cvv", message: "Questo campo è obbligatorio!"})
+            expect(response.body).to.deep.equal({name: "cvv", message: "Formato CVV errato!"})
             done();
         }
     });
