@@ -2,7 +2,7 @@ var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
 const Tesserino_Model = db.model_tesserino;
 const Cliente_Model = db.model_cliente;
-
+const Notifica_Model = db.model_notifica
 
 /*
   Viene eseguita quando l'utente vuole accedere alla pagina di richiesta del tesserino
@@ -102,7 +102,7 @@ exports.isExpired = (req, res) => {
 exports.create = (req, res) => {
 
     const ruolo = req.body.ruoloSessione;
-    const email = req.body.emailSessione;
+    const email= req.body.emailSessione;
 
 
     if (ruolo != "cliente") {
@@ -320,8 +320,24 @@ exports.create = (req, res) => {
             .then(data => {
                 Cliente_Model.findOneAndUpdate({email: email}, {tesserino: new ObjectId(data._id)}).then(
                     function (value) {
-                        res.json({message: true});
-                        return;
+
+                        var notifica=new Notifica_Model({
+                            titolo:"Richiesta tesserino avvenuta!",
+                            testo:"La richiesta del tesserino da parte di "+email+" è avvenuta con successo!",
+                            reciverEmail:email,
+                            tipo:"Notifica Tesserino",
+                            visualizzazione:true
+                        })
+                        //salva la notifica nel database
+                        notifica
+                        .save(notifica)
+                        .then(data=>{
+                            console.log(data)
+                            res.json({message: true});
+                            return;
+                        })
+
+                        
                     }
                 )
             })
@@ -332,23 +348,8 @@ exports.create = (req, res) => {
                 });
             });
 
-            /*
-            var notifica=new Notifica_Model({
-                titolo:"Richiesta tesserino avvenuta!",
-                testo:"La richiesta del tesserino da parte di "+email+" è avvenuta con successo!",
-                reciverEmail:email,
-                tipo:"Notifica Tesserino",
-                visualizzazione:true
-            })
-            //salva la notifica nel database
-            notifica
-            .save(notifica)
-            .then(data=>{
-                res.json({name:"notifica", message:"Notifica salvata"})
-            })
-            .catch(err=>{
-                res.json({name:"notifica", message:"Some error while saving noficia"})
-            }) */
+            
+            
 
     });
 };
@@ -589,8 +590,25 @@ exports.updateDataScadenza = (req, res) => {
 
                     Tesserino_Model.findByIdAndUpdate(tesserinoID, {dataScadenza: date}, function (err, docs) {
                         if (err) throw err;
-                        res.json(true);
-                        return;
+
+                        var notifica=new Notifica_Model({
+                            titolo:"Rinnovo tesserino avvenuto!",
+                            testo:"La richiesta del rinnovo del tesserino da parte di "+email+" è avvenuta con successo!",
+                            reciverEmail:email,
+                            tipo:"Notifica Tesserino",
+                            visualizzazione:true
+                        })
+
+                        //salvo la notifica
+                        notifica
+                        .save(notifica)
+                        .then(data=>{
+                            console.log(data);
+                            res.json(true);
+                            return;
+                        })
+
+                        
                     })
 
                 }
@@ -600,24 +618,7 @@ exports.updateDataScadenza = (req, res) => {
             }
         )
 
-         /*//creo la notifica
-         var notifica=new Notifica_Model({
-            titolo:"Rinnovo tesserino avvenuto!",
-            testo:"La richiesta del rinnovo del tesserino da parte di "+email+" è avvenuta con successo!",
-            reciverEmail:email,
-            tipo:"Notifica Tesserino",
-            visualizzazione:true
-        })
-
-        //salvo la notifica
-        notifica
-        .save(notifica)
-        .then(data=>{
-            res.json({name:"notifica", message:"Notifica salvata"})
-        })
-        .catch(err=>{
-            res.json({name:"notifica", message:"Some error while saving noficia"})
-        })*/
+         
 
     });
 };
@@ -810,8 +811,22 @@ exports.ricaricaTesserino = (req, res) => {
                 importo = parseFloat(importo);
                 Tesserino_Model.findByIdAndUpdate(tesserinoID, {saldo: saldo + importo}, function (err, docs) {
                     if (err) throw err;
-                    res.json({message: true});
-                    return;
+
+                    var notifica=new Notifica_Model({
+                        titolo:"Ricarica tesserino avvenuta!",
+                        testo:"La ricarica del tesserino da parte di "+email+" è avvenuta con successo!",
+                        reciverEmail:email,
+                        tipo:"Notifica Tesserino",
+                        visualizzazione:true
+                    })
+                    notifica
+                    .save(notifica)
+                    .then(data=>{
+                        console.log(data)
+                        res.json({message: true});
+                        return;
+                    })
+                    
 
                 });
 
@@ -821,21 +836,8 @@ exports.ricaricaTesserino = (req, res) => {
             }
         )
 
-        /*var notifica=new Notifica_Model({
-            titolo:"Ricarica tesserino avvenuta!",
-            testo:"La ricarica del tesserino da parte di "+email+" è avvenuta con successo!",
-            reciverEmail:email,
-            tipo:"Notifica Tesserino",
-            visualizzazione:true
-        })
-        notifica
-        .save(notifica)
-        .then(data=>{
-            res.json({name:"notifica", message:"Notifica salvata"})
-        })
-        .catch(err=>{
-            res.json({name:"notifica", message:"Some error while saving noficia"})
-        })*/
+        
+        
 
     });
 
