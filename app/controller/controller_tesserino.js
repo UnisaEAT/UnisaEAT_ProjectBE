@@ -332,6 +332,24 @@ exports.create = (req, res) => {
                 });
             });
 
+            /*
+            var notifica=new Notifica_Model({
+                titolo:"Richiesta tesserino avvenuta!",
+                testo:"La richiesta del tesserino da parte di "+email+" è avvenuta con successo!",
+                reciverEmail:email,
+                tipo:"Notifica Tesserino",
+                visualizzazione:true
+            })
+            //salva la notifica nel database
+            notifica
+            .save(notifica)
+            .then(data=>{
+                res.json({name:"notifica", message:"Notifica salvata"})
+            })
+            .catch(err=>{
+                res.json({name:"notifica", message:"Some error while saving noficia"})
+            }) */
+
     });
 };
 
@@ -581,6 +599,26 @@ exports.updateDataScadenza = (req, res) => {
                 res.json({messagge: "Error: " + err});
             }
         )
+
+         /*//creo la notifica
+         var notifica=new Notifica_Model({
+            titolo:"Rinnovo tesserino avvenuto!",
+            testo:"La richiesta del rinnovo del tesserino da parte di "+email+" è avvenuta con successo!",
+            reciverEmail:email,
+            tipo:"Notifica Tesserino",
+            visualizzazione:true
+        })
+
+        //salvo la notifica
+        notifica
+        .save(notifica)
+        .then(data=>{
+            res.json({name:"notifica", message:"Notifica salvata"})
+        })
+        .catch(err=>{
+            res.json({name:"notifica", message:"Some error while saving noficia"})
+        })*/
+
     });
 };
 
@@ -782,6 +820,23 @@ exports.ricaricaTesserino = (req, res) => {
                 res.json(err);
             }
         )
+
+        /*var notifica=new Notifica_Model({
+            titolo:"Ricarica tesserino avvenuta!",
+            testo:"La ricarica del tesserino da parte di "+email+" è avvenuta con successo!",
+            reciverEmail:email,
+            tipo:"Notifica Tesserino",
+            visualizzazione:true
+        })
+        notifica
+        .save(notifica)
+        .then(data=>{
+            res.json({name:"notifica", message:"Notifica salvata"})
+        })
+        .catch(err=>{
+            res.json({name:"notifica", message:"Some error while saving noficia"})
+        })*/
+
     });
 
 };
