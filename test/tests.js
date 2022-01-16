@@ -14,9 +14,9 @@
  * Per ricaricaTesserinoTest bisogna aver eseguito con successo createTesserinoTest, in modo che il cliente Francesco Rossi
  * Abbia un tesserino che è possibile ricaricare 
  */
-//require("./tesserinoTest/createTesserinoTest");
-//require("./tesserinoTest/rinnovoTesserinoTest");
-//require("./tesserinoTest/ricaricaTesserinoTest");
+require("./tesserinoTest/createTesserinoTest");
+require("./tesserinoTest/rinnovoTesserinoTest");
+require("./tesserinoTest/ricaricaTesserinoTest");
 
 //chatTest files
 /**
@@ -27,5 +27,5 @@
  * Per modificaMessaggioTest bisogna caricare nel db una conversazione ed un messaggio, in modo 
  * da utilizzare l'id del messaggio per modifire il messaggio
  */
-//require("./chatTest/invioMessaggioTest");
-//require("./chatTest/modificaMessaggioTest");
+require("./chatTest/invioMessaggioTest");
+require("./chatTest/modificaMessaggioTest");

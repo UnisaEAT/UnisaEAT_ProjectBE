@@ -1,0 +1,17 @@
+[{
+  "_id": {
+    "$oid": "61e3e98a760bad9f9bc8c064"
+  },
+  "conversazioneId": {
+    "$oid": "61dc2b2ef27cd22144f632c1"
+  },
+  "sender": {
+    "email": "d.devito@studenti.unisa.it",
+    "ruolo": "personale adisu"
+  },
+  "testo": "messaggio da modificare",
+  "dataInvio": {
+    "$date": "2022-01-17T09:41:55.844Z"
+  },
+  "__v": 0
+}]

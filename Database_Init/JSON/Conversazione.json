@@ -1,0 +1,16 @@
+[{
+  "_id": {
+    "$oid": "61dc2b2ef27cd22144f632c1"
+  },
+  "membri": [
+    {
+      "email": "d.devito@studenti.unisa.it",
+      "ruolo": "personale adisu"
+    },
+    {
+      "email": "d.devoto@studenti.unisa.it",
+      "ruolo": "cliente"
+    }
+  ],
+  "__v": 0
+}]

@@ -32,6 +32,8 @@ function insert() {
             const ordineData = fs.readFileSync(__dirname + '\\JSON\\Ordine.json')
             const statisticheData = fs.readFileSync(__dirname+"\\JSON\\Statistiche.json")
             const tesserinoData = fs.readFileSync(__dirname + '\\JSON\\Tesserino.json')
+            const conversazioneData = fs.readFileSync(__dirname + '\\JSON\\Conversazione.json')
+            const MessaggioData = fs.readFileSync(__dirname + '\\JSON\\Messaggio.json')
 
             const client = JSON.parse(clienteData)
             const personale = JSON.parse(personaledata)
@@ -41,6 +43,8 @@ function insert() {
             const menu = JSON.parse(menuData)
             const ordine = JSON.parse(ordineData);
             const tesserino = JSON.parse(tesserinoData);
+            const conversazione = JSON.parse(conversazioneData);
+            const messaggio = JSON.parse(MessaggioData);
 
             for (var i = 0; client[i] != null; i++) {
 
@@ -101,6 +105,16 @@ function insert() {
                 tesserino[i].dataScadenza = new Date (tesserino[i].dataScadenza.$date)
             }
 
+            for (var i = 0; conversazione[i] != null; i++) {
+                conversazione[i]._id = new ObjectId(conversazione[i]._id.$oid);
+            }
+
+            for (var i = 0; messaggio[i] != null; i++) {
+                messaggio[i]._id = new ObjectId(messaggio[i]._id.$oid);
+                messaggio[i].conversazioneId = new ObjectId(messaggio[i].conversazioneId.$oid);
+                messaggio[i].dataInvio = new Date(messaggio[i].dataInvio.$date)
+            }
+
             dbo.collection('cliente').insertMany(client, function (err, result) {
                 if (err) throw err
                 console.log('abbiamo inserito ' + result.insertedCount + ' clienti')
@@ -133,8 +147,21 @@ function insert() {
                                             if (err) throw err;
                                             console.log('abbiamo inserito ' + result.insertedCount + ' tesserini')
 
-                                            console.log('Succesfully created the collection UnisaEAT_db.')
-                                            resolve()
+                                            dbo.collection('conversazione').insertMany(conversazione, function(err, result){
+                                                if (err) throw err;
+                                                console.log('abbiamo inserito ' + result.insertedCount + ' conversazioni')
+                                                
+                                                dbo.collection('messaggio').insertMany(messaggio, function(err, result){
+                                                    if (err) throw err;
+                                                    console.log('abbiamo inserito ' + result.insertedCount + ' messaggi')
+                                                    console.log('Succesfully created the collection UnisaEAT_db.')
+                                                    resolve()
+                                                })
+
+                                                
+                                            })
+
+                                            
                                         })
                                     })
                                 })        

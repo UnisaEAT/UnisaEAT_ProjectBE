@@ -124,5 +124,45 @@
     "provincia": "Salerno",
     "cap": "84088",
     "telefono": "3466985454"
+  },
+  {
+    "_id": {
+      "$oid": "61e0648624f6d35a361e785b"
+    },
+    "nome": "Francesco",
+    "cognome": "Rossi",
+    "password": "bellaPassword1!",
+    "citta": "Fisciano",
+    "email": "francrossi@gmail.com",
+    "indirizzo": "Via Enaudi F/4",
+    "tesserino": null,
+    "dataDiNascita": "03/11/2000",
+    "provinciaDiNascita": "Salerno",
+    "comuneDiNascita": "Angri",
+    "cittadinanza": "Italiana",
+    "provincia": "Salerno",
+    "cap": "84081",
+    "telefono": "+393471234566"
+  },
+  {
+    "_id": {
+      "$oid": "61e17933f49c10616dd10fb2"
+    },
+    "nome": "Marco",
+    "cognome": "Rossi",
+    "password": "bellaPassword1!",
+    "citta": "Fisciano",
+    "email": "marcorossi@gmail.com",
+    "indirizzo": "Via Enaudi F/5",
+    "tesserino": {
+      "$oid": "61e3ece66594453ae84c6947"
+    },
+    "dataDiNascita": "03/11/2000",
+    "provinciaDiNascita": "Salerno",
+    "comuneDiNascita": "Angri",
+    "cittadinanza": "Italiana",
+    "provincia": "Salerno",
+    "cap": "84081",
+    "telefono": "+393471234567"
   }
 ]
