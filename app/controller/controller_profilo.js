@@ -1,23 +1,23 @@
 var ObjectId = require('mongodb').ObjectID;
 const db = require("../models");
-var Personale_Model = db.model_personale;  //Personale
-var Cliente_Model = db.model_cliente;  //Cliente
-var Admin_Model = db.model_admin;  //Admin
-const session = require('express-session')  //Verificare sessione
+var Personale_Model = db.model_personale; //Personale
+var Cliente_Model = db.model_cliente; //Cliente
+var Admin_Model = db.model_admin; //Admin
+const session = require('express-session') //Verificare sessione
 var hash = require('./hash.js')
 
 //findByEmail dell'utente
 exports.findByEmail = (req, res) => {
 
     var tipo = req.body.ruolo
-    console.log("Tipo"+tipo)
+    console.log("Tipo" + tipo)
     var mail = req.body.email
 
 
-//if Personale, Cliente, Admin
-    if ((tipo == "personale adisu")||(tipo=="operatore mensa")) {
-//Email andrà modificato una volta implementata la sessione nei Login
-        Personale_Model.find({email: mail}) //ID
+    //if Personale, Cliente, Admin
+    if ((tipo == "personale adisu") || (tipo == "operatore mensa")) {
+        //Email andrà modificato una volta implementata la sessione nei Login
+        Personale_Model.find({ email: mail }) //ID
             .then(data => {
                 res.json(data);
             })
@@ -25,60 +25,76 @@ exports.findByEmail = (req, res) => {
                 res.json({
                     name: "ruolo",
                     message:
-                    
+
                         err.message || "Some error occurred while retrieving profile."
                 });
             });
     }
-   if (tipo == "cliente") {
-        Cliente_Model.find({email: mail}) //ID
+    if (tipo == "cliente") {
+        Cliente_Model.find({ email: mail }) //ID
             .then(data => {
                 res.json(data);
             })
             .catch(err => {
                 res.json({
                     name: "ruolo",
-                    message:
-                        err.message || "Some error occurred while retrieving profile."
+                    message: err.message || "Some error occurred while retrieving profile."
                 });
             });
     }
     if (tipo == "admin") {
-        Admin_Model.find({email: mail}) //ID
+        Admin_Model.find({ email: mail }) //ID
             .then(data => {
                 res.json(data);
             })
             .catch(err => {
                 res.json({
                     name: "ruolo",
-                    message:
-                        err.message || "Some error occurred while retrieving profile."
+                    message: err.message || "Some error occurred while retrieving profile."
                 });
             });
     }
 };
 
-exports.updatePassword = function (req, res) {
+exports.updatePassword = function(req, res) {
 
     var mail = req.body.email
-    console.log("EMAIL "+mail)
+    console.log("EMAIL " + mail)
     var oldPassword = req.body.inputOldPassword
     var password = req.body.inputPassword
     var passwordConfirm = req.body.inputConfirmPassword
 
-    if ((!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(oldPassword)) || (oldPassword.length <= 8) || (oldPassword == null))) {
-        res.json({name: "inputOldPassword", message: "Errore Password vecchia."});
+    if ((!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(oldPassword)) || (oldPassword == null))) {
+        res.json({
+            name: "inputOldPassword",
+            message: "Il formato della vecchia password non è corretto."
+        });
+        if (oldPassword.length <= 8)
+            res.json({ name: "inputOldPassword", message: "Lunghezza password non corretta" });
         return;
     }
 
-    if ((password == null) || (password.length <= 8) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
-        res.json({name: "inputPassword", message: "Errore Password."});
+    if ((password == null) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
+        res.json({
+            name: "inputPassword",
+            message: "Il formato della nuova password non è corretto"
+        });
+        if (password.length <= 8)
+            res.json({ name: "inputPassword", message: "Lunghezza password non corretta" });
         return;
     }
+    if ((passwordConfirm == null) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(passwordConfirm)))) {
+        res.json({ name: "inputConfirmPassword", message: "Il formato della nuova password non è corretto" });
+        if (passwordConfirm != password) {
 
-    if (passwordConfirm != password) {
-        res.json({name: "inputConfirmPassword", message: "Errore Password di conferma."});
-        return;
+            res.json({
+                name: "inputConfirmPassword",
+                message: "la password inserita non corrisponde a quella del campo precedente"
+            });
+            if (password.length <= 8)
+                res.json({ name: "inputConfirmPassword", message: "Lunghezza password non corretta" });
+            return;
+        }
     }
 
     //Non corrisponde a quello sul DB CHECKPASSWORD - vedere come fare find per i tipi
@@ -92,7 +108,7 @@ exports.updatePassword = function (req, res) {
         let hashato=docs[0].password;
 
         if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword)==false) {
-          res.json({message: "Password non corrisponde nel DB."});
+          res.json({message: "la vecchia password non corrisponde."});
           return;
         }
       })
@@ -103,7 +119,7 @@ exports.updatePassword = function (req, res) {
         let hashato=docs[0].password;
 
         if(hash.checkPassword(hashato.hash, hashato.salt, oldPassword)==false) {
-          res.json({message: "Password non corrisponde nel DB."});
+          res.json({message: "la vecchia password non corrisponde."});
           return;
         }
       })
@@ -114,7 +130,7 @@ exports.updatePassword = function (req, res) {
         let hashato=docs[0].password;
 
         if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword)==false) {
-          res.json({message: "Password non corrisponde nel DB."});
+          res.json({message: "la vecchia password non corrisponde."});
           return;
         }
       })
@@ -126,51 +142,51 @@ exports.updatePassword = function (req, res) {
     console.log(req.body.ruolo)
     if (req.body.ruolo == "personale adisu" || req.body.ruolo == "operatore mensa") {
 
-        Personale_Model.find({email: mail}, function (err, docs) {
+        Personale_Model.find({ email: mail }, function(err, docs) {
             if (err) throw err;
             let hashato = docs[0].password;
 
             if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({name: "inputOldPassword", message: "Password non corrisponde nel DB."});
+                res.json({ name: "inputOldPassword", message: "la vecchia password non corrisponde." });
                 return;
             } else {
-                Personale_Model.findOneAndUpdate({email: mail}, {password: passwordHashed}).then(
-                    function (val) {
-                        res.json({name: "password", message: "Modifica password avvenuta con successo."});
+                Personale_Model.findOneAndUpdate({ email: mail }, { password: passwordHashed }).then(
+                    function(val) {
+                        res.json({ name: "password", message: "Modifica password avvenuta con successo." });
                         return;
                     }
                 );
             }
         })
     } else if (req.body.ruolo == "cliente") {
-        Cliente_Model.find({email: mail}, function (err, docs) {
+        Cliente_Model.find({ email: mail }, function(err, docs) {
             if (err) throw err;
             let hashato = docs[0].password;
 
             if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({name: "inputOldPassword", message: "Password non corrisponde nel DB."});
+                res.json({ name: "inputOldPassword", message: "la vecchia password non corrisponde." });
                 return;
             } else {
-                Cliente_Model.findOneAndUpdate({email: mail}, {password: passwordHashed}).then(
-                    function (val) {
-                        res.json({name: "password", message: "Modifica password avvenuta con successo."});
+                Cliente_Model.findOneAndUpdate({ email: mail }, { password: passwordHashed }).then(
+                    function(val) {
+                        res.json({ name: "password", message: "Modifica password avvenuta con successo." });
                         return;
                     }
                 );
             }
         })
     } else if (req.body.ruolo == "admin") {
-        Admin_Model.find({email: mail}, function (err, docs) {
+        Admin_Model.find({ email: mail }, function(err, docs) {
             if (err) throw err;
             let hashato = docs[0].password;
 
             if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({name: "inputOldPassword", message: "Password non corrisponde nel DB."});
+                res.json({ name: "inputOldPassword", message: "la vecchia password non corrisponde." });
                 return;
             } else {
-                Admin_Model.findOneAndUpdate({email: mail}, {password: passwordHashed}).then(
-                    function (val) {
-                        res.json({name: "password", message: "Modifica password avvenuta con successo."});
+                Admin_Model.findOneAndUpdate({ email: mail }, { password: passwordHashed }).then(
+                    function(val) {
+                        res.json({ name: "password", message: "Modifica password avvenuta con successo." });
                         return;
                     }
                 );
