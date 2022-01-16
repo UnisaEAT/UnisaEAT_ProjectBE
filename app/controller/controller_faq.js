@@ -28,9 +28,12 @@ exports.insertFAQ = (req, res) => {
   if (!domanda) {
   res.json({ name:"domanda", message: "Domanda non può essere vuoto" });
   return;}
-   if (domanda.length != 0) {
-    if (!(/^[A-Z0-9][\w\W]{15,198}\?$/.test(domanda)) || domanda.length <= 17 || domanda.length > 200) {
-      res.json({ name:"domanda", message: "Espressione regolare non rispettata" });
+  if (domanda.length != 0) {
+    if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(domanda)) ) {
+      res.json({message: "Formato della riposta non corretto" });
+      return;}
+      if (domanda.length <= 17 || domanda.length > 200){ res.json
+      ({ message: "Lunghezza della risposta non corretta" });
       return;}
     }
 
@@ -39,8 +42,11 @@ exports.insertFAQ = (req, res) => {
     res.json({ name:"risposta", message: "Risposta non può essere vuoto" });
     return;}
     if (risposta.length != 0) {
-      if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(risposta)) || risposta.length <= 17 || risposta.length > 200) {
-        res.json({name:"risposta", message: "Espressione regolare non rispettata" });
+      if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(risposta)) ) {
+        res.json({message: "Formato della riposta non corretto" });
+        return;}
+        if (risposta.length <= 17 || risposta.length > 200){ res.json
+        ({ message: "Lunghezza della risposta non corretta" });
         return;}
       }
 
@@ -51,7 +57,7 @@ exports.insertFAQ = (req, res) => {
     if (docs==0){
       faq.save(faq)
     .then(data => {
-      res.json({message: true});
+      res.json({message: "Inserimento avvenuto con successo."});
     })
     .catch(err => {
       res.json({message: err.message || "Some error occurred while retriving faq."
@@ -115,9 +121,12 @@ var newrisposta=req.body.newrisposta;
 if (!newdomanda) {
   res.json({ name:"newdomanda", message: "Domanda non può essere vuoto" });
   return;}
-   if (newdomanda.length != 0) {
-    if (!(/^[A-Z0-9][\w\W]{15,198}\?$/.test(newdomanda)) || newdomanda.length <= 17 || newdomanda.length > 200) {
-      res.json({ name:"newdomanda", message: "Espressione regolare non rispettata" });
+  if (domanda.length != 0) {
+    if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(newdomanda)) ) {
+      res.json({message: "Formato della domanda non corretto" });
+      return;}
+      if (newdomanda.length <= 17 || newdomanda.length > 200){ res.json
+      ({ message: "Lunghezza della domanda non corretta" });
       return;}
     }
 
@@ -126,15 +135,19 @@ if (!newdomanda) {
     res.json({ name:"newrisposta", message: "Risposta non può essere vuoto" });
     return;}
     if (newrisposta.length != 0) {
-      if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(newrisposta)) || newrisposta.length <= 17 || newrisposta.length > 200) {
-        res.json({name:"newrisposta", message: "Espressione regolare non rispettata" });
+      if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(newrisposta)) ) {
+        res.json({message: "Formato della riposta non corretto" });
+        return;}
+        if (newrisposta.length <= 17 || newrisposta.length > 200){ res.json
+        ({ message: "Lunghezza della risposta non corretta" });
         return;}
       }
+
 //Cerco domanda e cambio risposta, cerco risposta e cambio domanda?
   Faq_Model.findOneAndUpdate({domanda : domanda}, {domanda: newdomanda, risposta: newrisposta}) //vedere con alex come passare l'email in questo campo 
     .then(
 	function (value){
-	res.json({message:true})
+	res.json({message:"Modifica avvenuta con successo"})
 }
 )	
     .catch(err => {

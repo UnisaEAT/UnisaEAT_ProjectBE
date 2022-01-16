@@ -34,7 +34,7 @@ exports.insert = (req, res) => {
   return;}
    if (titolo.length != 0) {
     if (!(/^[A-Z0-9][\w\W]{19,99}\.$/.test(titolo)) || titolo.length <= 20 || titolo.length > 100) {
-      res.json({ name:"titolo", message: "Espressione regolare non rispettata" });
+      res.json({ name:"titolo", message: "Errore inserimento titolo" });
       return;}
     }
 
@@ -43,7 +43,7 @@ exports.insert = (req, res) => {
     return;}
     if (problema.length != 0) {
       if (!(/^[A-Z0-9][\w\W]{19,699}\.$/.test(problema)) || problema.length <= 20 || problema.length > 700) {
-        res.json({name:"problema", message: "Espressione regolare non rispettata" });
+        res.json({name:"problema", message: "Errore inserimento problema" });
         return;}
       }
 
@@ -54,7 +54,7 @@ exports.insert = (req, res) => {
     if (docs==0){
       ticket.save(ticket)
     .then(data => {
-      res.json({message: true});
+      res.json({message: "Compilazione del ticket avvenuta con successo"});
     })
     .catch(err => {
       res.json({message: err.message || "Some error occurred while retriving ticket."
@@ -102,7 +102,7 @@ exports.update = (req, res) => {
     return;}
      if (soluzione.length != 0) {
       if (!(/^[A-Z0-9][\w\W]{19,699}\.$/.test(soluzione)) || soluzione.length <= 20 || soluzione.length > 700) {
-        res.json({ name:"soluzione", message: "Espressione regolare non rispettata" });
+        res.json({ name:"soluzione", message: "Errore inserimento soluzione" });
         return;}
       }
 
@@ -119,7 +119,7 @@ exports.update = (req, res) => {
   notifica
   .save(notifica)
   .then(data=>{
-      res.json({message:true})
+      res.json({message:"Soluzione del ticket avvenuta con successo"})
   })
   .catch(err=>{
       res.json({message:"Some error occurred while retrieving notifica"})
