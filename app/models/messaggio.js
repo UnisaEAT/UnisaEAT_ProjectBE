@@ -1,12 +1,13 @@
 var ObjectId = require('mongodb').ObjectID;
 module.exports = mongoose => {
     //Schema Messaggio
+    //L'object sender è un oggetto di questo tipo: {email, ruolo} 
     var schema = mongoose.Schema(
         {
-            senderID: ObjectId,
-            receiverID: ObjectId,
+            conversazioneId: ObjectId,
+            sender: Object,
             testo: String,
-            data: Date
+            dataInvio: Date
         }
     );
 
