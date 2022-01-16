@@ -147,4 +147,55 @@ describe('Field test for ricarica tesserino', function () {
     });
   })
 
+  it('TC_TDM_3.9', function (done) {
+
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
+        tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"451", importo:""
+    })
+    .end(function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({name: "importo", message: "Questo campo è obbligatorio!"})
+            done();
+        }
+    });
+  })
+
+  it('TC_TDM_3.10', function (done) {
+
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
+        tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"451", importo:"10,,,50"
+    })
+    .end(function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({name: "importo", message: "Formato importo errato!"})
+            done();
+        }
+    });
+  })
+
+  it('TC_TDM_3.11', function (done) {
+
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
+        tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"451", importo:"10.50"
+    })
+    .end(function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({message: true})
+            done();
+        }
+    });
+  })
+
 })

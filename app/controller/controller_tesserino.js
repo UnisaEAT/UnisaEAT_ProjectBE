@@ -757,13 +757,13 @@ exports.ricaricaTesserino = (req, res) => {
                 }
 
                 if (!importo) {
-                    res.json({name: "importo", message: "Importo can not be empty"});
+                    res.json({name: "importo", message: "Questo campo è obbligatorio!"});
                     return;
                 }
     
                 if (importo.length != 0) {
-                    if (!(/(^\d{1,3})(\,\d{1,2})?$/.test(importo)) || importo.length > 6) {
-                        res.json({name: "importo", message: "Importo has invalid syntax!"});
+                    if (!(/(^\d{1,3})(\.\d{1,2})?$/.test(importo)) || importo.length > 6) {
+                        res.json({name: "importo", message: "Formato importo errato!"});
                         return;
                     }
                 }
