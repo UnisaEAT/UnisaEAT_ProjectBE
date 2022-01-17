@@ -60,6 +60,30 @@ exports.insert = (req, res) => {
         }
     }
 
+       //validazione dell'indirizzo
+       if (!indirizzo) {
+        res.json({name: "indirizzo", message: "Indirizzo non può essere vuoto"});
+        return;
+    }
+    if (indirizzo.length != 0) {
+        if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
+            res.json({name: "indirizzo", message: "Espressione regolare indirizzo non rispettata"});
+            return;
+        }
+    }
+
+     //validazione del numero di telefono
+     if (!numeroTelefono) {
+        res.json({name: "numeroTelefono", message: "NumeroTelefono non può essere vuoto"});
+        return;
+    }
+    if (numeroTelefono.length != 0) {
+        if (!(/^[0-9\-\+]{9,15}$/.test(numeroTelefono)) || numeroTelefono.length < 10 || numeroTelefono.length > 15) {
+            res.json({name: "numeroTelefono", message: "Espressione regolare numero non rispettata"});
+            return;
+        }
+    }
+
     //validazione della data di nascita
     if (!dataDiNascita) {
         res.json({name: "datadinascita", message: "Data di nascita non può essere vuoto"});
@@ -68,18 +92,6 @@ exports.insert = (req, res) => {
     if (dataDiNascita.length == 10) {
         if (!(/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[-\/.](19|20)\d\d/.test(dataDiNascita))) {
             res.json({name: "dataDiNascita", message: "Espressione regolare datadinascita non rispettata"});
-            return;
-        }
-    }
-
-    //validazione del numero di telefono
-    if (!numeroTelefono) {
-        res.json({name: "numeroTelefono", message: "NumeroTelefono non può essere vuoto"});
-        return;
-    }
-    if (numeroTelefono.length != 0) {
-        if (!(/^[0-9\-\+]{9,15}$/.test(numeroTelefono)) || numeroTelefono.length < 10 || numeroTelefono.length > 15) {
-            res.json({name: "numeroTelefono", message: "Espressione regolare numero non rispettata"});
             return;
         }
     }
@@ -96,17 +108,7 @@ exports.insert = (req, res) => {
         }
     }
 
-    //validazione dell'indirizzo
-    if (!indirizzo) {
-        res.json({name: "indirizzo", message: "Indirizzo non può essere vuoto"});
-        return;
-    }
-    if (indirizzo.length != 0) {
-        if (!(/^[a-zA-Z][^\n<>!?[\]{}|^~%#:;$%?\0-\cZ]+$/.test(indirizzo)) || indirizzo.length <= 1) {
-            res.json({name: "indirizzo", message: "Espressione regolare indirizzo non rispettata"});
-            return;
-        }
-    }
+ 
 
     //validazione della password
     if (!password) {
