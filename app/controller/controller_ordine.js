@@ -111,10 +111,10 @@ exports.hasOrdini = (req, res) => {
 }
 /*
  var notifica=new Notifica_Model({
-                            titolo:"Richiesta tesserino avvenuta!",
-                            testo:"La richiesta del tesserino da parte di "+email+" è avvenuta con successo!",
-                            reciverEmail:email,
-                            tipo:"Notifica Tesserino",
+                            titolo:"Ordinazione del pasto avvenuta!",
+                            testo:"La richiesta del pasto da parte di"+emailSesione+" è avvenuta con successo!",
+                            reciverEmail:emailSessione,
+                            tipo:"Notifica pasto",
                             visualizzazione:true
                         })
                         //salva la notifica nel database
