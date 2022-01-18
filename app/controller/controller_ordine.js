@@ -5,6 +5,7 @@ const Pasto_Model = db.model_pasto;
 const Menu_Model = db.model_menu;
 const Cliente_Model = db.model_cliente
 const Tesserino_Model = db.model_tesserino;
+const Notifica_Model = db.model_notifica;
 
 /**
  * 
@@ -109,27 +110,6 @@ exports.hasOrdini = (req, res) => {
     })
   })
 }
-/*
- var notifica=new Notifica_Model({
-                            titolo:"Ordinazione del pasto avvenuta!",
-                            testo:"La richiesta del pasto da parte di"+emailSesione+" è avvenuta con successo!",
-                            reciverEmail:emailSessione,
-                            tipo:"Notifica pasto",
-                            visualizzazione:true
-                        })
-                        //salva la notifica nel database
-                        notifica
-                        .save(notifica)
-                        .then(data=>{
-                            console.log(data)
-                            res.json({message: true});
-                            return;
-                        })
-
-*/
-
-
-
 
 exports.create = (req, res) => {
 
@@ -177,7 +157,23 @@ exports.create = (req, res) => {
           let nuovoSaldo = docs.saldo - prezzoOrdine;
           Tesserino_Model.findByIdAndUpdate(idTesserino, {saldo:nuovoSaldo}, function(err, docs) {
             if (err) throw err;
-            return res.json(true);
+
+            var notifica=new Notifica_Model({
+              titolo:"Ordinazione del pasto avvenuta!",
+              testo:"La richiesta del pasto da parte di "+emailSessione+" è avvenuta con successo!",
+              reciverEmail:emailSessione,
+              tipo:"Notifica pasto",
+              visualizzazione:true
+            })
+
+            //salva la notifica nel database
+            notifica
+            .save(notifica)
+            .then(data=>{
+                console.log(data)
+                return res.json(true);
+            })
+
           })
         })
       })
