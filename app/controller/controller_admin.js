@@ -29,19 +29,3 @@ exports.create = (req, res) => {
             });
         });
 };
-
-// Prendi tutti gli Admin dal database.
-exports.findAll = (req, res) => {
-
-
-    Admin_Model.find({})
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while retrieving clienti."
-            });
-        });
-
-};
