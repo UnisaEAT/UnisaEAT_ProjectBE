@@ -14,9 +14,9 @@
  * Per ricaricaTesserinoTest bisogna aver eseguito con successo createTesserinoTest, in modo che il cliente Francesco Rossi
  * Abbia un tesserino che è possibile ricaricare 
  */
-require("./tesserinoTest/createTesserinoTest");
-require("./tesserinoTest/rinnovoTesserinoTest");
-require("./tesserinoTest/ricaricaTesserinoTest");
+//require("./tesserinoTest/createTesserinoTest");
+//require("./tesserinoTest/rinnovoTesserinoTest");
+//require("./tesserinoTest/ricaricaTesserinoTest");
 
 //chatTest files
 /**
@@ -27,8 +27,8 @@ require("./tesserinoTest/ricaricaTesserinoTest");
  * Per modificaMessaggioTest bisogna caricare nel db una conversazione ed un messaggio, in modo 
  * da utilizzare l'id del messaggio per modifire il messaggio
  */
-require("./chatTest/invioMessaggioTest");
-require("./chatTest/modificaMessaggioTest");
+//require("./chatTest/invioMessaggioTest");
+//require("./chatTest/modificaMessaggioTest");
 
 //personaleTest files
 /**
@@ -36,6 +36,9 @@ require("./chatTest/modificaMessaggioTest");
  * Per inserimentoPersonaleTest nel db non ci deve essere caricato nessun Personale con l'email "lucabianchi@gmail.com"
  * 
  * Per inserimentoOperatoreMnesaTest nel db non ci deve essere caricato nessun Personale con l'email "bianchi@gmail.com"
- */
- require("./personaleTest/inserimentoPersonaleAdisuTest");
- require("./personaleTest/inserimentoOperatoreMensaTest");
+*/
+ //require("./personaleTest/inserimentoPersonaleAdisuTest");
+ //require("./personaleTest/inserimentoOperatoreMensaTest"); 
+ 
+ //Ticket 
+ require("./ticketTest/compilazioneTicketTest");

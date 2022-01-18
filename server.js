@@ -46,7 +46,7 @@ app.use(sessions({
 }));
 
 
-require("./app/routes/routes_cliente")(app);
+//require("./app/routes/routes_cliente")(app);
 require("./app/routes/routes_profilo")(app);
 require("./app/routes/routes_admin")(app);
 require("./app/routes/routes_personale")(app);
