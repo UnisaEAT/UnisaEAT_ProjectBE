@@ -109,6 +109,26 @@ exports.hasOrdini = (req, res) => {
     })
   })
 }
+/*
+ var notifica=new Notifica_Model({
+                            titolo:"Richiesta tesserino avvenuta!",
+                            testo:"La richiesta del tesserino da parte di "+email+" è avvenuta con successo!",
+                            reciverEmail:email,
+                            tipo:"Notifica Tesserino",
+                            visualizzazione:true
+                        })
+                        //salva la notifica nel database
+                        notifica
+                        .save(notifica)
+                        .then(data=>{
+                            console.log(data)
+                            res.json({message: true});
+                            return;
+                        })
+
+*/
+
+
 
 
 exports.create = (req, res) => {
