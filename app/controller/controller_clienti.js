@@ -78,19 +78,3 @@ exports.selectCliente = (req, res) => {
             });
         });
 };
-
-//Get del profilo
-exports.getProfilo = function (req, res) {
-    return new Promise(function (resolve, reject) {
-        //Chiedere questione sessione
-        var tipo = req.session.utente.tipo
-        var result = Cliente_Model.selectCliente()
-        get.then(function (result) {
-            resolve({
-                Nome: result.nome, Cognome: result.cognome,
-                tipo, Indirizzo: result.indirizzo, Email: result.email
-            })
-        })
-    });
-};
-//Per modifica profilo dovremmo avere direttamente setPassword - inserire .selectAdmin
