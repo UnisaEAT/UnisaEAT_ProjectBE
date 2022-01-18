@@ -29,3 +29,13 @@ require("./tesserinoTest/ricaricaTesserinoTest");
  */
 require("./chatTest/invioMessaggioTest");
 require("./chatTest/modificaMessaggioTest");
+
+//personaleTest files
+/**
+ * Prerequisiti:
+ * Per inserimentoPersonaleTest nel db non ci deve essere caricato nessun Personale con l'email "lucabianchi@gmail.com"
+ * 
+ * Per inserimentoOperatoreMnesaTest nel db non ci deve essere caricato nessun Personale con l'email "bianchi@gmail.com"
+ */
+ require("./personaleTest/inserimentoPersonaleAdisuTest");
+ require("./personaleTest/inserimentoOperatoreMensaTest");
