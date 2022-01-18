@@ -185,7 +185,7 @@ exports.getOrdiniByCliente = (req, res) => {
     if (err) throw err;
     let idCliente = new ObjectId(docs[0]._id);
 
-    Ordine_Model.find({acquirente:idCliente}, function(err, docs) {
+    Ordine_Model.find({acquirente:idCliente}).sort({dataOrdine:-1}).exec(function(err, docs) {
       if (err) throw err;
 
       if(docs.length == 0) {
