@@ -29,11 +29,11 @@ exports.insertFAQ = (req, res) => {
   res.json({ name:"domanda", message: "Domanda non può essere vuoto" });
   return;}
   if (domanda.length != 0) {
-    if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(domanda)) ) {
-      res.json({message: "Formato della riposta non corretto" });
+    if (!(/^[A-Z0-9][\w\W]{18,98}\?$/.test(domanda)) ) {
+      res.json({message: "Formato della domanda non corretto (richiede ?)" });
       return;}
       if (domanda.length <= 17 || domanda.length > 200){ res.json
-      ({ message: "Lunghezza della risposta non corretta" });
+      ({ message: "Lunghezza della domanda non corretta" });
       return;}
     }
 
@@ -43,7 +43,7 @@ exports.insertFAQ = (req, res) => {
     return;}
     if (risposta.length != 0) {
       if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(risposta)) ) {
-        res.json({message: "Formato della riposta non corretto" });
+        res.json({message: "Formato della riposta non corretto (richiede .)" });
         return;}
         if (risposta.length <= 17 || risposta.length > 200){ res.json
         ({ message: "Lunghezza della risposta non corretta" });
@@ -122,8 +122,8 @@ if (!newdomanda) {
   res.json({ name:"newdomanda", message: "Domanda non può essere vuoto" });
   return;}
   if (domanda.length != 0) {
-    if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(newdomanda)) ) {
-      res.json({message: "Formato della domanda non corretto" });
+    if (!(/^[A-Z0-9][\w\W]{18,98}\?$/.test(newdomanda)) ) {
+      res.json({message: "Formato della domanda non corretto (richiede ?)" });
       return;}
       if (newdomanda.length <= 17 || newdomanda.length > 200){ res.json
       ({ message: "Lunghezza della domanda non corretta" });
@@ -136,7 +136,7 @@ if (!newdomanda) {
     return;}
     if (newrisposta.length != 0) {
       if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(newrisposta)) ) {
-        res.json({message: "Formato della riposta non corretto" });
+        res.json({message: "Formato della riposta non corretto (richiede .)" });
         return;}
         if (newrisposta.length <= 17 || newrisposta.length > 200){ res.json
         ({ message: "Lunghezza della risposta non corretta" });

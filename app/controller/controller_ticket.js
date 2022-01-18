@@ -33,8 +33,11 @@ exports.insert = (req, res) => {
   res.json({ name:"titolo", message: "Non può essere vuoto" });
   return;}
    if (titolo.length != 0) {
-    if (!(/^[A-Z0-9][\w\W]{19,99}\.$/.test(titolo)) || titolo.length <= 20 || titolo.length > 100) {
-      res.json({ name:"titolo", message: "Errore inserimento titolo" });
+    if (!(/^[A-Z0-9][\w\W]{19,99}\.$/.test(titolo))) {
+    res.json({ name:"titolo", message: "Errore formato titolo (richiede .)" });
+    return;}
+    if (titolo.length <= 20 || titolo.length > 100) {
+      res.json({ name:"titolo", message: "Errore lunghezza titolo" });
       return;}
     }
 
@@ -42,9 +45,12 @@ exports.insert = (req, res) => {
     res.json({ name:"problema", message: "Non può essere vuoto" });
     return;}
     if (problema.length != 0) {
-      if (!(/^[A-Z0-9][\w\W]{19,699}\.$/.test(problema)) || problema.length <= 20 || problema.length > 700) {
-        res.json({name:"problema", message: "Errore inserimento problema" });
-        return;}
+      if (!(/^[A-Z0-9][\w\W]{19,699}\.$/.test(problema))) {
+      res.json({name:"problema", message: "Errore formato problema (richiede .)" });
+      return;}
+      if (problema.length <= 20 || problema.length > 700) {
+        res.json({name:"problema", message: "Errore lunghezza problema" });
+       return;}
       }
 
 
@@ -75,7 +81,7 @@ exports.insert = (req, res) => {
 // Metodo per prendere le info - Visualizzazione? -- Controllo per Email
 exports.select = (req, res) => {
 
-Ticket_Model.find({})
+Ticket_Model.find({soluzione: null })
     .then(data => {
       if(data==null){
       res.json({message:false})}
@@ -101,8 +107,12 @@ exports.update = (req, res) => {
     res.json({ name:"soluzione", message: "Non può essere vuoto" });
     return;}
      if (soluzione.length != 0) {
-      if (!(/^[A-Z0-9][\w\W]{19,699}\.$/.test(soluzione)) || soluzione.length <= 20 || soluzione.length > 700) {
-        res.json({ name:"soluzione", message: "Errore inserimento soluzione" });
+      if (!(/^[A-Z0-9][\w\W]{19,699}\.$/.test(soluzione))){
+      res.json({ name:"soluzione", message: "Errore formato soluzione" });
+        return;}
+      
+      if (soluzione.length <= 20 || soluzione.length > 700) {
+        res.json({ name:"soluzione", message: "Errore lunghezza soluzione" });
         return;}
       }
 

@@ -9,10 +9,8 @@ const emailSessione = "francrossi@gmail.com"
 const ruoloSessione = "cliente"
 
 describe('Field test for ticket',   function  () {
-  this.timeout(15000)
-  it('TC_TM_1.1',   function  (done) {
-    this.timeout(15000)
-    setTimeout(done,15000)
+  it('TC_TM_1.1',   function (done) {
+    
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         titolo: "titolo",
@@ -25,15 +23,14 @@ describe('Field test for ticket',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({name: "titolo", message: "Troppo breve"})
+            expect(response.body).to.deep.equal({message: "Errore lunghezza titolo"})
             done();
         }
     });
   })
 
   it('TC_TM_1.2',  function (done) {
-    this.timeout(15000)
-    setTimeout(done,15000)
+    
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         titolo: "titolo senza punto",
@@ -46,15 +43,14 @@ describe('Field test for ticket',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({name: "titolo", message: "Manca il punto!"})
+            expect(response.body).to.deep.equal({ message: "Errore formato titolo (richiede .)"})
             done();
         }
     });
   })
 
   it('TC_TM_1.3', function (done) {
-    this.timeout(15000)
-    setTimeout(done,15000)
+    
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         titolo: "titolo col punto.",
@@ -67,15 +63,14 @@ describe('Field test for ticket',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({name: "Problema", message: "Troppo breve"})
+            expect(response.body).to.deep.equal({message: "Errore lunghezza problema"})
             done();
         }
     });
   })
 
   it('TC_TM_1.4', function (done) {
-    this.timeout(15000)
-    setTimeout(done,15000)
+ 
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         titolo: "titolo col punto.",
@@ -88,15 +83,14 @@ describe('Field test for ticket',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({name: "Problema", message: "Manca il punto"})
+            expect(response.body).to.deep.equal({message: "Errore formato problema (richiede .)"})
             done();
         }
     });
   })
 
   it('TC_TM_1.5', function (done) {
-    this.timeout(15000)
-    setTimeout(done,15000)
+    
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         titolo: "titolo col punto.",
@@ -109,7 +103,7 @@ describe('Field test for ticket',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: true})
+            expect(response.body).to.deep.equal({message:"Compilazione del ticket avvenuta con successo"})
             done();
         }
     });
