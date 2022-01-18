@@ -8,7 +8,6 @@ module.exports = mongoose => {
         numeroTelefono: String,
         dataDiNascita: String,
         ruolo: String,
-        disponibilita: Boolean,
         indirizzo: String
     });
 
