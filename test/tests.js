@@ -41,4 +41,15 @@
  //require("./personaleTest/inserimentoOperatoreMensaTest"); 
  
  //Ticket 
- require("./ticketTest/compilazioneTicketTest");
+ //require("./ticketTest/compilazioneTicketTest");
+ //require("./ticketTest/risoluzioneTicketTest");
+ 
+ //Faq
+ //require("./FaqTest/inserimentoDomandaFaq");
+ //require("./FaqTest/modificaDomandaFaq");
+
+ //Login
+ require("./loginTest/login");
+
+
+ //Ricorda alla fine di togliere tutti i commenti

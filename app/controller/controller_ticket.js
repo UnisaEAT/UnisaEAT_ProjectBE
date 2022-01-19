@@ -6,14 +6,7 @@ const Notifica_Model=db.model_notifica;
 
 exports.insert = (req, res) => {
   // Validate request
-  if (!req.body.titolo) {
-    res.json({ name:"titolo", message: "Il titolo non può essere vuoto!" });
-    return;
-  }
-  if (!req.body.problema) {
-    res.json({ name:"problema", message: "Il problema non può essere vuoto!" });
-    return;
-  }
+
 	let titolo= req.body.titolo
 	let problema= req.body.problema
   let dat= new Date()
@@ -33,24 +26,28 @@ exports.insert = (req, res) => {
   res.json({ name:"titolo", message: "Non può essere vuoto" });
   return;}
    if (titolo.length != 0) {
+    if ((titolo.length <= 20 || titolo.length > 100)) {
+      res.json({ name:"titolo", message: "Errore lunghezza titolo" });
+      return;}
+    
     if (!(/^[A-Z0-9][\w\W]{19,99}\.$/.test(titolo))) {
     res.json({ name:"titolo", message: "Errore formato titolo (richiede .)" });
     return;}
-    if (titolo.length <= 20 || titolo.length > 100) {
-      res.json({ name:"titolo", message: "Errore lunghezza titolo" });
-      return;}
+   
     }
 
    if (!problema) {
     res.json({ name:"problema", message: "Non può essere vuoto" });
     return;}
     if (problema.length != 0) {
+      if ((problema.length <= 20 || problema.length > 700)) {
+        res.json({name:"problema", message: "Errore lunghezza problema" });
+       return;}
+      
       if (!(/^[A-Z0-9][\w\W]{19,699}\.$/.test(problema))) {
       res.json({name:"problema", message: "Errore formato problema (richiede .)" });
       return;}
-      if (problema.length <= 20 || problema.length > 700) {
-        res.json({name:"problema", message: "Errore lunghezza problema" });
-       return;}
+      
       }
 
 
@@ -107,13 +104,15 @@ exports.update = (req, res) => {
     res.json({ name:"soluzione", message: "Non può essere vuoto" });
     return;}
      if (soluzione.length != 0) {
-      if (!(/^[A-Z0-9][\w\W]{19,699}\.$/.test(soluzione))){
-      res.json({ name:"soluzione", message: "Errore formato soluzione" });
-        return;}
+     
       
-      if (soluzione.length <= 20 || soluzione.length > 700) {
+      if ((soluzione.length <= 20 || soluzione.length > 700)) {
         res.json({ name:"soluzione", message: "Errore lunghezza soluzione" });
         return;}
+
+        if (!(/^[A-Z0-9][\w\W]{19,699}\.$/.test(soluzione))){
+          res.json({ name:"soluzione", message: "Errore formato soluzione" });
+            return;}
       }
 
  Ticket_Model.findOneAndUpdate({titolo : titolo}, {soluzione: soluzione})

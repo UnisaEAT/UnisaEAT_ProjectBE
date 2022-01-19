@@ -13,48 +13,40 @@ exports.login = (req, res) => {
     var password = req.body.password
 
     //Validazione dell'email
-    if (!email) {
+   
+    if (email.length != 0) {
+        if (email.length < 8)
         res.json({
             name: "email",
-            message: "Email non può essere vuoto"
+            message: "Lunghezza email non corretta",
         });
-        return;
-    }
-    if (email.length != 0) {
+     
+     
         if (!(/^[a-zA-Z0-9.%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/.test(email))) {
             res.json({
                 name: "email",
                 message: "l'email ha un formato non corretto ",
             });
-            if (email.length < 8)
-                res.json({
-                    name: "email",
-                    message: "Lunghezza email non corretta",
-                });
+          
 
             return;
         }
     }
 
     //Validazione della password
-    if (!password) {
-        res.json({
-            name: "password",
-            message: "Passoword non può essere vuoto",
-        });
-        return;
-    }
+   
     if (password.length != 0) {
+        if (password.length <= 8)
+                res.json({
+                    name: "password",
+                    message: "Lunghezza password non corretta"
+                });
         if ((!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
             res.json({
                 name: "password",
-                message: "la password  ha un formato non corretto",
+                message: "la password  ha un formato non corretto"
             });
-            if (password.length <= 8)
-                res.json({
-                    name: "password",
-                    message: "Lunghezza password non corretta",
-                });
+            
             return;
         }
     }

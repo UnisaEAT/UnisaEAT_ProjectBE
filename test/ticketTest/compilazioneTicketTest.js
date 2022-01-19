@@ -15,15 +15,15 @@ describe('Field test for ticket',   function  () {
     .send({
         titolo: "titolo",
         problema: "Problematica 1.",
-        soluzione: null,
-        date: new Date(),
-        email:"Gigigigigigg@gmail.com"
+        soluzione: "",
+        date: "",
+        email:emailSessione
     })
     .end( function(error, response, body) {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Errore lunghezza titolo"})
+            expect(response.body).to.deep.equal({name:"titolo", message: "Errore lunghezza titolo"})
             done();
         }
     });
@@ -33,17 +33,17 @@ describe('Field test for ticket',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        titolo: "titolo senza punto",
+        titolo: "titolo senza puntoooo",
         problema: "Problematica 1.",
-        soluzione: null,
-        date: new Date(),
-        email:"Gigigigigigg@gmail.com"
+        soluzione: "",
+        date: "",
+        email: emailSessione
     })
     .end( function(error, response, body) {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({ message: "Errore formato titolo (richiede .)"})
+            expect(response.body).to.deep.equal({name:"titolo", message: "Errore formato titolo (richiede .)"})
             done();
         }
     });
@@ -53,17 +53,17 @@ describe('Field test for ticket',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        titolo: "titolo col punto.",
+        titolo: "Non riesco più ad effettuare le prenotazioni.",
         problema: "Non lo so",
-        soluzione: null,
-        date: new Date(),
-        email:"Gigigigigigg@gmail.com"
+        soluzione: "",
+        date: "",
+        email: emailSessione
     })
     .end( function(error, response, body) {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Errore lunghezza problema"})
+            expect(response.body).to.deep.equal({name:"problema",message: "Errore lunghezza problema"})
             done();
         }
     });
@@ -73,17 +73,17 @@ describe('Field test for ticket',   function  () {
  
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        titolo: "titolo col punto.",
-        problema: "Non lo so senza punto",
-        soluzione: null,
-        date: new Date(),
-        email:"Gigigigigigg@gmail.com"
+        titolo: "Non riesco più ad effettuare le prenotazioni.",
+        problema: "Quando mi reco nella sezione delle prenotazioni non riesco più a visualizzare il menù",
+        soluzione: "",
+        date: "",
+        email: emailSessione
     })
     .end( function(error, response, body) {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Errore formato problema (richiede .)"})
+            expect(response.body).to.deep.equal({name:"problema",message: "Errore formato problema (richiede .)"})
             done();
         }
     });
@@ -93,11 +93,11 @@ describe('Field test for ticket',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        titolo: "titolo col punto.",
-        problema: "Non lo so col punto.",
-        soluzione: null,
-        date: new Date(),
-        email:"Gigigigigigg@gmail.com"
+        titolo: "Non riesco più ad effettuare le prenotazioni.",
+        problema: "Quando mi reco nella sezione delle prenotazioni non riesco più a visualizzare il menù.",
+        soluzione: "",
+        date: "",
+        email: emailSessione
     })
     .end( function(error, response, body) {
         if (error) {
