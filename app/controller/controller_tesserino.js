@@ -324,7 +324,7 @@ exports.create = (req, res) => {
                         var notifica=new Notifica_Model({
                             titolo:"Richiesta tesserino avvenuta!",
                             testo:"La richiesta del tesserino da parte di "+email+" è avvenuta con successo!",
-                            reciverEmail:email,
+                            receiverEmail:email,
                             tipo:"Notifica Tesserino",
                             visualizzazione:true
                         })
@@ -594,7 +594,7 @@ exports.updateDataScadenza = (req, res) => {
                         var notifica=new Notifica_Model({
                             titolo:"Rinnovo tesserino avvenuto!",
                             testo:"La richiesta del rinnovo del tesserino da parte di "+email+" è avvenuta con successo!",
-                            reciverEmail:email,
+                            receiverEmail:email,
                             tipo:"Notifica Tesserino",
                             visualizzazione:true
                         })
@@ -815,7 +815,7 @@ exports.ricaricaTesserino = (req, res) => {
                     var notifica=new Notifica_Model({
                         titolo:"Ricarica tesserino avvenuta!",
                         testo:"La ricarica del tesserino da parte di "+email+" è avvenuta con successo!",
-                        reciverEmail:email,
+                        receiverEmail:email,
                         tipo:"Notifica Tesserino",
                         visualizzazione:true
                     })

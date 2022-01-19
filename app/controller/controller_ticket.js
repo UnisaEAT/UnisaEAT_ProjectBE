@@ -97,7 +97,7 @@ Ticket_Model.find({soluzione: null })
 
 //Prova modifica
 exports.update = (req, res) => {
-  let mail=req.body.mail
+  let mail=req.body.email
   var titolo = req.body.titolo
   var soluzione= req.body.soluzione
   if (!soluzione) {
@@ -121,7 +121,7 @@ exports.update = (req, res) => {
 	  var notifica=new Notifica_Model({
       titolo:"Il tuo ticket è stato risolto!",
       testo:"Il ticket inviato da "+ mail+" è stato risolto!",
-      reciverEmail:mail,
+      receiverEmail:mail,
       tipo:"Notifica Ticket",
       visualizzazione:true
   })

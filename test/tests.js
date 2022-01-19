@@ -14,9 +14,9 @@
  * Per ricaricaTesserinoTest bisogna aver eseguito con successo createTesserinoTest, in modo che il cliente Francesco Rossi
  * Abbia un tesserino che è possibile ricaricare 
  */
-//require("./tesserinoTest/createTesserinoTest");
-//require("./tesserinoTest/rinnovoTesserinoTest");
-//require("./tesserinoTest/ricaricaTesserinoTest");
+require("./tesserinoTest/createTesserinoTest");
+require("./tesserinoTest/rinnovoTesserinoTest");
+require("./tesserinoTest/ricaricaTesserinoTest");
 
 //chatTest files
 /**
@@ -27,8 +27,8 @@
  * Per modificaMessaggioTest bisogna caricare nel db una conversazione ed un messaggio, in modo 
  * da utilizzare l'id del messaggio per modifire il messaggio
  */
-//require("./chatTest/invioMessaggioTest");
-//require("./chatTest/modificaMessaggioTest");
+require("./chatTest/invioMessaggioTest");
+require("./chatTest/modificaMessaggioTest");
 
 //personaleTest files
 /**
@@ -37,19 +37,19 @@
  * 
  * Per inserimentoOperatoreMnesaTest nel db non ci deve essere caricato nessun Personale con l'email "bianchi@gmail.com"
 */
- //require("./personaleTest/inserimentoPersonaleAdisuTest");
- //require("./personaleTest/inserimentoOperatoreMensaTest"); 
+ require("./personaleTest/inserimentoPersonaleAdisuTest");
+ require("./personaleTest/inserimentoOperatoreMensaTest"); 
  
  //Ticket 
- //require("./ticketTest/compilazioneTicketTest");
- //require("./ticketTest/risoluzioneTicketTest");
+ require("./ticketTest/compilazioneTicketTest");
+ require("./ticketTest/risoluzioneTicketTest");
  
  //Faq
- //require("./FaqTest/inserimentoDomandaFaq");
- //require("./FaqTest/modificaDomandaFaq");
+ require("./FaqTest/inserimentoDomandaFaq");
+ require("./FaqTest/modificaDomandaFaq");
 
  //Login
-//require("./loginTest/login");
+require("./loginTest/login");
 //Profilo
 require("./profiloTest/modificaPassword");
  //Ricorda alla fine di togliere tutti i commenti
