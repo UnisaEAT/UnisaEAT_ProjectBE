@@ -65,37 +65,44 @@ exports.updatePassword = function(req, res) {
     var passwordConfirm = req.body.inputConfirmPassword
 
     if ((!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(oldPassword)) || (oldPassword == null))) {
+        if (oldPassword.length <= 8)
+        res.json({ name: "inputOldPassword", message: "Lunghezza password non corretta" });
+        
         res.json({
             name: "inputOldPassword",
             message: "Il formato della vecchia password non è corretto."
         });
-        if (oldPassword.length <= 8)
-            res.json({ name: "inputOldPassword", message: "Lunghezza password non corretta" });
-        return;
+      return;
     }
 
-    if ((password == null) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
+   
+        if (password.length <= 8)
+        res.json({ name: "inputPassword", message: "Lunghezza password non corretta" });
+    
+        if ((password == null) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(password)))) {
         res.json({
             name: "inputPassword",
-            message: "Il formato della nuova password non è corretto"
-        });
-        if (password.length <= 8)
-            res.json({ name: "inputPassword", message: "Lunghezza password non corretta" });
-        return;
+            message: "Il formato della nuova password non è corretto"});
+       return;
     }
+
+    if (passwordConfirm.length <= 8)
+{    res.json({ name: "inputConfirmPassword", message: "Lunghezza password non corretta" });}
+
     if ((passwordConfirm == null) || (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,30}$/.test(passwordConfirm)))) {
         res.json({ name: "inputConfirmPassword", message: "Il formato della nuova password non è corretto" });
+    }
+       
         if (passwordConfirm != password) {
-
+           
             res.json({
                 name: "inputConfirmPassword",
                 message: "la password inserita non corrisponde a quella del campo precedente"
             });
-            if (password.length <= 8)
-                res.json({ name: "inputConfirmPassword", message: "Lunghezza password non corretta" });
+            
             return;
         }
-    }
+    
 
     //Non corrisponde a quello sul DB CHECKPASSWORD - vedere come fare find per i tipi
 

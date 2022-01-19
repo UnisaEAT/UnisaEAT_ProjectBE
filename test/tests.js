@@ -49,7 +49,7 @@
  //require("./FaqTest/modificaDomandaFaq");
 
  //Login
- require("./loginTest/login");
-
-
+//require("./loginTest/login");
+//Profilo
+require("./profiloTest/modificaPassword");
  //Ricorda alla fine di togliere tutti i commenti

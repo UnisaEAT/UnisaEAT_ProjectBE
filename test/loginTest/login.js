@@ -7,12 +7,13 @@ const host = "localhost:8080/api/login"
 const path = "/login";
 const ruoloSessione = "cliente"
 
-describe('Field test for ticket',   function  () {
+
+describe('Field test for login',   function  () {
   it('TC_AM_1.1',   function (done) {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        email: "m.c1@gmail.com",
+        email: "m@g.m",
         password:""
     })
     .end( function(error, response, body) {
@@ -104,8 +105,8 @@ describe('Field test for ticket',   function  () {
   it('TC_AM_1.6', function (done) {
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        email: "c.citro28@studenti.unisa.it",
-        password:"Carmine0099"
+        email: "n.cappello@studenti.unisa.it",
+        password:"Carmine0099!" //Deve essere corretta ma non nel db
         
     })
     .end( function(error, response, body) {
@@ -120,17 +121,18 @@ describe('Field test for ticket',   function  () {
 
 
   it('TC_AM_1.7', function (done) {
+      
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        email: "c.citro28@studenti.unisa.it",
-        password:"Carmine0099"
+        email: "a.alessio@studenti.unisa.it",//Email nel db
+        password:"Alessiosalzano1!" 
         
     })
     .end( function(error, response, body) {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({  email: docs[0].email, ruolo: docs[0].ruolo })
+            expect(response.body).to.deep.equal({ email:"a.alessio@studenti.unisa.it" , ruolo: "cliente" })
             done();
         }
     });
