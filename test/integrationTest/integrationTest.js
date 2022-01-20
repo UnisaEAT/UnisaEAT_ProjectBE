@@ -630,14 +630,19 @@ describe('Integration Test', function () {
         });
     })
 
-    it('Test for inserimento domanda in FAQ', function (done) {
+    it('Test for inserimento domanda in FAQ : logged', function (done) {
 
-        
+        const host = "localhost:8080/api/faq"
+        const path = "/insertFAQ";
+        const emailSessione = "alessiosal@gmail.com";
+        const ruoloSessione = "personale adisu"
     
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
             domanda: "Prova lunga domanda per cambiare se c'è nel db?",
-            risposta:"Bisogna recarsi su pagamento pasto."
+            risposta:"Bisogna recarsi su pagamento pasto.",
+            email: emailSessione,
+            ruolo: ruoloSessione
         })
         .end( function(error, response, body) {
             if (error) {
@@ -647,6 +652,129 @@ describe('Integration Test', function () {
                 done();
             }
         });
-      })
+    })
+
+    it('Test for inserimento domanda in FAQ : not logged', function (done) {
+
+        const host = "localhost:8080/api/faq"
+        const path = "/insertFAQ";
+        const emailSessione = "";
+        const ruoloSessione = ""
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            domanda: "Prova lunga domanda per cambiare se c'è nel db?",
+            risposta:"Bisogna recarsi su pagamento pasto.",
+            email: emailSessione,
+            ruolo: ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Devi aver effettuato l'accesso per accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for inserimento domanda in FAQ : unauthorized', function (done) {
+
+        const host = "localhost:8080/api/faq"
+        const path = "/insertFAQ";
+        const emailSessione = "alex@gmail.com";
+        const ruoloSessione = "operatore mensa"
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            domanda: "Prova lunga domanda per cambiare se c'è nel db?",
+            risposta:"Bisogna recarsi su pagamento pasto.",
+            email: emailSessione,
+            ruolo: ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Non puoi accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for modifica domanda in FAQ : logged', function (done) {
+        
+        const host = "localhost:8080/api/faq"
+        const path = "/updateFAQ";
+        const emailSessione = "alessiosal@gmail.com";
+        const ruoloSessione = "personale adisu"
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            domanda:"Domanda da cercare lunga?",
+            newdomanda: "Prova lunga domanda per cambiare se c'è nel db?",
+            newrisposta:"Bisogna recarsi su pagamento pasto.",
+            email:emailSessione,
+            ruolo:ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Modifica avvenuta con successo"})
+                done();
+            }
+        });
+    })
+
+    it('Test for modifica domanda in FAQ : not logged', function (done) {
+        
+        const host = "localhost:8080/api/faq"
+        const path = "/updateFAQ";
+        const emailSessione = "";
+        const ruoloSessione = ""
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            domanda:"Domanda da cercare lunga?",
+            newdomanda: "Prova lunga domanda per cambiare se c'è nel db?",
+            newrisposta:"Bisogna recarsi su pagamento pasto.",
+            email:emailSessione,
+            ruolo:ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Devi aver effettuato l'accesso per accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for modifica domanda in FAQ : unauthorized', function (done) {
+        
+        const host = "localhost:8080/api/faq"
+        const path = "/updateFAQ";
+        const emailSessione = "alex@gmail.com";
+        const ruoloSessione = "operatore mensa"
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            domanda:"Domanda da cercare lunga?",
+            newdomanda: "Prova lunga domanda per cambiare se c'è nel db?",
+            newrisposta:"Bisogna recarsi su pagamento pasto.",
+            email:emailSessione,
+            ruolo:ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Non puoi accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
 
 })

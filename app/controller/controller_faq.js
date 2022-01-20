@@ -4,6 +4,15 @@ const Faq_Model = db.model_faq; //FARE IL MODEL DI FAQ
 
 // Create and Save a new - Domanda/Risposta
 exports.insertFAQ = (req, res) => {
+
+  if(!req.body.ruolo || !req.body.email) {
+    return res.json({message:"Devi aver effettuato l'accesso per accedere a questa pagina!"})
+  }
+
+  if(req.body.ruolo != "personale adisu"){
+    return res.json({message:"Non puoi accedere a questa pagina!"})
+  }
+
   // Validate request
 
 	let domanda= req.body.domanda
@@ -110,6 +119,15 @@ exports.selectFAQ = (req, res) => {
 
 //Prova modifica
 exports.updateFAQ = (req, res) => {
+
+  if(!req.body.ruolo || !req.body.email) {
+    return res.json({message:"Devi aver effettuato l'accesso per accedere a questa pagina!"})
+  }
+
+  if(req.body.ruolo != "personale adisu"){
+    return res.json({message:"Non puoi accedere a questa pagina!"})
+  }
+
 var domanda = req.body.domanda;
 var newdomanda= req.body.newdomanda;
 var newrisposta=req.body.newrisposta;
