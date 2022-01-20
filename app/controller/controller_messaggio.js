@@ -75,7 +75,7 @@ exports.modifyMessaggio = (req, res) => {
 exports.getAllConversationMessages = (req, res) =>{
     const conversazioneId = req.body.conversazioneId;
 
-    Messaggio_Model.find({conversazioneId:conversazioneId}, function(err, docs){
+    Messaggio_Model.find({conversazioneId:new ObjectId(conversazioneId)}, function(err, docs){
         if (err) throw err;
         return res.json(docs);
     })
