@@ -852,4 +852,25 @@ describe('Integration Test', function () {
         });
     })
 
+    it('Test for login', function (done) {
+
+        const host = "localhost:8080/api/login"
+        const path = "/login";
+      
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            email: "a.alessio@studenti.unisa.it",//Email nel db
+            password:"Alessiosalzano1!" 
+            
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({ email:"a.alessio@studenti.unisa.it" , ruolo: "cliente" })
+                done();
+            }
+        });
+      })
+
 })
