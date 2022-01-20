@@ -4,7 +4,13 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "nyc mocha"
+    "start": "node server.js",
+    "test": "nyc --reporter=html --reporter=text mocha --exit",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UnisaEAT/UnisaEAT_ProjectBE.git"
   },
   "keywords": [
     "nodejs",
