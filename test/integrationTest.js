@@ -215,4 +215,70 @@ describe('Integration Test', function () {
             }
         }); 
     })
+
+    it('Test for invio messaggio : logged', function (done) {
+        const host = "localhost:8080/api/messaggio"
+        const path = "/create";
+        const emailSessione = "d.devito@studenti.unisa.it"
+        const ruoloSessione = "personale adisu"
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            conversazioneId:"61dc2b2ef27cd22144f632c1", sender:{email:emailSessione, ruolo:ruoloSessione},
+            testo:"abc", dataInvio:new Date()
+
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.have.own.property('testo')
+                done();
+            }
+        });
+    })
+
+    it('Test for invio messaggio : not logged', function (done) {
+        const host = "localhost:8080/api/messaggio"
+        const path = "/create";
+        const emailSessione = ""
+        const ruoloSessione = ""
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            conversazioneId:"61dc2b2ef27cd22144f632c1", sender:{email:emailSessione, ruolo:ruoloSessione},
+            testo:"abc", dataInvio:new Date()
+
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({error:"Devi effettuare il login per inviare un messaggio!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for invio messaggio : unauthorized', function (done) {
+        const host = "localhost:8080/api/messaggio"
+        const path = "/create";
+        const emailSessione = "a.citro@studenti.unisa.it"
+        const ruoloSessione = "admin"
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            conversazioneId:"61dc2b2ef27cd22144f632c1", sender:{email:emailSessione, ruolo:ruoloSessione},
+            testo:"abc", dataInvio:new Date()
+
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({error:"Non sei autorizzato ad inviare messaggi!"})
+                done();
+            }
+        });
+    })
 })

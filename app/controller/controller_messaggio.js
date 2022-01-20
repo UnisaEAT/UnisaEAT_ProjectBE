@@ -12,6 +12,14 @@ exports.create = (req, res) => {
         return res.json({"error":"Nessun messaggio inviato"})
     }
 
+    if(!message.sender.email || !message.sender.ruolo){
+        return res.json({"error":"Devi effettuare il login per inviare un messaggio!"})
+    }
+
+    if(message.sender.ruolo != "cliente" && message.sender.ruolo != "personale adisu"){
+        return res.json({"error":"Non sei autorizzato ad inviare messaggi!"})
+    }
+
     if(message.testo.length == 0 || message.testo.length > 1000){
         return res.json({"error":true, message: "Lunghezza del messaggio non corretta!"})
     } 
