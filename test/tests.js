@@ -2,6 +2,8 @@
  * In questo file viene specificato l'ordine in cui i test devono essere eseguiti.
  */
 
+require("./integrationTest");
+return; //messo il return per eseguire solo il test di integrazione
 //tesserinoTest files
 /**
  * Prerequisiti: 
@@ -27,6 +29,7 @@ require("./tesserinoTest/ricaricaTesserinoTest");
  * Per modificaMessaggioTest bisogna caricare nel db una conversazione ed un messaggio, in modo 
  * da utilizzare l'id del messaggio per modifire il messaggio
  */
+
 require("./chatTest/invioMessaggioTest");
 require("./chatTest/modificaMessaggioTest");
 

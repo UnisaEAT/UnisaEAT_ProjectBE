@@ -104,9 +104,13 @@ exports.create = (req, res) => {
     const ruolo = req.body.ruoloSessione;
     const email= req.body.emailSessione;
 
+    if (ruolo==""){
+        res.json({message:"Devi effettuare il login per poter accedere a questa pagina!"})
+        return;
+    }
 
     if (ruolo != "cliente") {
-        res.json({message: "Only customers can access this page!"});
+        res.json({message: "Solo i clienti possono accedere a questa pagina!"});
         return;
     }
 
@@ -683,11 +687,16 @@ exports.ricaricaTesserino = (req, res) => {
     const ruolo = req.body.ruolo;
     const email = req.body.email;
 
-
-    if (ruolo != "cliente") {
-        res.json({message: "Only customers can access this page!"});
+    if(ruolo==""){
+        res.json({message:"Devi effettuare il login per accedere a questa pagina!"})
         return;
     }
+
+    if (ruolo != "cliente") {
+        res.json({message: "Solo i clienti possono accedere a questa pagina!"});
+        return;
+    }
+
     //Trova un Cliente tramite l'email
     Cliente_Model.find({email: email}, function (err, docs) {
         if (err) throw err;
