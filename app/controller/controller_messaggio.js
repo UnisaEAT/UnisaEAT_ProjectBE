@@ -51,6 +51,16 @@ exports.deleteMessaggio = (req, res) => {
 exports.modifyMessaggio = (req, res) => {
     const idMessaggio = req.body.idMessaggio;
     const nuovoTesto = req.body.nuovoTesto;
+    const emailSessione = req.body.email;
+    const ruoloSessione = req.body.ruolo;
+
+    if(!emailSessione || !ruoloSessione){
+        return res.json({"error":"Devi essere loggato per modificare un messaggio!"})
+    }
+
+    if(ruoloSessione != "cliente" && ruoloSessione != "personale adisu"){
+        return res.json({"error":"Non sei autorizzato a modificare messaggi!"})
+    }
 
     if(nuovoTesto.length == 0 || nuovoTesto.length > 1000){
         return res.json({"error":true, message: "Lunghezza del messaggio non corretta!"})

@@ -281,4 +281,68 @@ describe('Integration Test', function () {
             }
         });
     })
+
+    it('Test for modifica messaggio : logged', function (done) {
+        const host = "localhost:8080/api/messaggio"
+        const path = "/modifyMessage";
+        const emailSessione = "d.devito@studenti.unisa.it"
+        const ruoloSessione = "personale adisu"
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            idMessaggio:"61e3e98a760bad9f9bc8c064", nuovoTesto:"abcd", email:emailSessione, ruolo:ruoloSessione
+
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.equal(true)
+                done();
+            }
+        });
+    })
+
+    it('Test for modifica messaggio : not logged', function (done) {
+        const host = "localhost:8080/api/messaggio"
+        const path = "/modifyMessage";
+        const emailSessione = ""
+        const ruoloSessione = ""
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            idMessaggio:"61e3e98a760bad9f9bc8c064", nuovoTesto:"abcd", email:emailSessione, ruolo:ruoloSessione
+
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({"error":"Devi essere loggato per modificare un messaggio!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for modifica messaggio : unauthorized', function (done) {
+        const host = "localhost:8080/api/messaggio"
+        const path = "/modifyMessage";
+        const emailSessione = "a.citro@studenti.unisa.it"
+        const ruoloSessione = "admin"
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            idMessaggio:"61e3e98a760bad9f9bc8c064", nuovoTesto:"abcd", email:emailSessione, ruolo:ruoloSessione
+
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({"error":"Non sei autorizzato a modificare messaggi!"})
+                done();
+            }
+        });
+    })
+
 })
