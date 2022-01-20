@@ -58,6 +58,14 @@ exports.findByEmail = (req, res) => {
 
 exports.updatePassword = function(req, res) {
 
+    if(!req.body.ruolo || !req.body.email) {
+        return res.json({message:"Devi essere loggato per accedere a questa pagina!"});
+    }
+
+    if(req.body.ruolo == "cliente") {
+        return res.json({message: "Non puoi accedere a questa pagina!"})
+    }
+
     var mail = req.body.email
     console.log("EMAIL " + mail)
     var oldPassword = req.body.inputOldPassword

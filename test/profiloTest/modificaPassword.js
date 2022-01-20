@@ -156,9 +156,9 @@ describe('Field test for profilo',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        ruolo :"cliente",
-         email :"a.alessio@studenti.unisa.it",
-        inputOldPassword:"Alessiosalzano1!",
+        ruolo :"personale adisu",
+        email :"alessiosal@gmail.com",
+        inputOldPassword:"AlessioSalzano00!",
         inputPassword:"psswordAAAAA123!1",
         inputConfirmPassword:"psswordAAAAA123!1"
     })

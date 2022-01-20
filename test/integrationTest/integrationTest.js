@@ -777,4 +777,79 @@ describe('Integration Test', function () {
         });
     })
 
+    it('Test for modifica password : logged', function (done) {
+
+        const host = "localhost:8080/api/profilo"
+        const path = "/updatePassword";
+        const emailSessione = "alessiosal@gmail.com";
+        const ruoloSessione = "personale adisu"
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            ruolo :ruoloSessione,
+            email :emailSessione,
+            inputOldPassword:"AlessioSalzano00!",
+            inputPassword:"psswordAAAAA123!1",
+            inputConfirmPassword:"psswordAAAAA123!1"
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({name: "password", message: "Modifica password avvenuta con successo."})
+                done();
+            }
+        });
+    })
+
+    it('Test for modifica password : not logged', function (done) {
+
+        const host = "localhost:8080/api/profilo"
+        const path = "/updatePassword";
+        const emailSessione = "";
+        const ruoloSessione = ""
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            ruolo :ruoloSessione,
+            email :emailSessione,
+            inputOldPassword:"AlessioSalzano00!",
+            inputPassword:"psswordAAAAA123!1",
+            inputConfirmPassword:"psswordAAAAA123!1"
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Devi essere loggato per accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for modifica password : unauthorized', function (done) {
+
+        const host = "localhost:8080/api/profilo"
+        const path = "/updatePassword";
+        const emailSessione = "n.cappello@studenti.unisa.it";
+        const ruoloSessione = "cliente"
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            ruolo :ruoloSessione,
+            email :emailSessione,
+            inputOldPassword:"AlessioSalzano00!",
+            inputPassword:"psswordAAAAA123!1",
+            inputConfirmPassword:"psswordAAAAA123!1"
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Non puoi accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
+
 })
