@@ -7,6 +7,14 @@ const Notifica_Model=db.model_notifica;
 exports.insert = (req, res) => {
   // Validate request
 
+  if(!req.body.ruolo || !req.body.email){
+    return res.json({message: "Devi effettuare il login per inserire un ticket!"})
+  }
+
+  if(req.body.ruolo == "admin"){
+    return res.json({message:"Non puoi compilare un ticket!"})
+  }
+
 	let titolo= req.body.titolo
 	let problema= req.body.problema
   let dat= new Date()
@@ -97,6 +105,15 @@ Ticket_Model.find({soluzione: null })
 
 //Prova modifica
 exports.update = (req, res) => {
+
+  if(!req.body.ruolo || !req.body.email){
+    return res.json({message: "Devi effettuare il login per inserire un ticket!"})
+  }
+
+  if(req.body.ruolo != "admin"){
+    return res.json({message:"Non puoi risolvere un ticket!"})
+  }
+
   let mail=req.body.email
   var titolo = req.body.titolo
   var soluzione= req.body.soluzione

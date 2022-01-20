@@ -477,4 +477,176 @@ describe('Integration Test', function () {
         });
     })
 
+    it('Test for compilazione ticket : logged', function (done) {
+        const host = "localhost:8080/api/ticket"
+        const path = "/insert";
+        const emailSessione = "francrossi@gmail.com"
+        const ruoloSessione = "cliente"
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            titolo: "Non riesco più ad effettuare le prenotazioni.",
+            problema: "Quando mi reco nella sezione delle prenotazioni non riesco più a visualizzare il menù.",
+            soluzione: "",
+            date: "",
+            email: emailSessione,
+            ruolo: ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message:"Compilazione del ticket avvenuta con successo"})
+                done();
+            }
+        });
+    })
+
+    it('Test for compilazione ticket : not logged', function (done) {
+        const host = "localhost:8080/api/ticket"
+        const path = "/insert";
+        const emailSessione = ""
+        const ruoloSessione = ""
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            titolo: "Non riesco più ad effettuare le prenotazioni.",
+            problema: "Quando mi reco nella sezione delle prenotazioni non riesco più a visualizzare il menù.",
+            soluzione: "",
+            date: "",
+            email: emailSessione,
+            ruolo: ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message:"Devi effettuare il login per inserire un ticket!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for compilazione ticket : unauthorized', function (done) {
+        const host = "localhost:8080/api/ticket"
+        const path = "/insert";
+        const emailSessione = "a.citro@studenti.unisa.it"
+        const ruoloSessione = "admin"
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            titolo: "Non riesco più ad effettuare le prenotazioni.",
+            problema: "Quando mi reco nella sezione delle prenotazioni non riesco più a visualizzare il menù.",
+            soluzione: "",
+            date: "",
+            email: emailSessione,
+            ruolo: ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message:"Non puoi compilare un ticket!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for risoluzione ticket : logged', function (done) {
+        const host = "localhost:8080/api/ticket"
+        const path = "/update";
+        const emailSessione = "a.citro@studenti.unisa.it"
+        const ruoloSessione = "admin"
+
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            titolo: "",
+            problema: "",
+            soluzione: "Non si deve recare nella pagina degli ordini ma quella del menù.",
+            date: "",
+            email:emailSessione,
+            ruolo:ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message:"Soluzione del ticket avvenuta con successo"})
+                done();
+            }
+        });
+    })
+
+    it('Test for risoluzione ticket : not logged', function (done) {
+        const host = "localhost:8080/api/ticket"
+        const path = "/update";
+        const emailSessione = ""
+        const ruoloSessione = ""
+
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            titolo: "",
+            problema: "",
+            soluzione: "Non si deve recare nella pagina degli ordini ma quella del menù.",
+            date: "",
+            email:emailSessione,
+            ruolo:ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message:"Devi effettuare il login per inserire un ticket!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for risoluzione ticket : unauthorized', function (done) {
+        const host = "localhost:8080/api/ticket"
+        const path = "/update";
+        const emailSessione = "n.cappello@studenti.unisa.it"
+        const ruoloSessione = "cliente"
+
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            titolo: "",
+            problema: "",
+            soluzione: "Non si deve recare nella pagina degli ordini ma quella del menù.",
+            date: "",
+            email:emailSessione,
+            ruolo:ruoloSessione
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message:"Non puoi risolvere un ticket!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for inserimento domanda in FAQ', function (done) {
+
+        
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            domanda: "Prova lunga domanda per cambiare se c'è nel db?",
+            risposta:"Bisogna recarsi su pagamento pasto."
+        })
+        .end( function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Inserimento avvenuto con successo."})
+                done();
+            }
+        });
+      })
+
 })
