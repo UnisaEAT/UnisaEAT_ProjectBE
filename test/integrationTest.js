@@ -144,4 +144,75 @@ describe('Integration Test', function () {
         });
     })
 
+    it('Test for rinnovo tesserino : logged', function (done) {
+        const host = "localhost:8080/api/tesserino"
+        const path = "/rinnovoTesserino";
+        const emailSessione = "marcorossi@gmail.com"
+        const ruoloSessione = "cliente"
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+            dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
+            indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
+            email: "marcorossi@gmail.com", confermaEmail:"marcorossi@gmail.com"
+
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal(true)
+                done();
+            }
+        }); 
+    })
+
+    it('Test for rinnovo tesserino : not logged', function (done) {
+        const host = "localhost:8080/api/tesserino"
+        const path = "/rinnovoTesserino";
+        const emailSessione = ""
+        const ruoloSessione = ""
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+            dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
+            indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
+            email: "marcorossi@gmail.com", confermaEmail:"marcorossi@gmail.com"
+
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Devi effettuare il login per poter accedere a questa pagina!"})
+                done();
+            }
+        }); 
+    })
+
+    it('Test for rinnovo tesserino : unauthorized', function (done) {
+        const host = "localhost:8080/api/tesserino"
+        const path = "/rinnovoTesserino";
+        const emailSessione = "alessiosal@gmail.com"
+        const ruoloSessione = "personale adisu"
+    
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+            dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
+            indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
+            email: "marcorossi@gmail.com", confermaEmail:"marcorossi@gmail.com"
+
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Solo i clienti possono accedere a questa pagina!"})
+                done();
+            }
+        }); 
+    })
 })

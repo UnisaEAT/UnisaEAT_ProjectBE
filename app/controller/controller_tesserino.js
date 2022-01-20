@@ -374,8 +374,13 @@ exports.updateDataScadenza = (req, res) => {
     const email = req.body.emailSessione;
 
 
+    if (ruolo==""){
+        res.json({message:"Devi effettuare il login per poter accedere a questa pagina!"})
+        return;
+    }
+
     if (ruolo != "cliente") {
-        res.json({message: "Only customers can access this page!"});
+        res.json({message: "Solo i clienti possono accedere a questa pagina!"});
         return;
     }
 
