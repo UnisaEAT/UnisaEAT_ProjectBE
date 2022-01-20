@@ -5,6 +5,15 @@ var hash = require('./hash.js');
 
 // Crea e salva un nuovo Personale(operatore mensa o personale ADISU)
 exports.insert = (req, res) => {
+
+    if(!req.body.ruolo){
+        return res.json({message:"Devi essere loggato per accedere a questa pagina!"})
+    }
+
+    if(req.body.ruolo != "admin" && req.body.ruolo != "personale adisu"){
+        return res.json({message:"Non puoi accedere a questa pagina!"})
+    }
+
     // Validazione della request
     let nome = req.body.nome;
     let cognome = req.body.cognome;

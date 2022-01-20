@@ -345,4 +345,136 @@ describe('Integration Test', function () {
         });
     })
 
+    it('Test for inserimento personale adisu : logged', function (done) {
+        const host = "localhost:8080/api/personale"
+        const path = "/insert";
+        const ruoloSessione = "admin"
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "LucaBianchi@gmail.com", password: "Ilsolesplende97!",
+            confermapassword: "Ilsolesplende97!"
+    
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: true})
+                done();
+            }
+        });
+    })
+
+    it('Test for inserimento personale adisu : not logged', function (done) {
+        const host = "localhost:8080/api/personale"
+        const path = "/insert";
+        const ruoloSessione = ""
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "LucaBianchi@gmail.com", password: "Ilsolesplende97!",
+            confermapassword: "Ilsolesplende97!"
+    
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Devi essere loggato per accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for inserimento personale adisu : unauthorized', function (done) {
+        const host = "localhost:8080/api/personale"
+        const path = "/insert";
+        const ruoloSessione = "cliente"
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "LucaBianchi@gmail.com", password: "Ilsolesplende97!",
+            confermapassword: "Ilsolesplende97!"
+    
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Non puoi accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for inserimento operatore mensa : logged', function (done) {
+        const host = "localhost:8080/api/personale"
+        const path = "/insert";
+        const ruoloSessione = "personale adisu"
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "Bianchi@gmail.com", password: "Ilsolesplende97!",
+            confermapassword: "Ilsolesplende97!"
+    
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: true})
+                done();
+            }
+        });
+    })
+
+    it('Test for inserimento operatore mensa : not logged', function (done) {
+        const host = "localhost:8080/api/personale"
+        const path = "/insert";
+        const ruoloSessione = ""
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "Bianchi@gmail.com", password: "Ilsolesplende97!",
+            confermapassword: "Ilsolesplende97!"
+    
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Devi essere loggato per accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
+
+    it('Test for inserimento operatore mensa : unauthorized', function (done) {
+        const host = "localhost:8080/api/personale"
+        const path = "/insert";
+        const ruoloSessione = "cliente"
+
+        chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+        .send({
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "Bianchi@gmail.com", password: "Ilsolesplende97!",
+            confermapassword: "Ilsolesplende97!"
+    
+        })
+        .end(function(error, response, body) {
+            if (error) {
+                console.log(error);
+            } else {
+                expect(response.body).to.deep.equal({message: "Non puoi accedere a questa pagina!"})
+                done();
+            }
+        });
+    })
+
 })
