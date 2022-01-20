@@ -5,6 +5,8 @@ chai.use(chaiHttp);
 
 const host = "localhost:8080/api/messaggio"
 const path = "/modifyMessage";
+const emailSessione = "d.devito@studenti.unisa.it"
+const ruoloSessione = "personale adisu"
 
 describe('Field test for modifica messaggio', function () {
   
@@ -13,7 +15,7 @@ describe('Field test for modifica messaggio', function () {
 
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        idMessaggio:"61e3e98a760bad9f9bc8c064", nuovoTesto:""
+        idMessaggio:"61e3e98a760bad9f9bc8c064", nuovoTesto:"", email:emailSessione, ruolo:ruoloSessione
 
     })
     .end(function(error, response, body) {
@@ -31,7 +33,7 @@ describe('Field test for modifica messaggio', function () {
 
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        idMessaggio:"61e3e98a760bad9f9bc8c064", nuovoTesto:"abcd"
+        idMessaggio:"61e3e98a760bad9f9bc8c064", nuovoTesto:"abcd", email:emailSessione, ruolo:ruoloSessione
 
     })
     .end(function(error, response, body) {

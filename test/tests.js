@@ -2,7 +2,7 @@
  * In questo file viene specificato l'ordine in cui i test devono essere eseguiti.
  */
 
-require("./integrationTest");
+require("./integrationTest/integrationTest");
 return; //messo il return per eseguire solo il test di integrazione
 
 //tesserinoTest files
