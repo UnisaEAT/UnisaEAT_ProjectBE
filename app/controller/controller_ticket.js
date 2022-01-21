@@ -101,7 +101,22 @@ Ticket_Model.find({soluzione: null })
 ;
 
 
+exports.utente = (req, res) => {
 
+  Ticket_Model.find({email: req.session.email })
+      .then(data => {
+        if(data==null){
+        res.json({message:false})}
+        else res.json(data);
+      })
+      .catch(err => {
+        res.json({
+          message:
+            err.message || "Some error occurred while retrieving ticket by email."
+        });
+      });}
+  ;
+  
 
 //Prova modifica
 exports.update = (req, res) => {

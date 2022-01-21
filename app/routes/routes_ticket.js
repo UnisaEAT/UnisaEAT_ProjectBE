@@ -8,7 +8,7 @@ module.exports = app => {
 router.post("/insert", ticket.insert);
 router.post("/select", ticket.select);
 router.post("/update", ticket.update);
-
+router.post("/utente", ticket.utente);
   
     app.use('/api/ticket', router);
   };
