@@ -5,8 +5,10 @@ chai.use(chaiHttp);
 
 const host = "localhost:8080/api/faq"
 const path = "/insertFAQ";
-const emailSessione = "francrossi@gmail.com"
-const ruoloSessione = "cliente"
+const emailSessione = "alessiosal@gmail.comm"
+const ruoloSessione = "personale adisu"
+
+const path2 = "/updateFAQ";
 
 describe('Field test for faq',   function  () {
   it('TC_FM_1.1',   function (done) {
@@ -14,7 +16,9 @@ describe('Field test for faq',   function  () {
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda: "Come pago?",
-        risposta:""
+        risposta:"",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -31,7 +35,9 @@ describe('Field test for faq',   function  () {
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda: "Come pago un ordine prenotato",
-        risposta:""
+        risposta:"",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -46,7 +52,9 @@ describe('Field test for faq',   function  () {
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda: "Come pago un ordine prenotato?",
-        risposta:"Pagina pagamento."
+        risposta:"Pagina pagamento.",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -62,7 +70,9 @@ describe('Field test for faq',   function  () {
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda: "Come pago un ordine prenotato?",
-        risposta:"Bisogna recarsi su pagamento pasto"
+        risposta:"Bisogna recarsi su pagamento pasto",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -79,7 +89,9 @@ describe('Field test for faq',   function  () {
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda: "Prova lunga domanda per cambiare se c'è nel db?",
-        risposta:"Bisogna recarsi su pagamento pasto."
+        risposta:"Bisogna recarsi su pagamento pasto.",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -92,11 +104,13 @@ describe('Field test for faq',   function  () {
   })
   it('TC_FM_2.1',   function (done) {
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda:"Domanda da cercare lunga?",
         newdomanda: "Come pago?",
-        newrisposta:""
+        newrisposta:"",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -110,11 +124,13 @@ describe('Field test for faq',   function  () {
 
   it('TC_FM_2.2',  function (done) {
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda:"Domanda da cercare lunga?",
         newdomanda: "Come pago un ordine prenotato",
-        newrisposta:""
+        newrisposta:"",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -125,12 +141,15 @@ describe('Field test for faq',   function  () {
         }
     });
   })
+
   it('TC_FM_2.3', function (done) {
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda:"Domanda da cercare lunga?",
         newdomanda: "Come pago un ordine prenotato?",
-        newrisposta:"Pagina pagamento."
+        newrisposta:"Pagina pagamento.",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -143,11 +162,13 @@ describe('Field test for faq',   function  () {
   })
 
   it('TC_FM_2.4', function (done) {
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda:"Domanda da cercare lunga?",
         newdomanda: "Come pago un ordine prenotato?",
-        newrisposta:"Bisogna recarsi su pagamento pasto"
+        newrisposta:"Bisogna recarsi su pagamento pasto",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -156,16 +177,18 @@ describe('Field test for faq',   function  () {
             expect(response.body).to.deep.equal({message: "Formato della riposta non corretto (richiede .)"})
             done();
         }
-    });
+    })
   })
 
   it('TC_FM_2.5', function (done) {
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         domanda:"Domanda da cercare lunga?",
         newdomanda: "Prova lunga domanda per cambiare se c'è nel db?",
-        newrisposta:"Bisogna recarsi su pagamento pasto."
+        newrisposta:"Bisogna recarsi su pagamento pasto.",
+        email:emailSessione,
+        ruolo:ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
