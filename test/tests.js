@@ -2,6 +2,8 @@
  * In questo file viene specificato l'ordine in cui i test devono essere eseguiti.
  */
 
+return;
+
 /*require("./integrationTest/integrationTest");
 
 return; 

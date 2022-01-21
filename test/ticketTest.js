@@ -5,8 +5,13 @@ chai.use(chaiHttp);
 
 const host = "localhost:8080/api/ticket"
 const path = "/insert";
+const path2 = "/update"
+
 const emailSessione = "francrossi@gmail.com"
 const ruoloSessione = "cliente"
+
+const emailSessione2 = "a.citro@studenti.unisa.it"
+const ruoloSessione2 = "admin"
 
 describe('Field test for ticket',   function  () {
   it('TC_TM_1.1',   function (done) {
@@ -17,7 +22,8 @@ describe('Field test for ticket',   function  () {
         problema: "Problematica 1.",
         soluzione: "",
         date: "",
-        email:emailSessione
+        email:emailSessione,
+        ruolo: ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -37,7 +43,8 @@ describe('Field test for ticket',   function  () {
         problema: "Problematica 1.",
         soluzione: "",
         date: "",
-        email: emailSessione
+        email:emailSessione,
+        ruolo: ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -57,7 +64,8 @@ describe('Field test for ticket',   function  () {
         problema: "Non lo so",
         soluzione: "",
         date: "",
-        email: emailSessione
+        email:emailSessione,
+        ruolo: ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -77,7 +85,8 @@ describe('Field test for ticket',   function  () {
         problema: "Quando mi reco nella sezione delle prenotazioni non riesco più a visualizzare il menù",
         soluzione: "",
         date: "",
-        email: emailSessione
+        email:emailSessione,
+        ruolo: ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -97,7 +106,8 @@ describe('Field test for ticket',   function  () {
         problema: "Quando mi reco nella sezione delle prenotazioni non riesco più a visualizzare il menù.",
         soluzione: "",
         date: "",
-        email: emailSessione
+        email:emailSessione,
+        ruolo: ruoloSessione
     })
     .end( function(error, response, body) {
         if (error) {
@@ -110,13 +120,14 @@ describe('Field test for ticket',   function  () {
   })
   it('TC_TM_2.1',   function (done) {
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         titolo: "",
         problema: "",
         soluzione: "Non si deve",
         date: "",
-        email:emailSessione
+        email:emailSessione2,
+        ruolo: ruoloSessione2
     })
     .end( function(error, response, body) {
         if (error) {
@@ -130,13 +141,14 @@ describe('Field test for ticket',   function  () {
 
   it('TC_TM_2.2',  function (done) {
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         titolo: "",
         problema: "",
         soluzione: "non si deve recare nella pagina degli ordini ma quella del menù",
         date: "",
-        email:emailSessione
+        email:emailSessione2,
+        ruolo: ruoloSessione2
     })
     .end( function(error, response, body) {
         if (error) {
@@ -150,13 +162,14 @@ describe('Field test for ticket',   function  () {
 
   it('TC_TM_2.3', function (done) {
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         titolo: "",
         problema: "",
         soluzione: "Non si deve recare nella pagina degli ordini ma quella del menù.",
         date: "",
-        email:emailSessione
+        email:emailSessione2,
+        ruolo: ruoloSessione2
     })
     .end( function(error, response, body) {
         if (error) {
