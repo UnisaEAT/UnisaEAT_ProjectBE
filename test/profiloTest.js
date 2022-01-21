@@ -5,13 +5,16 @@ chai.use(chaiHttp);
 
 const host = "localhost:8080/api/profilo"
 const path = "/updatePassword";
-const ruoloSessione = "cliente"
+const ruoloSessione = "personale adisu";
+const emailSessione = "alessiosal@gmail.com"
 
 describe('Field test for profilo',   function  () {
   it('TC_PM_1.1',   function (done) {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
+        ruolo :ruoloSessione,
+        email :emailSessione,
         inputOldPassword:"qwerty",
         inputPassword:"",
         inputConfirmPassword:""
@@ -29,6 +32,8 @@ describe('Field test for profilo',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
+        ruolo :ruoloSessione,
+        email :emailSessione,
         inputOldPassword:"vsv”sfafa",
         inputPassword:"",
         inputConfirmPassword:""
@@ -48,6 +53,8 @@ describe('Field test for profilo',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
+        ruolo :ruoloSessione,
+        email :emailSessione,
         inputOldPassword:"vsvsfafoaGGq",
         inputPassword:"",
         inputConfirmPassword:""
@@ -68,6 +75,8 @@ describe('Field test for profilo',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
+        ruolo :ruoloSessione,
+        email :emailSessione,
         inputOldPassword:"psswordAAAAA123!",
         inputPassword:"gguggu",
         inputConfirmPassword:""
@@ -85,6 +94,8 @@ describe('Field test for profilo',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
+        ruolo :ruoloSessione,
+        email :emailSessione,
         inputOldPassword:"psswordAAAAAA123!",
         inputPassword:"fsdc”eeee",
         inputConfirmPassword:""
@@ -103,6 +114,8 @@ describe('Field test for profilo',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
+        ruolo :ruoloSessione,
+        email :emailSessione,
         inputOldPassword:"psswordAAAAA123!",
         inputPassword:"psswordAAAAA123!1",
         inputConfirmPassword:"Ciao!1"
@@ -120,6 +133,8 @@ describe('Field test for profilo',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
+        ruolo :ruoloSessione,
+        email :emailSessione,
         inputOldPassword:"psswordAAAAA123!",
         inputPassword:"psswordA123!",
         inputConfirmPassword:"fsdc”eeee"
@@ -137,6 +152,8 @@ describe('Field test for profilo',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
+        ruolo :ruoloSessione,
+        email :emailSessione,
         inputOldPassword:"psswordAAAAAA123!",
         inputPassword:"psswordAAAAA123!1",
         inputConfirmPassword:"psswordAAAAA123!"
@@ -156,8 +173,8 @@ describe('Field test for profilo',   function  () {
     
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        ruolo :"personale adisu",
-        email :"alessiosal@gmail.com",
+        ruolo :ruoloSessione,
+        email :emailSessione,
         inputOldPassword:"AlessioSalzano00!",
         inputPassword:"psswordAAAAA123!1",
         inputConfirmPassword:"psswordAAAAA123!1"
