@@ -2,7 +2,7 @@
  * In questo file viene specificato l'ordine in cui i test devono essere eseguiti.
  */
 
-/*require("./integrationTest/integrationTest");
+/*require("./integrationTest");
 
 return; 
 //messo il return per eseguire solo il test di integrazione*/
@@ -27,4 +27,10 @@ require("./loginTest");
 //Profilo
 
 require("./profiloTest");
+
+require("./statisticheTest")
+
+require("./ordineTest")
+
+require("./conversazioneTest")
  //Ricorda alla fine di togliere tutti i commenti

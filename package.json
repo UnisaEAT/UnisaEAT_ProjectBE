@@ -19,7 +19,8 @@
     "exclude": [
       "**/node_modules/**",
       "**/test/**",
-      "**/coverage/**"
+      "**/coverage/**",
+      "**/Database_Init"
     ],
     "all": true
   },

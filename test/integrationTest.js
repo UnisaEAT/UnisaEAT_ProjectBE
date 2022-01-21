@@ -1,3 +1,4 @@
+const app = require ("../server")
 var chai = require('chai')
 var expect = chai.expect
 var chaiHttp = require('chai-http');
@@ -6,7 +7,6 @@ chai.use(chaiHttp);
 /**
  * Il database va resettato e ripopolato con gli appositi scripts per il corretto funzionamento dell'integration test
  */
-return;
 describe('Integration Test', function () {
   
     it('Test for create tesserino : logged', function (done) {

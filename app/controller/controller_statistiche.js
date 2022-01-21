@@ -8,7 +8,7 @@ const Pasto_Model = db.model_pasto;
   La statistica conterrà la data di inizio e fine, ossia la settimana del calcolo;
   Conterrà un array in cui per ogni pasto ci sarà il numero di ordinazioni effettuate nella settimana.
 */
-
+/*
 exports.calcoloStatistiche = function () {
   return new Promise(function (resolve, reject) {
     let inizioStatistica = new Date();
@@ -52,6 +52,7 @@ exports.calcoloStatistiche = function () {
   });
 
 }
+*/
 
 
 // Restituisce tutte le statistiche
