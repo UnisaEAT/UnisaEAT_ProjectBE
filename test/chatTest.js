@@ -1,3 +1,4 @@
+const app = require ("../server")
 var chai = require('chai')
 var expect = chai.expect
 var chaiHttp = require('chai-http');

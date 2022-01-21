@@ -2,8 +2,6 @@
  * In questo file viene specificato l'ordine in cui i test devono essere eseguiti.
  */
 
-return;
-
 /*require("./integrationTest/integrationTest");
 
 return; 
@@ -16,13 +14,13 @@ require("./tesserinoTest");
 require("./chatTest");
 
 //personaleTest files
- require("./personaleTest");
+require("./personaleTest");
  
  //Ticket 
- require("./ticketTest");
+require("./ticketTest");
  
  //Faq
- require("./faqTest");
+require("./faqTest");
 
  //Login
 require("./loginTest");
