@@ -8,7 +8,12 @@ const path = "/create";
 const emailSessione = "francrossi@gmail.com"
 const ruoloSessione = "cliente"
 
-describe('Field test for richiesta tesserino', function () {
+const path2 = "/rinnovoTesserino";
+const emailSessione2 = "marcorossi@gmail.com"
+
+const path3 = "/ricaricaTesserino";
+
+describe('Field test for tesserino', function () {
   
   it('TC_TDM_1.1', function (done) {
 
@@ -575,12 +580,13 @@ describe('Field test for richiesta tesserino', function () {
     });
   })
 
+    
+
   it('TC_TDM_2.1', function (done) {
 
-
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"", nome:"",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"", nome:"",
         dataDiNascita: "", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -598,9 +604,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.2', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi112", nome:"",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi112", nome:"",
         dataDiNascita: "", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -618,9 +624,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.3', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"",
         dataDiNascita: "", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -638,9 +644,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.4', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco12#3",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco12#3",
         dataDiNascita: "", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -658,9 +664,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.5', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -678,9 +684,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.6', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "111/40/2000", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -698,9 +704,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.7', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -718,9 +724,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.8', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salern0241", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -738,9 +744,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.9', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -758,9 +764,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.10', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angr0234", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -778,9 +784,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.11', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -798,9 +804,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.12', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italian!!32", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -818,9 +824,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.13', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", indirizzo: "",
         provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -838,9 +844,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.14', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi!! .12", provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -858,9 +864,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.15', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -878,9 +884,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.16', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salern12!?", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -898,9 +904,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.17', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -918,9 +924,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.18', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fiscian31\!", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -938,9 +944,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.19', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "", telefono: "", email: "", confermaEmail:""
 
@@ -958,9 +964,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.20', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "212", telefono: "", email: "", confermaEmail:""
 
@@ -978,9 +984,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.21', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+39347321", email: "", confermaEmail:""
 
@@ -998,9 +1004,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.22', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+39347321ab32", email: "", confermaEmail:""
 
@@ -1018,9 +1024,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.23', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567", email: "", confermaEmail:""
 
@@ -1038,9 +1044,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.24', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
         email: "marc@.com", confermaEmail:""
@@ -1059,9 +1065,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.25', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
         email: "marcorossi@gmail.com", confermaEmail:""
@@ -1080,9 +1086,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.26', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
         email: "marcorossi@gmail.com", confermaEmail:"marc@.swq1"
@@ -1101,9 +1107,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.27', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
         email: "marcorossi@gmail.com", confermaEmail:"marcorossi@hotmail.it"
@@ -1122,9 +1128,9 @@ describe('Field test for richiesta tesserino', function () {
   it('TC_TDM_2.28', function (done) {
 
     
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        emailSessione: emailSessione, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
+        emailSessione: emailSessione2, ruoloSessione:ruoloSessione, cognome:"Rossi", nome:"Marco",
         dataDiNascita: "03/11/2000", provinciaDiNascita: "Salerno", comuneDiNascita:"Angri", cittadinanza: "Italiana", 
         indirizzo: "Via Enaudi F/5", provincia: "Salerno", comune: "Fisciano", cap: "84081", telefono: "+393471234567",
         email: "marcorossi@gmail.com", confermaEmail:"marcorossi@gmail.com"
@@ -1142,7 +1148,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.1', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"", numeroCarta:"",
         tipoCarta:"Visa", dataScadenzaCarta:"", cvv:"", importo:""
@@ -1159,7 +1165,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.2', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Ros214!", numeroCarta:"",
         tipoCarta:"Visa", dataScadenzaCarta:"", cvv:"", importo:""
@@ -1176,7 +1182,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.3', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"402314",
         tipoCarta:"Visa", dataScadenzaCarta:"", cvv:"", importo:""
@@ -1193,7 +1199,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.4', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"1104357839102",
         tipoCarta:"Visa", dataScadenzaCarta:"", cvv:"", importo:""
@@ -1210,7 +1216,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.5', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
         tipoCarta:"Visa", dataScadenzaCarta:"", cvv:"", importo:""
@@ -1227,7 +1233,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.6', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
         tipoCarta:"Visa", dataScadenzaCarta:"122/202", cvv:"", importo:""
@@ -1244,7 +1250,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.7', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
         tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"", importo:""
@@ -1261,7 +1267,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.8', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
         tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"43212", importo:""
@@ -1278,7 +1284,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.9', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
         tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"451", importo:""
@@ -1295,7 +1301,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.10', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
         tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"451", importo:"10,,,50"
@@ -1312,7 +1318,7 @@ describe('Field test for richiesta tesserino', function () {
 
   it('TC_TDM_3.11', function (done) {
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path3).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         email: emailSessione, ruolo:ruoloSessione, intestatario:"Francesco Rossi", numeroCarta:"4012343851244",
         tipoCarta:"Visa", dataScadenzaCarta:"12/26", cvv:"451", importo:"10.50"
