@@ -32,7 +32,7 @@ describe('Field test for Personale', function () {
       it('TC_OMM_1.2', function (done) {
       chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca97”£", cognome:"",
+            ruolo:ruoloSessione, nome:"Luca97”£", cognome:"",
             indirizzo: "", numeroTelefono: "", dataDiNascita:"", email: "", password: "",
             confermapassword: ""
     
@@ -52,7 +52,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"",
             indirizzo: "", numeroTelefono: "", dataDiNascita:"", email: "", password: "",
             confermapassword: ""
     
@@ -72,7 +72,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi97!!",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi97!!",
             indirizzo: "", numeroTelefono: "", dataDiNascita:"", email: "", password: "",
             confermapassword: ""
     
@@ -92,7 +92,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "", numeroTelefono: "", dataDiNascita:"", email: "", password: "",
             confermapassword: ""
     
@@ -112,7 +112,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma?!!", numeroTelefono: "", dataDiNascita:"", email: "", password: "",
             confermapassword: ""
     
@@ -133,7 +133,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+39 33145", dataDiNascita:"", email: "", password: "",
             confermapassword: ""
     
@@ -153,7 +153,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+39 33145ewew!!", dataDiNascita:"", email: "", password: "",
             confermapassword: ""
     
@@ -173,7 +173,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"", email: "", password: "",
             confermapassword: ""
     
@@ -193,7 +193,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"64/12/1997", email: "", password: "",
             confermapassword: ""
     
@@ -213,7 +213,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "", password: "",
             confermapassword: ""
     
@@ -233,7 +233,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "LuckBianch@.com", 
             password: "", confermapassword: ""
     
@@ -253,7 +253,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "Bianchi@gmail.com", password: "",
             confermapassword: ""
     
@@ -273,7 +273,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "Bianchi@gmail.com", password: "ilsolesplende",
             confermapassword: ""
     
@@ -293,7 +293,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "Bianchi@gmail.com", password: "Ilsolesplende97!",
             confermapassword: ""
     
@@ -313,7 +313,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "Bianchi@gmail.com", password: "Ilsolesplende97!",
             confermapassword: "ilsolesplende"
     
@@ -333,7 +333,7 @@ describe('Field test for Personale', function () {
 
         chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
         .send({
-            ruoloSessione:ruoloSessione, nome:"Luca", cognome:"Bianchi",
+            ruolo:ruoloSessione, nome:"Luca", cognome:"Bianchi",
             indirizzo: "Via Roma 12", numeroTelefono: "+393471234566", dataDiNascita:"05/12/1997", email: "Bianchi@gmail.com", password: "Ilsolesplende97!",
             confermapassword: "Ilsolesplende96!"
     
@@ -726,16 +726,4 @@ describe('Field test for Personale', function () {
             }
         });
       })
-
-
-
-
-
-
-     
-
-
-
 })
-
-
