@@ -2,34 +2,29 @@
  * In questo file viene specificato l'ordine in cui i test devono essere eseguiti.
  */
 
-require("./integrationTest/integrationTest");
-return; //messo il return per eseguire solo il test di integrazione
+/*require("./integrationTest/integrationTest");
 
+return; 
+//messo il return per eseguire solo il test di integrazione*/
 
 //tesserinoTest files
-require("./tesserinoTest/createTesserinoTest");
-require("./tesserinoTest/rinnovoTesserinoTest");
-require("./tesserinoTest/ricaricaTesserinoTest");
+require("./tesserinoTest");
 
 //chatTest files
-require("./chatTest/invioMessaggioTest");
-require("./chatTest/modificaMessaggioTest");
+require("./chatTest");
 
 //personaleTest files
- require("./personaleTest/inserimentoPersonaleAdisuTest");
- require("./personaleTest/inserimentoOperatoreMensaTest"); 
+ require("./personaleTest");
  
  //Ticket 
- require("./ticketTest/compilazioneTicketTest");
- require("./ticketTest/risoluzioneTicketTest");
+ require("./ticketTest");
  
  //Faq
- require("./FaqTest/inserimentoDomandaFaq");
- require("./FaqTest/modificaDomandaFaq");
+ require("./faqTest");
 
  //Login
-require("./loginTest/login");
+require("./loginTest");
 //Profilo
 
-require("./profiloTest/modificaPassword");
+require("./profiloTest");
  //Ricorda alla fine di togliere tutti i commenti

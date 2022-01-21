@@ -5,8 +5,23 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "nyc mocha --timeout 10000",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "test": "mocha ./test/tests.js --timeout 10000 --exit",
+    "_comment": "Note: --exit in the test element is to force the test program to exit after finishing in case we use done()",
+    "coverage": "nyc --reporter=lcov --reporter=text-lcov npm test"
+  },
+  "nyc": {
+    "_comment": "Purpose of this part: to do code coverage within Mocha/Chai using Istanbul",
+    "register": "babel-register",
+    "include": [
+      "**/*.js",
+      "./*.js"
+    ],
+    "exclude": [
+      "**/node_modules/**",
+      "**/test/**",
+      "**/coverage/**"
+    ],
+    "all": true
   },
   "repository": {
     "type": "git",
@@ -23,12 +38,9 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.24.0",
-    "body-parser": "^1.19.0",
     "bootstrap": "^5.1.3",
-    "chai-http": "^4.3.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
-    "express": "^4.17.2",
     "express-react-views": "^0.11.0",
     "express-session": "^1.17.2",
     "fs": "^0.0.1-security",
@@ -38,7 +50,12 @@
     "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
+    "body-parser": "^1.19.1",
     "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "codecov": "^3.8.3",
+    "coverage-node": "^5.0.1",
+    "express": "^4.17.2",
     "mocha": "^9.1.4",
     "nyc": "^15.1.0"
   }
