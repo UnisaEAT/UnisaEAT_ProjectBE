@@ -5,6 +5,10 @@ chai.use(chaiHttp);
 
 const host = "localhost:8080/api/messaggio"
 const path = "/create";
+const emailSessione = "d.devito@studenti.unisa.it";
+const ruoloSessione = "personale adisu";
+
+const path2 = "/modifyMessage";
 
 describe('Field test Chat', function () {
   
@@ -13,7 +17,7 @@ describe('Field test Chat', function () {
 
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        conversazioneId:"61dc2b2ef27cd22144f632c1", sender:{email:"d.devito@studenti.unisa.it", ruolo:"personale adisu"},
+        conversazioneId:"61dc2b2ef27cd22144f632c1", sender:{email:emailSessione, ruolo:ruoloSessione},
         testo:"", dataInvio:new Date()
 
     })
@@ -32,7 +36,7 @@ describe('Field test Chat', function () {
 
     chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
     .send({
-        conversazioneId:"61dc2b2ef27cd22144f632c1", sender:{email:"d.devito@studenti.unisa.it", ruolo:"personale adisu"},
+        conversazioneId:"61dc2b2ef27cd22144f632c1", sender:{email:emailSessione, ruolo:ruoloSessione},
         testo:"abc", dataInvio:new Date()
 
     })
@@ -49,7 +53,7 @@ describe('Field test Chat', function () {
   it('TC_CM_2.1', function (done) {
 
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         idMessaggio:"61e3e98a760bad9f9bc8c064", nuovoTesto:"", email:emailSessione, ruolo:ruoloSessione
 
@@ -67,7 +71,7 @@ describe('Field test Chat', function () {
   it('TC_CM_2.2', function (done) {
 
 
-    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    chai.request(host).post(path2).set('content-type', 'application/x-www-form-urlencoded')
     .send({
         idMessaggio:"61e3e98a760bad9f9bc8c064", nuovoTesto:"abcd", email:emailSessione, ruolo:ruoloSessione
 
