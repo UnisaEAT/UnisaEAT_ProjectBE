@@ -4,7 +4,7 @@ const Notifica_Model = db.model_notifica;
 
 //VISUALIZZARE LA LISTA DELLE NOTIFICHE 
 exports.visualizzaLista =(req,res) =>{
-    Notifica_Model.find({reciverEmail:req.body.email})
+    Notifica_Model.find({receiverEmail:req.body.email})
     .then(data=>{
         if(data){
             res.json(data);
