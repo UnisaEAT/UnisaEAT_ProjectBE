@@ -1,15 +1,30 @@
-[   {
-        "domanda": "Con chi posso comunicare dalla chat?",
-        "risposta": "Il cliente potrà comunicare con il Personale Adisu."
+[
+    {
+        "domanda": "Come prenotare un pasto?",
+        "risposta": "Per prenotare un pasto bisogna accedere alla sezione 'componi l'ordine' in alto e scegliere la tipologia del menu da visualizzare,scegliere i pasti e confermare l'ordine."
     },
-
-    {    
-        "domanda": "A che università fa riferimento il servizio UnisaEAT?",
-        "risposta": "L'università degli studi di salerno, come suggerisce il nome."
+    {
+        "domanda": "Come richiedere il tesserino?",
+        "risposta": "Per richiedere un tesserino bisogna accedere alla sezione 'richiedi tesserino digitale' in alto e compilare il form."
     },
-    {       
-        "domanda": "Come posso ritirare un ordine in mensa?",
-        "risposta": "Dopo aver effettuato l'ordine viene rilasciato un qr da mostrare direttamente in mensa."
+    {
+        "domanda": "Come contattare ADISU?",
+        "risposta": "Per contattare un personale ADISU bisogna innanzitutto cliccare sull'iconcina della chat in basso a destra e poi selezionare il personale disponibile nella sezione specifica."
+    },
+    {
+        "domanda": "Come contattare un Admin?",
+        "risposta": "Per contattare un Admin bisogna innanzitutto cliccare sull'iconcina della chat in basso a destra e poi selezionare l'Admin disponibile nella sezione specifica."
+    },
+    {
+        "domanda": "Come compilare un ticket?",
+        "risposta": "Per compilare un ticket bisogna accedere alla sezione specifica in alto del ticket e compilare i campi richiesti. Successivamente si riceverà una notifica da parte dell' admin con la soluzione al suo problema."
+    },
+    {
+        "domanda": "Come visualizzare il menù giornaliero?",
+        "risposta": "Per visualizzare il menù giornaliero basterà selezionare la relativa icona presente nella parte superiore e fare un click su 'Menù giornaliero'."
+    },
+    {
+        "domanda": "Come visualizzare il saldo del Tesserino?",
+        "risposta": "Per visualizzare il saldo del Tesserino basterà selezionare l'iconcina in alto e selezionare 'Visualizza Saldo'. N.B. Devi essere in possesso di un Tesserino in corso di validità."
     }
-
 ]
