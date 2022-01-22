@@ -152,8 +152,8 @@ exports.update = (req, res) => {
 	function (value){
 	  var notifica=new Notifica_Model({
       titolo:"Il tuo ticket è stato risolto!",
-      testo:"Il ticket inviato da "+ mail+" è stato risolto!",
-      receiverEmail:mail,
+      testo:"Il ticket inviato da "+ value.email+" è stato risolto!",
+      receiverEmail:value.email,
       tipo:"Notifica Ticket",
       visualizzazione:true
   })
