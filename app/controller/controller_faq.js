@@ -32,11 +32,11 @@ exports.insertFAQ = (req, res) => {
   return;}
 
   if (domanda.length <= 17 || domanda.length > 200){ res.json
-    ({ message: "Lunghezza della domanda non corretta" });
+    ({ name:"domanda", message: "Lunghezza della domanda non corretta" });
     return;}
   if (domanda.length != 0) {
     if (!(/^[A-Z0-9][\w\W]{18,98}\?$/.test(domanda)) ) {
-      res.json({message: "Formato della domanda non corretto (richiede ?)" });
+      res.json({name:"domanda", message: "Formato della domanda non corretto (richiede ? oppure una lettera maiuscola iniziale)" });
       return;}
       
     }
@@ -47,11 +47,11 @@ exports.insertFAQ = (req, res) => {
     return;}
 
     if (risposta.length <= 17 || risposta.length > 200){ res.json
-      ({ message: "Lunghezza della risposta non corretta" });
+      ({ name:"risposta", message: "Lunghezza della risposta non corretta" });
       return;}
     if (risposta.length != 0) {
       if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(risposta)) ) {
-        res.json({message: "Formato della riposta non corretto (richiede .)" });
+        res.json({name:"risposta", message: "Formato della riposta non corretto (richiede . oppure una lettera maiuscola iniziale)" });
         return;}
         
       }
@@ -137,10 +137,10 @@ var newrisposta=req.body.newrisposta;
   if (domanda.length != 0) {
 
     if (newdomanda.length <= 17 || newdomanda.length > 200){ res.json
-      ({ message: "Lunghezza della domanda non corretta" });
+      ({name: "newdomanda", message: "Lunghezza della domanda non corretta" });
       return;}
     if (!(/^[A-Z0-9][\w\W]{18,98}\?$/.test(newdomanda)) ) {
-      res.json({message: "Formato della domanda non corretto (richiede ?)" });
+      res.json({name: "newdomanda",message: "Formato della domanda non corretto (richiede ? oppure la lettera iniziale maiuscola)" });
       return;}
       
     }
@@ -151,11 +151,11 @@ var newrisposta=req.body.newrisposta;
     if (newrisposta.length != 0) {
     
         if (newrisposta.length <= 17 || newrisposta.length > 200){ res.json
-        ({ message: "Lunghezza della risposta non corretta" });
+        ({ name: "newrisposta",message: "Lunghezza della risposta non corretta" });
         return;}
 
         if (!(/^[A-Z0-9][\w\W]{15,198}\.$/.test(newrisposta)) ) {
-          res.json({message: "Formato della riposta non corretto (richiede .)" });
+          res.json({name: "newrisposta", message: "Formato della riposta non corretto (richiede . oppure la lettera iniziale maiuscola)" });
           return;}
       }
 

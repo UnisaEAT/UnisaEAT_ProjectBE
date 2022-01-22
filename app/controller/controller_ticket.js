@@ -17,8 +17,8 @@ exports.insert = (req, res) => {
 
 	let titolo= req.body.titolo
 	let problema= req.body.problema
-  let dat= new Date()
-  let mail= req.body.email
+    let dat= new Date()
+    let mail= req.body.email
 
 // Create 
   const ticket= new Ticket_Model({
@@ -103,7 +103,7 @@ Ticket_Model.find({soluzione: null })
 
 exports.utente = (req, res) => {
 
-  Ticket_Model.find({email: req.session.email })
+  Ticket_Model.find({email: req.body.email })
       .then(data => {
         if(data==null){
         res.json({message:false})}
@@ -152,8 +152,8 @@ exports.update = (req, res) => {
 	function (value){
 	  var notifica=new Notifica_Model({
       titolo:"Il tuo ticket è stato risolto!",
-      testo:"Il ticket inviato da "+ value.email+" è stato risolto!",
-      receiverEmail:value.email,
+      testo:"Il ticket inviato da "+ mail+" è stato risolto!",
+      receiverEmail:mail,
       tipo:"Notifica Ticket",
       visualizzazione:true
   })
