@@ -189,6 +189,45 @@ describe('Field test for profilo',   function  () {
         }
     });
   })
+
+  it('TC_PM_2.1',   function (done) {
+    
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        ruolo :"",
+        email :"",
+        inputOldPassword:"AlessioSalzano00!",
+        inputPassword:"psswordAAAAA123!1",
+        inputConfirmPassword:"psswordAAAAA123!1"
+    })
+    .end( function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({message:"Devi essere loggato per accedere a questa pagina!"})
+            done();
+        }
+    });
+  })
  
+  it('TC_PM_2.1',   function (done) {
+    
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        ruolo :"cliente",
+        email :"n.cappello@studenti.unisa.it",
+        inputOldPassword:"AlessioSalzano00!",
+        inputPassword:"psswordAAAAA123!1",
+        inputConfirmPassword:"psswordAAAAA123!1"
+    })
+    .end( function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({message: "Non puoi accedere a questa pagina!"})
+            done();
+        }
+    });
+  })
 
 })

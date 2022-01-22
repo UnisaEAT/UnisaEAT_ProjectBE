@@ -138,4 +138,23 @@ describe('Field test for login',   function  () {
         }
     });
   })
+
+  it('TC_AM_2.1', function (done) {
+      
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        email: "alessiosal@gmail.com",//Email nel db
+        password:"AlessioSalzano00!" 
+        
+    })
+    .end( function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({ email:"alessiosal@gmail.com" , ruolo: "personale adisu" })
+            done();
+        }
+    });
+  })
+
 })

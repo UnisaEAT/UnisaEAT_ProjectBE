@@ -20,7 +20,12 @@
       "**/node_modules/**",
       "**/test/**",
       "**/coverage/**",
-      "**/Database_Init"
+      "**/Database_Init",
+      "**/controller/controller_menu.js",
+      "**/controller/controller_notifica.js",
+      "**/controller/controller_ordine.js",
+      "**/controller/controller_statistiche.js",
+      "**/controller/controller_conversazione.js"
     ],
     "all": true
   },

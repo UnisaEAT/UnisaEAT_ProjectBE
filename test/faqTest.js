@@ -25,7 +25,7 @@ describe('Field test for faq',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Lunghezza della domanda non corretta"})
+            expect(response.body).to.deep.equal({name:"domanda", message: "Lunghezza della domanda non corretta"})
             done();
         }
     });
@@ -44,7 +44,7 @@ describe('Field test for faq',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Formato della domanda non corretto (richiede ?)"})
+            expect(response.body).to.deep.equal({name:"domanda", message: "Formato della domanda non corretto (richiede ? oppure una lettera maiuscola iniziale)"})
             done();
         }
     });
@@ -61,7 +61,7 @@ describe('Field test for faq',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Lunghezza della risposta non corretta"})
+            expect(response.body).to.deep.equal({name:"risposta", message: "Lunghezza della risposta non corretta"})
             done();
         }
     });
@@ -79,7 +79,7 @@ describe('Field test for faq',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Formato della riposta non corretto (richiede .)"})
+            expect(response.body).to.deep.equal({name:"risposta", message: "Formato della riposta non corretto (richiede . oppure una lettera maiuscola iniziale)"})
             done();
         }
     });
@@ -117,7 +117,7 @@ describe('Field test for faq',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Lunghezza della domanda non corretta" })
+            expect(response.body).to.deep.equal({name:"newdomanda", message: "Lunghezza della domanda non corretta" })
             done();
         }
     });
@@ -137,7 +137,7 @@ describe('Field test for faq',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Formato della domanda non corretto (richiede ?)"})
+            expect(response.body).to.deep.equal({name:"newdomanda",message: "Formato della domanda non corretto (richiede ? oppure la lettera iniziale maiuscola)"})
             done();
         }
     });
@@ -156,7 +156,7 @@ describe('Field test for faq',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Lunghezza della risposta non corretta"})
+            expect(response.body).to.deep.equal({name:"newrisposta", message: "Lunghezza della risposta non corretta"})
             done();
         }
     });
@@ -175,7 +175,7 @@ describe('Field test for faq',   function  () {
         if (error) {
             console.log(error);
         } else {
-            expect(response.body).to.deep.equal({message: "Formato della riposta non corretto (richiede .)"})
+            expect(response.body).to.deep.equal({name:"newrisposta",message: "Formato della riposta non corretto (richiede . oppure la lettera iniziale maiuscola)"})
             done();
         }
     })
@@ -200,4 +200,83 @@ describe('Field test for faq',   function  () {
         }
     });
   })
+
+  it('TC_FM_3.1', function (done) {
+    
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        domanda:"Domanda da cercare lunga?",
+        newdomanda: "Prova lunga domanda per cambiare se c'è nel db?",
+        newrisposta:"Bisogna recarsi su pagamento pasto.",
+        email:"",
+        ruolo:""
+    })
+    .end( function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({message: "Devi aver effettuato l'accesso per accedere a questa pagina!"})
+            done();
+        }
+    });
+  })
+
+  it('TC_FM_3.2', function (done) {
+    
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        domanda:"Domanda da cercare lunga?",
+        newdomanda: "Prova lunga domanda per cambiare se c'è nel db?",
+        newrisposta:"Bisogna recarsi su pagamento pasto.",
+        email:"n.cappello@studenti.unisa.it",
+        ruolo:"cliente"
+    })
+    .end( function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({message: "Non puoi accedere a questa pagina!"})
+            done();
+        }
+    });
+  })
+
+  it('TC_FM_3.3', function (done) {
+    
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        domanda:"",
+        risposta:"",
+        email:"n.cappello@studenti.unisa.it",
+        ruolo:"personale adisu"
+    })
+    .end( function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({name:"domanda", message: "Domanda non può essere vuoto" })
+            done();
+        }
+    });
+  })
+
+  it('TC_FM_3.4', function (done) {
+    
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        domanda:"Esempio domanda esempio domanda?",
+        risposta:"",
+        email:"n.cappello@studenti.unisa.it",
+        ruolo:"personale adisu"
+    })
+    .end( function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({name:"risposta", message: "Risposta non può essere vuoto" })
+            done();
+        }
+    });
+  })
+
 })

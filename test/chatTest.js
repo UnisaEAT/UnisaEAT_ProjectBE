@@ -87,4 +87,42 @@ describe('Field test for Chat', function () {
     });
   })
 
+  it('TC_CM_3.1', function (done) {
+
+
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        conversazioneId:"61dc2b2ef27cd22144f632c1", sender:{email:"", ruolo:""},
+        testo:"", dataInvio:new Date()
+
+    })
+    .end(function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({"error":"Devi effettuare il login per inviare un messaggio!"})
+            done();
+        }
+    });
+  })
+
+  it('TC_CM_3.2', function (done) {
+
+
+    chai.request(host).post(path).set('content-type', 'application/x-www-form-urlencoded')
+    .send({
+        conversazioneId:"61dc2b2ef27cd22144f632c1", sender:{email:emailSessione, ruolo:"admin"},
+        testo:"abc", dataInvio:new Date()
+
+    })
+    .end(function(error, response, body) {
+        if (error) {
+            console.log(error);
+        } else {
+            expect(response.body).to.deep.equal({"error":"Non sei autorizzato ad inviare messaggi!"})
+            done();
+        }
+    });
+  })
+
 })

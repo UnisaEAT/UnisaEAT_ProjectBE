@@ -65,7 +65,7 @@ exports.visualizzaPasti = (req, res) => {
  *  
  *  @return {pranzo:boolean, cena:boolean}
  */
-/*
+
 exports.hasOrdini = (req, res) => {
 
   /*
@@ -75,7 +75,7 @@ exports.hasOrdini = (req, res) => {
     Se non esiste nessun ordine allora pranzo e cena sono settati a false
     Se siste un solo ordine si controlla se è per pranzo o cena
     Se ne esistono due sia pranzo che cena sono true
-  
+  */
 
   let email = req.body.email;
   let ruolo = req.body.ruolo;
@@ -110,9 +110,9 @@ exports.hasOrdini = (req, res) => {
       }
     })
   })
-}*/
+}
 
-/*
+
 exports.create = (req, res) => {
 
   let emailSessione = req.body.email;
@@ -231,4 +231,4 @@ exports.getOrdiniByCliente = (req, res) => {
       })
     })
   })
-};*/
+};

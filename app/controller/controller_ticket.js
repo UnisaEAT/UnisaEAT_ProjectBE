@@ -97,8 +97,8 @@ Ticket_Model.find({soluzione: null })
         message:
           err.message || "Some error occurred while retrieving ticket by email."
       });
-    });}
-;
+    });
+};
 
 
 exports.utente = (req, res) => {
@@ -114,8 +114,8 @@ exports.utente = (req, res) => {
           message:
             err.message || "Some error occurred while retrieving ticket by email."
         });
-      });}
-  ;
+      });
+};
   
 
 //Prova modifica

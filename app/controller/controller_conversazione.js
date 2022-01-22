@@ -30,7 +30,7 @@ exports.create = (req, res) => {
 
 //restituisce tutte le conversazioni di un utente
 //l'fe passa l'utente {email, ruolo} di cui vuole ottenere tutte le conversazioni
-/*exports.getConversazioni = (req, res) => {
+exports.getConversazioni = (req, res) => {
 
     const user = req.body.user;
 
@@ -58,4 +58,4 @@ exports.getConversazione = (req, res) => {
         if(err) throw err;
         res.json(docs);
     })
-}*/
+}

@@ -14,24 +14,23 @@ exports.login = (req, res) => {
 
     //Validazione dell'email
    
-    if (email.length != 0) {
-        if (email.length < 8)
+    if (email.length < 8)
+    res.json({
+        name: "email",
+        message: "Lunghezza email non corretta",
+    });
+    
+    
+    if (!(/^[a-zA-Z0-9.%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/.test(email))) {
         res.json({
             name: "email",
-            message: "Lunghezza email non corretta",
+            message: "l'email ha un formato non corretto ",
         });
-     
-     
-        if (!(/^[a-zA-Z0-9.%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$/.test(email))) {
-            res.json({
-                name: "email",
-                message: "l'email ha un formato non corretto ",
-            });
-          
+        
 
-            return;
-        }
+        return;
     }
+    
 
     //Validazione della password
    

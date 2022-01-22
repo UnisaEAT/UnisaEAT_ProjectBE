@@ -173,23 +173,6 @@ exports.updatePassword = function(req, res) {
                 );
             }
         })
-    } else if (req.body.ruolo == "cliente") {
-        Cliente_Model.find({ email: mail }, function(err, docs) {
-            if (err) throw err;
-            let hashato = docs[0].password;
-
-            if (hash.checkPassword(hashato.hash, hashato.salt, oldPassword) == false) {
-                res.json({ name: "inputOldPassword", message: "la vecchia password non corrisponde." });
-                return;
-            } else {
-                Cliente_Model.findOneAndUpdate({ email: mail }, { password: passwordHashed }).then(
-                    function(val) {
-                        res.json({ name: "password", message: "Modifica password avvenuta con successo." });
-                        return;
-                    }
-                );
-            }
-        })
     } else if (req.body.ruolo == "admin") {
         Admin_Model.find({ email: mail }, function(err, docs) {
             if (err) throw err;

@@ -220,7 +220,7 @@ exports.findByEmailAndRemove = (req, res) => {
 };
 
 /*Metodo per prendere le info del personale (NON VIENE USATO)
-exports.findByEmail = (req, res) => {
+/*exports.findByEmail = (req, res) => {
 var email = req.body.email;
   Personale_Model.find({email : email}) //vedere con alex come passare l'email in questo campo
     .then(data => {

@@ -28,9 +28,10 @@ require("./loginTest");
 
 require("./profiloTest");
 
+/*
 require("./statisticheTest")
 
 require("./ordineTest")
 
 require("./conversazioneTest")
- //Ricorda alla fine di togliere tutti i commenti
+ //Ricorda alla fine di togliere tutti i commenti*/
