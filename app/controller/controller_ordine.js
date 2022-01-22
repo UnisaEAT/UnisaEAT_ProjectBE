@@ -119,7 +119,6 @@ exports.create = (req, res) => {
   let prezzoOrdine = req.body.prezzo;
   let boolPranzo = req.body.boolPranzo;
   let arrayIdPasti = req.body.idPasti;
-  console.log(arrayIdPasti)
 
   Cliente_Model.find({email:emailSessione}, function (err, docs) {
     if (err) throw err;
@@ -172,7 +171,6 @@ exports.create = (req, res) => {
             notifica
             .save(notifica)
             .then(data=>{
-                console.log(data)
                 return res.json(true);
             })
 

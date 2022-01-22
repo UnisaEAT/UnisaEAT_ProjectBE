@@ -336,7 +336,6 @@ exports.create = (req, res) => {
                         notifica
                         .save(notifica)
                         .then(data=>{
-                            console.log(data)
                             res.json({message: true});
                             return;
                         })
@@ -612,7 +611,6 @@ exports.updateDataScadenza = (req, res) => {
                         notifica
                         .save(notifica)
                         .then(data=>{
-                            console.log(data);
                             res.json(true);
                             return;
                         })
@@ -836,7 +834,6 @@ exports.ricaricaTesserino = (req, res) => {
                     notifica
                     .save(notifica)
                     .then(data=>{
-                        console.log(data)
                         res.json({message: true});
                         return;
                     })

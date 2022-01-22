@@ -10,7 +10,6 @@ var hash = require('./hash.js')
 exports.findByEmail = (req, res) => {
 
     var tipo = req.body.ruolo
-    console.log("Tipo" + tipo)
     var mail = req.body.email
 
 
@@ -67,7 +66,6 @@ exports.updatePassword = function(req, res) {
     }
 
     var mail = req.body.email
-    console.log("EMAIL " + mail)
     var oldPassword = req.body.inputOldPassword
     var password = req.body.inputPassword
     var passwordConfirm = req.body.inputConfirmPassword
@@ -154,7 +152,6 @@ exports.updatePassword = function(req, res) {
 
     var passwordHashed = hash.hashPassword(password)
 
-    console.log(req.body.ruolo)
     if (req.body.ruolo == "personale adisu" || req.body.ruolo == "operatore mensa") {
 
         Personale_Model.find({ email: mail }, function(err, docs) {
