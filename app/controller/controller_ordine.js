@@ -152,7 +152,7 @@ exports.create = (req, res) => {
             const notifica = new Notifica_Model({
               titolo: 'Ordinazione del pasto avvenuta!',
               testo: 'La richiesta del pasto da parte di ' + emailSessione + ' è avvenuta con successo!',
-              reciverEmail: emailSessione,
+              receiverEmail: emailSessione,
               tipo: 'Notifica pasto',
               visualizzazione: true
             })
