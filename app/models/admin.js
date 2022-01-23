@@ -1,18 +1,18 @@
 module.exports = mongoose => {
-    //Schema Admin
-    var schema = mongoose.Schema({
-        nome: String,
-        cognome: String,
-        password: Object,
-        email: String,
-    });
+  // Schema Admin
+  const schema = mongoose.Schema({
+    nome: String,
+    cognome: String,
+    password: Object,
+    email: String
+  })
 
-    schema.method("toJSON", function () {
-        const {__v, _id, ...object} = this.toObject();
-        object.id = _id;
-        return object;
-    });
+  schema.method('toJSON', function () {
+    const { __v, _id, ...object } = this.toObject()
+    object.id = _id
+    return object
+  })
 
-    const Admin = mongoose.model("admin", schema, "admin");
-    return Admin;
-};
+  const Admin = mongoose.model('admin', schema, 'admin')
+  return Admin
+}

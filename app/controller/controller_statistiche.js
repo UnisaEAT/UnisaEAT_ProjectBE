@@ -1,6 +1,6 @@
-const db = require("../models");
-const Statistiche_Model = db.model_statistiche;
-const Pasto_Model = db.model_pasto;
+const db = require('../models')
+const Statistiche_Model = db.model_statistiche
+const Pasto_Model = db.model_pasto
 
 /*
   Il calcolo delle statistiche avviene settimanalmente;
@@ -46,7 +46,6 @@ exports.calcoloStatistiche = function () {
           reject(err);
         });
 
-
     });
 
   });
@@ -54,51 +53,49 @@ exports.calcoloStatistiche = function () {
 }
 */
 
-
 // Restituisce tutte le statistiche
 // invece dell'id c'è il campo nome. La data è nel seguente formato: gg/mm/aaaa
 exports.findAll = (req, res) => {
+  const ruolo = req.body.ruolo
 
-  const ruolo = req.body.ruolo;
-
-  if(ruolo != "operatore mensa") {
-     return res.json({message : "Accesso negato"})
+  if (ruolo != 'operatore mensa') {
+    return res.json({ message: 'Accesso negato' })
   }
 
   Statistiche_Model.find({})
     .then(data => {
-      const cloneData = JSON.parse(JSON.stringify(data)) //array statistiche clonato, senza riferimenti
+      const cloneData = JSON.parse(JSON.stringify(data)) // array statistiche clonato, senza riferimenti
 
-      Pasto_Model.find({}, "nome", function (err, docs) {
-        if (err) throw err;
-        //in docs ho tutti i nomi dei pasti e il loro id
+      Pasto_Model.find({}, 'nome', function (err, docs) {
+        if (err) throw err
+        // in docs ho tutti i nomi dei pasti e il loro id
 
-        //sostituisco l'id dei pasti con i loro nomi, per permettere al fe di stampare i nomi
-        //sostituisco la data con una stringa data
+        // sostituisco l'id dei pasti con i loro nomi, per permettere al fe di stampare i nomi
+        // sostituisco la data con una stringa data
 
-        let i;
-        for(i = 0; i < cloneData.length; i++) {
-          //sostituisco le date con stringhe
-          let date = new Date(cloneData[i].dataInizio);
-          let dataToString = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
-          cloneData[i].dataInizio = dataToString;
+        let i
+        for (i = 0; i < cloneData.length; i++) {
+          // sostituisco le date con stringhe
+          let date = new Date(cloneData[i].dataInizio)
+          let dataToString = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+          cloneData[i].dataInizio = dataToString
 
-          date = new Date(cloneData[i].dataFine);
-          dataToString = date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
-          cloneData[i].dataFine = dataToString;
+          date = new Date(cloneData[i].dataFine)
+          dataToString = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+          cloneData[i].dataFine = dataToString
 
-          //sostituisco gli id con i nomi. Creo un campo nome ed elimino il campo id
-          cloneData[i].pastiEOrdinazioni.forEach(function(item, index, array) {
-            let nomePasto = docs.find(function(pasto) {return pasto.id === item.id})
-            nomePasto = nomePasto.nome;
-            item.nome = nomePasto;
-            delete item.id;
+          // sostituisco gli id con i nomi. Creo un campo nome ed elimino il campo id
+          cloneData[i].pastiEOrdinazioni.forEach(function (item, index, array) {
+            let nomePasto = docs.find(function (pasto) { return pasto.id === item.id })
+            nomePasto = nomePasto.nome
+            item.nome = nomePasto
+            delete item.id
           })
         }
-        return res.json(cloneData);
+        return res.json(cloneData)
       })
     })
     .catch(err => {
-      res.json(err);
-    });
-};
+      res.json(err)
+    })
+}

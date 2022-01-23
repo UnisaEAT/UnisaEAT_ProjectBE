@@ -1,19 +1,19 @@
-var ObjectId = require('mongodb').ObjectID;
+const ObjectId = require('mongodb').ObjectID
 module.exports = mongoose => {
-    //Schema Conversazione
-    //membri sarà un Array di due oggetti: uno cliente e l'altro personale (email e ruolo)
-    var schema = mongoose.Schema(
-        {
-            membri: Array
-        }
-    );
+  // Schema Conversazione
+  // membri sarà un Array di due oggetti: uno cliente e l'altro personale (email e ruolo)
+  const schema = mongoose.Schema(
+    {
+      membri: Array
+    }
+  )
 
-    schema.method("toJSON", function () {
-        const {__v, _id, ...object} = this.toObject();
-        object.id = _id;
-        return object;
-    });
+  schema.method('toJSON', function () {
+    const { __v, _id, ...object } = this.toObject()
+    object.id = _id
+    return object
+  })
 
-    const Conversazione = mongoose.model("conversazione", schema, "conversazione");
-    return Conversazione;
-};
+  const Conversazione = mongoose.model('conversazione', schema, 'conversazione')
+  return Conversazione
+}

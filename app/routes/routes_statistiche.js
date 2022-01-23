@@ -1,11 +1,10 @@
 module.exports = app => {
-    const statistica = require("../controller/controller_statistiche");
-  
-    var router = require("express").Router();
+  const statistica = require('../controller/controller_statistiche')
 
-    // Retrieve all Statistiche
-    router.post("/findAll", statistica.findAll);
+  const router = require('express').Router()
 
-  
-    app.use('/api/statistica', router);
-  };
+  // Retrieve all Statistiche
+  router.post('/findAll', statistica.findAll)
+
+  app.use('/api/statistica', router)
+}
