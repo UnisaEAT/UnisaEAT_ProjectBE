@@ -27,8 +27,6 @@ exports.create = (req, res) => {
   }
 }
 
-// restituisce tutte le conversazioni di un utente
-// l'fe passa l'utente {email, ruolo} di cui vuole ottenere tutte le conversazioni
 /**
  * Questo metodo restituisce tutte le conversazioni di un utente
  * @param {Object} req - L'oggetto request 
@@ -48,8 +46,7 @@ exports.getConversazioni = (req, res) => {
   })
 }
 
-// restituisce una conversazione tra due utenti
-// l'fe passa gli utenti {email, ruolo} di cui vuole ottenere la conversazione
+
 /**
  * Questo metodo restituisce una conversazione tra due utenti
  * @param {Object} req - L'oggetto request 

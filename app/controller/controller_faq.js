@@ -2,7 +2,12 @@ const e = require('express')
 const db = require('../models')
 const Faq_Model = db.model_faq // FARE IL MODEL DI FAQ
 
-// Create and Save a new - Domanda/Risposta
+/**
+ * Questo metodo inserisce una nuova faq
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto {message:String} con una stringa che avvisa del corretto inserimento 
+ */
 exports.insertFAQ = (req, res) => {
   if (!req.body.ruolo || !req.body.email) {
     return res.json({ message: "Devi aver effettuato l'accesso per accedere a questa pagina!" })
@@ -82,7 +87,12 @@ exports.insertFAQ = (req, res) => {
 }
 // Questo era INSERIMENTO
 
-// RIMUOVERE DATA UN EMAIL - utilizziamo la domanda(?)
+/**
+ * Questo metodo rimuove una faq
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto {message:true} se l'eliminazione va a buon fine, altrimenti {message:false} 
+ */
 exports.deleteFAQ = (req, res) => {
   const domanda = req.body.domanda
   Faq_Model.findOneAndDelete({ domanda: domanda })
@@ -96,7 +106,12 @@ exports.deleteFAQ = (req, res) => {
     })
 }
 
-// Metodo per prendere le info - Visualizzazione?
+/**
+ * Questo metodo restituisce tutte le faqs
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {(Array|Object)} - Restituisce un array di faqs, o {message:false} se non sono presenti faqs
+ */
 exports.selectFAQ = (req, res) => {
   Faq_Model.find({})
     .then(data => {
@@ -112,7 +127,12 @@ exports.selectFAQ = (req, res) => {
     })
 }
 
-// Prova modifica
+/**
+ * Questo metodo modifica una faq
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto {message:String} con una stringa che avvisa del corretto inserimento 
+ */
 exports.updateFAQ = (req, res) => {
   if (!req.body.ruolo || !req.body.email) {
     return res.json({ message: "Devi aver effettuato l'accesso per accedere a questa pagina!" })
