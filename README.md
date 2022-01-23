@@ -104,3 +104,4 @@ Team Members:
 
 ## License
 
+This project is totally open source and free to use.
