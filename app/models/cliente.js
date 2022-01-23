@@ -1,4 +1,10 @@
 const ObjectId = require('mongodb').ObjectID
+
+/**
+ * Questo metodo crea uno schema Mongoose per il Cliente
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema del Cliente
+ */
 module.exports = mongoose => {
   // Schema Cliente
   const schema = mongoose.Schema(

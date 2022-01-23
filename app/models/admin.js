@@ -1,3 +1,8 @@
+/**
+ * Questo metodo crea uno schema Mongoose per l'Admin
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema dell'Admin
+ */
 module.exports = mongoose => {
   // Schema Admin
   const schema = mongoose.Schema({

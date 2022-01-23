@@ -1,4 +1,10 @@
 const ObjectId = require('mongodb').ObjectID
+
+/**
+ * Questo metodo crea uno schema Mongoose per il messaggio
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema del messaggio
+ */
 module.exports = mongoose => {
   // Schema Messaggio
   // L'object sender è un oggetto di questo tipo: {email, ruolo}

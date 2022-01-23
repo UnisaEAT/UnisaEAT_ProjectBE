@@ -1,4 +1,8 @@
-const ObjectId = require('mongodb').ObjectID
+/**
+ * Questo metodo crea uno schema Mongoose per la conversazione
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema della conversazione
+ */
 module.exports = mongoose => {
   // Schema Conversazione
   // membri sarà un Array di due oggetti: uno cliente e l'altro personale (email e ruolo)

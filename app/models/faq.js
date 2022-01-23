@@ -1,4 +1,8 @@
-// Model faq.js
+/**
+ * Questo metodo crea uno schema Mongoose per la Faq
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema della Faq
+ */
 module.exports = mongoose => {
   const schema = mongoose.Schema(
     {
