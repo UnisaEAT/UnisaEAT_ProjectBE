@@ -1,6 +1,11 @@
 const ObjectId = require('mongodb').ObjectID
 module.exports = mongoose => {
   // Schema Ordine
+    /**
+ * Questo metodo crea uno schema Mongoose per l'ordine
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema dell'ordine
+ */
   const schema = mongoose.Schema(
     {
       prezzo: Number,

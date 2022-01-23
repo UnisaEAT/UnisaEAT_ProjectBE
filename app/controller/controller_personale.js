@@ -4,6 +4,12 @@ const Personale_Model = db.model_personale
 const hash = require('./hash.js')
 
 // Crea e salva un nuovo Personale(operatore mensa o personale ADISU)
+/**
+ * Questo metodo crea e salva  un nuovo Personale(operatore mensa o un personale ADISU)
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto false in caso di errore, altrimenti restituisce true
+ */
 exports.insert = (req, res) => {
   if (!req.body.ruolo) {
     return res.json({ message: 'Devi essere loggato per accedere a questa pagina!' })
@@ -171,6 +177,12 @@ exports.insert = (req, res) => {
 }
 
 // Prendi tutti i Personali dal Database dato un ruolo
+/**
+ *Questo metodo ritorna una lista facendo una ricerca in base al ruolo
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un array contente il personale con un determinato ruolo, ritorna false in caso di array vuoto
+ */
 exports.findByRuolo = (req, res) => {
   // variabile di prova da cancellare
   let tipo = req.body.ruolo
@@ -195,6 +207,12 @@ exports.findByRuolo = (req, res) => {
 }
 
 // Rimozione di un Personale data un email ricevuta dal lato Front-End
+/**
+ * Questo metodo cerca e rimuove un personale con una data email in quanto è unica nel DB
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce false nel caso in cui non trova il personale con quell'email, altrimenti restituisce true
+ */
 exports.findByEmailAndRemove = (req, res) => {
   Personale_Model.findOneAndDelete({ email: req.body.email })
     .then(data => {

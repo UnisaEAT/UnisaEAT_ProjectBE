@@ -1,6 +1,11 @@
 const ObjectId = require('mongodb').ObjectID
 module.exports = mongoose => {
   // Schema Notifica
+  /**
+ * Questo metodo crea uno schema Mongoose per la notifica
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema della notifica
+ */
   const schema = mongoose.Schema(
     {
       receiverEmail: String,

@@ -7,6 +7,12 @@ const session = require('express-session') // Verificare sessione
 const hash = require('./hash.js')
 
 // findByEmail dell'utente
+/**
+ * Questo metodo fa una find dell'utente tramite lemail
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto contente il personale cercato, altrimenti ritorna errore
+ */
 exports.findByEmail = (req, res) => {
   const tipo = req.body.ruolo
   const mail = req.body.email
@@ -52,7 +58,12 @@ exports.findByEmail = (req, res) => {
       })
   }
 }
-
+/**
+ * Questo metodo permette di fare un update della password dell'utente
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto {name: 'password', message: 'Modifica password avvenuta con successo.'} se si riesce a cambiare la password altrimenti ritorna errore
+ */
 exports.updatePassword = function (req, res) {
   if (!req.body.ruolo || !req.body.email) {
     return res.json({ message: 'Devi essere loggato per accedere a questa pagina!' })

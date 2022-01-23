@@ -1,6 +1,11 @@
 // Model Ticket.js
 module.exports = mongoose => {
   // Schema Ticket
+    /**
+ * Questo metodo crea uno schema Mongoose per il ticket
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema del ticket
+ */
   const schema = mongoose.Schema(
     {
 

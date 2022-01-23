@@ -55,6 +55,12 @@ exports.calcoloStatistiche = function () {
 
 // Restituisce tutte le statistiche
 // invece dell'id c'è il campo nome. La data è nel seguente formato: gg/mm/aaaa
+/**
+ * Questo restituisce tutte le statistiche
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto contente tutte le statistiche settiamanli
+ */
 exports.findAll = (req, res) => {
   const ruolo = req.body.ruolo
 

@@ -1,5 +1,10 @@
 module.exports = mongoose => {
   // Schema Personale
+    /**
+ * Questo metodo crea uno schema Mongoose per il personale
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema del personale
+ */
   const schema = mongoose.Schema({
     nome: String,
     cognome: String,

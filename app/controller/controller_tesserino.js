@@ -14,6 +14,12 @@ const Notifica_Model = db.model_notifica
   Se viene restituito {message:true} il cliente ha un tesserino
   Se viene restituito {message:false} il cliente non ha un tesserino
 */
+/**
+ * Controlla se l'utente ha già un tesserino
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un{message:true} se il cliente ha un tesserino altrimenti restituisce {message:false}
+ */
 exports.hasTesserino = (req, res) => {
   const ruolo = req.body.ruolo
   const email = req.body.email
@@ -43,6 +49,12 @@ exports.hasTesserino = (req, res) => {
 
   Se viene restituito {message : true} allora il tesserino è scaduto
   Se viene restituito {message : false} allora il tesserino non è scaduto
+*/
+/**
+ * Questo metodo controlla se il tesserino dell'utente è scaduto
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Viene restituito {message : true} allora il tesserino è scaduto e viene restituito {message : false} quando il tesserino non è scaduto
 */
 exports.isExpired = (req, res) => {
   const ruolo = req.body.ruolo
@@ -88,6 +100,13 @@ exports.isExpired = (req, res) => {
 
   Viene restituito {message:true} se il create è andato a buon fine
  */
+/**
+ * Questo metodo crea e salva un tesserino
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Viene restituito {message:true} se il create è andato a buon fine
+*/
+  
 exports.create = (req, res) => {
   const ruolo = req.body.ruoloSessione
   const email = req.body.emailSessione
@@ -345,6 +364,12 @@ exports.create = (req, res) => {
 
   Restituisce false se il tesserino non è scaduto, true se è stato rinnovato
  */
+/**
+ * Questo metodo aggiorna la data di scadenza del tesserino 
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} -  Restituisce false se il tesserino non è scaduto, true se è stato rinnovato
+*/
 exports.updateDataScadenza = (req, res) => {
   const ruolo = req.body.ruoloSessione
   const email = req.body.emailSessione
@@ -604,6 +629,12 @@ exports.updateDataScadenza = (req, res) => {
   Nel caso di messaggi di errore, l'oggetto inviato sarà {message:"messaggio"}
   Quindi se response.hasOwnProperty("message") is true allora non è l'oggetto tesserino
 */
+/**
+ * Questo metodo restituisice tutte le info di un tesserino
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} -  Nel caso di errori, l'oggetto sarà {message:"messaggio"}, almentri verrà restituito un tesserino
+*/
 exports.getInfoTesserino = (req, res) => {
   const ruolo = req.body.ruolo
   const email = req.body.email
@@ -646,6 +677,12 @@ exports.getInfoTesserino = (req, res) => {
 
   Se l'operazione va a buon fine viene restituito {message:true}
   altrimenti {message:"Stringa di errore"}
+*/
+/**
+ * Questo metodo serve per ricaricare un tesserino
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} -  Nel caso di errori, l'oggetto sarà {message:"stringa di errore"}, almentri sarà {message:true}
 */
 exports.ricaricaTesserino = (req, res) => {
   const ruolo = req.body.ruolo

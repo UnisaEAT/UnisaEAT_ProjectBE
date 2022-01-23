@@ -1,5 +1,10 @@
 module.exports = mongoose => {
   // Schema Tesserino
+    /**
+ * Questo metodo crea uno schema Mongoose per il tesserino
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema del tesserino
+ */
   const schema = mongoose.Schema(
     {
       saldo: Number,

@@ -1,5 +1,10 @@
 module.exports = mongoose => {
   // Schema Pasto
+/**
+ * Questo metodo crea uno schema Mongoose per il pasto
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema del pasto
+ */
   const schema = mongoose.Schema(
     {
       nome: String,

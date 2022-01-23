@@ -3,7 +3,12 @@ const db = require('../models')
 const Ticket_Model = db.model_ticket // FARE IL MODEL
 const Notifica_Model = db.model_notifica
 // Create and Save a new
-
+/**
+ * Questo metodo serve a creare un  ticket
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} -  Nel caso di errori, l'oggetto sarà {message:"caso di errore"}, almentri verrà restituito true
+*/
 exports.insert = (req, res) => {
   // Validate request
 
@@ -83,6 +88,12 @@ exports.insert = (req, res) => {
 // Questo era INSERIMENTO
 
 // Metodo per prendere le info - Visualizzazione? -- Controllo per Email
+/**
+ * Questo metodo ritorna i ticket senza una soluzione
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} -  Nel caso di errori, l'oggetto sarà {message:"false"}, almentri verrà restituito un array con tutti i ticket senza soluzione
+*/
 exports.select = (req, res) => {
   Ticket_Model.find({ soluzione: null })
     .then(data => {
@@ -97,7 +108,13 @@ exports.select = (req, res) => {
       })
     })
 }
-
+// Metodo per prendere le info - Visualizzazione? -- Controllo per Email
+/**
+ * Questo metodo ritorna i ticket di un determinato utente
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} -  Nel caso di errori, l'oggetto sarà {message:"false"}, almentri verrà restituito un array con tutti i ticket di quel determinato utente
+*/
 exports.utente = (req, res) => {
   Ticket_Model.find({ email: req.body.email })
     .then(data => {
@@ -114,6 +131,12 @@ exports.utente = (req, res) => {
 }
 
 // Prova modifica
+/**
+ * Questo metodo serve ad inserire una soluzione al ticket
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} -  Nel caso di errori, l'oggetto sarà {message:"caso di errore"}, almentri verrà restituito  {message: 'Soluzione del ticket avvenuta con successo'}
+*/
 exports.update = (req, res) => {
   if (!req.body.ruolo || !req.body.email) {
     return res.json({ message: 'Devi effettuare il login per inserire un ticket!' })

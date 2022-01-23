@@ -1,5 +1,10 @@
 module.exports = mongoose => {
   // Schema Statistiche
+    /**
+ * Questo metodo crea uno schema Mongoose per le statistiche
+ * @param {Object} - mongoose 
+ * @returns {Object} - restituisce lo schema delle statistiche
+ */
   const schema = mongoose.Schema(
     {
       dataInizio: Date,
