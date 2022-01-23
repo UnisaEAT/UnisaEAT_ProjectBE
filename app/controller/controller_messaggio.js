@@ -2,8 +2,12 @@ const ObjectId = require('mongodb').ObjectID
 const db = require('../models')
 const Messaggio_Model = db.model_messaggio
 
-// crea un nuovo messaggio
-// l'fe mi passa: l'id della conversazione, il sender {email, ruolo}, il testo, la data (new Date())
+/**
+ * Questo metodo permette di creare un messaggio
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto messaggio se l'inserimento è andato a buon fine, altrimenti {error:String} in caso di errore
+ */
 exports.create = (req, res) => {
   const message = req.body
 
@@ -38,6 +42,12 @@ exports.create = (req, res) => {
     })
 }
 
+/**
+ * Questo metodo permette di eliminare un messaggio
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Boolean} - Restituisce true se l'eliminazione è andata a buon fine, altrimenti lancia un'eccezione
+ */
 exports.deleteMessaggio = (req, res) => {
   const idMessaggio = req.body.idMessaggio
 
@@ -47,6 +57,12 @@ exports.deleteMessaggio = (req, res) => {
   })
 }
 
+/**
+ * Questo metodo permette di modificare un messaggio
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {(Boolean|Object)} - Restituisce true se la modifica è andata a buon fine, altrimenti un oggetto {error:String} contenente il messaggio di errore
+ */
 exports.modifyMessaggio = (req, res) => {
   const idMessaggio = req.body.idMessaggio
   const nuovoTesto = req.body.nuovoTesto
@@ -71,6 +87,12 @@ exports.modifyMessaggio = (req, res) => {
   })
 }
 
+/**
+ * Questo metodo restituisce tutti i messaggi di una conversazione
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Array} - Restituisce un array di messaggi, altrimenti lancia un'eccezione
+ */
 exports.getAllConversationMessages = (req, res) => {
   const conversazioneId = req.body.conversazioneId
 

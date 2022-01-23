@@ -6,6 +6,12 @@ const Admin_Model = db.model_admin
 
 const hash = require('./hash.js')
 
+/**
+ * Questo metodo restituisce email e ruolo dell'utente che ha effettuato il login
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto {email:String, ruolo:String} con i dati dell'utente loggato
+ */
 exports.login = (req, res) => {
   // Prendiamo l'email e la password dal body
   const email = req.body.email

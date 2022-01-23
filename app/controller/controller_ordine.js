@@ -8,10 +8,10 @@ const Tesserino_Model = db.model_tesserino
 const Notifica_Model = db.model_notifica
 
 /**
- *
- * @param {*} req
- * @param {*} res
- * @returns {error:"messaggio di errore"} in caso di errore; {pranzo:arrayPasti, cena:ArrayPasti}
+ * Questo metodo restituisce tutti i pasti del menù giornaliero
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - {error:"messaggio di errore"} in caso di errore; {pranzo:arrayPasti, cena:ArrayPasti}
  */
 exports.visualizzaPasti = (req, res) => {
   const ruolo = req.body.ruolo
@@ -51,11 +51,11 @@ exports.visualizzaPasti = (req, res) => {
 }
 
 /**
- * Controlla se il cliente loggato abbia effettuato degli ordini nella giornata odierna
- *
- *  @return {pranzo:boolean, cena:boolean}
+ * Questo metodo controlla se il cliente loggato abbia effettuato degli ordini nella giornata odierna
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - restituisce un oggetto {pranzo:Boolean, cena:Boolean}
  */
-
 exports.hasOrdini = (req, res) => {
   /*
     Se l'utente loggato non è un cliente l'accesso alla pagina viene negato, altrimenti
@@ -98,6 +98,12 @@ exports.hasOrdini = (req, res) => {
   })
 }
 
+/**
+ * Questo metodo crea un ordine
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Boolean} - restituisce true se l'inserimento è andato a buon fine, altrimenti lancia un'eccezione
+ */
 exports.create = (req, res) => {
   const emailSessione = req.body.email
   const prezzoOrdine = req.body.prezzo
@@ -169,6 +175,12 @@ exports.create = (req, res) => {
 
 // Retrieve all Ordini from the database.
 // restituire tutti gli ordini del cliente, ma invece dell'id del pasto ci va messo l'intero oggetto pasto
+/**
+ * Questo metodo restituisce tutti gli ordini di un cliente
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Array} - restituisce un array di ordini
+ */
 exports.getOrdiniByCliente = (req, res) => {
   const ruolo = req.body.ruolo
   const email = req.body.email

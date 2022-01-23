@@ -2,7 +2,12 @@ const db = require('../models')
 const Menu_Model = db.model_menu
 const Pasto_Model = db.model_pasto
 
-// metodo per la scelta del menu, ritorna tutti i pasti che poi verrano scelti dall'operatore mensa e successivamente verranno inseriti nel menu
+/**
+ * Questo metodo restituisce tutti i pasti presenti nel database
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Array} - Restituisce un array di tutti i pasti presenti nel database
+ */
 exports.scelatamenu = (req, res) => {
   Pasto_Model.find({})
     .then(data => {
@@ -17,7 +22,13 @@ exports.scelatamenu = (req, res) => {
     })
 }
 
-// metodo per la visualizzazione del menu, ritorna il menu del giorno, in base alla selezione "pranzo o cena"
+
+/**
+ * Questo metodo restituisce il menù odierno, disponibile a pranzo o a cena
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto menù 
+ */
 exports.visualizzamenu = (req, res) => {
   const tipoMenu = req.body.tipo
   const dataOdierna = new Date()
@@ -37,6 +48,12 @@ exports.visualizzamenu = (req, res) => {
     })
 }
 
+/**
+ * Questo metodo permette di inserire il menù odierno
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} - Restituisce un oggetto {message:true} se l'inserimento è andato a buon fine, altrimenti {message:String} in caso di errore
+ */
 exports.inseriscimenu = async (req, res) => {
   const tipoMenu = req.body.tipo
   const dataOdierna = new Date()
@@ -75,6 +92,12 @@ exports.inseriscimenu = async (req, res) => {
     })
 }
 
+/**
+ * Questo metodo permette di modificare il menù odierno
+ * @param {Object} req - L'oggetto request 
+ * @param {Object} res - L'oggetto response
+ * @returns {Object} -  Restituisce un oggetto {message:true} se la modifica è andata a buon fine, altrimenti {message:String} in caso di errore
+ */
 exports.modificamenu = async (req, res) => {
   const tipoMenu = req.body.tipo
   const dataOdierna = new Date()
